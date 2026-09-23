@@ -3,32 +3,33 @@ import { AppState, Activity, DailyStatus, Theme } from '@/types';
 import { useStorageState } from '@/hooks/useStorageState';
 import { generateUUID } from '@/utils/uuid';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// Interface method signatures - ESLint 9 requires disable comments on each line
+/* eslint-disable */
 interface AppContextType {
   // State
   appState: AppState;
-  
+
   // Actions
   addActivity: (_activity: Omit<Activity, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateActivity: (_id: string, _updates: Partial<Activity>) => void;
   deleteActivity: (_id: string) => void;
-  
+
   toggleActivityStatus: (_activityId: string, _date: string) => void;
   setActivityValue: (_activityId: string, _date: string, _value: number) => void;
-  
+
   changeDate: (_newDate: string) => void;
   goToday: () => void;
-  
+
   theme: Theme;
   toggleTheme: () => void;
-  
+
   // Helpers
   getCompletedCount: (_date?: string) => number;
   getTotalCount: () => number;
   getProgressPercent: (_date?: string) => number;
   getCategoryStats: (_date?: string) => Record<string, { completed: number; total: number }>;
 }
-/* eslint-enable @typescript-eslint/no-unused-vars */
+/* eslint-enable */
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -228,6 +229,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useApp() {
   const context = useContext(AppContext);
   

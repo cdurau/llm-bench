@@ -1,4 +1,5 @@
-import { useState, React } from 'react';
+import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 
 /** @jsxImportSource react */
 import { useApp } from '@/contexts/AppContext';
@@ -29,7 +30,7 @@ export function ActivityItem({ activity, date }: ActivityItemProps) {
     }
   };
   
-  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!isFuture) {
       const value = parseFloat(e.target.value);
       setActivityValue(activity.id, date, isNaN(value) ? 0 : value);

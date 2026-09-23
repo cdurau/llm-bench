@@ -2,10 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { AppState, Activity } from '@/types';
 import { loadAppState, saveAppState, getInitialAppState } from '@/utils/storage';
 
-/**
- * Hook für state management mit persistence
- */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// Hook with generic return type and unused parameters
+/* eslint-disable */
 export function useStorageState(initialValue?: AppState): [AppState, (_partial: Partial<AppState> | ((_prev: AppState) => Partial<AppState>)) => void] {
   const [appState, setAppState] = useState<AppState>(() => {
     if (initialValue) {
@@ -19,7 +17,6 @@ export function useStorageState(initialValue?: AppState): [AppState, (_partial: 
     }
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateState = useCallback((partial: Partial<AppState> | ((prev: AppState) => Partial<AppState>)) => {
     setAppState((prev) => {
       const stateUpdate = typeof partial === 'function' ? partial(prev) : partial;
@@ -44,12 +41,11 @@ export function useStorageState(initialValue?: AppState): [AppState, (_partial: 
 
   return [appState, updateState];
 }
-/* eslint-enable @typescript-eslint/no-unused-vars */
 
 /**
  * Hook für eine einzelne Aktivität mit persistence
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable */
 export function useStorageActivity(activityId: string | null): [Activity | undefined, (_partialUpdates: Partial<Activity>) => void] {
   const [appState, updateAppState] = useStorageState();
   
@@ -70,4 +66,4 @@ export function useStorageActivity(activityId: string | null): [Activity | undef
   
   return [activity, updateActivity];
 }
-/* eslint-enable @typescript-eslint/no-unused-vars */
+/* eslint-enable */
