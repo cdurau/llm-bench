@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="PulseBoard">
+  <rect width="48" height="48" rx="12" fill="#4f46e5"/>
+  <path d="M9 24h8l3-9 5 18 3-9h11"
+        fill="none" stroke="#ffffff" stroke-width="3.2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
