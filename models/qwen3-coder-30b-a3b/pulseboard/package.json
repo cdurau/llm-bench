@@ -1,0 +1,27 @@
+{
+  "name": "pulseboard",
+  "version": "1.0.0",
+  "description": "A minimalist personal activity tracker",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.4",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vitejs/plugin-react": "^3.0.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.0.0"
+  },
+  "keywords": ["react", "pwa", "activity-tracker"],
+  "author": "PulseBoard",
+  "license": "MIT"
+}
