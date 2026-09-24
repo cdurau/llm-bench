@@ -27,16 +27,19 @@ AGENTS.md                               # artifact/documentation policy
 models/
   <model>/
     <model>-test<N>/                    # numbered benchmark/test slot for this model
-      <app>/                            # generated test application, e.g. pulseboard
-        ...                             # exact generated project state
-        benchmark/
-          session*.json                 # raw OpenCode session export
-          session*.md                   # readable OpenCode session export
+      ...                               # exact structure produced by the model
 ```
 
-The numbered test layer lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results. Use `test1`, `test2`, ... per model and keep the concrete app name below that test folder.
+The numbered test folder is the canonical run boundary. It lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results.
 
-Existing closed artifacts that predate the current layout may remain in their original location. Benchmark integrity is more important than retroactively normalizing historical runs.
+**Important:** the contents inside a test folder are preserved exactly as the model created them. The benchmark does not normalize the generated project layout afterward.
+
+For example, the current PulseBoard runs differ intentionally:
+
+- Qwen3-Coder-Next created the app directly inside `qwen3-coder-next-test1/`.
+- Qwen3-Coder-30B-A3B and Gemma 4 created an additional `pulseboard/` project folder inside their `test1` folders.
+
+Both layouts are valid benchmark artifacts because this structural choice is itself part of the model output.
 
 A failed or interrupted result is still a valid benchmark artifact and is preserved exactly as the run ended.
 
@@ -54,5 +57,6 @@ Run verdicts and detailed evaluations are intentionally **not duplicated here**.
 
 - Do not repair a closed run just to make the result pass.
 - Preserve broken or incomplete final states as evidence.
+- Do not move or normalize files created by the model merely to make layouts consistent.
 - Keep raw session exports and reproducible failure evidence in Git.
 - Keep narrative evaluation, comparisons, and lessons learned in Notion.
