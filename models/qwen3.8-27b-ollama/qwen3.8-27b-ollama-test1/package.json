@@ -1,0 +1,22 @@
+{
+  "name": "klar-todo-pwa",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Klar — eine ruhige, installierbare To-do-PWA (Vite + React). Themes und Todos bleiben lokal gespeichert.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "icons": "node scripts/gen-icons.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11",
+    "vite-plugin-pwa": "^0.21.1"
+  }
+}

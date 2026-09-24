@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Klar — eine ruhige, installierbare To-do-PWA. Todos und Theme bleiben lokal gespeichert."
+    />
+    <!-- theme-color is updated on the fly to match the active theme -->
+    <meta name="theme-color" id="meta-theme-color" content="#EEEEEC" />
+
+    <!-- iOS / Apple touch icon -->
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
+
+    <title>Klar — Aufgaben</title>
+
+    <script>
+      // Apply the persisted (or system) theme before first paint to avoid a flash
+      // of the wrong theme on reload.
+      ;(function () {
+        try {
+          var stored = localStorage.getItem('klar:theme');
+          var theme;
+          if (stored === 'light' || stored === 'dark') {
+            theme = stored;
+          } else {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
