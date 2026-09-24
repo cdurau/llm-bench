@@ -50,6 +50,9 @@ A failed or interrupted result is still a valid benchmark artifact and is preser
 - `models/gemma-4-26b-a4b-it-qat/gemma-4-26b-a4b-it-qat-test1/pulseboard/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
+- `models/qwen3.8-27b/qwen3.8-27b-test1/`
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
 
 Run verdicts and detailed evaluations are intentionally **not duplicated here**. See the Notion **Benchmark Runs** database instead.
 
