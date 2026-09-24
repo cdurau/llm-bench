@@ -26,11 +26,11 @@ instructions.md                         # canonical benchmark prompt
 AGENTS.md                               # artifact/documentation policy
 models/
   <model>/
-    <model>-test<N>/                    # numbered benchmark/test slot for this model
+    <model>-test<N>[-<variant>]/        # numbered benchmark/test slot; optional config suffix
       ...                               # exact structure produced by the model
 ```
 
-The numbered test folder is the canonical run boundary. It lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results.
+The numbered test folder is the canonical run boundary. It lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results. A short optional suffix such as `-mehr-kontext` may be used for a controlled configuration variant, while the test number remains the unique slot identifier.
 
 **Important:** the contents inside a test folder are preserved exactly as the model created them. The benchmark does not normalize the generated project layout afterward.
 
@@ -38,7 +38,7 @@ For example, the current PulseBoard runs differ intentionally:
 
 - Qwen3-Coder-Next created the app directly inside `qwen3-coder-next-test1/`.
 - Qwen3-Coder-30B-A3B and Gemma 4 created an additional `pulseboard/` project folder inside their `test1` folders.
-- Ornith 1.5 35B A3B also created the project directly inside `ornith-1.5-35b-a3b-mlx-test1/`; the interrupted run preserves its incomplete in-place project state.
+- Ornith 1.5 35B A3B created both runs directly in their test slots. `ornith-1.5-35b-a3b-mlx-test1/` preserves the interrupted 65K-context run; `ornith-1.5-35b-a3b-test2-mehr-kontext/` preserves the 131K-context control run.
 
 Both direct and nested layouts are valid benchmark artifacts because this structural choice is itself part of the model output.
 
@@ -55,6 +55,9 @@ A failed or interrupted result is still a valid benchmark artifact and is preser
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 - `models/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-mlx-test1/`
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
+- `models/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-test2-mehr-kontext/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 
