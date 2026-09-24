@@ -18,9 +18,14 @@ Do not duplicate narrative benchmark documentation in Git.
 Repository: https://github.com/cdurau/llm-bench
 
 - `instructions.md` — canonical PulseBoard benchmark prompt.
-- `models/<model>/...` — generated code and run artifacts.
-- Session exports (`.json`, `.md`) and raw logs stay in Git when available.
+- `models/<model>/<model>-test<N>/<app>/` — canonical layout for new benchmark artifacts.
+- `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model.
+- The concrete app name belongs below the numbered test folder, for example `.../test1/pulseboard/`.
+- Session exports (`.json`, `.md`) and raw logs stay with the corresponding app/run artifact in Git when available.
 - A failed or aborted model output is still a valid benchmark artifact and must be preserved.
+- Existing closed artifacts that predate the current layout do not need to be moved merely for consistency.
+
+The numbered test layer exists so one model can be evaluated on multiple benchmark apps or benchmark cases without overwriting or mixing prior results. Never reuse a closed test slot for a different benchmark artifact.
 
 ### Notion
 
@@ -70,10 +75,11 @@ When a model run is finished or intentionally aborted:
 
 1. Preserve the model's final generated state exactly as it ended.
 2. Do not silently repair a failed benchmark after the run has been closed.
-3. Save useful raw session/log artifacts in the corresponding Git model folder when available.
-4. Commit/push the technical artifacts to Git.
-5. Create or update the matching entry in the Notion **Benchmark Runs** database.
-6. Populate at least:
+3. Store the result in the correct `models/<model>/<model>-test<N>/<app>/` slot. For a new benchmark app/case, use a new numbered test slot instead of overwriting an earlier one.
+4. Save useful raw session/log artifacts with the matching app/run artifact when available.
+5. Commit/push the technical artifacts to Git.
+6. Create or update the matching entry in the Notion **Benchmark Runs** database.
+7. Populate at least:
    - Run
    - Modell
    - Datum
@@ -89,9 +95,9 @@ When a model run is finished or intentionally aborted:
    - GitHub
    - Git Pfad
    - Kurzfazit
-7. Put the detailed evaluation in the Notion database page body.
-8. Link the Notion evaluation back to the exact Git model/run folder.
-9. If the methodology changed, update the Notion methodology page rather than creating a new Git narrative document.
+8. Put the detailed evaluation in the Notion database page body.
+9. Link the Notion evaluation back to the exact Git app/run folder, not only the model root.
+10. If the methodology changed, update the Notion methodology page rather than creating a new Git narrative document.
 
 ## Status meanings
 
@@ -109,6 +115,7 @@ Runtime errors and model errors should be separated in the evaluation whenever p
 - Distinguish infrastructure/tool-protocol failures from agent reasoning/coding failures.
 - Repeated bad edits, failure to change strategy, task drift, and inability to verify the final product are relevant agentic benchmark findings.
 - Do not change `instructions.md` between comparison runs unless the benchmark methodology is intentionally versioned and documented in Notion.
+- Do not repurpose or overwrite a numbered test folder after it has become part of a documented benchmark run.
 
 ## Notion access
 
@@ -124,8 +131,9 @@ If Notion access is unavailable:
 
 For benchmark-related changes, verify:
 
-- technical artifacts are committed to the correct model folder;
+- technical artifacts are committed to the correct model/test/app folder;
 - no accidental post-run repair changed a closed benchmark result;
+- the matching Notion run points to the exact current Git path;
 - Notion contains the current readable evaluation;
 - Git does not contain a competing narrative evaluation;
 - Git and Notion link to one another where useful.
