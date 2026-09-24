@@ -19,7 +19,7 @@ Repository: https://github.com/cdurau/llm-bench
 
 - `instructions.md` — canonical PulseBoard benchmark prompt.
 - `models/<model>/<model>-test<N>[-<variant>]/` — canonical run boundary for benchmark artifacts; a short optional suffix may identify a controlled configuration variant.
-- `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique.
+- `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique.
 - Everything **inside** a numbered test folder must preserve the structure actually created by the model.
 - If a model creates the application directly in the test folder, keep it there.
 - If a model creates an additional project folder such as `pulseboard/`, keep that folder as generated.
