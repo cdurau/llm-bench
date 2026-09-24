@@ -9,10 +9,13 @@ interface DashboardProps {
 
 export const Dashboard: React.FC<DashboardProps> = ({ state, currentDate }) => {
   const todayKey = currentDate.toISOString().split('T')[0];
-  const dailyStatus = state.dailyStatuses[todayKey];
+  const dailyStatus = state.dailyStatuses[todayKey] || {
+    completedActivityIds: [],
+    completedValues: {},
+  };
 
   const totalActivities = state.activities.length;
-  const completedCount = dailyStatus ? dailyStatus.completedActivityIds.length : 0;
+  const completedCount = dailyStatus.completedActivityIds.length;
   const remainingCount = totalActivities - completedCount;
   const progressPercent = totalActivities > 0 ? Math.round((completedCount / totalActivities) * 100) : 0;
 
