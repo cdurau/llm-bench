@@ -18,8 +18,8 @@ Do not duplicate narrative benchmark documentation in Git.
 Repository: https://github.com/cdurau/llm-bench
 
 - `instructions.md` — canonical PulseBoard benchmark prompt.
-- `models/<model>/<model>-test<N>/` — canonical run boundary for benchmark artifacts.
-- `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model.
+- `models/<model>/<model>-test<N>[-<variant>]/` — canonical run boundary for benchmark artifacts; a short optional suffix may identify a controlled configuration variant.
+- `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique.
 - Everything **inside** a numbered test folder must preserve the structure actually created by the model.
 - If a model creates the application directly in the test folder, keep it there.
 - If a model creates an additional project folder such as `pulseboard/`, keep that folder as generated.
@@ -78,9 +78,9 @@ When a model run is finished or intentionally aborted:
 
 1. Preserve the model's final generated state exactly as it ended.
 2. Do not silently repair a failed benchmark after the run has been closed.
-3. Store the result under the correct `models/<model>/<model>-test<N>/` slot.
+3. Store the result under the correct `models/<model>/<model>-test<N>[-<variant>]/` slot.
 4. Preserve the model-created structure inside that slot exactly; an extra app folder is neither required nor forbidden.
-5. For a new benchmark app/case, use a new numbered test slot instead of overwriting an earlier one.
+5. For a new benchmark app/case or controlled rerun, use a new numbered test slot instead of overwriting an earlier one; an optional suffix may describe the configuration variant.
 6. Save useful raw session/log artifacts with the matching run artifact when available.
 7. Commit/push the technical artifacts to Git.
 8. Create or update the matching entry in the Notion **Benchmark Runs** database.
