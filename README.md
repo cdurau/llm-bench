@@ -22,23 +22,29 @@ Agent/documentation rules are defined in [`AGENTS.md`](./AGENTS.md).
 ## Repository layout
 
 ```text
-instructions.md                 # canonical benchmark prompt
-AGENTS.md                       # artifact/documentation policy
+instructions.md                         # canonical benchmark prompt
+AGENTS.md                               # artifact/documentation policy
 models/
   <model>/
-    ...                         # exact generated project state
-    benchmark/
-      session*.json             # raw OpenCode session export
-      session*.md               # readable OpenCode session export
+    <model>-test<N>/                    # numbered benchmark/test slot for this model
+      <app>/                            # generated test application, e.g. pulseboard
+        ...                             # exact generated project state
+        benchmark/
+          session*.json                 # raw OpenCode session export
+          session*.md                   # readable OpenCode session export
 ```
+
+The numbered test layer lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results. Use `test1`, `test2`, ... per model and keep the concrete app name below that test folder.
+
+Existing closed artifacts that predate the current layout may remain in their original location. Benchmark integrity is more important than retroactively normalizing historical runs.
 
 A failed or interrupted result is still a valid benchmark artifact and is preserved exactly as the run ended.
 
 ## Current model artifacts
 
 - `models/qwen3-coder-next/qwen3-coder-next-test1/`
-- `models/qwen3-coder-30b-a3b/pulseboard/`
-- `models/gemma-4-26b-a4b-it-qat/pulseboard/`
+- `models/qwen3-coder-30b-a3b/qwen3-coder-30b-a3b-test1/pulseboard/`
+- `models/gemma-4-26b-a4b-it-qat/gemma-4-26b-a4b-it-qat-test1/pulseboard/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 
