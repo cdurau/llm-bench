@@ -93,7 +93,7 @@ Zeige:
 ### Arbeitsweise
 
 - Arbeite selbstständig.
-- Benutze den Jev Skill wenn du eine entscheidung triffst nach diesem Schema: jev pick "FRAGE" "OPTION_A" "OPTION_B" -s "KONTEXT"
+- Benutze den Jev Skill bei wesentlichen Entscheidungen bei denen mehrere plausible Optionen bestehen nach diesem Schema: jev pick "FRAGE" "OPTION_A" "OPTION_B" -s "KONTEXT"
 - Stelle keine Rückfragen.
 - Entscheide selbst über eine sinnvolle Projektstruktur.
 - Führe Tests, Lint und Production Build selbst aus.
