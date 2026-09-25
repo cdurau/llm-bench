@@ -27,12 +27,13 @@ Agent/documentation rules are defined in [`AGENTS.md`](./AGENTS.md).
 instructions.md                         # canonical benchmark prompt
 AGENTS.md                               # artifact/documentation policy
 models/
-  <model>/
-    <model>-test<N>[-<variant>]/        # numbered benchmark/test slot; optional config suffix
-      ...                               # exact structure produced by the model
+  <model-family>/                       # e.g. qwen3, gemma-4, ornith-1.5
+    <model>/
+      <model>-test<N>[-<variant>]/      # numbered benchmark/test slot; optional config suffix
+        ...                             # exact structure produced by the model
 ```
 
-The numbered test folder is the canonical run boundary. It lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results. A short optional suffix such as `-mehr-kontext` may be used for a controlled configuration variant, while the test number remains the unique slot identifier.
+Model artifacts are grouped by model family first. The numbered test folder remains the canonical run boundary. It lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results. A short optional suffix such as `-mehr-kontext` may be used for a controlled configuration variant, while the test number remains the unique slot identifier.
 
 **Important:** the contents inside a test folder are preserved exactly as the model created them. The benchmark does not normalize the generated project layout afterward.
 
@@ -48,21 +49,21 @@ A failed or interrupted result is still a valid benchmark artifact and is preser
 
 ## Current model artifacts
 
-- `models/qwen3-coder-next/qwen3-coder-next-test1/`
-- `models/qwen3-coder-30b-a3b/qwen3-coder-30b-a3b-test1/pulseboard/`
-- `models/gemma-4-26b-a4b-it-qat/gemma-4-26b-a4b-it-qat-test1/pulseboard/`
+- `models/qwen3/qwen3-coder-next/qwen3-coder-next-test1/`
+- `models/qwen3/qwen3-coder-30b-a3b/qwen3-coder-30b-a3b-test1/pulseboard/`
+- `models/gemma-4/gemma-4-26b-a4b-it-qat/gemma-4-26b-a4b-it-qat-test1/pulseboard/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
-- `models/qwen3.8-27b/qwen3.8-27b-test1/`
+- `models/qwen3/qwen3.8-27b/qwen3.8-27b-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
-- `models/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-mlx-test1/`
+- `models/ornith-1.5/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-mlx-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
-- `models/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-test2-mehr-kontext/`
+- `models/ornith-1.5/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-test2-mehr-kontext/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
-- `models/qwen3.8-35b-a3b-distill-oq8-mtp/qwen3.8-35b-a3b-distill-oq8-mtp-test1/`
+- `models/qwen3/qwen3.8-35b-a3b-distill-oq8-mtp/qwen3.8-35b-a3b-distill-oq8-mtp-test1/`
   - oMLX / M1 Max 64 GB / 131K context / Lightning MTP / TurboQuant KV 8-bit
   - extended `frontend-design` + Jev prompt
   - `benchmark/session01.json`
