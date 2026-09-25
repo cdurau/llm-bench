@@ -15,7 +15,9 @@ Methodology: https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e
 
 ## PulseBoard benchmark
 
-The canonical reproducible prompt is [`instructions.md`](./instructions.md).
+The original canonical reproducible prompt is [`instructions.md`](./instructions.md).
+
+Runs using the extended agent workflow with `frontend-design`, Jev and project-memory documentation use [`instructions_jev_frontend-skill.md`](./instructions_jev_frontend-skill.md). These runs are not directly comparable with runs using the original prompt.
 
 Agent/documentation rules are defined in [`AGENTS.md`](./AGENTS.md).
 
@@ -60,6 +62,12 @@ A failed or interrupted result is still a valid benchmark artifact and is preser
 - `models/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-test2-mehr-kontext/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
+- `models/qwen3.8-35b-a3b-distill-oq8-mtp/qwen3.8-35b-a3b-distill-oq8-mtp-test1/`
+  - oMLX / M1 Max 64 GB / 131K context / Lightning MTP / TurboQuant KV 8-bit
+  - extended `frontend-design` + Jev prompt
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
+  - oMLX runtime log in `benchmark/`
 
 Run verdicts and detailed evaluations are intentionally **not duplicated here**. See the Notion **Benchmark Runs** database instead.
 
