@@ -40,12 +40,13 @@ Model artifacts are grouped by model family first. The numbered test folder rema
 For example, the current PulseBoard runs differ intentionally:
 
 - Qwen3-Coder-Next created the app directly inside `qwen3-coder-next-test1/`.
-- Qwen3-Coder-30B-A3B and Gemma 4 created an additional `pulseboard/` project folder inside their `test1` folders.
+- Qwen3-Coder-30B-A3B and Gemma 4 26B created an additional `pulseboard/` project folder inside their `test1` folders.
+- Gemma 4 31B IT 8-bit with oMLX created the app directly inside `gemma-4-31b-it-8bit-test1-omlx/`.
 - Ornith 1.5 35B A3B created both runs directly in their test slots. `ornith-1.5-35b-a3b-mlx-test1/` preserves the interrupted 65K-context run; `ornith-1.5-35b-a3b-test2-mehr-kontext/` preserves the 131K-context control run.
 
 Both direct and nested layouts are valid benchmark artifacts because this structural choice is itself part of the model output.
 
-A failed or interrupted result is still a valid benchmark artifact and is preserved exactly as the run ended.
+A failed, interrupted, partially working, or visually broken result is still a valid benchmark artifact and is preserved exactly as the run ended. A successful build or green unit tests do not by themselves imply a successful benchmark result; final UI/PWA verification is evaluated separately in Notion.
 
 ## Current model artifacts
 
@@ -54,6 +55,14 @@ A failed or interrupted result is still a valid benchmark artifact and is preser
 - `models/gemma-4/gemma-4-26b-a4b-it-qat/gemma-4-26b-a4b-it-qat-test1/pulseboard/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
+- `models/gemma-4/gemma-4-31b-it-8bit-omlx/gemma-4-31b-it-8bit-test1-omlx/`
+  - oMLX / M1 Max 64 GB / 131K configured context
+  - extended `frontend-design` + Jev prompt
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
+  - `benchmark/omlx-log.txt`
+  - runtime notes: long-run recovery after interruption; oMLX memory-guard pressure around ~32K live context; intended TurboQuant KV8 was not active (`turboquant_kv_bits=None`); power delivery changed from an insufficient 45 W supply to the Apple 96 W adapter during the run
+  - artifact integrity note: final source/build is preserved even though browser verification showed missing effective styling and the generated PNG PWA icon placeholders are zero-byte files
 - `models/qwen3/qwen3.8-27b/qwen3.8-27b-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
@@ -79,3 +88,4 @@ Run verdicts and detailed evaluations are intentionally **not duplicated here**.
 - Do not move or normalize files created by the model merely to make layouts consistent.
 - Keep raw session exports and reproducible failure evidence in Git.
 - Keep narrative evaluation, comparisons, and lessons learned in Notion.
+- Treat final browser/UI verification as distinct from compile/build success; visually broken styling, empty generated assets, or incomplete runtime behavior remain benchmark findings even when `npm run build` exits successfully.
