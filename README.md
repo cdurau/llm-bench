@@ -71,6 +71,13 @@ A failed, interrupted, partially working, or visually broken result is still a v
   - extended `frontend-design` + Jev prompt
   - interrupted run state preserved as benchmark evidence
   - `benchmark/omlx-log.txt`
+- `models/qwen3/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-NEO-CODER/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-NEO-CODER-test1/`
+  - oMLX / M1 Max 64 GB / 134144 configured context / Lightning MTP / TurboQuant KV 4-bit
+  - extended `frontend-design` + Jev prompt; Jev installed as project skill and successfully invoked
+  - interrupted agent run: three manual `Führe die Aufgabe fort.` continuations were required and the model repeatedly stopped after announcing the next implementation step
+  - no PulseBoard implementation was produced in the preserved final state; build, tests, lint and PWA therefore remain unverified
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
 - `models/ornith-1.5/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-mlx-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
