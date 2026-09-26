@@ -66,6 +66,11 @@ A failed, interrupted, partially working, or visually broken result is still a v
 - `models/qwen3/qwen3.8-27b/qwen3.8-27b-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
+- `models/qwen3/Qwen3.8-27B-TURBO-Fable-Cold-Heretic/Qwen3.8-27B-TURBO-Fable-Cold-Heretic-test1/`
+  - oMLX / M1 Max 64 GB / Lightning MTP
+  - extended `frontend-design` + Jev prompt
+  - interrupted run state preserved as benchmark evidence
+  - `benchmark/omlx-log.txt`
 - `models/ornith-1.5/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-mlx-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
