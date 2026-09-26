@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Plus, Trash2, Edit2 } from 'lucide-react';
 import { format, addDays, subDays, isToday, isAfter } from 'date-fns';
 import { ActivityModal } from './ActivityModal';
 import { useState } from 'react';
-import { Activity } from '../types';
+import type { Activity } from '../types';
 
 export const PulseBoard: React.FC = () => {
   const { 
@@ -58,7 +58,7 @@ export const PulseBoard: React.FC = () => {
               </button>
               <h1 className="text-3xl font-serif font-medium">
                 {format(currentDate, 'EEEE, MMMM do')}
-                {isToday(currentDate) && <span className="ml-3 text-sm font-sans uppercase tracking-widest text-olive-600 opacity-70">Today</span>}
+                {isToday(currentDate) && <span className="ml-3 text-sm font-sans tracking-widest text-olive-600 opacity-70">Today</span>}
               </h1>
               <button 
                 onClick={() => setCurrentDate(addDays(currentDate, 1))}
@@ -80,7 +80,7 @@ export const PulseBoard: React.FC = () => {
           {/* Pulse Meter */}
           <div className="space-y-2">
             <div className="flex justify-between text-xs font-medium text-stone-500 uppercase tracking-wider">
-              <span>Daily Progress</span>
+              <span>Daily progress</span>
               <span>{Math.round(progress)}%</span>
             </div>
             <div className="h-1.5 w-full bg-stone-200 dark:bg-stone-800 rounded-full overflow-hidden">
@@ -134,7 +134,7 @@ export const PulseBoard: React.FC = () => {
                       {activity.description && (
                         <span className="text-xs text-stone-500 line-clamp-1">{activity.description}</span>
                       )}
-                      <span className="text-[10px] uppercase tracking-tighter text-stone-400 mt-1">
+                      <span className="text-[10px] tracking-tighter text-stone-400 mt-1 capitalize">
                         {activity.category}
                       </span>
                     </div>

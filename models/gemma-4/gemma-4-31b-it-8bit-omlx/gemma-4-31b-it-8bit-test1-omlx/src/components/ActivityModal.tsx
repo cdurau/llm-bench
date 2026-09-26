@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { usePulse } from '../context/PulseContext';
-import { Activity } from '../types';
-import { Plus, X, Save, Trash2 } from 'lucide-react';
+import type { Activity } from '../types';
+import { X, Save } from 'lucide-react';
 
 interface Props {
   isOpen: boolean;
@@ -48,7 +48,7 @@ export const ActivityModal: React.FC<Props> = ({ isOpen, onClose, activityToEdit
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/50 backdrop-blur-sm">
       <div className="bg-white dark:bg-stone-900 w-full max-w-md border border-stone-200 dark:border-stone-800 p-6 shadow-xl">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-serif text-stone-900 dark:text-stone-100">
+          <h2 className="text-xl font-serif text-stone-900 dark:text-stone-100 capitalize">
             {activityToEdit ? 'Edit Activity' : 'New Activity'}
           </h2>
           <button onClick={onClose} className="p-1 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors">
@@ -58,7 +58,7 @@ export const ActivityModal: React.FC<Props> = ({ isOpen, onClose, activityToEdit
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-stone-500 mb-1">Name</label>
+            <label className="block text-xs font-medium text-stone-500 mb-1 capitalize">Name</label>
             <input 
               autoFocus
               value={name} 
@@ -68,7 +68,7 @@ export const ActivityModal: React.FC<Props> = ({ isOpen, onClose, activityToEdit
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-stone-500 mb-1">Description (optional)</label>
+            <label className="block text-xs font-medium text-stone-500 mb-1 capitalize">Description (optional)</label>
             <textarea 
               value={description} 
               onChange={e => setDescription(e.target.value)} 
@@ -78,7 +78,7 @@ export const ActivityModal: React.FC<Props> = ({ isOpen, onClose, activityToEdit
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-stone-500 mb-1">Category</label>
+              <label className="block text-xs font-medium text-stone-500 mb-1 capitalize">Category</label>
               <input 
                 value={category} 
                 onChange={e => setCategory(e.target.value)} 
@@ -87,7 +87,7 @@ export const ActivityModal: React.FC<Props> = ({ isOpen, onClose, activityToEdit
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-stone-500 mb-1">Daily Goal (optional)</label>
+              <label className="block text-xs font-medium text-stone-500 mb-1 capitalize">Daily goal (optional)</label>
               <input 
                 type="number"
                 value={dailyGoal || ''} 

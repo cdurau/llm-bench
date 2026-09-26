@@ -1,4 +1,4 @@
-import { AppData, Activity, DailyStatus } from '../types';
+import type { AppData } from '../types';
 
 const STORAGE_KEY = 'pulseboard_data';
 const CURRENT_VERSION = 1;

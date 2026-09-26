@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { AppData, Activity } from '../types';
+import type { Activity } from '../types';
 import { storage } from '../lib/storage';
-import { format, addDays, subDays, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 
 interface PulseContextType {
   currentDate: Date;

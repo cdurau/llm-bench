@@ -68,11 +68,7 @@ describe('PulseBoard Core Functionality', () => {
   });
 
   it('prevents toggling activities on future dates', () => {
-    // Setup: mock date to tomorrow
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    vi.setSystemTime(tomorrow);
-
+    // Setup: add an activity
     const activityId = 'test-id';
     const data = {
       version: 1,
@@ -83,12 +79,14 @@ describe('PulseBoard Core Functionality', () => {
 
     renderWithProvider(<PulseBoard />);
     
+    // Navigate to tomorrow
+    const nextButton = screen.getByLabelText(/Next Day/i);
+    fireEvent.click(nextButton);
+    
     const checkbox = screen.getByLabelText(/Toggle completion/i);
     fireEvent.click(checkbox);
     
     expect(checkbox).not.toHaveClass('bg-olive-600');
-    
-    vi.useRealTimers();
   });
 
   it('handles corrupted storage data gracefully', () => {
