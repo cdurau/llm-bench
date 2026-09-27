@@ -27,7 +27,7 @@ Agent/documentation rules are defined in [`AGENTS.md`](./AGENTS.md).
 instructions.md                         # canonical benchmark prompt
 AGENTS.md                               # artifact/documentation policy
 models/
-  <model-family>/                       # e.g. qwen3, gemma-4, ornith-1.5
+  <model-family>/                       # e.g. qwen3, gemma-4, ornith-1.5, Edge0
     <model>/
       <model>-test<N>[-<variant>]/      # numbered benchmark/test slot; optional config suffix
         ...                             # exact structure produced by the model
@@ -43,6 +43,7 @@ For example, the current PulseBoard runs differ intentionally:
 - Qwen3-Coder-30B-A3B and Gemma 4 26B created an additional `pulseboard/` project folder inside their `test1` folders.
 - Gemma 4 31B IT 8-bit with oMLX created the app directly inside `gemma-4-31b-it-8bit-test1-omlx/`.
 - Ornith 1.5 35B A3B created both runs directly in their test slots. `ornith-1.5-35b-a3b-mlx-test1/` preserves the interrupted 65K-context run; `ornith-1.5-35b-a3b-test2-mehr-kontext/` preserves the 131K-context control run.
+- Edge0 35B A3B Preview created the app in a nested `pulseboard/` folder and stores the OpenCode session plus oMLX runtime log in the sibling `benchmark/` folder.
 
 Both direct and nested layouts are valid benchmark artifacts because this structural choice is itself part of the model output.
 
@@ -50,6 +51,17 @@ A failed, interrupted, partially working, or visually broken result is still a v
 
 ## Current model artifacts
 
+- `models/Edge0/Edge0-35B-A3B-preview/Edge0-35B-A3B-preview-test1/`
+  - oMLX / OpenCode v2 / extended `frontend-design` + Jev benchmark prompt
+  - long, stable tool-using run; OpenCode export records 133,861 input tokens, 70,612 output tokens and 8,085,434 cache-read tokens
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
+  - `benchmark/omlx-log.txt`
+  - final agent report: 46 tests passed, TypeScript check passed and production build passed
+  - runtime evidence: prefix/boundary caching remained active above 132K prompt tokens; observed tool-call decode throughput in the late-run log is roughly 25–27 tok/s, with context growing beyond 138K prompt tokens
+  - artifact integrity note: browser/code verification found a critical fresh-start integration bug despite green tests — with zero activities, `components/App.tsx` renders only `EmptyState`, so `ActivityList` and its implemented add form are unreachable and the first activity cannot be created
+  - cleanup note: unused Vite starter `src/App.tsx` remains in the project, while `src/main.tsx` correctly imports the real app from `src/components/App.tsx`
+  - visual result is functional but comparatively generic/utilitarian; detailed evaluation and PARTIAL run status are recorded in Notion
 - `models/qwen3/qwen3-coder-next/qwen3-coder-next-test1/`
 - `models/qwen3/qwen3-coder-30b-a3b/qwen3-coder-30b-a3b-test1/pulseboard/`
 - `models/gemma-4/gemma-4-26b-a4b-it-qat/gemma-4-26b-a4b-it-qat-test1/pulseboard/`
@@ -100,4 +112,4 @@ Run verdicts and detailed evaluations are intentionally **not duplicated here**.
 - Do not move or normalize files created by the model merely to make layouts consistent.
 - Keep raw session exports and reproducible failure evidence in Git.
 - Keep narrative evaluation, comparisons, and lessons learned in Notion.
-- Treat final browser/UI verification as distinct from compile/build success; visually broken styling, empty generated assets, or incomplete runtime behavior remain benchmark findings even when `npm run build` exits successfully.
+- Treat final browser/UI verification as distinct from compile/build success; visually broken styling, empty generated assets, incomplete runtime behavior, or blocked first-run flows remain benchmark findings even when `npm run build` and automated tests exit successfully.
