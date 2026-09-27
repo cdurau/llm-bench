@@ -107,13 +107,17 @@ A failed, interrupted, partially working, or visually broken result is still a v
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 - `models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/`
-  - oMLX / OpenCode v2 / optimized oQ4e + MTP run
-  - interrupted after **364.19 min (6:04:12 h)**; canonical duration extracted from `benchmark/session01.json`, therefore this is time-to-abort rather than time-to-success
-  - final documented test state: **39/47 tests passed (~83%)**, with 8 App integration tests still failing
-  - project state is nevertheless far advanced: React/TypeScript app, componentized UI, reducer/context state, versioned localStorage persistence, date navigation, activity CRUD, daily targets/progress, corruption handling, dashboard/category statistics, tests, PWA setup and substantial custom CSS are present
-  - benchmark interpretation: failure is primarily an **agentic completion/debug-convergence problem**, not an early inability to implement PulseBoard; extremely long reasoning/debug phases prevented a clean finish
-  - requirement miss: `PLAN.md` deliberately selects OS-driven `prefers-color-scheme` dark mode with **no manual toggle**, while the PulseBoard requirement calls for a persistent Dark/Light toggle
-  - documentation incompleteness: `PLAN.md` references `STATUS.md`, but no `STATUS.md` is present in the preserved final run
+  - oMLX / OpenCode v2 / optimized Qwen3.8-27B-oQ4e-mtp / high-effort agent run
+  - final OpenCode session outcome: **succeeded**; canonical session span from `time.created` to final `time.idle` is **748.90 min (12:28:54 h)** including the manual continuation gaps; OpenCode's final build segment reported **3 h 4 min**, which is not used as the canonical full-run duration
+  - session totals: **164,023 input**, **141,655 output**, **13,928,491 cache-read tokens**, cost 0
+  - final gates: **47/47 Vitest/RTL tests**, ESLint **0 errors / 0 warnings**, strict `tsc -b` clean, production build successful
+  - PWA verified beyond unit tests with a custom headless-Chrome/CDP harness: Service Worker active, **9/9 unique precache assets**, real dialog interaction, target counter and 50% progress, versioned localStorage persistence across reload; after stopping the preview server, the same profile reloaded the app shell and persisted data successfully offline
+  - implementation is substantially production-oriented: componentized React/TypeScript UI, reducer/context state, URL-hash day selection, defensive versioned localStorage sanitization/recovery, future-day protection in UI and reducer, PWA update flow, keyboard/a11y handling, reduced-motion support, and project-local AGENTS/PLAN/STATUS documentation
+  - notable design idea: the EKG-like **PulseLine** is filled according to daily completion percentage and gives the otherwise restrained UI a product-specific visual motif
+  - Jev was used for **7 architectural/product decisions**; the model did not blindly follow the low-confidence IndexedDB suggestion and instead chose localStorage based on the task's risk/complexity trade-off
+  - agentic weakness: convergence was extremely slow and required manual continuation prompts; substantial time was spent debugging tests and then building a bespoke PWA/offline verification harness. Final quality is strong, but practical time-to-result is poor
+  - requirement interpretation: Dark Mode is implemented through `prefers-color-scheme` and intentionally has **no manual/persistent theme toggle**. This is acceptable for the actual run prompt, which only says “Dark Mode berücksichtigen”; it would be a miss only against older PulseBoard prompt variants that explicitly required a persistent toggle
+  - final project documentation is complete (`AGENTS.md`, `PLAN.md`, `STATUS.md`); `STATUS.md` records all M0–M5 milestones and final browser/offline verification
   - `benchmark/session01.json`
   - `benchmark/session01.md`
   - `benchmark/omlx-log.txt`
