@@ -106,6 +106,17 @@ A failed, interrupted, partially working, or visually broken result is still a v
 - `models/qwen3/qwen3.8-27b/qwen3.8-27b-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
+- `models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/`
+  - oMLX / OpenCode v2 / optimized oQ4e + MTP run
+  - interrupted after **364.19 min (6:04:12 h)**; canonical duration extracted from `benchmark/session01.json`, therefore this is time-to-abort rather than time-to-success
+  - final documented test state: **39/47 tests passed (~83%)**, with 8 App integration tests still failing
+  - project state is nevertheless far advanced: React/TypeScript app, componentized UI, reducer/context state, versioned localStorage persistence, date navigation, activity CRUD, daily targets/progress, corruption handling, dashboard/category statistics, tests, PWA setup and substantial custom CSS are present
+  - benchmark interpretation: failure is primarily an **agentic completion/debug-convergence problem**, not an early inability to implement PulseBoard; extremely long reasoning/debug phases prevented a clean finish
+  - requirement miss: `PLAN.md` deliberately selects OS-driven `prefers-color-scheme` dark mode with **no manual toggle**, while the PulseBoard requirement calls for a persistent Dark/Light toggle
+  - documentation incompleteness: `PLAN.md` references `STATUS.md`, but no `STATUS.md` is present in the preserved final run
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
+  - `benchmark/omlx-log.txt`
 - `models/qwen3/Qwen3.8-27B-TURBO-Fable-Cold-Heretic/Qwen3.8-27B-TURBO-Fable-Cold-Heretic-test1/`
   - oMLX / M1 Max 64 GB / Lightning MTP
   - extended `frontend-design` + Jev prompt
