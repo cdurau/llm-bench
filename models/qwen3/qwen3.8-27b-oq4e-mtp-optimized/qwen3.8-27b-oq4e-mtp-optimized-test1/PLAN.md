@@ -181,7 +181,8 @@ localStorage ──► load() ──► useReducer(store) ──► save() (bei 
 ├── STATUS.md            Meilenstein-Log + Stand + Erinnerungen
 ├── index.html
 ├── package.json / tsconfig*.json / vite.config.ts / eslint.config.js
-├── scripts/generate-icons.mjs
+├── scripts/generate-icons.mjs   Icons (reines zlib, keine externen Dienste)
+├── scripts/verify-pwa.mjs       PWA-/Offline-Verifikation (headless Chrome, CDP)
 ├── public/              favicon.svg, icons/*.png
 └── src/
     ├── main.tsx / App.tsx / pwa.ts / styles.css
