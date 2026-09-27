@@ -2,7 +2,7 @@
 
 **Session ID:** ses_f1dc0e902ffeqlQv9qXWh7kBuD
 **Created:** 9/27/2026, 11:43:00 AM
-**Updated:** 9/27/2026, 12:47:07 PM
+**Updated:** 9/27/2026, 6:02:33 PM
 
 ---
 
@@ -5594,5 +5594,1117 @@ Progress: Currently 39 passing, 8 failing (all within App.test.tsx). Let's take 
 
 
 Down to 8 App-test failures. Let me inspect them:
+
+
+
+---
+
+## User
+
+Machst du weiter?
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+User's question (in German): "Machst du weiter?" — "Are you continuing?" Yes — I should continue working. I'll briefly confirm and continue debugging the remaining 8 test failures.
+
+I'll go check the details of the App test failures.
+
+
+
+
+Ja, arbeite gerade dran. Ich sehe mir die restlichen 8 Test-Fehler im Detail an:
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/App.test.tsx 2>&1 | sed -n '/Failed Tests/,$p' | head -120",
+  "timeout": 180000
+}
+```
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/App.test.tsx > App: Darstellung > zeigt leeren Zustand mit Einladung, Datum und Wortmarke
+TestingLibraryElementError: Found multiple elements with the role "button" and name "Aktivität hinzufügen"
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<button[39m
+  [33mclass[39m=[32m"btn btn--primary"[39m
+  [33mtype[39m=[32m"button"[39m
+[36m>[39m
+  [0mAktivität hinzufügen[0m
+[36m</button>[39m
+
+Ignored nodes: comments, script, style
+[36m<button[39m
+  [33mclass[39m=[32m"btn btn--primary"[39m
+  [33mtype[39m=[32m"button"[39m
+[36m>[39m
+  [36m<svg[39m
+    [33maria-hidden[39m=[32m"true"[39m
+    [33mfill[39m=[32m"none"[39m
+    [33mheight[39m=[32m"15"[39m
+    [33mstroke[39m=[32m"currentColor"[39m
+    [33mstroke-linecap[39m=[32m"round"[39m
+    [33mstroke-linejoin[39m=[32m"round"[39m
+    [33mstroke-width[39m=[32m"1.6"[39m
+    [33mviewBox[39m=[32m"0 0 16 16"[39m
+    [33mwidth[39m=[32m"15"[39m
+  [36m>[39m
+    [36m<path[39m
+      [33md[39m=[32m"M8 3v10M3 8h10"[39m
+    [36m/>[39m
+  [36m</svg>[39m
+  [0mAktivität hinzufügen[0m
+[36m</button>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"topbar"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"wordmark"[39m
+        [36m>[39m
+          [0mPulseBoard[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<main>[39m
+        [36m<section[39m
+          [33maria-label[39m=[32m"Tagesübersicht"[39m
+          [33mclass[39m=[32m"day"[39m
+        [36m>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Tagesnavigation"[39m
+            [33mclass[39m=[32m"day__nav"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Vorheriger Tag"[39m
+              [33mclass[39m=[32m"navbtn"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"16"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.6"[39m
+                [33mviewBox[39m=[32m"0 0 16 16"[39m
+                [33mwidth[39m=[32m"16"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M10 3 5 8l5 5"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"navbtn navbtn--today is-active"[39m
+              [33mdisabled[39m=[32m""[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mHeute[0m
+            [36m</button>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Nächster Tag"[39m
+              [33mclass[39m=[32m"navbtn"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"16"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.6"[39m
+                [33mviewBox[39m=[32m"0 0 16 16"[39m
+                [33mwidth[39m=[32m"16"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m6 3 5 5-5 5"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</nav>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"day__title"[39m
+          [36m>[39m
+            [0mSonntag, 27. September[0m
+          [36m</h1>[39m
+          [36m<svg[39m
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+The first test fails because in the empty state there are two buttons with the name "Aktivität hinzufügen": the one inside the EmptyState (the `.empty` div) and the one inside `.addrow` — both are rendered. I didn't realize that: ActivityList renders the EmptyState with its own button, and on top of that App always renders the addrow button. In other words, in the empty state there are two "Aktivität hinzufügen" buttons.
+
+Is this a UX problem? Having two identical primary CTAs in the empty state is redundant. A better design: when the list is empty, hide the standalone add button (the EmptyState has its own CTA). Fix in App: only render `.addrow` when `data.activities.length > 0`.
+
+Test update: "zeigt leeren Zustand (displays the empty state)" — then `getByRole('button', { name: 'Aktivität hinzufügen' })` is unique (the one in the EmptyState).
+
+This fixes both the test and the UI (removing the redundancy).
+
+Other failures — the dashboard test that uses `within(stats).getByText('50 %')`… and probably the remaining 7 failures have similar multiple-elements issues, or issues caused by the double button. Let me fix App and re-run.
+
+
+
+
+Cause identified: In the empty state, **two** "Add Activity" buttons are being rendered (one in the Empty State and another in the additional row) — redundant both in UX terms and for the tests. The additional row should only be displayed when a list exists:
+
+
+
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.tsx",
+  "oldString": "        <div className=\"addrow\">\n          <button type=\"button\" className=\"btn btn--primary\" onClick={openAdd}>\n            <IconPlus />\n            Aktivität hinzufügen\n          </button>\n        </div>",
+  "newString": "        {data.activities.length > 0 && (\n          <div className=\"addrow\">\n            <button type=\"button\" className=\"btn btn--primary\" onClick={openAdd}>\n              <IconPlus />\n              Aktivität hinzufügen\n            </button>\n          </div>\n        )}"
+}
+```
+
+Edited src/App.tsx (1 replacement)
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run 2>&1 | tail -6",
+  "timeout": 180000
+}
+```
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  7 failed | 40 passed (47)
+   Start at  18:07:01
+   Duration  1.98s (transform 140ms, setup 491ms, collect 260ms, tests 1.24s, environment 1.23s, prepare 173ms)
+
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Still 7 failing. Wait — the previous failure was at 18:07 — but the previous run was at 16:45... well, whatever, I'll continue. Let me check the failure details again (the current output).
+
+
+
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/App.test.tsx 2>&1 | sed -n '/Failed Tests/,$p' | grep -E \"FAIL|Error:|TestingLibrary|✕|expected|Unable to find|found:\" | head -50",
+  "timeout": 180000
+}
+```
+
+ FAIL  src/App.test.tsx > App: Aktivitäten verwalten > Erstellen: ohne Tagesziel wird einmal abgehackt (kein Chip)
+Error: [2mexpect([22m[31melement[39m[2m).not.toBeInTheDocument()[22m
+[31mexpected document not to contain element, found <span
+ FAIL  src/App.test.tsx > App: Aktivitäten verwalten > Formular-Validierung: leerer Name → Fehler, Dialog bleibt offen
+Error: [2mexpect([22m[31melement[39m[2m).not.toBeInTheDocument()[22m
+[31mexpected document not to contain element, found <h2
+ FAIL  src/App.test.tsx > App: Tagesstatus & Persistenz > Abhaken überlebt einen Reload (gleicher localStorage)
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "„E-Mails aufräumen“ abhaken"
+ FAIL  src/App.test.tsx > App: Datumswechsel > Status bleibt pro Tag erhalten, Navigation via Hash
+AssertionError: expected '#/2026-09-28' to be '#/2026-09-27' // Object.is equality
+ FAIL  src/App.test.tsx > App: Beschädigte gespeicherte Daten > kaputtes JSON → Banner, leere App, trotzdem nutzbar
+TestingLibraryElementError: Unable to find an element with the text: /Gespeicherte Daten konnten nicht gelesen werden/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+ FAIL  src/App.test.tsx > App: Beschädigte gespeicherte Daten > Banner lässt sich manuell ausblenden
+TestingLibraryElementError: Unable to find an element with the text: /Gespeicherte Daten konnten nicht gelesen werden/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+ FAIL  src/App.test.tsx > App: Dashboard > Stats + Kategorie-Übersicht reagieren auf Abhaken
+TestingLibraryElementError: Found multiple elements with the text: 1
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Let me analyze each one:
+
+1. **"Create: without daily goal... (no chip)"** — `expect(screen.queryByText(/0\/1/)).not.toBeInTheDocument()` — found a span with text matching /0\/1/... which span? Ah — probably the row chip: I was assuming no chip for target-1, but wait, the row chip is only rendered for `counting = target > 1`. Hmm, so what matched /0\/1/? Let me look at the DOM output of the failure... it says `found <span ...>`. Which span? Maybe `.cat__count`! The category overview: for category "Ohne Kategorie", the span for `0/1` — that's it! The category overview shows the count "0/1". My test's regex /0\/1/ ends up matching the category count. Fix for the test: scope it, or use a different assertion (query within the list section). Let's assert `screen.queryByRole('button', { name: /Fortschritt für/ })` — no, that's wrong. The simplest: assert that the row has no chip: `expect(screen.getByText('E-Mails aufräumen').closest('li')?.querySelector('.row__chip')).toBeNull()`. Or use within on the list section. Let's go with checking the li.
+
+2. **"Form validation"** — after saving an empty name, `expect(dialogIsOpen()).toBe(true)` — the error says `expect(document).not.toBeInTheDocument() found <h2...` — is that the second assertion `expect(screen.queryByText('Noch keine Aktivitäten')).not.toBeInTheDocument()`?? No wait — the first assertion is dialogIsOpen... The error message says "expected document not to contain element, found <h2" — that's from `queryByText('Noch keine Aktivitäten')` → found an h2 (the EmptyState title). So the dialog is still open (assertion 1 passes), and the error text was found, but... no wait, the error says found <h2 — so 'Noch keine Aktivitäten' exists. Right — in the empty state, the EmptyState with that h2 is displayed. My assertion assumed the empty state disappears, but there are no activities, so it should still be displayed. My test's assertion is wrong: delete that line (the empty state stays).
+
+3. **"Check-off survives reload"** — after toggling and remounting, it couldn't find the button named `„E-Mails aufräumen“ abhaken`... no wait, the test clicks the "abhaken" button and then checks `aria-pressed true` on the same button (which I asserted immediately — that probably passed), and then unmount+re-render → looking for `„E-Mails aufräumen“ wieder offen machen`. Failure: "Unable to find ... name „E-Mails aufräumen“ abhaken" — hmm, it's looking for the "abhaken" variant? Let me re-read the test:
+
+```ts
+await user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));
+expect(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' })).toHaveAttribute('aria-pressed', 'true');
+```
+After clicking, the label becomes "wieder offen machen" — so `getByRole(... '„E-Mails aufräumen“ abhaken'` no longer exists! The aria-label changed. Bug in my test: the post-click assertion should use the new label. Fix: after clicking, expect the `wieder offen machen` button with aria-pressed true.
+
+4. **"Status remains per day"** — `expected '#/2026-09-28' to be '#/2026-09-27'` — the last step: after clicking "Heute" from tomorrow, hash is still '#/2026-09-28'?? So clicking "Heute" didn't navigate. Why? selectDay(addDays(day, 0)) — day = tomorrow '2026-09-28' → addDays → same day → no wait, "Heute" calls `onSelectDay(addDays(day, 0))` = '2026-09-28' — bug! addDays(day, 0) is the "current" day, not today! "Heute" should navigate to today, not "the same day". Fix: "Heute" should call selectDay(todayKey()) instead of addDays(day, 0).
+
+That's the actual bug I found: in DayHeader, the "Heute" button does `onSelectDay(addDays(day, 0))` — always the current day. It should be `onSelectDay(todayKey())`.
+
+5. **Corruption test: banner text not found** — "This could be because the text is broken up by multiple elements". My banner JSX:
+```
+Gespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt.
+PulseBoard startet mit einem leeren Zustand; der alte Stand wird erst
+ersetzt, wenn du etwas speicherst.
+```
+The text nodes are split into multiple lines by JSX whitespace → `getByText(/Gespeicherte Daten konnten nicht gelesen werden/)` uses the default matcher against each element's text content... the regex should match a substring of the whole paragraph, right? getByText matches against the textContent of each element, but — by default it only considers "normalized text" of elements that "have" direct text — the div.banner__text contains multiple text nodes (all direct children) → getNodeText concatenates all direct text children: "Gespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt. PulseBoard startet mit einem leeren Zustand; der alte Stand wird erst ersetzt, wenn du etwas speicherst." → the regex should match!
+
+Hmm wait — but the banner's children are wrapped in `<div className="banner__text">{children}</div>` — the children prop = JSX with multiple text nodes inside that div → all direct text of banner__text. The regex /Gespeicherte Daten konnten nicht gelesen werden/ should match.
+
+Otherwise... the banner isn't rendered at all! Why? recovery !== 'corrupt'. In the test: `window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON')` is done "before" render. load() → readRaw → '{{ kein JSON' → JSON.parse fails → recovery is 'corrupt'. It should render, but...
+
+Wait — look at AppProvider: `const loaded = useMemo(() => load(), [])` and the save effect on the first run: `if (firstRun.current) { firstRun = false; if (startedCorrupt.current) return; }` — early return, no save. OK.
+
+Hmm, but in the test "Banner lässt sich manuell ausblenden (Banner can be manually hidden)", I set the localStorage to `'null'` — JSON.parse('null') = null → isRecord(null) is false → corrupt. It should work, but...
+
+Let me check the actual DOM in the failure — maybe the text is there but split differently. The error says "Unable to find an element with the text: /Gespeicherte Daten konnten nicht gelesen werden/". Let me print the DOM and check.
+
+Actually — I suspect the issue is this: my banner text inside App.tsx:
+
+```tsx
+<Banner tone="danger" onDismiss={dismissRecovery}>
+  Gespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt.
+  PulseBoard startet mit einem leeren Zustand; der alte Stand wird erst
+  ersetzt, wenn du etwas speicherst.
+</Banner>
+```
+JSX: each line is a separate text node, and whitespace/newlines between lines are "collapsed" (JSX trims leading/trailing whitespace including newlines). So the text is: "Gespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt.PulseBoard startet..." — note: there's no space between "beschädigt." and "PulseBoard" (JSX's whitespace handling removes newlines between lines without adding a space!). But that doesn't affect the regex match.
+
+Hmm, so why not found? Let me actually look at the DOM dump in the failure.
+
+6. **Dashboard: multiple "1"** — `within(stats).getByText('1')` is ambiguous (both Erledigt and Offen are 1). Fix: scope to the correct stat: either use getAllByText('1') and check length 2, or target the dd by structure. Let me assert the values: `within(stats).getAllByText('1')` length 2, and `getByText('50 %')`. Actually, more simply: use `expect(within(stats).getAllByText('1')).toHaveLength(2)`.
+
+Let me look at the DOM for the banner issue. I'll run one corruption test with full output.
+
+
+
+
+Ich sehe mehrere Ursachen. Zuerst der Banner-Fall im DOM:
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/App.test.tsx -t \"kaputtes JSON\" 2>&1 | sed -n '/<body>/,/Failed Tests/p' | head -80",
+  "timeout": 120000
+}
+```
+
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"topbar"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"wordmark"[39m
+        [36m>[39m
+          [0mPulseBoard[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<main>[39m
+        [36m<section[39m
+          [33maria-label[39m=[32m"Tagesübersicht"[39m
+          [33mclass[39m=[32m"day"[39m
+        [36m>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Tagesnavigation"[39m
+            [33mclass[39m=[32m"day__nav"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Vorheriger Tag"[39m
+              [33mclass[39m=[32m"navbtn"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"16"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.6"[39m
+                [33mviewBox[39m=[32m"0 0 16 16"[39m
+                [33mwidth[39m=[32m"16"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M10 3 5 8l5 5"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"navbtn navbtn--today is-active"[39m
+              [33mdisabled[39m=[32m""[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mHeute[0m
+            [36m</button>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Nächster Tag"[39m
+              [33mclass[39m=[32m"navbtn"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"16"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.6"[39m
+                [33mviewBox[39m=[32m"0 0 16 16"[39m
+                [33mwidth[39m=[32m"16"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m6 3 5 5-5 5"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</nav>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"day__title"[39m
+          [36m>[39m
+            [0mSonntag, 27. September[0m
+          [36m</h1>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+The DOM dump is cut off before the banner area. Let me look at the main content portion of the dump — I'll search for "banner" or "Noch keine Aktivitäten" within the output.
+
+
+
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/App.test.tsx -t \"kaputtes JSON\" 2>&1 | grep -n \"banner\\|Noch keine\\|empty\\|Aktivitäten\\|u003e\" | sed -n '1,20p'",
+  "timeout": 120000
+}
+```
+
+6:   ↓ App: Aktivitäten verwalten > Erstellen: Formular erzeugt Zeile mit Zähl-Chip bei Tagesziel > 1
+7:   ↓ App: Aktivitäten verwalten > Erstellen: ohne Tagesziel wird einmal abgehackt (kein Chip)
+8:   ↓ App: Aktivitäten verwalten > Bearbeiten: Name und Ziel werden aktualisiert
+9:   ↓ App: Aktivitäten verwalten > Löschen: Zeile verschwindet, leere Liste zeigt Empty State wieder
+10:   ↓ App: Aktivitäten verwalten > Formular-Validierung: leerer Name → Fehler, Dialog bleibt offen
+166:          [33maria-label[39m=[32m"Aktivitäten"[39m
+171:            [0mAktivitäten[0m
+174:            [33mclass[39m=[32m"empty"[39m
+177:              [33mclass[39m=[32m"empty__title"[39m
+179:              [0mNoch keine Aktivitäten[0m
+182:              [33mclass[39m=[32m"empty__text"[39m
+471:          [33maria-label[39m=[32m"Aktivitäten"[39m
+476:            [0mAktivitäten[0m
+479:            [33mclass[39m=[32m"empty"[39m
+482:              [33mclass[39m=[32m"empty__title"[39m
+484:              [0mNoch keine Aktivitäten[0m
+487:              [33mclass[39m=[32m"empty__text"[39m
+625:    243|     // Kein Crash, Hinweosbanner, Empty State
+630:    247|     expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocume…
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Interesting — there's no banner in the DOM at all (no "banner" class to be found). The empty state is being rendered, but the banner isn't. That means `recovery` wasn't 'corrupt' in the render…
+
+Wait — looking at my AppProvider:
+
+```tsx
+const loaded = useMemo(() => load(), []);
+```
+
+In the test, `window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON')` is executed before render. `load()` should return corrupt, though…
+
+Could it be — is the AppProvider's save effect running before that…? No, the first run early-returns when corrupt.
+
+Hmm, wait — actually! Let me look at the first effect:
+
+```tsx
+useEffect(() => {
+  if (firstRun.current) {
+    firstRun.current = false;
+    if (startedCorrupt.current) return;
+  }
+  if (!save(data)) pushToast(...);
+}, [data, pushToast]);
+```
+
+If recovery is 'corrupt', startedCorrupt = true → early return. No save. OK.
+
+So why is there no banner? Let me check the JSX in App.tsx:
+
+```tsx
+{recovery === 'corrupt' && (
+  <Banner ...>
+```
+
+Maybe the `recovery` value is 'ok'?? load() is… ah, wait. I've got it. In the test, `window.localStorage.setItem` — but is jsdom's localStorage shared? setup's afterEach clears it. Before render, setItem. `load()` reads `window.localStorage.getItem(STORAGE_KEY)`.
+
+Hmm — could the issue be that `useMemo(() => load(), [])` runs during the first render… no problem there.
+
+Wait, actually — maybe the issue is in `App.tsx`: I'm using `recovery` from `useApp()`. And AppContextValue.recovery — from AppProvider: `recovery` state = loaded.recovery. Should be 'corrupt'.
+
+Let me quickly debug with a node-style check: write a small vitest test? No, first let me grep the actual DOM more thoroughly for the banner class (grep didn't find "banner"). And check the value of the second test file… actually — hold on. Lines 166-182 show one DOM (the failing one), lines 471-487 show the second DOM dump (from the second test's failure? No — -t "kaputtes JSON" runs one test; maybe there are two DOM dumps: one for the initial assertion failure, and another for the later assertion).
+
+Let me look at the DOM around main's beginning — the banner should be between the topbar and the section. Let me output lines 130-175 of the test output.
+
+
+
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/App.test.tsx -t \"kaputtes JSON\" 2>&1 | sed -n '120,175p'",
+  "timeout": 120000
+}
+```
+
+            [36m<div[39m
+              [33mclass[39m=[32m"stat"[39m
+            [36m>[39m
+              [36m<dt[39m
+                [33mclass[39m=[32m"stat__label"[39m
+              [36m>[39m
+                [0mErledigt[0m
+              [36m</dt>[39m
+              [36m<dd[39m
+                [33mclass[39m=[32m"stat__value"[39m
+              [36m>[39m
+                [0m0[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"stat"[39m
+            [36m>[39m
+              [36m<dt[39m
+                [33mclass[39m=[32m"stat__label"[39m
+              [36m>[39m
+                [0mOffen[0m
+              [36m</dt>[39m
+              [36m<dd[39m
+                [33mclass[39m=[32m"stat__value"[39m
+              [36m>[39m
+                [0m0[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"stat"[39m
+            [36m>[39m
+              [36m<dt[39m
+                [33mclass[39m=[32m"stat__label"[39m
+              [36m>[39m
+                [0mFortschritt[0m
+              [36m</dt>[39m
+              [36m<dd[39m
+                [33mclass[39m=[32m"stat__value"[39m
+              [36m>[39m
+                [0m0[0m
+                [0m %[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33maria-label[39m=[32m"Aktivitäten"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"section__label"[39m
+          [36m>[39m
+            [0mAktivitäten[0m
+          [36m</h2>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"empty"[39m
+          [36m>[39m
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Confirmed: the banner is absent from the DOM. So `recovery` is not 'corrupt' in this render. Why?
+
+Hypothesis: The `save` on the first run of the `AppProvider` — no wait, if it's corrupt it early-returns…
+
+Hmm, hold on. Let me re-check `load()`:
+
+```ts
+export function load(): { data: AppData; recovery: Recovery } {
+  const rawText = readRaw();
+  if (rawText === null) {
+    return { data: emptyData(), recovery: 'empty' };
+  }
+  ...
+}
+```
+
+readRaw catches exceptions → returns null → 'empty'.
+
+The test does `window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON')`. Then render. load() → '{{ kein JSON' → JSON.parse throws → 'corrupt'. The banner should be rendered…
+
+Could it be that the test file's `STORAGE_KEY` import is different… I imported it from './lib/storage' — same key. Hmm.
+
+Wait. React 19 + `useMemo(() => load(), [])` — in React 19, is useMemo re-executed during render if React determines the deps have changed… no, with [] it runs only once per mount.
+
+Hmm, let me look at the actual test once more:
+
+```tsx
+it('kaputtes JSON → Banner, leere App, trotzdem nutzbar', async () => {
+  const user = userEvent.setup();
+  window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON');
+  render(<App />);
+  expect(screen.getByText(/Gespeicherte Daten konnten nicht gelesen werden/)).toBeInTheDocument();
+  ...
+```
+
+Hmm, hold on — the DOM dump shows a second "empty" section around line 471 — that's the DOM after `addActivity` (a later assertion dump?). No, that's not it — the output I got was from the first failure (getByText). The DOM shown is the state at the time of the first assertion. No banner.
+
+Let me think about `save` on the first run… no wait. What about `startedCorrupt`… the `recovery` state variable: `useState(loaded.recovery)` — loaded is computed with useMemo. Both should be 'corrupt'.
+
+Could it be… App renders twice (two <App> instances?) — no, that's not it.
+
+Hmm, let me check `App.tsx` once more:
+
+```tsx
+export default function App() {
+  return (
+    <AppProvider>
+      <Shell />
+    </AppProvider>
+  );
+}
+
+function Shell() {
+  const { data, recovery, dispatch, dismissRecovery } = useApp();
+```
+
+This looks correct.
+
+Wait a moment — could it be that in the test's environment, `window.localStorage` is not available in the same realm as the module? No — the storage tests passed (they use localStorage directly).
+
+Let me quickly write a focused debug: a small node script using jsdom? Easier way: add a temporary console.log? Instead, let me write a scratch test file, run it, then delete it:
+
+Actually — wait. I've got it! In the test setup `afterEach`, `window.localStorage.clear()` — no problem. But in the test file, the `beforeEach` in App.test.tsx calls `setClock(...)` — no problem.
+
+Hmm, let me look at the DOM again — there are two DOM dumps (line 166 and line 471). The second one also has "Noch keine Aktivitäten". So the second dump is probably from a later assertion within the same test (after addActivity, the test asserts that the banner disappeared via queryByText — but the failure happened at the first getByText… so why is there a second DOM dump?).
+
+Could it be that the first failure happened later in the test — after the addActivity flow — and the DOM at that point shows the banner is missing… but the DOM dump should show the current state: if the test progressed to the "Neuanfang" assertion… the output I saw was cut off mid-way. Let me get the exact failing line from the output: the earlier grep showed `625: 243| // Kein Crash, Hinweosbanner, Empty State` and `630: 247| expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocume…`.
+
+Lines 243/247 of the test file = the first assertion (after render). So the banner is absent.
+
+Let me quickly check with a minimal repro test… actually — ah. I think I've got it!
+
+`AppProvider` → `AppDataProvider` → `useMemo(() => load(), [])`.
+
+But `load()` is called during render. In React 19 dev… no, that's not it.
+
+Hmm, wait — what about `ToastProvider` — the outer AppProvider returns <ToastProvider><AppDataProvider>… and AppDataProvider calls useToast() — that's now inside the ToastProvider ✓.
+
+So let me actually run a one-shot debug test:
+
+```tsx
+import { render, screen } from '@testing-library/react';
+import App from '../App';
+import { STORAGE_KEY, load } from '../lib/storage';
+
+it('debug', () => {
+  window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON');
+  console.log('raw load:', load().recovery);
+  render(<App />);
+  console.log(document.body.innerHTML.slice(0, 500));
+});
+```
+
+Let me create a scratch file, run it, and then delete it.
+
+
+
+
+Banner fehlt komplett im DOM — ich brauche einen schnellen Debug-Test:
+
+
+
+**Tool: write**
+
+**Input:**
+```json
+{
+  "content": "import { describe, expect, it } from 'vitest';\nimport { render, screen } from '@testing-library/react';\nimport App from '../App';\nimport { STORAGE_KEY, load } from '../lib/storage';\n\ndescribe('debug', () => {\n  it('korrupt', () => {\n    window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON');\n    console.log('raw load recovery:', load().recovery);\n    render(<App />);\n    expect(screen.getByText(/Gespeicherte Daten/)).toBeInTheDocument();\n  });\n});\n",
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx"
+}
+```
+
+Created file successfully: src/debug.test.tsx
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Let me try running this debug test to check the actual DOM and the recovery status.
+
+
+
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/debug.test.tsx 2>&1 | grep -E \"recovery:|banner|Gespeicherte|Unable|FAIL|✓|×\" | head -20",
+  "timeout": 120000
+}
+```
+
+ FAIL  src/debug.test.tsx [ src/debug.test.tsx ]
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+The debug test itself failed — probably a compile error. Let's check.
+
+
+
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/debug.test.tsx 2>&1 | head -30",
+  "timeout": 120000
+}
+```
+
+
+ RUN  v3.2.7 /Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1
+
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/debug.test.tsx [ src/debug.test.tsx ]
+Error: Failed to resolve import "../App" from "src/debug.test.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx:3:16
+  2  |  import { describe, expect, it } from "vitest";
+  3  |  import { render, screen } from "@testing-library/react";
+  4  |  import App from "../App";
+     |                   ^
+  5  |  import { STORAGE_KEY, load } from "../lib/storage";
+  6  |  describe("debug", () => {
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/config.js:29079:43
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/config.js:29076:14
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/config.js:27199:18
+ ❯ node_modules/vite/dist/node/chunks/config.js:27257:32
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/config.js:27225:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/config.js:28877:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/config.js:22746:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  18:27:56
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+The import path is wrong — since debug.test.tsx is in src/, App is at `./App`, not `../App`. Let me fix it.
+
+
+
+
+
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx",
+  "oldString": "import App from '../App';\nimport { STORAGE_KEY, load } from '../lib/storage';",
+  "newString": "import App from './App';\nimport { STORAGE_KEY, load } from './lib/storage';"
+}
+```
+
+Edited src/debug.test.tsx (1 replacement)
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Let's try running the debug test once more.
+
+
+
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "npx vitest run src/debug.test.tsx 2>&1 | grep -E \"recovery:|Gespeicherte|Unable|Found|banner|✓|×|passed|failed\" | head -20",
+  "timeout": 120000
+}
+```
+
+raw load recovery: corrupt
+ ❯ src/debug.test.tsx (1 test | 1 failed) 58ms
+   × debug > korrupt 58ms
+     → Unable to find an element with the text: /Gespeicherte Daten/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+TestingLibraryElementError: Unable to find an element with the text: /Gespeicherte Daten/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+      9|     console.log('raw load recovery:', load().recovery);
+     11|     expect(screen.getByText(/Gespeicherte Daten/)).toBeInTheDocument();
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+`load()` returns 'corrupt', yet the rendered app doesn't show the banner. That means `recovery !== 'corrupt'` in the app's context. In other words, something between load() and the rendering is changing it.
+
+The only path: in AppProvider, `setRecovery('ok')` is called from:
+1. `dismissRecovery` — user action.
+2. Effect: `if (startedCorrupt.current && !firstRun.current) { startedCorrupt.current = false; setRecovery('ok'); }` — runs when state.data changes.
+
+Wait — the deps for effect #2 are [data]. In React's strict rendering… hmm, is this effect running twice?? `startedCorrupt` is a ref — first run: startedCorrupt=true, firstRun… the first effect (save) sets firstRun.current=false during its first execution. Effects run in order: the save effect runs first (firstRun false, startedCorrupt true → early return), then the corrupt effect: `startedCorrupt.current(true) && !firstRun.current(false→!false=true)` → setRecovery('ok')!!
+
+The bug is: on the initial mount, both effects run with the initial data. The save effect early-returns (good), but the corrupt effect checks `!firstRun.current` — firstRun is already false (it was set by the save effect that ran earlier in the same effect flush). So setRecovery('ok') fires immediately.
+
+The logic `!firstRun.current` was intended to mean "after a real data change," but the effect runs with the same data at mount time. I need to distinguish between "the data was changed by the user" and "the initial data." Use a ref holding the last-seen data object:
+
+```tsx
+const lastSaved = useRef(loaded.data);
+useEffect(() => {
+  if (firstRun.current) {
+    firstRun.current = false;
+    if (startedCorrupt.current) return;
+  }
+  if (!save(data)) pushToast(...);
+  lastSaved.current = data;
+}, [data, pushToast]);
+
+useEffect(() => {
+  if (startedCorrupt.current && data !== lastSavedRef... 
+```
+Hmm — simpler: in the save effect, when we actually save, if startedCorrupt → setRecovery('ok') and clear startedCorrupt. One effect:
+
+```tsx
+useEffect(() => {
+  if (firstRun.current) {
+    firstRun.current = false;
+    if (startedCorrupt.current) return; // don't overwrite until there's an actual change
+  }
+  if (startedCorrupt.current) {
+    startedCorrupt.current = false;
+    setRecovery('ok'); // first real change got persisted
+  }
+  if (!save(data)) pushToast(...);
+}, [data, pushToast]);
+```
+Wait, ordering: if the data is the initial data and it's not corrupt → firstRun: set to false, don't early-return → startedCorrupt is false → skip → save (harmless re-save). ✓
+Corrupt + initial → early return, no save. ✓
+Corrupt + user change → save, and startedCorrupt → setRecovery('ok') + clear. ✓
+
+Single effect, no race. Replace the two effects with one.
+
+This explains it: the reason the banner disappeared on mount is that on mount the recovery got set to 'ok'.
+
+Now, the other failing tests:
+
+A. "Erstellen: ohne Tagesziel (kein Chip)": the test asserts `queryByText(/0\/1/)` is null — but the category overview renders "0/1". Fix the test: scope to the list section, or check the row. Assert that the row has no chip:
+```ts
+const row = screen.getByText('E-Mails aufräumen').closest('li');
+expect(row?.querySelector('.row__chip')).toBeNull();
+```
+
+B. "Formular-Validierung": remove the incorrect assertion about 'Noch keine Aktivitäten' (the empty state stays visible). Keep the dialog-open + error assertions.
+
+C. "Abhaken überlebt Reload": after the toggle, the label changes; fix the assertion to use the "wieder offen machen" label.
+
+D. "Datumswechsel": the real bug in DayHeader — "Heute" must navigate to todayKey(), not addDays(day, 0). Fix.
+
+E. Dashboard "1" is ambiguous: use getAllByText('1') with length 2.
+
+Let me also double-check the D fix in the test flow: navigate to next (tomorrow) → click "Heute" → selectDay(todayKey()) = '2026-09-27' → hash '#/2026-09-27' ✓.
+
+And "Reload auf gespeicherter Hash" — this test: click Nächster Tag, unmount, re-render → the day from the hash is restored. This test was also failing earlier — probably the same "Heute" issue? No — it asserts the title after re-render; it was failing because… hmm, it wasn't in the earlier list? It was failing in the 7-item list. Why? Let me think: first render → addActivity "Spaziergang" → click Nächster Tag → hash '#/2026-09-28' ✓ → unmount → render → the title should show Montag 28. useSelectedDay's initial state = dayFromHash() → '#/2026-09-28' → '2026-09-28' ✓. Hmm, this should pass, but…
+
+Wait — the cause of the failure might be different: after unmounting, localStorage still has the activity; the re-render works… let me re-run after the fixes and check.
+
+Actually, the cause of the failure might be this: on the first render, click "Nächster Tag" — selectDay('2026-09-28') sets location.hash; jsdom fires hashchange → setDay. Then assert the hash. unmount. render() again: new component, useState(dayFromHash) → '2026-09-28' → title Montag ✓. Should pass. If it doesn't, I'll check.
+
+Now, let's fix everything.
+
+
+
+
+Found it — a race condition between the two effects: on mount, both are executed, the save-effect sets `firstRun=false` early, and after that the corrupt-effect immediately concludes "already modified" and resets the banner. I'll consolidate both into a single effect:
+
+
+
+
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/state/Provider.tsx",
+  "oldString": "  useEffect(() => {\n    if (firstRun.current) {\n      firstRun.current = false;\n      if (startedCorrupt.current) return; // erst nach echten Änderungen überschreiben\n    }\n    if (!save(data)) {\n      pushToast(\n        'Änderung konnte nicht gespeichert werden – der Browser-Speicher ist voll oder gesperrt.',\n      );\n    }\n  }, [data, pushToast]);\n\n  useEffect(() => {\n    if (startedCorrupt.current && !firstRun.current) {\n      // Erste echte Änderung persistiert → kaputter Zustand wurde ersetzt.\n      startedCorrupt.current = false;\n      setRecovery('ok');\n    }\n  }, [data]);",
+  "newString": "  useEffect(() => {\n    if (firstRun.current) {\n      firstRun.current = false;\n      if (startedCorrupt.current) return; // erst nach echten Änderungen überschreiben\n    }\n    if (startedCorrupt.current) {\n      // Erste echte Nutzer-Änderung wurde persistiert → kaputter Zustand ersetzt.\n      startedCorrupt.current = false;\n      setRecovery('ok');\n    }\n    if (!save(data)) {\n      pushToast(\n        'Änderung konnte nicht gespeichert werden – der Browser-Speicher ist voll oder gesperrt.',\n      );\n    }\n  }, [data, pushToast]);"
+}
+```
+
+Edited src/state/Provider.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/components/DayHeader.tsx",
+  "oldString": "import type { DayKey } from '../lib/types';\nimport type { DayStats } from '../state/store';\nimport { addDays, formatLong, isFuture, isToday } from '../lib/dates';",
+  "newString": "import type { DayKey } from '../lib/types';\nimport type { DayStats } from '../state/store';\nimport { addDays, formatLong, isFuture, isToday, todayKey } from '../lib/dates';"
+}
+```
+
+Edited src/components/DayHeader.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/components/DayHeader.tsx",
+  "oldString": "        <button\n          type=\"button\"\n          className={`navbtn navbtn--today${today ? ' is-active' : ''}`}\n          onClick={() => onSelectDay(addDays(day, 0))}\n          disabled={today}\n        >\n          Heute\n        </button>",
+  "newString": "        <button\n          type=\"button\"\n          className={`navbtn navbtn--today${today ? ' is-active' : ''}`}\n          onClick={() => onSelectDay(todayKey())}\n          disabled={today}\n        >\n          Heute\n        </button>"
+}
+```
+
+Edited src/components/DayHeader.tsx (1 replacement)
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Next, fixing the test files (test bugs, not app bugs):
+
+1. "Create: no daily goal (no chip)": the regex /0\/1/ ends up matching the category count. Scope it to the row:
+```ts
+const row = screen.getByText('E-Mails aufräumen').closest('li');
+expect(row?.querySelector('.row__chip')).toBeNull();
+```
+
+2. "Form validation": remove the incorrect `queryByText('Noch keine Aktivitäten')` assertion.
+
+3. "Check-off survives reload": after toggling, use the new label.
+
+4. Dashboard: use `getAllByText('1')` and toHaveLength(2).
+
+
+
+
+Next, four test bugs (assertions that don't match the correct app behavior):
+
+
+
+
+
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+  "oldString": "    await addActivity(user, { name: 'E-Mails aufräumen' });\n\n    expect(screen.getByText('E-Mails aufräumen')).toBeInTheDocument();\n    expect(screen.queryByText(/0\\/1/)).not.toBeInTheDocument();\n  });",
+  "newString": "    await addActivity(user, { name: 'E-Mails aufräumen' });\n\n    const row = screen.getByText('E-Mails aufräumen').closest('li');\n    expect(row).not.toBeNull();\n    // Kein Zähl-Chip, weil Ziel 1 (einmal abhaken)\n    expect(row?.querySelector('.row__chip')).toBeNull();\n  });"
+}
+```
+
+Edited src/App.test.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+  "oldString": "    expect(dialogIsOpen()).toBe(true);\n    expect(screen.getByText('Gib der Aktivität einen Namen.')).toBeInTheDocument();\n    expect(screen.queryByText('Noch keine Aktivitäten')).not.toBeInTheDocument();\n  });",
+  "newString": "    expect(dialogIsOpen()).toBe(true);\n    expect(screen.getByText('Gib der Aktivität einen Namen.')).toBeInTheDocument();\n    // Es wurde nichts angelegt: Empty State bleibt sichtbar\n    expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocument();\n  });"
+}
+```
+
+Edited src/App.test.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+  "oldString": "    await user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));\n    expect(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' })).toHaveAttribute(\n      'aria-pressed',\n      'true',\n    );",
+  "newString": "    await user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));\n    // Nach dem Abhaken ändert sich das aria-label → auf den neuen Namen prüfen\n    expect(\n      screen.getByRole('button', { name: '„E-Mails aufräumen“ wieder offen machen' }),\n    ).toHaveAttribute('aria-pressed', 'true');"
+}
+```
+
+Edited src/App.test.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+  "oldString": "    expect(within(stats).getByText('50 %')).toBeInTheDocument();\n    expect(within(stats).getByText('1')).toBeInTheDocument();",
+  "newString": "    expect(within(stats).getByText('50 %')).toBeInTheDocument();\n    // Erledigt und Offen zeigen beide \"1\"\n    expect(within(stats).getAllByText('1')).toHaveLength(2);"
+}
+```
+
+Edited src/App.test.tsx (1 replacement)
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+Wait, about the dashboard test: `within(stats).getAllByText('1')` — stats contains the dt labels "Erledigt", "Offen", "Fortschritt" and the dd values "1", "1", "50 %". The text "1" appears in 2 dd's. But watch out — getByText with the string '1' matches elements whose entire (normalized direct) text is '1'. The dd's: "1" ✓, "50 %" ✗, dt's "Erledigt" etc. ✗. → 2 elements. ✓
+
+Also, before that, in the initial state: `getByText('0 %')` — the dd is "0" + " %" (two text nodes: `{stats.percent}` and " %"). getNodeText concatenates the direct text nodes: "0" + " %" = "0 %". ✓ (the earlier test run reached that far... it was passing the initial assertion, and was failing at '50 %'? Actually the failure was "Found multiple elements with the text: 1" — meaning '50 %' was found without any problem.)
+
+Next, delete the debug test and re-run everything.
+
+
+
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "rm src/debug.test.tsx && npx vitest run 2>&1 | tail -8",
+  "timeout": 180000
+}
+```
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 46 passed (47)
+   Start at  18:46:53
+   Duration  2.10s (transform 150ms, setup 527ms, collect 247ms, tests 1.34s, environment 1.38s, prepare 175ms)
+
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+
+46/47. The one that's failing:
+
+
+
 
 

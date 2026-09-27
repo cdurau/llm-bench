@@ -10,20 +10,20 @@
     },
     "cost": 0,
     "tokens": {
-      "input": 108070,
-      "output": 100081,
+      "input": 122826,
+      "output": 109338,
       "reasoning": 0,
       "cache": {
-        "read": 5103084,
+        "read": 6977071,
         "write": 0
       }
     },
     "outcome": "interrupted",
     "time": {
       "created": 1790502180632,
-      "updated": 1790506027944,
-      "idle": 1790524032315,
-      "viewed": 1790524032315
+      "updated": 1790524953646,
+      "idle": 1790531292884,
+      "viewed": 1790531292884
     },
     "title": "PulseBoard PWA implementieren",
     "subpath": "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1",
@@ -6836,6 +6836,1415 @@
       "id": "msg_0e38c853b001RCtIL0bRE6QEWA",
       "time": {
         "created": 1790524032315
+      },
+      "type": "idle",
+      "outcome": "interrupted"
+    },
+    {
+      "id": "msg_0e39a9331001ITGesFOIz2MFVp",
+      "time": {
+        "created": 1790524953663
+      },
+      "text": "Machst du weiter?",
+      "files": [],
+      "agents": [],
+      "type": "user"
+    },
+    {
+      "id": "msg_0e39a9445001uaSB3ByPX6h3Fb",
+      "time": {
+        "created": 1790524953745,
+        "streamed": 1790525018065,
+        "completed": 1790525020974
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nUser's question (in German): \"Machst du weiter?\" — \"Are you continuing?\" Yes — I should continue working. I'll briefly confirm and continue debugging the remaining 8 test failures.\n\nI'll go check the details of the App test failures.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790524994093,
+            "completed": 1790525018060
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nJa, arbeite gerade dran. Ich sehe mir die restlichen 8 Test-Fehler im Detail an:\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_7428da7b",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/App.test.tsx 2>&1 | sed -n '/Failed Tests/,$p' | head -120",
+              "timeout": 180000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/App.test.tsx > App: Darstellung > zeigt leeren Zustand mit Einladung, Datum und Wortmarke\nTestingLibraryElementError: Found multiple elements with the role \"button\" and name \"Aktivität hinzufügen\"\n\nHere are the matching elements:\n\nIgnored nodes: comments, script, style\n\u001b[36m<button\u001b[39m\n  \u001b[33mclass\u001b[39m=\u001b[32m\"btn btn--primary\"\u001b[39m\n  \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n\u001b[36m>\u001b[39m\n  \u001b[0mAktivität hinzufügen\u001b[0m\n\u001b[36m</button>\u001b[39m\n\nIgnored nodes: comments, script, style\n\u001b[36m<button\u001b[39m\n  \u001b[33mclass\u001b[39m=\u001b[32m\"btn btn--primary\"\u001b[39m\n  \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n\u001b[36m>\u001b[39m\n  \u001b[36m<svg\u001b[39m\n    \u001b[33maria-hidden\u001b[39m=\u001b[32m\"true\"\u001b[39m\n    \u001b[33mfill\u001b[39m=\u001b[32m\"none\"\u001b[39m\n    \u001b[33mheight\u001b[39m=\u001b[32m\"15\"\u001b[39m\n    \u001b[33mstroke\u001b[39m=\u001b[32m\"currentColor\"\u001b[39m\n    \u001b[33mstroke-linecap\u001b[39m=\u001b[32m\"round\"\u001b[39m\n    \u001b[33mstroke-linejoin\u001b[39m=\u001b[32m\"round\"\u001b[39m\n    \u001b[33mstroke-width\u001b[39m=\u001b[32m\"1.6\"\u001b[39m\n    \u001b[33mviewBox\u001b[39m=\u001b[32m\"0 0 16 16\"\u001b[39m\n    \u001b[33mwidth\u001b[39m=\u001b[32m\"15\"\u001b[39m\n  \u001b[36m>\u001b[39m\n    \u001b[36m<path\u001b[39m\n      \u001b[33md\u001b[39m=\u001b[32m\"M8 3v10M3 8h10\"\u001b[39m\n    \u001b[36m/>\u001b[39m\n  \u001b[36m</svg>\u001b[39m\n  \u001b[0mAktivität hinzufügen\u001b[0m\n\u001b[36m</button>\u001b[39m\n\n(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).\n\nIgnored nodes: comments, script, style\n\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<div\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"shell\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<header\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"topbar\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<span\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"wordmark\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPulseBoard\u001b[0m\n        \u001b[36m</span>\u001b[39m\n      \u001b[36m</header>\u001b[39m\n      \u001b[36m<main>\u001b[39m\n        \u001b[36m<section\u001b[39m\n          \u001b[33maria-label\u001b[39m=\u001b[32m\"Tagesübersicht\"\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"day\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<nav\u001b[39m\n            \u001b[33maria-label\u001b[39m=\u001b[32m\"Tagesnavigation\"\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"day__nav\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<button\u001b[39m\n              \u001b[33maria-label\u001b[39m=\u001b[32m\"Vorheriger Tag\"\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"navbtn\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<svg\u001b[39m\n                \u001b[33maria-hidden\u001b[39m=\u001b[32m\"true\"\u001b[39m\n                \u001b[33mfill\u001b[39m=\u001b[32m\"none\"\u001b[39m\n                \u001b[33mheight\u001b[39m=\u001b[32m\"16\"\u001b[39m\n                \u001b[33mstroke\u001b[39m=\u001b[32m\"currentColor\"\u001b[39m\n                \u001b[33mstroke-linecap\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-linejoin\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-width\u001b[39m=\u001b[32m\"1.6\"\u001b[39m\n                \u001b[33mviewBox\u001b[39m=\u001b[32m\"0 0 16 16\"\u001b[39m\n                \u001b[33mwidth\u001b[39m=\u001b[32m\"16\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[36m<path\u001b[39m\n                  \u001b[33md\u001b[39m=\u001b[32m\"M10 3 5 8l5 5\"\u001b[39m\n                \u001b[36m/>\u001b[39m\n              \u001b[36m</svg>\u001b[39m\n            \u001b[36m</button>\u001b[39m\n            \u001b[36m<button\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"navbtn navbtn--today is-active\"\u001b[39m\n              \u001b[33mdisabled\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[0mHeute\u001b[0m\n            \u001b[36m</button>\u001b[39m\n            \u001b[36m<button\u001b[39m\n              \u001b[33maria-label\u001b[39m=\u001b[32m\"Nächster Tag\"\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"navbtn\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<svg\u001b[39m\n                \u001b[33maria-hidden\u001b[39m=\u001b[32m\"true\"\u001b[39m\n                \u001b[33mfill\u001b[39m=\u001b[32m\"none\"\u001b[39m\n                \u001b[33mheight\u001b[39m=\u001b[32m\"16\"\u001b[39m\n                \u001b[33mstroke\u001b[39m=\u001b[32m\"currentColor\"\u001b[39m\n                \u001b[33mstroke-linecap\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-linejoin\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-width\u001b[39m=\u001b[32m\"1.6\"\u001b[39m\n                \u001b[33mviewBox\u001b[39m=\u001b[32m\"0 0 16 16\"\u001b[39m\n                \u001b[33mwidth\u001b[39m=\u001b[32m\"16\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[36m<path\u001b[39m\n                  \u001b[33md\u001b[39m=\u001b[32m\"m6 3 5 5-5 5\"\u001b[39m\n                \u001b[36m/>\u001b[39m\n              \u001b[36m</svg>\u001b[39m\n            \u001b[36m</button>\u001b[39m\n          \u001b[36m</nav>\u001b[39m\n          \u001b[36m<h1\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"day__title\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSonntag, 27. September\u001b[0m\n          \u001b[36m</h1>\u001b[39m\n          \u001b[36m<svg\u001b[39m\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790525018053,
+            "ran": 1790525018062,
+            "completed": 1790525020949
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "83df228aac5a679225cc550bb495f95cdee8edd8",
+        "end": "83df228aac5a679225cc550bb495f95cdee8edd8",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 909,
+        "output": 152,
+        "reasoning": 0,
+        "cache": {
+          "read": 125254,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e39b9b38001jAZD679rXx6X9w",
+      "time": {
+        "created": 1790525021008,
+        "streamed": 1790525220957,
+        "completed": 1790525223745
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nThe first test fails because in the empty state there are two buttons with the name \"Aktivität hinzufügen\": the one inside the EmptyState (the `.empty` div) and the one inside `.addrow` — both are rendered. I didn't realize that: ActivityList renders the EmptyState with its own button, and on top of that App always renders the addrow button. In other words, in the empty state there are two \"Aktivität hinzufügen\" buttons.\n\nIs this a UX problem? Having two identical primary CTAs in the empty state is redundant. A better design: when the list is empty, hide the standalone add button (the EmptyState has its own CTA). Fix in App: only render `.addrow` when `data.activities.length > 0`.\n\nTest update: \"zeigt leeren Zustand (displays the empty state)\" — then `getByRole('button', { name: 'Aktivität hinzufügen' })` is unique (the one in the EmptyState).\n\nThis fixes both the test and the UI (removing the redundancy).\n\nOther failures — the dashboard test that uses `within(stats).getByText('50 %')`… and probably the remaining 7 failures have similar multiple-elements issues, or issues caused by the double button. Let me fix App and re-run.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790525118070,
+            "completed": 1790525220948
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nCause identified: In the empty state, **two** \"Add Activity\" buttons are being rendered (one in the Empty State and another in the additional row) — redundant both in UX terms and for the tests. The additional row should only be displayed when a list exists:\n\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_5e2bd26f",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.tsx",
+              "oldString": "        <div className=\"addrow\">\n          <button type=\"button\" className=\"btn btn--primary\" onClick={openAdd}>\n            <IconPlus />\n            Aktivität hinzufügen\n          </button>\n        </div>",
+              "newString": "        {data.activities.length > 0 && (\n          <div className=\"addrow\">\n            <button type=\"button\" className=\"btn btn--primary\" onClick={openAdd}>\n              <IconPlus />\n              Aktivität hinzufügen\n            </button>\n          </div>\n        )}"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/App.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/App.tsx",
+                  "patch": "Index: src/App.tsx\n===================================================================\n--- src/App.tsx\n+++ src/App.tsx\n@@ -92,14 +92,16 @@\n           onDelete={(activity) => dispatch({ type: 'activity/delete', id: activity.id })}\n           onAdd={openAdd}\n         />\n \n-        <div className=\"addrow\">\n-          <button type=\"button\" className=\"btn btn--primary\" onClick={openAdd}>\n-            <IconPlus />\n-            Aktivität hinzufügen\n-          </button>\n-        </div>\n+        {data.activities.length > 0 && (\n+          <div className=\"addrow\">\n+            <button type=\"button\" className=\"btn btn--primary\" onClick={openAdd}>\n+              <IconPlus />\n+              Aktivität hinzufügen\n+            </button>\n+          </div>\n+        )}\n \n         <CategoryOverview stats={categories} />\n       </main>\n \n",
+                  "status": "modified",
+                  "additions": 8,
+                  "deletions": 6
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790525220932,
+            "ran": 1790525220951,
+            "completed": 1790525220972
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_5e648a6e",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run 2>&1 | tail -6",
+              "timeout": 180000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "\n Test Files  1 failed | 3 passed (4)\n      Tests  7 failed | 40 passed (47)\n   Start at  18:07:01\n   Duration  1.98s (transform 140ms, setup 491ms, collect 260ms, tests 1.24s, environment 1.23s, prepare 173ms)\n\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790525220942,
+            "ran": 1790525220954,
+            "completed": 1790525223688
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "83df228aac5a679225cc550bb495f95cdee8edd8",
+        "end": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "files": [
+          "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.tsx"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 2368,
+        "output": 602,
+        "reasoning": 0,
+        "cache": {
+          "read": 126158,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e39eb34f001NaDkdHwV7Qo0BZ",
+      "time": {
+        "created": 1790525223786,
+        "streamed": 1790525281558,
+        "completed": 1790525284043
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nStill 7 failing. Wait — the previous failure was at 18:07 — but the previous run was at 16:45... well, whatever, I'll continue. Let me check the failure details again (the current output).\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790525257009,
+            "completed": 1790525281551
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_999beb04",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/App.test.tsx 2>&1 | sed -n '/Failed Tests/,$p' | grep -E \"FAIL|Error:|TestingLibrary|✕|expected|Unable to find|found:\" | head -50",
+              "timeout": 180000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": " FAIL  src/App.test.tsx > App: Aktivitäten verwalten > Erstellen: ohne Tagesziel wird einmal abgehackt (kein Chip)\nError: \u001b[2mexpect(\u001b[22m\u001b[31melement\u001b[39m\u001b[2m).not.toBeInTheDocument()\u001b[22m\n\u001b[31mexpected document not to contain element, found <span\n FAIL  src/App.test.tsx > App: Aktivitäten verwalten > Formular-Validierung: leerer Name → Fehler, Dialog bleibt offen\nError: \u001b[2mexpect(\u001b[22m\u001b[31melement\u001b[39m\u001b[2m).not.toBeInTheDocument()\u001b[22m\n\u001b[31mexpected document not to contain element, found <h2\n FAIL  src/App.test.tsx > App: Tagesstatus & Persistenz > Abhaken überlebt einen Reload (gleicher localStorage)\nTestingLibraryElementError: Unable to find an accessible element with the role \"button\" and name \"„E-Mails aufräumen“ abhaken\"\n FAIL  src/App.test.tsx > App: Datumswechsel > Status bleibt pro Tag erhalten, Navigation via Hash\nAssertionError: expected '#/2026-09-28' to be '#/2026-09-27' // Object.is equality\n FAIL  src/App.test.tsx > App: Beschädigte gespeicherte Daten > kaputtes JSON → Banner, leere App, trotzdem nutzbar\nTestingLibraryElementError: Unable to find an element with the text: /Gespeicherte Daten konnten nicht gelesen werden/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n FAIL  src/App.test.tsx > App: Beschädigte gespeicherte Daten > Banner lässt sich manuell ausblenden\nTestingLibraryElementError: Unable to find an element with the text: /Gespeicherte Daten konnten nicht gelesen werden/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n FAIL  src/App.test.tsx > App: Dashboard > Stats + Kategorie-Übersicht reagieren auf Abhaken\nTestingLibraryElementError: Found multiple elements with the text: 1\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790525281548,
+            "ran": 1790525281555,
+            "completed": 1790525284021
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "end": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 735,
+        "output": 150,
+        "reasoning": 0,
+        "cache": {
+          "read": 128521,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e39f9ed9001TyvFbeKIgythe8",
+      "time": {
+        "created": 1790525284084,
+        "streamed": 1790525635746,
+        "completed": 1790525637705
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nLet me analyze each one:\n\n1. **\"Create: without daily goal... (no chip)\"** — `expect(screen.queryByText(/0\\/1/)).not.toBeInTheDocument()` — found a span with text matching /0\\/1/... which span? Ah — probably the row chip: I was assuming no chip for target-1, but wait, the row chip is only rendered for `counting = target > 1`. Hmm, so what matched /0\\/1/? Let me look at the DOM output of the failure... it says `found <span ...>`. Which span? Maybe `.cat__count`! The category overview: for category \"Ohne Kategorie\", the span for `0/1` — that's it! The category overview shows the count \"0/1\". My test's regex /0\\/1/ ends up matching the category count. Fix for the test: scope it, or use a different assertion (query within the list section). Let's assert `screen.queryByRole('button', { name: /Fortschritt für/ })` — no, that's wrong. The simplest: assert that the row has no chip: `expect(screen.getByText('E-Mails aufräumen').closest('li')?.querySelector('.row__chip')).toBeNull()`. Or use within on the list section. Let's go with checking the li.\n\n2. **\"Form validation\"** — after saving an empty name, `expect(dialogIsOpen()).toBe(true)` — the error says `expect(document).not.toBeInTheDocument() found <h2...` — is that the second assertion `expect(screen.queryByText('Noch keine Aktivitäten')).not.toBeInTheDocument()`?? No wait — the first assertion is dialogIsOpen... The error message says \"expected document not to contain element, found <h2\" — that's from `queryByText('Noch keine Aktivitäten')` → found an h2 (the EmptyState title). So the dialog is still open (assertion 1 passes), and the error text was found, but... no wait, the error says found <h2 — so 'Noch keine Aktivitäten' exists. Right — in the empty state, the EmptyState with that h2 is displayed. My assertion assumed the empty state disappears, but there are no activities, so it should still be displayed. My test's assertion is wrong: delete that line (the empty state stays).\n\n3. **\"Check-off survives reload\"** — after toggling and remounting, it couldn't find the button named `„E-Mails aufräumen“ abhaken`... no wait, the test clicks the \"abhaken\" button and then checks `aria-pressed true` on the same button (which I asserted immediately — that probably passed), and then unmount+re-render → looking for `„E-Mails aufräumen“ wieder offen machen`. Failure: \"Unable to find ... name „E-Mails aufräumen“ abhaken\" — hmm, it's looking for the \"abhaken\" variant? Let me re-read the test:\n\n```ts\nawait user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));\nexpect(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' })).toHaveAttribute('aria-pressed', 'true');\n```\nAfter clicking, the label becomes \"wieder offen machen\" — so `getByRole(... '„E-Mails aufräumen“ abhaken'` no longer exists! The aria-label changed. Bug in my test: the post-click assertion should use the new label. Fix: after clicking, expect the `wieder offen machen` button with aria-pressed true.\n\n4. **\"Status remains per day\"** — `expected '#/2026-09-28' to be '#/2026-09-27'` — the last step: after clicking \"Heute\" from tomorrow, hash is still '#/2026-09-28'?? So clicking \"Heute\" didn't navigate. Why? selectDay(addDays(day, 0)) — day = tomorrow '2026-09-28' → addDays → same day → no wait, \"Heute\" calls `onSelectDay(addDays(day, 0))` = '2026-09-28' — bug! addDays(day, 0) is the \"current\" day, not today! \"Heute\" should navigate to today, not \"the same day\". Fix: \"Heute\" should call selectDay(todayKey()) instead of addDays(day, 0).\n\nThat's the actual bug I found: in DayHeader, the \"Heute\" button does `onSelectDay(addDays(day, 0))` — always the current day. It should be `onSelectDay(todayKey())`.\n\n5. **Corruption test: banner text not found** — \"This could be because the text is broken up by multiple elements\". My banner JSX:\n```\nGespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt.\nPulseBoard startet mit einem leeren Zustand; der alte Stand wird erst\nersetzt, wenn du etwas speicherst.\n```\nThe text nodes are split into multiple lines by JSX whitespace → `getByText(/Gespeicherte Daten konnten nicht gelesen werden/)` uses the default matcher against each element's text content... the regex should match a substring of the whole paragraph, right? getByText matches against the textContent of each element, but — by default it only considers \"normalized text\" of elements that \"have\" direct text — the div.banner__text contains multiple text nodes (all direct children) → getNodeText concatenates all direct text children: \"Gespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt. PulseBoard startet mit einem leeren Zustand; der alte Stand wird erst ersetzt, wenn du etwas speicherst.\" → the regex should match!\n\nHmm wait — but the banner's children are wrapped in `<div className=\"banner__text\">{children}</div>` — the children prop = JSX with multiple text nodes inside that div → all direct text of banner__text. The regex /Gespeicherte Daten konnten nicht gelesen werden/ should match.\n\nOtherwise... the banner isn't rendered at all! Why? recovery !== 'corrupt'. In the test: `window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON')` is done \"before\" render. load() → readRaw → '{{ kein JSON' → JSON.parse fails → recovery is 'corrupt'. It should render, but...\n\nWait — look at AppProvider: `const loaded = useMemo(() => load(), [])` and the save effect on the first run: `if (firstRun.current) { firstRun = false; if (startedCorrupt.current) return; }` — early return, no save. OK.\n\nHmm, but in the test \"Banner lässt sich manuell ausblenden (Banner can be manually hidden)\", I set the localStorage to `'null'` — JSON.parse('null') = null → isRecord(null) is false → corrupt. It should work, but...\n\nLet me check the actual DOM in the failure — maybe the text is there but split differently. The error says \"Unable to find an element with the text: /Gespeicherte Daten konnten nicht gelesen werden/\". Let me print the DOM and check.\n\nActually — I suspect the issue is this: my banner text inside App.tsx:\n\n```tsx\n<Banner tone=\"danger\" onDismiss={dismissRecovery}>\n  Gespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt.\n  PulseBoard startet mit einem leeren Zustand; der alte Stand wird erst\n  ersetzt, wenn du etwas speicherst.\n</Banner>\n```\nJSX: each line is a separate text node, and whitespace/newlines between lines are \"collapsed\" (JSX trims leading/trailing whitespace including newlines). So the text is: \"Gespeicherte Daten konnten nicht gelesen werden – sie waren beschädigt.PulseBoard startet...\" — note: there's no space between \"beschädigt.\" and \"PulseBoard\" (JSX's whitespace handling removes newlines between lines without adding a space!). But that doesn't affect the regex match.\n\nHmm, so why not found? Let me actually look at the DOM dump in the failure.\n\n6. **Dashboard: multiple \"1\"** — `within(stats).getByText('1')` is ambiguous (both Erledigt and Offen are 1). Fix: scope to the correct stat: either use getAllByText('1') and check length 2, or target the dd by structure. Let me assert the values: `within(stats).getAllByText('1')` length 2, and `getByText('50 %')`. Actually, more simply: use `expect(within(stats).getAllByText('1')).toHaveLength(2)`.\n\nLet me look at the DOM for the banner issue. I'll run one corruption test with full output.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790525313685,
+            "completed": 1790525635740
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nIch sehe mehrere Ursachen. Zuerst der Banner-Fall im DOM:\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_d71fda36",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/App.test.tsx -t \"kaputtes JSON\" 2>&1 | sed -n '/<body>/,/Failed Tests/p' | head -80",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "\u001b[36m<body>\u001b[39m\n  \u001b[36m<div>\u001b[39m\n    \u001b[36m<div\u001b[39m\n      \u001b[33mclass\u001b[39m=\u001b[32m\"shell\"\u001b[39m\n    \u001b[36m>\u001b[39m\n      \u001b[36m<header\u001b[39m\n        \u001b[33mclass\u001b[39m=\u001b[32m\"topbar\"\u001b[39m\n      \u001b[36m>\u001b[39m\n        \u001b[36m<span\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"wordmark\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[0mPulseBoard\u001b[0m\n        \u001b[36m</span>\u001b[39m\n      \u001b[36m</header>\u001b[39m\n      \u001b[36m<main>\u001b[39m\n        \u001b[36m<section\u001b[39m\n          \u001b[33maria-label\u001b[39m=\u001b[32m\"Tagesübersicht\"\u001b[39m\n          \u001b[33mclass\u001b[39m=\u001b[32m\"day\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<nav\u001b[39m\n            \u001b[33maria-label\u001b[39m=\u001b[32m\"Tagesnavigation\"\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"day__nav\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[36m<button\u001b[39m\n              \u001b[33maria-label\u001b[39m=\u001b[32m\"Vorheriger Tag\"\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"navbtn\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<svg\u001b[39m\n                \u001b[33maria-hidden\u001b[39m=\u001b[32m\"true\"\u001b[39m\n                \u001b[33mfill\u001b[39m=\u001b[32m\"none\"\u001b[39m\n                \u001b[33mheight\u001b[39m=\u001b[32m\"16\"\u001b[39m\n                \u001b[33mstroke\u001b[39m=\u001b[32m\"currentColor\"\u001b[39m\n                \u001b[33mstroke-linecap\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-linejoin\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-width\u001b[39m=\u001b[32m\"1.6\"\u001b[39m\n                \u001b[33mviewBox\u001b[39m=\u001b[32m\"0 0 16 16\"\u001b[39m\n                \u001b[33mwidth\u001b[39m=\u001b[32m\"16\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[36m<path\u001b[39m\n                  \u001b[33md\u001b[39m=\u001b[32m\"M10 3 5 8l5 5\"\u001b[39m\n                \u001b[36m/>\u001b[39m\n              \u001b[36m</svg>\u001b[39m\n            \u001b[36m</button>\u001b[39m\n            \u001b[36m<button\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"navbtn navbtn--today is-active\"\u001b[39m\n              \u001b[33mdisabled\u001b[39m=\u001b[32m\"\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[0mHeute\u001b[0m\n            \u001b[36m</button>\u001b[39m\n            \u001b[36m<button\u001b[39m\n              \u001b[33maria-label\u001b[39m=\u001b[32m\"Nächster Tag\"\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"navbtn\"\u001b[39m\n              \u001b[33mtype\u001b[39m=\u001b[32m\"button\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<svg\u001b[39m\n                \u001b[33maria-hidden\u001b[39m=\u001b[32m\"true\"\u001b[39m\n                \u001b[33mfill\u001b[39m=\u001b[32m\"none\"\u001b[39m\n                \u001b[33mheight\u001b[39m=\u001b[32m\"16\"\u001b[39m\n                \u001b[33mstroke\u001b[39m=\u001b[32m\"currentColor\"\u001b[39m\n                \u001b[33mstroke-linecap\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-linejoin\u001b[39m=\u001b[32m\"round\"\u001b[39m\n                \u001b[33mstroke-width\u001b[39m=\u001b[32m\"1.6\"\u001b[39m\n                \u001b[33mviewBox\u001b[39m=\u001b[32m\"0 0 16 16\"\u001b[39m\n                \u001b[33mwidth\u001b[39m=\u001b[32m\"16\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[36m<path\u001b[39m\n                  \u001b[33md\u001b[39m=\u001b[32m\"m6 3 5 5-5 5\"\u001b[39m\n                \u001b[36m/>\u001b[39m\n              \u001b[36m</svg>\u001b[39m\n            \u001b[36m</button>\u001b[39m\n          \u001b[36m</nav>\u001b[39m\n          \u001b[36m<h1\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"day__title\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mSonntag, 27. September\u001b[0m\n          \u001b[36m</h1>\u001b[39m\n          \u001b[36m<svg\u001b[39m\n            \u001b[33maria-hidden\u001b[39m=\u001b[32m\"true\"\u001b[39m\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790525635737,
+            "ran": 1790525635743,
+            "completed": 1790525637667
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "end": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 670,
+        "output": 2014,
+        "reasoning": 0,
+        "cache": {
+          "read": 129251,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3a5045a001BooIQ7GSPF8yO2",
+      "time": {
+        "created": 1790525637747,
+        "streamed": 1790525762192,
+        "completed": 1790525764063
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nThe DOM dump is cut off before the banner area. Let me look at the main content portion of the dump — I'll search for \"banner\" or \"Noch keine Aktivitäten\" within the output.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790525738329,
+            "completed": 1790525762187
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_d11f0438",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/App.test.tsx -t \"kaputtes JSON\" 2>&1 | grep -n \"banner\\|Noch keine\\|empty\\|Aktivitäten\\|u003e\" | sed -n '1,20p'",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "6:   ↓ App: Aktivitäten verwalten > Erstellen: Formular erzeugt Zeile mit Zähl-Chip bei Tagesziel > 1\n7:   ↓ App: Aktivitäten verwalten > Erstellen: ohne Tagesziel wird einmal abgehackt (kein Chip)\n8:   ↓ App: Aktivitäten verwalten > Bearbeiten: Name und Ziel werden aktualisiert\n9:   ↓ App: Aktivitäten verwalten > Löschen: Zeile verschwindet, leere Liste zeigt Empty State wieder\n10:   ↓ App: Aktivitäten verwalten > Formular-Validierung: leerer Name → Fehler, Dialog bleibt offen\n166:          \u001b[33maria-label\u001b[39m=\u001b[32m\"Aktivitäten\"\u001b[39m\n171:            \u001b[0mAktivitäten\u001b[0m\n174:            \u001b[33mclass\u001b[39m=\u001b[32m\"empty\"\u001b[39m\n177:              \u001b[33mclass\u001b[39m=\u001b[32m\"empty__title\"\u001b[39m\n179:              \u001b[0mNoch keine Aktivitäten\u001b[0m\n182:              \u001b[33mclass\u001b[39m=\u001b[32m\"empty__text\"\u001b[39m\n471:          \u001b[33maria-label\u001b[39m=\u001b[32m\"Aktivitäten\"\u001b[39m\n476:            \u001b[0mAktivitäten\u001b[0m\n479:            \u001b[33mclass\u001b[39m=\u001b[32m\"empty\"\u001b[39m\n482:              \u001b[33mclass\u001b[39m=\u001b[32m\"empty__title\"\u001b[39m\n484:              \u001b[0mNoch keine Aktivitäten\u001b[0m\n487:              \u001b[33mclass\u001b[39m=\u001b[32m\"empty__text\"\u001b[39m\n625:    243|     // Kein Crash, Hinweosbanner, Empty State\n630:    247|     expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocume…\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790525762184,
+            "ran": 1790525762189,
+            "completed": 1790525764026
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "end": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 2407,
+        "output": 145,
+        "reasoning": 0,
+        "cache": {
+          "read": 131072,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3a6f1ee001fZCR1LMBwF7NgD",
+      "time": {
+        "created": 1790525764102,
+        "streamed": 1790525904515,
+        "completed": 1790525906362
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nInteresting — there's no banner in the DOM at all (no \"banner\" class to be found). The empty state is being rendered, but the banner isn't. That means `recovery` wasn't 'corrupt' in the render…\n\nWait — looking at my AppProvider:\n\n```tsx\nconst loaded = useMemo(() => load(), []);\n```\n\nIn the test, `window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON')` is executed before render. `load()` should return corrupt, though…\n\nCould it be — is the AppProvider's save effect running before that…? No, the first run early-returns when corrupt.\n\nHmm, wait — actually! Let me look at the first effect:\n\n```tsx\nuseEffect(() => {\n  if (firstRun.current) {\n    firstRun.current = false;\n    if (startedCorrupt.current) return;\n  }\n  if (!save(data)) pushToast(...);\n}, [data, pushToast]);\n```\n\nIf recovery is 'corrupt', startedCorrupt = true → early return. No save. OK.\n\nSo why is there no banner? Let me check the JSX in App.tsx:\n\n```tsx\n{recovery === 'corrupt' && (\n  <Banner ...>\n```\n\nMaybe the `recovery` value is 'ok'?? load() is… ah, wait. I've got it. In the test, `window.localStorage.setItem` — but is jsdom's localStorage shared? setup's afterEach clears it. Before render, setItem. `load()` reads `window.localStorage.getItem(STORAGE_KEY)`.\n\nHmm — could the issue be that `useMemo(() => load(), [])` runs during the first render… no problem there.\n\nWait, actually — maybe the issue is in `App.tsx`: I'm using `recovery` from `useApp()`. And AppContextValue.recovery — from AppProvider: `recovery` state = loaded.recovery. Should be 'corrupt'.\n\nLet me quickly debug with a node-style check: write a small vitest test? No, first let me grep the actual DOM more thoroughly for the banner class (grep didn't find \"banner\"). And check the value of the second test file… actually — hold on. Lines 166-182 show one DOM (the failing one), lines 471-487 show the second DOM dump (from the second test's failure? No — -t \"kaputtes JSON\" runs one test; maybe there are two DOM dumps: one for the initial assertion failure, and another for the later assertion).\n\nLet me look at the DOM around main's beginning — the banner should be between the topbar and the section. Let me output lines 130-175 of the test output.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790525794487,
+            "completed": 1790525904509
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_9f3d15d7",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/App.test.tsx -t \"kaputtes JSON\" 2>&1 | sed -n '120,175p'",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "            \u001b[36m<div\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"stat\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<dt\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"stat__label\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[0mErledigt\u001b[0m\n              \u001b[36m</dt>\u001b[39m\n              \u001b[36m<dd\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"stat__value\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[0m0\u001b[0m\n              \u001b[36m</dd>\u001b[39m\n            \u001b[36m</div>\u001b[39m\n            \u001b[36m<div\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"stat\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<dt\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"stat__label\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[0mOffen\u001b[0m\n              \u001b[36m</dt>\u001b[39m\n              \u001b[36m<dd\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"stat__value\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[0m0\u001b[0m\n              \u001b[36m</dd>\u001b[39m\n            \u001b[36m</div>\u001b[39m\n            \u001b[36m<div\u001b[39m\n              \u001b[33mclass\u001b[39m=\u001b[32m\"stat\"\u001b[39m\n            \u001b[36m>\u001b[39m\n              \u001b[36m<dt\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"stat__label\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[0mFortschritt\u001b[0m\n              \u001b[36m</dt>\u001b[39m\n              \u001b[36m<dd\u001b[39m\n                \u001b[33mclass\u001b[39m=\u001b[32m\"stat__value\"\u001b[39m\n              \u001b[36m>\u001b[39m\n                \u001b[0m0\u001b[0m\n                \u001b[0m %\u001b[0m\n              \u001b[36m</dd>\u001b[39m\n            \u001b[36m</div>\u001b[39m\n          \u001b[36m</dl>\u001b[39m\n        \u001b[36m</section>\u001b[39m\n        \u001b[36m<section\u001b[39m\n          \u001b[33maria-label\u001b[39m=\u001b[32m\"Aktivitäten\"\u001b[39m\n        \u001b[36m>\u001b[39m\n          \u001b[36m<h2\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"section__label\"\u001b[39m\n          \u001b[36m>\u001b[39m\n            \u001b[0mAktivitäten\u001b[0m\n          \u001b[36m</h2>\u001b[39m\n          \u001b[36m<div\u001b[39m\n            \u001b[33mclass\u001b[39m=\u001b[32m\"empty\"\u001b[39m\n          \u001b[36m>\u001b[39m\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790525904506,
+            "ran": 1790525904512,
+            "completed": 1790525906325
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "end": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 643,
+        "output": 675,
+        "reasoning": 0,
+        "cache": {
+          "read": 133474,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3a91dca001uATfh6sMU9CYbS",
+      "time": {
+        "created": 1790525906401,
+        "streamed": 1790526340783,
+        "completed": 1790526340877
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nConfirmed: the banner is absent from the DOM. So `recovery` is not 'corrupt' in this render. Why?\n\nHypothesis: The `save` on the first run of the `AppProvider` — no wait, if it's corrupt it early-returns…\n\nHmm, hold on. Let me re-check `load()`:\n\n```ts\nexport function load(): { data: AppData; recovery: Recovery } {\n  const rawText = readRaw();\n  if (rawText === null) {\n    return { data: emptyData(), recovery: 'empty' };\n  }\n  ...\n}\n```\n\nreadRaw catches exceptions → returns null → 'empty'.\n\nThe test does `window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON')`. Then render. load() → '{{ kein JSON' → JSON.parse throws → 'corrupt'. The banner should be rendered…\n\nCould it be that the test file's `STORAGE_KEY` import is different… I imported it from './lib/storage' — same key. Hmm.\n\nWait. React 19 + `useMemo(() => load(), [])` — in React 19, is useMemo re-executed during render if React determines the deps have changed… no, with [] it runs only once per mount.\n\nHmm, let me look at the actual test once more:\n\n```tsx\nit('kaputtes JSON → Banner, leere App, trotzdem nutzbar', async () => {\n  const user = userEvent.setup();\n  window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON');\n  render(<App />);\n  expect(screen.getByText(/Gespeicherte Daten konnten nicht gelesen werden/)).toBeInTheDocument();\n  ...\n```\n\nHmm, hold on — the DOM dump shows a second \"empty\" section around line 471 — that's the DOM after `addActivity` (a later assertion dump?). No, that's not it — the output I got was from the first failure (getByText). The DOM shown is the state at the time of the first assertion. No banner.\n\nLet me think about `save` on the first run… no wait. What about `startedCorrupt`… the `recovery` state variable: `useState(loaded.recovery)` — loaded is computed with useMemo. Both should be 'corrupt'.\n\nCould it be… App renders twice (two <App> instances?) — no, that's not it.\n\nHmm, let me check `App.tsx` once more:\n\n```tsx\nexport default function App() {\n  return (\n    <AppProvider>\n      <Shell />\n    </AppProvider>\n  );\n}\n\nfunction Shell() {\n  const { data, recovery, dispatch, dismissRecovery } = useApp();\n```\n\nThis looks correct.\n\nWait a moment — could it be that in the test's environment, `window.localStorage` is not available in the same realm as the module? No — the storage tests passed (they use localStorage directly).\n\nLet me quickly write a focused debug: a small node script using jsdom? Easier way: add a temporary console.log? Instead, let me write a scratch test file, run it, then delete it:\n\nActually — wait. I've got it! In the test setup `afterEach`, `window.localStorage.clear()` — no problem. But in the test file, the `beforeEach` in App.test.tsx calls `setClock(...)` — no problem.\n\nHmm, let me look at the DOM again — there are two DOM dumps (line 166 and line 471). The second one also has \"Noch keine Aktivitäten\". So the second dump is probably from a later assertion within the same test (after addActivity, the test asserts that the banner disappeared via queryByText — but the failure happened at the first getByText… so why is there a second DOM dump?).\n\nCould it be that the first failure happened later in the test — after the addActivity flow — and the DOM at that point shows the banner is missing… but the DOM dump should show the current state: if the test progressed to the \"Neuanfang\" assertion… the output I saw was cut off mid-way. Let me get the exact failing line from the output: the earlier grep showed `625: 243| // Kein Crash, Hinweosbanner, Empty State` and `630: 247| expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocume…`.\n\nLines 243/247 of the test file = the first assertion (after render). So the banner is absent.\n\nLet me quickly check with a minimal repro test… actually — ah. I think I've got it!\n\n`AppProvider` → `AppDataProvider` → `useMemo(() => load(), [])`.\n\nBut `load()` is called during render. In React 19 dev… no, that's not it.\n\nHmm, wait — what about `ToastProvider` — the outer AppProvider returns <ToastProvider><AppDataProvider>… and AppDataProvider calls useToast() — that's now inside the ToastProvider ✓.\n\nSo let me actually run a one-shot debug test:\n\n```tsx\nimport { render, screen } from '@testing-library/react';\nimport App from '../App';\nimport { STORAGE_KEY, load } from '../lib/storage';\n\nit('debug', () => {\n  window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON');\n  console.log('raw load:', load().recovery);\n  render(<App />);\n  console.log(document.body.innerHTML.slice(0, 500));\n});\n```\n\nLet me create a scratch file, run it, and then delete it.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790525975246,
+            "completed": 1790526340776
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nBanner fehlt komplett im DOM — ich brauche einen schnellen Debug-Test:\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_e953e44d",
+          "name": "write",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "content": "import { describe, expect, it } from 'vitest';\nimport { render, screen } from '@testing-library/react';\nimport App from '../App';\nimport { STORAGE_KEY, load } from '../lib/storage';\n\ndescribe('debug', () => {\n  it('korrupt', () => {\n    window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON');\n    console.log('raw load recovery:', load().recovery);\n    render(<App />);\n    expect(screen.getByText(/Gespeicherte Daten/)).toBeInTheDocument();\n  });\n});\n",
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Created file successfully: src/debug.test.tsx"
+              }
+            ],
+            "metadata": {
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790526340770,
+            "ran": 1790526340779,
+            "completed": 1790526340793
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "0f8f630295a6bf9668434677e2dc9b6064d11381",
+        "end": "c99f2925571dc9ccca3969d2809d9721084e8fe3",
+        "files": [
+          "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 1545,
+        "output": 1442,
+        "reasoning": 0,
+        "cache": {
+          "read": 134112,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3afbf1d001LCNBmMgyescUp4",
+      "time": {
+        "created": 1790526340947,
+        "streamed": 1790526443876,
+        "completed": 1790526445507
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nLet me try running this debug test to check the actual DOM and the recovery status.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790526416484,
+            "completed": 1790526443870
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_5052f2df",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/debug.test.tsx 2>&1 | grep -E \"recovery:|banner|Gespeicherte|Unable|FAIL|✓|×\" | head -20",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": " FAIL  src/debug.test.tsx [ src/debug.test.tsx ]\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790526443867,
+            "ran": 1790526443873,
+            "completed": 1790526445479
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "c99f2925571dc9ccca3969d2809d9721084e8fe3",
+        "end": "c99f2925571dc9ccca3969d2809d9721084e8fe3",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 1472,
+        "output": 104,
+        "reasoning": 0,
+        "cache": {
+          "read": 135652,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3b157d0001VFprHAdOe6ocSu",
+      "time": {
+        "created": 1790526445543,
+        "streamed": 1790526475684,
+        "completed": 1790526476618
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nThe debug test itself failed — probably a compile error. Let's check.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790526456968,
+            "completed": 1790526475680
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_ce8d4566",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/debug.test.tsx 2>&1 | head -30",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "\n RUN  v3.2.7 /Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1\n\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/debug.test.tsx [ src/debug.test.tsx ]\nError: Failed to resolve import \"../App\" from \"src/debug.test.tsx\". Does the file exist?\n  Plugin: vite:import-analysis\n  File: /Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx:3:16\n  2  |  import { describe, expect, it } from \"vitest\";\n  3  |  import { render, screen } from \"@testing-library/react\";\n  4  |  import App from \"../App\";\n     |                   ^\n  5  |  import { STORAGE_KEY, load } from \"../lib/storage\";\n  6  |  describe(\"debug\", () => {\n ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/config.js:29079:43\n ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/config.js:29076:14\n ❯ normalizeUrl node_modules/vite/dist/node/chunks/config.js:27199:18\n ❯ node_modules/vite/dist/node/chunks/config.js:27257:32\n ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/config.js:27225:4\n ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/config.js:28877:14\n ❯ loadAndTransform node_modules/vite/dist/node/chunks/config.js:22746:26\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  no tests\n   Start at  18:27:56\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790526475675,
+            "ran": 1790526475682,
+            "completed": 1790526476601
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "c99f2925571dc9ccca3969d2809d9721084e8fe3",
+        "end": "c99f2925571dc9ccca3969d2809d9721084e8fe3",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 139,
+        "output": 78,
+        "reasoning": 0,
+        "cache": {
+          "read": 137119,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3b1d1550010oBgXuL7BQxTvB",
+      "time": {
+        "created": 1790526476651,
+        "streamed": 1790526556306,
+        "completed": 1790526556379
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nThe import path is wrong — since debug.test.tsx is in src/, App is at `./App`, not `../App`. Let me fix it.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790526513707,
+            "completed": 1790526556303
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_6495e181",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx",
+              "oldString": "import App from '../App';\nimport { STORAGE_KEY, load } from '../lib/storage';",
+              "newString": "import App from './App';\nimport { STORAGE_KEY, load } from './lib/storage';"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/debug.test.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/debug.test.tsx",
+                  "patch": "Index: src/debug.test.tsx\n===================================================================\n--- src/debug.test.tsx\n+++ src/debug.test.tsx\n@@ -1,8 +1,8 @@\n import { describe, expect, it } from 'vitest';\n import { render, screen } from '@testing-library/react';\n-import App from '../App';\n-import { STORAGE_KEY, load } from '../lib/storage';\n+import App from './App';\n+import { STORAGE_KEY, load } from './lib/storage';\n \n describe('debug', () => {\n   it('korrupt', () => {\n     window.localStorage.setItem(STORAGE_KEY, '{{ kein JSON');\n",
+                  "status": "modified",
+                  "additions": 2,
+                  "deletions": 2
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790526556298,
+            "ran": 1790526556305,
+            "completed": 1790526556312
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "c99f2925571dc9ccca3969d2809d9721084e8fe3",
+        "end": "d4b66fb2d5b71b58f00475f157b6316a363397e0",
+        "files": [
+          "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 694,
+        "output": 176,
+        "reasoning": 0,
+        "cache": {
+          "read": 137253,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3b308f2001vbqD74PeW1klFR",
+      "time": {
+        "created": 1790526556424,
+        "streamed": 1790526595507,
+        "completed": 1790526596726
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nLet's try running the debug test once more.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790526571537,
+            "completed": 1790526595503
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_a2070cdc",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "npx vitest run src/debug.test.tsx 2>&1 | grep -E \"recovery:|Gespeicherte|Unable|Found|banner|✓|×|passed|failed\" | head -20",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "raw load recovery: corrupt\n ❯ src/debug.test.tsx (1 test | 1 failed) 58ms\n   × debug > korrupt 58ms\n     → Unable to find an element with the text: /Gespeicherte Daten/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\nTestingLibraryElementError: Unable to find an element with the text: /Gespeicherte Daten/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.\n      9|     console.log('raw load recovery:', load().recovery);\n     11|     expect(screen.getByText(/Gespeicherte Daten/)).toBeInTheDocument();\n Test Files  1 failed (1)\n      Tests  1 failed (1)\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790526595498,
+            "ran": 1790526595505,
+            "completed": 1790526596709
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "d4b66fb2d5b71b58f00475f157b6316a363397e0",
+        "end": "d4b66fb2d5b71b58f00475f157b6316a363397e0",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 207,
+        "output": 101,
+        "reasoning": 0,
+        "cache": {
+          "read": 137942,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3b3a680001j74ATZSrJKg3Jj",
+      "time": {
+        "created": 1790526596757,
+        "streamed": 1790527207351,
+        "completed": 1790527207473
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\n`load()` returns 'corrupt', yet the rendered app doesn't show the banner. That means `recovery !== 'corrupt'` in the app's context. In other words, something between load() and the rendering is changing it.\n\nThe only path: in AppProvider, `setRecovery('ok')` is called from:\n1. `dismissRecovery` — user action.\n2. Effect: `if (startedCorrupt.current && !firstRun.current) { startedCorrupt.current = false; setRecovery('ok'); }` — runs when state.data changes.\n\nWait — the deps for effect #2 are [data]. In React's strict rendering… hmm, is this effect running twice?? `startedCorrupt` is a ref — first run: startedCorrupt=true, firstRun… the first effect (save) sets firstRun.current=false during its first execution. Effects run in order: the save effect runs first (firstRun false, startedCorrupt true → early return), then the corrupt effect: `startedCorrupt.current(true) && !firstRun.current(false→!false=true)` → setRecovery('ok')!!\n\nThe bug is: on the initial mount, both effects run with the initial data. The save effect early-returns (good), but the corrupt effect checks `!firstRun.current` — firstRun is already false (it was set by the save effect that ran earlier in the same effect flush). So setRecovery('ok') fires immediately.\n\nThe logic `!firstRun.current` was intended to mean \"after a real data change,\" but the effect runs with the same data at mount time. I need to distinguish between \"the data was changed by the user\" and \"the initial data.\" Use a ref holding the last-seen data object:\n\n```tsx\nconst lastSaved = useRef(loaded.data);\nuseEffect(() => {\n  if (firstRun.current) {\n    firstRun.current = false;\n    if (startedCorrupt.current) return;\n  }\n  if (!save(data)) pushToast(...);\n  lastSaved.current = data;\n}, [data, pushToast]);\n\nuseEffect(() => {\n  if (startedCorrupt.current && data !== lastSavedRef... \n```\nHmm — simpler: in the save effect, when we actually save, if startedCorrupt → setRecovery('ok') and clear startedCorrupt. One effect:\n\n```tsx\nuseEffect(() => {\n  if (firstRun.current) {\n    firstRun.current = false;\n    if (startedCorrupt.current) return; // don't overwrite until there's an actual change\n  }\n  if (startedCorrupt.current) {\n    startedCorrupt.current = false;\n    setRecovery('ok'); // first real change got persisted\n  }\n  if (!save(data)) pushToast(...);\n}, [data, pushToast]);\n```\nWait, ordering: if the data is the initial data and it's not corrupt → firstRun: set to false, don't early-return → startedCorrupt is false → skip → save (harmless re-save). ✓\nCorrupt + initial → early return, no save. ✓\nCorrupt + user change → save, and startedCorrupt → setRecovery('ok') + clear. ✓\n\nSingle effect, no race. Replace the two effects with one.\n\nThis explains it: the reason the banner disappeared on mount is that on mount the recovery got set to 'ok'.\n\nNow, the other failing tests:\n\nA. \"Erstellen: ohne Tagesziel (kein Chip)\": the test asserts `queryByText(/0\\/1/)` is null — but the category overview renders \"0/1\". Fix the test: scope to the list section, or check the row. Assert that the row has no chip:\n```ts\nconst row = screen.getByText('E-Mails aufräumen').closest('li');\nexpect(row?.querySelector('.row__chip')).toBeNull();\n```\n\nB. \"Formular-Validierung\": remove the incorrect assertion about 'Noch keine Aktivitäten' (the empty state stays visible). Keep the dialog-open + error assertions.\n\nC. \"Abhaken überlebt Reload\": after the toggle, the label changes; fix the assertion to use the \"wieder offen machen\" label.\n\nD. \"Datumswechsel\": the real bug in DayHeader — \"Heute\" must navigate to todayKey(), not addDays(day, 0). Fix.\n\nE. Dashboard \"1\" is ambiguous: use getAllByText('1') with length 2.\n\nLet me also double-check the D fix in the test flow: navigate to next (tomorrow) → click \"Heute\" → selectDay(todayKey()) = '2026-09-27' → hash '#/2026-09-27' ✓.\n\nAnd \"Reload auf gespeicherter Hash\" — this test: click Nächster Tag, unmount, re-render → the day from the hash is restored. This test was also failing earlier — probably the same \"Heute\" issue? No — it asserts the title after re-render; it was failing because… hmm, it wasn't in the earlier list? It was failing in the 7-item list. Why? Let me think: first render → addActivity \"Spaziergang\" → click Nächster Tag → hash '#/2026-09-28' ✓ → unmount → render → the title should show Montag 28. useSelectedDay's initial state = dayFromHash() → '#/2026-09-28' → '2026-09-28' ✓. Hmm, this should pass, but…\n\nWait — the cause of the failure might be different: after unmounting, localStorage still has the activity; the re-render works… let me re-run after the fixes and check.\n\nActually, the cause of the failure might be this: on the first render, click \"Nächster Tag\" — selectDay('2026-09-28') sets location.hash; jsdom fires hashchange → setDay. Then assert the hash. unmount. render() again: new component, useState(dayFromHash) → '2026-09-28' → title Montag ✓. Should pass. If it doesn't, I'll check.\n\nNow, let's fix everything.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790526615446,
+            "completed": 1790527207339
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nFound it — a race condition between the two effects: on mount, both are executed, the save-effect sets `firstRun=false` early, and after that the corrupt-effect immediately concludes \"already modified\" and resets the banner. I'll consolidate both into a single effect:\n\n\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_641a5201",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/state/Provider.tsx",
+              "oldString": "  useEffect(() => {\n    if (firstRun.current) {\n      firstRun.current = false;\n      if (startedCorrupt.current) return; // erst nach echten Änderungen überschreiben\n    }\n    if (!save(data)) {\n      pushToast(\n        'Änderung konnte nicht gespeichert werden – der Browser-Speicher ist voll oder gesperrt.',\n      );\n    }\n  }, [data, pushToast]);\n\n  useEffect(() => {\n    if (startedCorrupt.current && !firstRun.current) {\n      // Erste echte Änderung persistiert → kaputter Zustand wurde ersetzt.\n      startedCorrupt.current = false;\n      setRecovery('ok');\n    }\n  }, [data]);",
+              "newString": "  useEffect(() => {\n    if (firstRun.current) {\n      firstRun.current = false;\n      if (startedCorrupt.current) return; // erst nach echten Änderungen überschreiben\n    }\n    if (startedCorrupt.current) {\n      // Erste echte Nutzer-Änderung wurde persistiert → kaputter Zustand ersetzt.\n      startedCorrupt.current = false;\n      setRecovery('ok');\n    }\n    if (!save(data)) {\n      pushToast(\n        'Änderung konnte nicht gespeichert werden – der Browser-Speicher ist voll oder gesperrt.',\n      );\n    }\n  }, [data, pushToast]);"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/state/Provider.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/state/Provider.tsx",
+                  "patch": "Index: src/state/Provider.tsx\n===================================================================\n--- src/state/Provider.tsx\n+++ src/state/Provider.tsx\n@@ -42,23 +42,20 @@\n     if (firstRun.current) {\n       firstRun.current = false;\n       if (startedCorrupt.current) return; // erst nach echten Änderungen überschreiben\n     }\n+    if (startedCorrupt.current) {\n+      // Erste echte Nutzer-Änderung wurde persistiert → kaputter Zustand ersetzt.\n+      startedCorrupt.current = false;\n+      setRecovery('ok');\n+    }\n     if (!save(data)) {\n       pushToast(\n         'Änderung konnte nicht gespeichert werden – der Browser-Speicher ist voll oder gesperrt.',\n       );\n     }\n   }, [data, pushToast]);\n \n-  useEffect(() => {\n-    if (startedCorrupt.current && !firstRun.current) {\n-      // Erste echte Änderung persistiert → kaputter Zustand wurde ersetzt.\n-      startedCorrupt.current = false;\n-      setRecovery('ok');\n-    }\n-  }, [data]);\n-\n   const value = useMemo<AppContextValue>(\n     () => ({\n       data,\n       recovery,\n",
+                  "status": "modified",
+                  "additions": 5,
+                  "deletions": 8
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790527207327,
+            "ran": 1790527207342,
+            "completed": 1790527207359
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_4291bba6",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/components/DayHeader.tsx",
+              "oldString": "import type { DayKey } from '../lib/types';\nimport type { DayStats } from '../state/store';\nimport { addDays, formatLong, isFuture, isToday } from '../lib/dates';",
+              "newString": "import type { DayKey } from '../lib/types';\nimport type { DayStats } from '../state/store';\nimport { addDays, formatLong, isFuture, isToday, todayKey } from '../lib/dates';"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/components/DayHeader.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/components/DayHeader.tsx",
+                  "patch": "Index: src/components/DayHeader.tsx\n===================================================================\n--- src/components/DayHeader.tsx\n+++ src/components/DayHeader.tsx\n@@ -1,7 +1,7 @@\n import type { DayKey } from '../lib/types';\n import type { DayStats } from '../state/store';\n-import { addDays, formatLong, isFuture, isToday } from '../lib/dates';\n+import { addDays, formatLong, isFuture, isToday, todayKey } from '../lib/dates';\n import { PulseLine } from './PulseLine';\n import { IconChevronLeft, IconChevronRight } from './icons';\n \n interface DayHeaderProps {\n",
+                  "status": "modified",
+                  "additions": 1,
+                  "deletions": 1
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790527207335,
+            "ran": 1790527207344,
+            "completed": 1790527207357
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_9ae76e4e",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/components/DayHeader.tsx",
+              "oldString": "        <button\n          type=\"button\"\n          className={`navbtn navbtn--today${today ? ' is-active' : ''}`}\n          onClick={() => onSelectDay(addDays(day, 0))}\n          disabled={today}\n        >\n          Heute\n        </button>",
+              "newString": "        <button\n          type=\"button\"\n          className={`navbtn navbtn--today${today ? ' is-active' : ''}`}\n          onClick={() => onSelectDay(todayKey())}\n          disabled={today}\n        >\n          Heute\n        </button>"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/components/DayHeader.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/components/DayHeader.tsx",
+                  "patch": "Index: src/components/DayHeader.tsx\n===================================================================\n--- src/components/DayHeader.tsx\n+++ src/components/DayHeader.tsx\n@@ -28,9 +28,9 @@\n         </button>\n         <button\n           type=\"button\"\n           className={`navbtn navbtn--today${today ? ' is-active' : ''}`}\n-          onClick={() => onSelectDay(addDays(day, 0))}\n+          onClick={() => onSelectDay(todayKey())}\n           disabled={today}\n         >\n           Heute\n         </button>\n",
+                  "status": "modified",
+                  "additions": 1,
+                  "deletions": 1
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790527207337,
+            "ran": 1790527207346,
+            "completed": 1790527207361
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "d4b66fb2d5b71b58f00475f157b6316a363397e0",
+        "end": "a1d815c943ac6a0d582b42cc3c9c65ea5cb77fde",
+        "files": [
+          "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/components/DayHeader.tsx",
+          "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/state/Provider.tsx"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 324,
+        "output": 2247,
+        "reasoning": 0,
+        "cache": {
+          "read": 138144,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3bcf843001hELn6X54kOaVn9",
+      "time": {
+        "created": 1790527207519,
+        "streamed": 1790527502218,
+        "completed": 1790527502316
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nNext, fixing the test files (test bugs, not app bugs):\n\n1. \"Create: no daily goal (no chip)\": the regex /0\\/1/ ends up matching the category count. Scope it to the row:\n```ts\nconst row = screen.getByText('E-Mails aufräumen').closest('li');\nexpect(row?.querySelector('.row__chip')).toBeNull();\n```\n\n2. \"Form validation\": remove the incorrect `queryByText('Noch keine Aktivitäten')` assertion.\n\n3. \"Check-off survives reload\": after toggling, use the new label.\n\n4. Dashboard: use `getAllByText('1')` and toHaveLength(2).\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790527281227,
+            "completed": 1790527502206
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nNext, four test bugs (assertions that don't match the correct app behavior):\n\n\n\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_b13b6914",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+              "oldString": "    await addActivity(user, { name: 'E-Mails aufräumen' });\n\n    expect(screen.getByText('E-Mails aufräumen')).toBeInTheDocument();\n    expect(screen.queryByText(/0\\/1/)).not.toBeInTheDocument();\n  });",
+              "newString": "    await addActivity(user, { name: 'E-Mails aufräumen' });\n\n    const row = screen.getByText('E-Mails aufräumen').closest('li');\n    expect(row).not.toBeNull();\n    // Kein Zähl-Chip, weil Ziel 1 (einmal abhaken)\n    expect(row?.querySelector('.row__chip')).toBeNull();\n  });"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/App.test.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/App.test.tsx",
+                  "patch": "Index: src/App.test.tsx\n===================================================================\n--- src/App.test.tsx\n+++ src/App.test.tsx\n@@ -77,10 +77,12 @@\n     render(<App />);\n \n     await addActivity(user, { name: 'E-Mails aufräumen' });\n \n-    expect(screen.getByText('E-Mails aufräumen')).toBeInTheDocument();\n-    expect(screen.queryByText(/0\\/1/)).not.toBeInTheDocument();\n+    const row = screen.getByText('E-Mails aufräumen').closest('li');\n+    expect(row).not.toBeNull();\n+    // Kein Zähl-Chip, weil Ziel 1 (einmal abhaken)\n+    expect(row?.querySelector('.row__chip')).toBeNull();\n   });\n \n   it('Bearbeiten: Name und Ziel werden aktualisiert', async () => {\n     const user = userEvent.setup();\n",
+                  "status": "modified",
+                  "additions": 4,
+                  "deletions": 2
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790527502194,
+            "ran": 1790527502208,
+            "completed": 1790527502223
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_dd62bb0b",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+              "oldString": "    expect(dialogIsOpen()).toBe(true);\n    expect(screen.getByText('Gib der Aktivität einen Namen.')).toBeInTheDocument();\n    expect(screen.queryByText('Noch keine Aktivitäten')).not.toBeInTheDocument();\n  });",
+              "newString": "    expect(dialogIsOpen()).toBe(true);\n    expect(screen.getByText('Gib der Aktivität einen Namen.')).toBeInTheDocument();\n    // Es wurde nichts angelegt: Empty State bleibt sichtbar\n    expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocument();\n  });"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/App.test.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/App.test.tsx",
+                  "patch": "Index: src/App.test.tsx\n===================================================================\n--- src/App.test.tsx\n+++ src/App.test.tsx\n@@ -124,9 +124,10 @@\n     await user.click(within(dialog).getByRole('button', { name: 'Speichern' }));\n \n     expect(dialogIsOpen()).toBe(true);\n     expect(screen.getByText('Gib der Aktivität einen Namen.')).toBeInTheDocument();\n-    expect(screen.queryByText('Noch keine Aktivitäten')).not.toBeInTheDocument();\n+    // Es wurde nichts angelegt: Empty State bleibt sichtbar\n+    expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocument();\n   });\n });\n \n describe('App: Tagesstatus & Persistenz', () => {\n",
+                  "status": "modified",
+                  "additions": 2,
+                  "deletions": 1
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790527502201,
+            "ran": 1790527502209,
+            "completed": 1790527502226
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_ef4e0e29",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+              "oldString": "    await user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));\n    expect(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' })).toHaveAttribute(\n      'aria-pressed',\n      'true',\n    );",
+              "newString": "    await user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));\n    // Nach dem Abhaken ändert sich das aria-label → auf den neuen Namen prüfen\n    expect(\n      screen.getByRole('button', { name: '„E-Mails aufräumen“ wieder offen machen' }),\n    ).toHaveAttribute('aria-pressed', 'true');"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/App.test.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/App.test.tsx",
+                  "patch": "Index: src/App.test.tsx\n===================================================================\n--- src/App.test.tsx\n+++ src/App.test.tsx\n@@ -136,12 +136,12 @@\n     const first = render(<App />);\n     await addActivity(user, { name: 'E-Mails aufräumen' });\n \n     await user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));\n-    expect(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' })).toHaveAttribute(\n-      'aria-pressed',\n-      'true',\n-    );\n+    // Nach dem Abhaken ändert sich das aria-label → auf den neuen Namen prüfen\n+    expect(\n+      screen.getByRole('button', { name: '„E-Mails aufräumen“ wieder offen machen' }),\n+    ).toHaveAttribute('aria-pressed', 'true');\n \n     first.unmount();\n     render(<App />);\n \n",
+                  "status": "modified",
+                  "additions": 4,
+                  "deletions": 4
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790527502203,
+            "ran": 1790527502211,
+            "completed": 1790527502229
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_d03449ec",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Projekte/llm-bench/models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx",
+              "oldString": "    expect(within(stats).getByText('50 %')).toBeInTheDocument();\n    expect(within(stats).getByText('1')).toBeInTheDocument();",
+              "newString": "    expect(within(stats).getByText('50 %')).toBeInTheDocument();\n    // Erledigt und Offen zeigen beide \"1\"\n    expect(within(stats).getAllByText('1')).toHaveLength(2);"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited src/App.test.tsx (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "src/App.test.tsx",
+                  "patch": "Index: src/App.test.tsx\n===================================================================\n--- src/App.test.tsx\n+++ src/App.test.tsx\n@@ -283,9 +283,10 @@\n \n     await user.click(screen.getByRole('button', { name: '„Meditation“ abhaken' }));\n \n     expect(within(stats).getByText('50 %')).toBeInTheDocument();\n-    expect(within(stats).getByText('1')).toBeInTheDocument();\n+    // Erledigt und Offen zeigen beide \"1\"\n+    expect(within(stats).getAllByText('1')).toHaveLength(2);\n \n     // Kategorie-Übersicht: Meditation erledigt, Bücher nicht\n     const cat = screen.getByRole('region', { name: 'Übersicht nach Kategorie' });\n     expect(within(cat).getByText('1/1')).toBeInTheDocument();\n",
+                  "status": "modified",
+                  "additions": 2,
+                  "deletions": 1
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1790527502204,
+            "ran": 1790527502215,
+            "completed": 1790527502231
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "a1d815c943ac6a0d582b42cc3c9c65ea5cb77fde",
+        "end": "a715df00e135fa202045574f04810c5be298ed99",
+        "files": [
+          "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/App.test.tsx"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 1512,
+        "output": 1055,
+        "reasoning": 0,
+        "cache": {
+          "read": 139264,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3c177f9001lcczvaO6RZxfCx",
+      "time": {
+        "created": 1790527502357,
+        "streamed": 1790527612514,
+        "completed": 1790527615552
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nWait, about the dashboard test: `within(stats).getAllByText('1')` — stats contains the dt labels \"Erledigt\", \"Offen\", \"Fortschritt\" and the dd values \"1\", \"1\", \"50 %\". The text \"1\" appears in 2 dd's. But watch out — getByText with the string '1' matches elements whose entire (normalized direct) text is '1'. The dd's: \"1\" ✓, \"50 %\" ✗, dt's \"Erledigt\" etc. ✗. → 2 elements. ✓\n\nAlso, before that, in the initial state: `getByText('0 %')` — the dd is \"0\" + \" %\" (two text nodes: `{stats.percent}` and \" %\"). getNodeText concatenates the direct text nodes: \"0\" + \" %\" = \"0 %\". ✓ (the earlier test run reached that far... it was passing the initial assertion, and was failing at '50 %'? Actually the failure was \"Found multiple elements with the text: 1\" — meaning '50 %' was found without any problem.)\n\nNext, delete the debug test and re-run everything.\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790527554673,
+            "completed": 1790527612508
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_541cf2d3",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "rm src/debug.test.tsx && npx vitest run 2>&1 | tail -8",
+              "timeout": 180000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 3 passed (4)\n      Tests  1 failed | 46 passed (47)\n   Start at  18:46:53\n   Duration  2.10s (transform 150ms, setup 527ms, collect 247ms, tests 1.34s, environment 1.38s, prepare 175ms)\n\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1790527612501,
+            "ran": 1790527612512,
+            "completed": 1790527615502
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "a715df00e135fa202045574f04810c5be298ed99",
+        "end": "afad4ecfbe3c1c81b2efe055f6ce50b7c82006fe",
+        "files": [
+          "models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/src/debug.test.tsx"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 1131,
+        "output": 316,
+        "reasoning": 0,
+        "cache": {
+          "read": 140771,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_0e3c3324c0017g7944HtFB4rmj",
+      "time": {
+        "created": 1790527615588,
+        "streamed": 1790531292839,
+        "completed": 1790531292882
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Qwen3.8-27B-oQ4e-mtp",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\n46/47. The one that's failing:\n",
+          "state": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1790527642004,
+            "completed": 1790531292836
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\n"
+        }
+      ],
+      "snapshot": {
+        "start": "afad4ecfbe3c1c81b2efe055f6ce50b7c82006fe",
+        "end": "afad4ecfbe3c1c81b2efe055f6ce50b7c82006fe",
+        "files": []
+      },
+      "finish": "error",
+      "error": {
+        "type": "aborted",
+        "message": "Step interrupted"
+      }
+    },
+    {
+      "id": "msg_0e3fb4ed4001kv7Uhge7cL3fDm",
+      "time": {
+        "created": 1790531292884
       },
       "type": "idle",
       "outcome": "interrupted"
