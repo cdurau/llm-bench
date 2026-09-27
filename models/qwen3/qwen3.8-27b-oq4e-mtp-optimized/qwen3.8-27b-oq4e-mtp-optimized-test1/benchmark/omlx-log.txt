@@ -1,101 +1,101 @@
-2026-09-27 17:36:23,308 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?author=mlx-community&sort=trendingScore&limit=60&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,314 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?author=mlx-community&sort=downloads&limit=60&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,458 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.6-35B-A3B-DFlash2-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,465 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.8-27B-Uncensored-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,505 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/MiMo-V2.6-Distill-Qwen-9B-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,519 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Embedding-0.6B-4bit-DWQ?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,520 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/LensVLM-9B-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,522 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.8-27B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,524 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gpt-oss-20b-MXFP4-Q8?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,525 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.8-27B-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,601 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-9B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,603 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-4-26b-a4b-it-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,656 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.8-Flash-Next-Uncensored-oQ5e-mtp?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,659 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.8-Flash-Next-4bit-mtp?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,661 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-35B-A3B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,667 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Coder-Next-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,683 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Confucius4-R2T2-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,691 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-9B-MLX-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,735 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.6-35B-A3B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,744 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.6-35B-A3B-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,793 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-4-12B-it-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,797 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Unlimited-OCR-mxfp8?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,803 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/MiniCPM5-2B-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,830 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Hemmingway-1-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,830 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Nemotron-3-Diarization-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,852 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.8-Flash-Next-Uncensored-oQ6e-mtp?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,868 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Mixtral-8x22B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,885 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Meta-Llama-3-8B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,927 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Llama-3-Groq-8B-Tool-Use-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,931 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen2.5-1.5B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,956 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen2.5-Coder-7B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,965 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Embedding-4B-4bit-DWQ?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,976 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Embedding-8B-4bit-DWQ?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:23,993 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-235B-A22B-Instruct-2507-3bit-DWQ?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,030 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Chatterbox-Turbo-TTS-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,061 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-TTS-12Hz-1.7B-Base-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,081 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,081 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/embeddinggemma-300m-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,093 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Coder-Next-6bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,100 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Coder-Next-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,123 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-35B-A3B-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,162 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-2B-MLX-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,195 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Soprano-1.1-80M-5bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,222 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-4B-MLX-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,224 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-4B-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,225 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-9B-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,236 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-VL-Embedding-2B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,241 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Huihui-Qwen3.5-35B-A3B-Claude-4.6-Opus-abliterated-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,264 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Llama-3.1-8B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,343 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-ASR-0.6B-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,363 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-8B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,369 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/all-MiniLM-L6-v2-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,369 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Kimi-K2.5?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,448 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Devstral-Small-2-24B-Instruct-2512-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,449 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-0.6B-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,449 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/GLM-OCR-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,449 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Mistral-7B-Instruct-v0.3-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,489 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-30B-A3B-Instruct-2507-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,507 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-4B-Instruct-2507-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,578 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.6-27B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,584 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-2-9b-it-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,596 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-4-31b-it-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,597 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-3-4b-it-qat-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,597 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-0.6B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,598 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen2.5-0.5B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,653 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Llama-3.2-1B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,688 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-3-4b-it-8bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,721 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/GLM-5.2-mxfp4?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,741 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-4-12B-it-qat-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,743 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-4-e2b-it-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,747 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.8-27B-MTP-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,748 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-4-26B-A4B-it-qat-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,772 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-3-1b-it-qat-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,808 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Coder-30B-A3B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,822 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-VL-4B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,848 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=xf&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,860 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-4B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,883 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gpt-oss-20b-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,883 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3.5-4B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,888 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen1.5-0.5B-Chat-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,898 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-4-e4b-it-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,912 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen2.5-7B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,940 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Ministral-3-3B-Instruct-2512-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:24,960 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-1.7B-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:25,005 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Llama-3.2-3B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:25,018 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/xfang2026/Gemma-4-31B-JANG_4M-CRACK?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:25,724 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=xfx&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:36:27,661 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=XingChen-AGI%2FXing4.0-29B-A4B&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:36:30,052 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=Xing4.0-29B-A4B&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:36:30,195 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/TokenAI-zer/Xing4.0-29B-A4B-4bit-MLX?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:30,253 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Xing4.0-29B-A4B-OptiQ-4bit?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:30,314 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/TokenAI-zer/Xing4.0-29B-A4B-8bit-MLX?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:30,317 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/TokenAI-zer/Xing4.0-29B-A4B-6bit-MLX?blobs=true "HTTP/1.1 200 OK"
-2026-09-27 17:36:47,207 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=xXing4.0-29B-A4B&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:37:02,569 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=xXing4.0-29B-A4&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:37:03,198 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=xXing4.0-29B-A4B&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:37:09,317 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=XingChen-AGI%2FXing4.0-29B-A4B&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:37:11,475 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=Xing4.0-29B-A4B&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
-2026-09-27 17:47:12,249 - omlx.engine.vlm - INFO - [-] - [vlm_stream_generate] Aborting request a1261258-0f45-44c5-bfac-f4ff3ff19f07
-2026-09-27 17:47:12,306 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[64] finish=filter tokens=26185 cycles=6376 tok/cycle=4.11 accept=19808/19824 (99.9%) depth[d1=6210/6212,d2=6047/6049,d3=5022/5027,d4=2529/2536] d0=164 emits[init=2,draft=19806,bonus=6361,verify=16] timing[backbone=3539367.6ms mtp=76979.6ms sample=424.9ms cache=3418.3ms]
+2026-09-28 00:02:12,320 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/Jundot/Qwen3.8-Flash-Next-oQ4e-mtp?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,329 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/ddalcu/Qwen3.8-Flash-Next-MLX-Serve-mixed-4-8bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,373 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/sh0wie/Qwen3.8-Flash-Next-REAP-288-MLX-4bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,375 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/Youssofal/Qwen3.8-Flash-Next-MTPLX-Optimized-Speed?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,379 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mensaprodigy/Qwen3.8-Flash-Next-REAP-384-mlx-mtp?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,380 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/ARC4NUM/Qwen3.8-Flash-Next-Uncensored-MLX-Serve-4bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,380 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/GBP-DE/Qwen3.8-Flash-Next-oQ5e-mtp?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,382 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/ddalcu/Qwen3.8-Flash-Next-MLX-Serve-iQ-MLX-3.3bpw?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,492 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/Robot-Haus/Qwen3.8-Flash-Next-oQ4e-fp16-mtp?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,496 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3-Coder-Next-MLX-4bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,519 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/Vontra/Qwen3.8-Flash-Next-MLX-oQ6-MTP?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,520 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/Vontra/Qwen3.8-Flash-Next-MLX-oQ8-MTP?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,524 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/JANGQ-AI/Qwen3.8-Flash-Next-JANG_6S?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:12,540 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/Youssofal/Qwen3.8-Flash-Next-MTPLX-Bare-Speed?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:13,873 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=qwen3+next+80b+a3b&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,061 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Instruct-4bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,062 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Thinking-5bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,062 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Thinking-8bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,062 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Instruct-5bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,063 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Thinking-6bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,063 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/nightmedia/Qwen3-Next-80B-A3B-Instruct-qx86-hi-mlx?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,073 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Instruct-8bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,073 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Instruct-6bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,199 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3-Next-80B-A3B-Instruct-MLX-6bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,200 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3-Next-80B-A3B-Instruct-MLX-5bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,201 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3-Next-80B-A3B-Instruct-MLX-4bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,206 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-Next-80B-A3B-Thinking-4bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,208 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3-Next-80B-A3B-Instruct-MLX-8bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,218 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/abnormalmapstudio/Qwen3-Next-80B-A3B-Thinking-mxfp4-mlx?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,237 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/nightmedia/Qwen3-Next-80B-A3B-Thinking-qx64-hi-mlx?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:14,238 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/nightmedia/Qwen3-Next-80B-A3B-Instruct-qx64-mlx?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:19,826 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models?filter=mlx&search=qwen3+next+80b+a3b+4bit&sort=trendingScore&limit=20&expand=safetensors&expand=downloads&expand=likes&expand=trendingScore "HTTP/1.1 200 OK"
+2026-09-28 00:02:19,977 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/halley-ai/Qwen3-Next-80B-A3B-Instruct-MLX-4bit-gs64?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:20,041 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/McG-221/Qwen3-Next-80B-A3B-Thinking-Uncensored-mlx-4Bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:20,047 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/cs2764/Huihui-Qwen3-Next-80B-A3B-Thinking-abliterated-mlx-4Bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:20,053 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3-Next-80B-A3B-Thinking-MLX-4bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:20,084 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/mferrier/Qwen3-Next-80B-A3B-Thinking-mlx-4Bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:20,215 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/introvoyz041/Qwen3-Next-80B-A3B-Thinking-4bit-mlx-4Bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:20,226 - httpx - INFO - [-] - HTTP Request: GET https://huggingface.co/api/models/introvoyz041/Qwen3-Next-80B-A3B-Instruct-4bit-mlx-4Bit?blobs=true "HTTP/1.1 200 OK"
+2026-09-28 00:02:32,203 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=5 (model has mtp_forward, batch=1, primed=1327)
+2026-09-28 00:02:37,998 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] parked for 128 standard tokens before re-entry probe
+2026-09-28 00:02:37,998 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] finish=parked tokens=31 cycles=23 tok/cycle=1.35 accept=6/8 (75.0%) depth[d1=3/5,d2=2/2,d3=1/1,d4=0/0] d0=18 emits[init=2,draft=6,bonus=21,verify=2] timing[backbone=5520.0ms mtp=21.9ms sample=1.1ms cache=10.1ms]
+2026-09-28 00:03:03,311 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] re-entry probe started after 128 standard tokens
+2026-09-28 00:03:03,311 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=5 (model has mtp_forward, batch=1, primed=0)
+2026-09-28 00:03:10,046 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] parked for 256 standard tokens before re-entry probe
+2026-09-28 00:03:10,047 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] finish=parked tokens=32 cycles=23 tok/cycle=1.39 accept=7/10 (70.0%) depth[d1=3/5,d2=2/2,d3=1/2,d4=1/1] d0=18 emits[init=2,draft=7,bonus=20,verify=3] timing[backbone=6451.4ms mtp=18.4ms sample=1.1ms cache=9.8ms]
+2026-09-28 00:04:04,075 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] re-entry probe started after 256 standard tokens
+2026-09-28 00:04:04,075 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=5 (model has mtp_forward, batch=1, primed=0)
+2026-09-28 00:04:11,063 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] parked for 512 standard tokens before re-entry probe
+2026-09-28 00:04:11,064 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[5] finish=parked tokens=32 cycles=23 tok/cycle=1.39 accept=7/10 (70.0%) depth[d1=3/5,d2=2/2,d3=2/2,d4=0/1] d0=18 emits[init=2,draft=7,bonus=20,verify=3] timing[backbone=6746.1ms mtp=14.3ms sample=0.9ms cache=9.3ms]
+2026-09-28 00:04:15,819 - omlx.scheduler - INFO - [-] - Using boundary cache snapshot for 25bd6b97-730a-4005-906e-0be554ef0765: storing 191529/192033 tokens (tail terminal, 0 intermediate snapshots)
+2026-09-28 00:04:15,824 - omlx.scheduler - INFO - [-] - Cache phase timings: boundary_capture_extract=17.6ms/48, boundary_capture_sync=834.5ms/48, boundary_snapshot_save=1869.4ms/48, cleanup_finished_sync=1776.3ms/117, prefix_cache_lookup=690.8ms/122, prefix_cache_reconstruct=3337.4ms/120, store_cache_main_boundary=2858.8ms/117, store_cache_main_collect=4.3ms/117, store_cache_main_dispatch=28.7ms/117, store_cache_worker_sync=13.9ms/116
+2026-09-28 00:04:15,828 - omlx.server - INFO - [-] - Chat completion: model=Qwen3.8-27B-oQ4e-mtp, 499 tokens in 175.93s (4.8 tok/s), prompt: 191534, finish_reason=tool_calls, max_tokens=32768, request_max_tokens=None, stream_model_ttft=72.28s, stream_visible_ttft=72.36s
+2026-09-28 00:04:18,856 - omlx.scheduler - INFO - [-] - Prefix cache restore for 157ddbd5-27a0-4456-a1c5-89ef93daeb3e: source=paged cached=191529 suffix=720 blocks=47 lookup=9.220ms reconstruct=38.357ms promote=True
+2026-09-28 00:04:59,322 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=6 (model has mtp_forward, batch=1, primed=720)
+2026-09-28 00:05:13,113 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] parked for 128 standard tokens before re-entry probe
+2026-09-28 00:05:13,114 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] finish=parked tokens=60 cycles=36 tok/cycle=1.67 accept=22/30 (73.3%) depth[d1=13/15,d2=6/10,d3=2/3,d4=1/2] d0=21 emits[init=2,draft=22,bonus=28,verify=8] timing[backbone=13414.6ms mtp=79.0ms sample=1.6ms cache=15.0ms]
+2026-09-28 00:05:38,378 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] re-entry probe started after 128 standard tokens
+2026-09-28 00:05:38,378 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=6 (model has mtp_forward, batch=1, primed=0)
+2026-09-28 00:05:45,090 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] parked for 256 standard tokens before re-entry probe
+2026-09-28 00:05:45,090 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] finish=parked tokens=31 cycles=23 tok/cycle=1.35 accept=6/11 (54.5%) depth[d1=3/5,d2=2/3,d3=1/2,d4=0/1] d0=18 emits[init=2,draft=6,bonus=18,verify=5] timing[backbone=6484.4ms mtp=17.4ms sample=0.9ms cache=9.5ms]
+2026-09-28 00:06:03,138 - omlx.process_memory_enforcer - INFO - [-] - Memory pressure level: ok -> hard (current=59.6GB, soft=53.6GB, hard=55.1GB, ceiling=58.0GB)
+2026-09-28 00:06:03,139 - omlx.process_memory_enforcer - INFO - [-] - Requested pressure cache reclaim on 1 scheduler(s) (freed_hot=0.0GB, pool=26.4GB)
+2026-09-28 00:06:03,139 - omlx.process_memory_enforcer - INFO - [-] - Hard memory pressure: deferring destructive enforcement (poll 1/5) while pooled Metal buffers drain on 1 scheduler(s)
+2026-09-28 00:06:04,141 - omlx.process_memory_enforcer - INFO - [-] - Memory pressure level: hard -> ok (current=33.2GB, soft=53.6GB, hard=55.1GB, ceiling=58.0GB)
+2026-09-28 00:06:36,576 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] re-entry probe started after 256 standard tokens
+2026-09-28 00:06:36,576 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=6 (model has mtp_forward, batch=1, primed=0)
+2026-09-28 00:06:43,182 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] parked for 512 standard tokens before re-entry probe
+2026-09-28 00:06:43,182 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[6] finish=parked tokens=28 cycles=23 tok/cycle=1.22 accept=3/7 (42.9%) depth[d1=3/5,d2=0/2,d3=0/0,d4=0/0] d0=18 emits[init=2,draft=3,bonus=19,verify=4] timing[backbone=6383.7ms mtp=15.4ms sample=1.0ms cache=9.1ms]
+2026-09-28 00:08:13,677 - omlx.scheduler - INFO - [-] - Using boundary cache snapshot for 157ddbd5-27a0-4456-a1c5-89ef93daeb3e: storing 192512/193209 tokens (block aligned, 0 intermediate snapshots)
+2026-09-28 00:08:13,690 - omlx.scheduler - INFO - [-] - Cache phase timings: boundary_capture_extract=17.8ms/49, boundary_capture_sync=857.7ms/49, boundary_snapshot_save=1892.1ms/49, cleanup_finished_sync=1797.3ms/118, prefix_cache_lookup=700.0ms/123, prefix_cache_reconstruct=3375.7ms/121, store_cache_main_boundary=2887.4ms/118, store_cache_main_collect=4.3ms/118, store_cache_main_dispatch=28.9ms/118, store_cache_worker_sync=14.2ms/118
+2026-09-28 00:08:13,692 - omlx.server - INFO - [-] - Chat completion: model=Qwen3.8-27B-oQ4e-mtp, 960 tokens in 236.21s (4.9 tok/s), prompt: 192249, finish_reason=tool_calls, max_tokens=32768, request_max_tokens=None, stream_model_ttft=41.84s, stream_visible_ttft=41.91s
+2026-09-28 00:08:16,823 - omlx.scheduler - INFO - [-] - Prefix cache restore for 3076fe8f-712b-4c73-bc6f-fd7d0ea52748: source=paged cached=192512 suffix=728 blocks=47 lookup=9.294ms reconstruct=39.726ms promote=True
+2026-09-28 00:08:59,756 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=7 (model has mtp_forward, batch=1, primed=728)
+2026-09-28 00:10:02,048 - omlx.process_memory_enforcer - INFO - [-] - Memory pressure level: ok -> hard (current=57.6GB, soft=53.6GB, hard=55.1GB, ceiling=58.0GB)
+2026-09-28 00:10:02,049 - omlx.process_memory_enforcer - INFO - [-] - Requested pressure cache reclaim on 1 scheduler(s) (freed_hot=0.0GB, pool=23.4GB)
+2026-09-28 00:10:02,049 - omlx.process_memory_enforcer - INFO - [-] - Hard memory pressure: deferring destructive enforcement (poll 1/5) while pooled Metal buffers drain on 1 scheduler(s)
+2026-09-28 00:10:03,051 - omlx.process_memory_enforcer - INFO - [-] - Memory pressure level: hard -> ok (current=33.8GB, soft=53.6GB, hard=55.1GB, ceiling=58.0GB)
+2026-09-28 00:10:25,861 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[7] parked for 128 standard tokens before re-entry probe
+2026-09-28 00:10:25,861 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[7] finish=parked tokens=413 cycles=230 tok/cycle=1.80 accept=181/242 (74.8%) depth[d1=152/192,d2=20/40,d3=6/7,d4=3/3] d0=38 emits[init=2,draft=181,bonus=169,verify=61] timing[backbone=85303.4ms mtp=208.2ms sample=12.0ms cache=101.7ms]
+2026-09-28 00:10:51,287 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[7] re-entry probe started after 128 standard tokens
+2026-09-28 00:10:51,287 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=7 (model has mtp_forward, batch=1, primed=0)
+2026-09-28 00:10:58,071 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[7] parked for 256 standard tokens before re-entry probe
+2026-09-28 00:10:58,072 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[7] finish=parked tokens=27 cycles=23 tok/cycle=1.17 accept=2/7 (28.6%) depth[d1=2/5,d2=0/2,d3=0/0,d4=0/0] d0=18 emits[init=2,draft=2,bonus=18,verify=5] timing[backbone=6570.4ms mtp=14.4ms sample=1.0ms cache=9.7ms]
+2026-09-28 00:11:48,775 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[7] re-entry probe started after 256 standard tokens
+2026-09-28 00:11:48,775 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP path activated for uid=7 (model has mtp_forward, batch=1, primed=0)
+2026-09-28 00:11:54,259 - omlx.patches.mlx_lm_mtp.batch_generator - INFO - [-] - MTP[7] finish=stop tokens=23 cycles=18 tok/cycle=1.28 accept=3/7 (42.9%) depth[d1=2/5,d2=1/2,d3=0/0,d4=0/0] d0=13 emits[init=2,draft=3,bonus=14,verify=4] timing[backbone=5455.0ms mtp=13.3ms sample=0.7ms cache=7.5ms]
+2026-09-28 00:11:54,291 - omlx.scheduler - INFO - [-] - Using boundary cache snapshot for 3076fe8f-712b-4c73-bc6f-fd7d0ea52748: storing 193235/194086 tokens (tail terminal, 0 intermediate snapshots)
+2026-09-28 00:11:54,298 - omlx.scheduler - INFO - [-] - Cache phase timings: boundary_capture_extract=17.8ms/49, boundary_capture_sync=857.7ms/49, boundary_snapshot_save=1892.1ms/49, cleanup_finished_sync=1797.4ms/119, prefix_cache_lookup=709.3ms/124, prefix_cache_reconstruct=3415.4ms/122, store_cache_main_boundary=2916.3ms/119, store_cache_main_collect=4.4ms/119, store_cache_main_dispatch=29.1ms/119, store_cache_worker_sync=14.2ms/118
+2026-09-28 00:11:54,301 - omlx.server - INFO - [-] - Chat completion: model=Qwen3.8-27B-oQ4e-mtp, 846 tokens in 218.93s (4.8 tok/s), prompt: 193240, finish_reason=stop, max_tokens=32768, request_max_tokens=None, stream_model_ttft=44.39s, stream_visible_ttft=44.47s
+2026-09-28 00:15:07,544 - omlx.engine_pool - INFO - [-] - Unloading model: Qwen3.8-27B-oQ4e-mtp (immediate abort)
+2026-09-28 00:15:07,544 - omlx.engine_core - INFO - [-] - Engine stopped
+2026-09-28 00:15:07,610 - omlx.scheduler - INFO - [-] - Scheduler shutdown initiated...
+2026-09-28 00:15:07,616 - omlx.cache.paged_ssd_cache - INFO - [-] - Shutting down PagedSSDCacheManager...
+2026-09-28 00:15:07,616 - omlx.scheduler - INFO - [-] - Scheduler shutdown completed
+2026-09-28 00:15:07,618 - omlx.cache.paged_cache - INFO - [-] - PagedCacheManager cleared (reset to 256 initial blocks)
+2026-09-28 00:15:07,807 - omlx.scheduler - INFO - [-] - Deep reset completed - all caches cleared
+2026-09-28 00:15:08,125 - omlx.engine.vlm - INFO - [-] - VLMBatchedEngine stopped
+2026-09-28 00:15:08,156 - omlx.engine_pool - INFO - [-] - Unloaded model: Qwen3.8-27B-oQ4e-mtp, freed=16.77GB (expected>=14.60GB), active_memory: 1.03KB (settled)
+2026-09-28 00:15:08,156 - omlx.admin.routes - INFO - [-] - Manually unloaded model: Qwen3.8-27B-oQ4e-mtp
 
