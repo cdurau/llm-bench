@@ -1,6 +1,6 @@
 import type { DayKey } from '../lib/types';
 import type { DayStats } from '../state/store';
-import { addDays, formatLong, isFuture, isToday } from '../lib/dates';
+import { addDays, formatLong, isFuture, isToday, todayKey } from '../lib/dates';
 import { PulseLine } from './PulseLine';
 import { IconChevronLeft, IconChevronRight } from './icons';
 
@@ -29,7 +29,7 @@ export function DayHeader({ day, stats, onSelectDay }: DayHeaderProps) {
         <button
           type="button"
           className={`navbtn navbtn--today${today ? ' is-active' : ''}`}
-          onClick={() => onSelectDay(addDays(day, 0))}
+          onClick={() => onSelectDay(todayKey())}
           disabled={today}
         >
           Heute

@@ -93,12 +93,14 @@ function Shell() {
           onAdd={openAdd}
         />
 
-        <div className="addrow">
-          <button type="button" className="btn btn--primary" onClick={openAdd}>
-            <IconPlus />
-            Aktivität hinzufügen
-          </button>
-        </div>
+        {data.activities.length > 0 && (
+          <div className="addrow">
+            <button type="button" className="btn btn--primary" onClick={openAdd}>
+              <IconPlus />
+              Aktivität hinzufügen
+            </button>
+          </div>
+        )}
 
         <CategoryOverview stats={categories} />
       </main>

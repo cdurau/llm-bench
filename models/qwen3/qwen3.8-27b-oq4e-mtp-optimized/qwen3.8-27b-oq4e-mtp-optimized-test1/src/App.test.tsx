@@ -78,8 +78,10 @@ describe('App: Aktivitäten verwalten', () => {
 
     await addActivity(user, { name: 'E-Mails aufräumen' });
 
-    expect(screen.getByText('E-Mails aufräumen')).toBeInTheDocument();
-    expect(screen.queryByText(/0\/1/)).not.toBeInTheDocument();
+    const row = screen.getByText('E-Mails aufräumen').closest('li');
+    expect(row).not.toBeNull();
+    // Kein Zähl-Chip, weil Ziel 1 (einmal abhaken)
+    expect(row?.querySelector('.row__chip')).toBeNull();
   });
 
   it('Bearbeiten: Name und Ziel werden aktualisiert', async () => {
@@ -123,7 +125,8 @@ describe('App: Aktivitäten verwalten', () => {
 
     expect(dialogIsOpen()).toBe(true);
     expect(screen.getByText('Gib der Aktivität einen Namen.')).toBeInTheDocument();
-    expect(screen.queryByText('Noch keine Aktivitäten')).not.toBeInTheDocument();
+    // Es wurde nichts angelegt: Empty State bleibt sichtbar
+    expect(screen.getByText('Noch keine Aktivitäten')).toBeInTheDocument();
   });
 });
 
@@ -134,10 +137,10 @@ describe('App: Tagesstatus & Persistenz', () => {
     await addActivity(user, { name: 'E-Mails aufräumen' });
 
     await user.click(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' }));
-    expect(screen.getByRole('button', { name: '„E-Mails aufräumen“ abhaken' })).toHaveAttribute(
-      'aria-pressed',
-      'true',
-    );
+    // Nach dem Abhaken ändert sich das aria-label → auf den neuen Namen prüfen
+    expect(
+      screen.getByRole('button', { name: '„E-Mails aufräumen“ wieder offen machen' }),
+    ).toHaveAttribute('aria-pressed', 'true');
 
     first.unmount();
     render(<App />);
@@ -281,7 +284,8 @@ describe('App: Dashboard', () => {
     await user.click(screen.getByRole('button', { name: '„Meditation“ abhaken' }));
 
     expect(within(stats).getByText('50 %')).toBeInTheDocument();
-    expect(within(stats).getByText('1')).toBeInTheDocument();
+    // Erledigt und Offen zeigen beide "1"
+    expect(within(stats).getAllByText('1')).toHaveLength(2);
 
     // Kategorie-Übersicht: Meditation erledigt, Bücher nicht
     const cat = screen.getByRole('region', { name: 'Übersicht nach Kategorie' });

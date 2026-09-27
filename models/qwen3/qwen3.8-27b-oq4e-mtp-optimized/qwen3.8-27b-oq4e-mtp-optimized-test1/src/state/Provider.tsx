@@ -43,20 +43,17 @@ function AppDataProvider({ children }: { children: ReactNode }) {
       firstRun.current = false;
       if (startedCorrupt.current) return; // erst nach echten Änderungen überschreiben
     }
+    if (startedCorrupt.current) {
+      // Erste echte Nutzer-Änderung wurde persistiert → kaputter Zustand ersetzt.
+      startedCorrupt.current = false;
+      setRecovery('ok');
+    }
     if (!save(data)) {
       pushToast(
         'Änderung konnte nicht gespeichert werden – der Browser-Speicher ist voll oder gesperrt.',
       );
     }
   }, [data, pushToast]);
-
-  useEffect(() => {
-    if (startedCorrupt.current && !firstRun.current) {
-      // Erste echte Änderung persistiert → kaputter Zustand wurde ersetzt.
-      startedCorrupt.current = false;
-      setRecovery('ok');
-    }
-  }, [data]);
 
   const value = useMemo<AppContextValue>(
     () => ({
