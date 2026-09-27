@@ -10,7 +10,6 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'prompt',
-      includeAssets: ['favicon.svg', 'icons/*.png'],
       manifest: {
         name: 'PulseBoard – Deine Tagesübersicht',
         short_name: 'PulseBoard',

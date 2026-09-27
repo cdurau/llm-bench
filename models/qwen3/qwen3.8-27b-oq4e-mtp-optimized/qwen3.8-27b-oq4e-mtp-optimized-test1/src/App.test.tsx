@@ -257,13 +257,14 @@ describe('App: Beschädigte gespeicherte Daten', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('Banner lässt sich manuell ausblenden', () => {
+  it('Banner lässt sich manuell ausblenden', async () => {
+    const user = userEvent.setup();
     window.localStorage.setItem(STORAGE_KEY, 'null');
     render(<App />);
-    const banner = screen.getByText(/Gespeicherte Daten konnten nicht gelesen werden/);
-    expect(banner).toBeInTheDocument();
-    const dismiss = screen.getByRole('button', { name: 'Hinweis ausblenden' });
-    dismiss.click();
+    expect(
+      screen.getByText(/Gespeicherte Daten konnten nicht gelesen werden/),
+    ).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Hinweis ausblenden' }));
     expect(
       screen.queryByText(/Gespeicherte Daten konnten nicht gelesen werden/),
     ).not.toBeInTheDocument();
