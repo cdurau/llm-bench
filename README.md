@@ -36,6 +36,19 @@ Runs using the extended agent workflow with `frontend-design`, Jev and project-m
 
 Agent/documentation rules are defined in [`AGENTS.md`](./AGENTS.md).
 
+### Runtime measurement
+
+Benchmark completion time is **derived from the preserved OpenCode/session logs**, not estimated manually from chat messages or wall-clock recollection.
+
+- Prefer the timestamps in `benchmark/session01.json` (or the corresponding raw session export) as the canonical source.
+- For a completed run, calculate elapsed agent runtime from the session start/creation timestamp through the final completed/idle timestamp recorded by the session.
+- For an interrupted or failed run, calculate the elapsed time only through the recorded interruption/abort point and label it explicitly as **time until abort/failure**, not completion time.
+- Manual continuation prompts remain part of the same run. Their delays should be interpreted from the session timeline rather than guessed.
+- Runtime values copied into Notion should therefore be reproducible from the GitHub artifacts. When a raw session log is available, prefer this extracted value over manually reported durations.
+- Keep runtime distinct from inference metrics such as TTFT, prompt-processing speed and decode tok/s. The benchmark uses both: inference metrics describe model/runtime speed, while elapsed session time measures practical **time-to-result** for the coding-agent task.
+
+For future benchmark evaluations, runtime extraction from the logs is a standard evaluation step alongside build/tests, functional verification, tool-use stability and UI/PWA inspection.
+
 ## Repository layout
 
 ```text
