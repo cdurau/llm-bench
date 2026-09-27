@@ -13,6 +13,21 @@ Notion project: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f
 Benchmark Runs: https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86  
 Methodology: https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e
 
+## Runtime and model-format strategy
+
+As of 2026-09-27, the benchmark is intentionally focused on the practical target: reliable local coding agents on Apple Silicon that can build medium-to-complex applications with minimal manual intervention.
+
+- **Primary path: oMLX + MLX.** This is the default for serious new coding benchmark runs and the current reference platform.
+- **Comparison path: Ollama + MLX.** Selected strong models may be tested against oMLX under controlled conditions, especially for tool calling, TTFT, decode speed, memory use and agent stability.
+- **Model lab / fallback: LM Studio + MLX/GGUF.** LM Studio remains useful for quickly loading and inspecting new models and for compatibility checks, but is no longer the primary benchmark runtime.
+- **GGUF is a targeted secondary path.** Use it when an interesting model/finetune is not reasonably available as MLX or when GGUF offers a concrete advantage. The project does not aim for a 50:50 MLX/GGUF split.
+- As a rough guideline, **80–90% of relevant model exploration should use MLX**. Do not test every quantization across every runtime unless the comparison answers a concrete question.
+- Prioritize promising **27–40B dense/MoE** models and larger **50–70B MoE or strongly quantized models** when they leave enough memory headroom for the runtime, KV cache and coding agent.
+- **100–120B experiments are selective**, not a default search path. The Nemotron 120B loading/inference experiments are an example where runtime complexity and memory pressure can outweigh the practical benefit.
+- For a particularly strong candidate, a controlled **oMLX vs Ollama-MLX** follow-up can compare the same model using TTFT, decode speed, RAM, tool-call success, agent stability and the final PulseBoard result.
+
+The current practical reference is **Qwen3.8-35B-A3B-Distill-oQ8-fp16-mtp + oMLX**. New candidates are judged primarily on the combined result of quality, speed, memory footprint and agentic reliability rather than raw tokens/s alone. Detailed runtime rationale and evolving findings remain in the Notion **Inference Provider & Runtime Vergleich** page.
+
 ## PulseBoard benchmark
 
 The original canonical reproducible prompt is [`instructions.md`](./instructions.md).
