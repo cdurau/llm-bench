@@ -41,10 +41,11 @@ Du hast den **Jev-Skill** zur Verfügung (im Projekt installiert). Lade ihn und 
 Regeln:
 
 - Gib Jev **Rohmaterial** (Code, Dateiliste, CSS-Werte, Feature-Liste), keine Schlussfolgerung von dir. Sag also nicht „das ist bestimmt okay", sondern schick die echten Daten.
-- Frag konkret, z. B.:
-  - noul: „Erfüllt diese Komponente alle Anforderungen aus Feature 1?"
-  - choice: „Welcher der drei Layout-Ansätze passt am besten zum Design-Skill?"
-  - score: „Wie gut ist die Typografie-Hierarchie dieser CSS-Klassen?"
+- Jev läuft als Kommandozeilen-Tool (`jev`) über deine Shell. Frag konkret, z. B. (genaue Syntax steht im Skill):
+  - Ja/Nein: `jev yes "Erfüllt diese Komponente alle Anforderungen aus Feature 1?" -s @src/components/Today.tsx`
+  - Auswahl: `jev pick "Welcher Ansatz passt am besten zum Design-Skill?" a="Karten mit Schatten" b="flache Liste"`
+  - Score: `jev score "Wie klar ist die Typografie-Hierarchie?" schwach okay stark -s @src/index.css`
+- Frage nur beobachtbare Bedingungen ab (was im Code oder in den Werten steht), keine Vermutungen über Absichten.
 - Sinnvolle Einsatzpunkte: Feature-Checkliste nach jedem Meilenstein, Kontrast-Check der Farbpaare, Prüfen ob ein Screen dem Design-Skill folgt, Entscheidung zwischen zwei Umsetzungsvarianten.
 - Bei niedriger Confidence (unter 0.5) entscheide selbst und geh weiter. Bei einem klaren Nein: beheben.
 - Jev entscheidet nur. Der Code kommt von dir.
