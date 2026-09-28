@@ -79,6 +79,17 @@ A failed, interrupted, partially working, or visually broken result is still a v
 
 ## Current model artifacts
 
+- `models/Laguna/Laguna-XS-2.1-oQ8e/Laguna-XS-2.1-oQ8e-test1/`
+  - oMLX / OpenCode v2 / M1 Max 64 GB / 65,536 configured context / Laguna DFlash oQ8 draft model
+  - PulseBoard implementation completed and reported working in the manual run; activity CRUD, optional daily goal, date-specific completion state and versioned localStorage persistence are present in source
+  - synthetic oMLX baseline: 4K prompt **462.8 pp tok/s / 40.8 tg tok/s / 8.85 s TTFT / 35.0 GB peak RAM**; 16K prompt **388.1 pp tok/s / 29.7 tg tok/s / 42.2 s TTFT / 35.6 GB peak RAM**
+  - long-agent behavior: DFlash decode remained fast as live prompt context grew beyond ~26K tokens, but TTFT/prefill rose to roughly 76 s, making long-context prefill the practical bottleneck
+  - agent-stability note: after the application was already complete, OpenCode output degenerated into repeated `AAAAAA`; no such corruption is present in the generated application source
+  - PWA caveat: `vite.config.ts` references `pwa-192x192.png` and `pwa-512x512.png`, but those PNG assets are absent from `public/`; PWA is therefore recorded as PARTIAL in Notion pending/failing complete installability verification
+  - generated `README.md` remained the default Vite README rather than project-specific documentation
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
+  - `benchmark/omlx-log.txt`
 - `models/Edge0/Edge0-35B-A3B-preview/Edge0-35B-A3B-preview-test1/`
   - oMLX / OpenCode v2 / extended `frontend-design` + Jev benchmark prompt
   - long, stable tool-using run; OpenCode export records 133,861 input tokens, 70,612 output tokens and 8,085,434 cache-read tokens
