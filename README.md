@@ -1,151 +1,160 @@
 # llm-bench
 
-Reproducible artifact repository for local coding-LLM benchmarks.
+Reproduzierbares Artefakt-Repository für Benchmarks lokaler Coding-LLMs.
 
-## Source of truth
+## Source of Truth
 
-This project intentionally separates technical artifacts from human-readable evaluation:
+Dieses Projekt trennt technische Artefakte bewusst von der lesbaren Auswertung:
 
-- **GitHub** stores benchmark prompts, generated code, configs, raw session exports/logs, and other reproducible artifacts.
-- **Notion** stores run evaluations, comparisons, findings, decisions, and benchmark methodology.
+- **GitHub** enthält Benchmark-Prompts, erzeugten Code, Configs, rohe Session-Exporte/Logs und weitere reproduzierbare Artefakte.
+- **Notion** enthält Run-Auswertungen, Vergleiche, Erkenntnisse, Entscheidungen und die Benchmark-Methodik.
 
-Notion project: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f  
+Notion-Projekt: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f  
 Benchmark Runs: https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86  
-Methodology: https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e
+Methodik: https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e
 
-## Runtime and model-format strategy
+## Runtime- und Modellformat-Strategie
 
-As of 2026-09-27, the benchmark is intentionally focused on the practical target: reliable local coding agents on Apple Silicon that can build medium-to-complex applications with minimal manual intervention.
+Stand 2026-09-27 ist der Benchmark bewusst auf das praktische Ziel ausgerichtet: zuverlässige lokale Coding-Agenten auf Apple Silicon, die mittelgroße bis komplexe Anwendungen mit minimalem manuellem Eingreifen bauen können.
 
-- **Primary path: oMLX + MLX.** This is the default for serious new coding benchmark runs and the current reference platform.
-- **Comparison path: Ollama + MLX.** Selected strong models may be tested against oMLX under controlled conditions, especially for tool calling, TTFT, decode speed, memory use and agent stability.
-- **Model lab / fallback: LM Studio + MLX/GGUF.** LM Studio remains useful for quickly loading and inspecting new models and for compatibility checks, but is no longer the primary benchmark runtime.
-- **GGUF is a targeted secondary path.** Use it when an interesting model/finetune is not reasonably available as MLX or when GGUF offers a concrete advantage. The project does not aim for a 50:50 MLX/GGUF split.
-- As a rough guideline, **80–90% of relevant model exploration should use MLX**. Do not test every quantization across every runtime unless the comparison answers a concrete question.
-- Prioritize promising **27–40B dense/MoE** models and larger **50–70B MoE or strongly quantized models** when they leave enough memory headroom for the runtime, KV cache and coding agent.
-- **100–120B experiments are selective**, not a default search path. The Nemotron 120B loading/inference experiments are an example where runtime complexity and memory pressure can outweigh the practical benefit.
-- For a particularly strong candidate, a controlled **oMLX vs Ollama-MLX** follow-up can compare the same model using TTFT, decode speed, RAM, tool-call success, agent stability and the final PulseBoard result.
+- **Primärer Pfad: oMLX + MLX.** Das ist der Standard für ernsthafte neue Coding-Benchmark-Läufe und die aktuelle Referenzplattform.
+- **Vergleichspfad: Ollama + MLX.** Ausgewählte starke Modelle können unter kontrollierten Bedingungen gegen oMLX getestet werden, insbesondere bei Tool-Calling, TTFT, Decode-Geschwindigkeit, Speicherbedarf und Agenten-Stabilität.
+- **Modell-Labor / Fallback: LM Studio + MLX/GGUF.** LM Studio bleibt nützlich, um neue Modelle schnell zu laden und zu untersuchen und für Kompatibilitätschecks, ist aber nicht mehr die primäre Benchmark-Runtime.
+- **GGUF ist ein gezielter Nebenpfad.** Nutze es, wenn ein interessantes Modell/Finetune nicht sinnvoll als MLX verfügbar ist oder GGUF einen konkreten Vorteil bietet. Das Projekt strebt keine 50:50-Aufteilung zwischen MLX und GGUF an.
+- Als grobe Richtlinie sollten **80–90 % der relevanten Modell-Exploration MLX nutzen**. Nicht jede Quantisierung in jeder Runtime testen, solange der Vergleich keine konkrete Frage beantwortet.
+- Vielversprechende **27–40B Dense/MoE**-Modelle und größere **50–70B MoE- oder stark quantisierte Modelle** priorisieren, wenn sie genug Speicher-Headroom für Runtime, KV-Cache und Coding-Agent lassen.
+- **100–120B-Experimente sind selektiv**, kein Standard-Suchpfad. Die Lade-/Inferenz-Experimente mit Nemotron 120B sind ein Beispiel dafür, dass Runtime-Komplexität und Speicherdruck den praktischen Nutzen überwiegen können.
+- Bei einem besonders starken Kandidaten kann ein kontrollierter **oMLX-vs-Ollama-MLX**-Folgetest dasselbe Modell anhand von TTFT, Decode-Geschwindigkeit, RAM, Tool-Call-Erfolg, Agenten-Stabilität und dem finalen PulseBoard-Ergebnis vergleichen.
 
-The current practical reference is **Qwen3.8-35B-A3B-Distill-oQ8-fp16-mtp + oMLX**. New candidates are judged primarily on the combined result of quality, speed, memory footprint and agentic reliability rather than raw tokens/s alone. Detailed runtime rationale and evolving findings remain in the Notion **Inference Provider & Runtime Vergleich** page.
+Die aktuelle praktische Referenz ist **Qwen3.8-35B-A3B-Distill-oQ8-fp16-mtp + oMLX**. Neue Kandidaten werden vor allem am kombinierten Ergebnis aus Qualität, Geschwindigkeit, Speicherbedarf und agentischer Zuverlässigkeit gemessen, nicht allein an rohen Tokens/s. Die ausführliche Runtime-Begründung und laufende Erkenntnisse stehen weiter in der Notion-Seite **Inference Provider & Runtime Vergleich**.
 
-## PulseBoard benchmark
+## PulseBoard-Benchmark
 
-The original canonical reproducible prompt is [`instructions.md`](./instructions.md).
+Der ursprüngliche kanonische, reproduzierbare Prompt ist [`instructions.md`](./instructions.md).
 
-Runs using the extended agent workflow with `frontend-design`, Jev and project-memory documentation use [`instructions_jev_frontend-skill.md`](./instructions_jev_frontend-skill.md). These runs are not directly comparable with runs using the original prompt.
+Läufe mit dem erweiterten Agenten-Workflow mit `frontend-design`, Jev und Projekt-Memory-Dokumentation nutzen [`instructions_jev_frontend-skill.md`](./instructions_jev_frontend-skill.md). Diese Läufe sind nicht direkt mit Läufen vergleichbar, die den ursprünglichen Prompt nutzen.
 
-Agent/documentation rules are defined in [`AGENTS.md`](./AGENTS.md).
+Regeln für Agenten und Dokumentation stehen in [`AGENTS.md`](./AGENTS.md).
 
-### Runtime measurement
+### Laufzeitmessung
 
-Benchmark completion time is **derived from the preserved OpenCode/session logs**, not estimated manually from chat messages or wall-clock recollection.
+Die Benchmark-Laufzeit wird **aus den gesicherten OpenCode-/Session-Logs abgeleitet**, nicht manuell aus Chat-Nachrichten oder der Erinnerung an die Uhrzeit geschätzt.
 
-- Prefer the timestamps in `benchmark/session01.json` (or the corresponding raw session export) as the canonical source.
-- For a completed run, calculate elapsed agent runtime from the session start/creation timestamp through the final completed/idle timestamp recorded by the session.
-- For an interrupted or failed run, calculate the elapsed time only through the recorded interruption/abort point and label it explicitly as **time until abort/failure**, not completion time.
-- Manual continuation prompts remain part of the same run. Their delays should be interpreted from the session timeline rather than guessed.
-- Runtime values copied into Notion should therefore be reproducible from the GitHub artifacts. When a raw session log is available, prefer this extracted value over manually reported durations.
-- Keep runtime distinct from inference metrics such as TTFT, prompt-processing speed and decode tok/s. The benchmark uses both: inference metrics describe model/runtime speed, while elapsed session time measures practical **time-to-result** for the coding-agent task.
+- Bevorzugt werden die Zeitstempel in `benchmark/session01.json` (oder dem entsprechenden rohen Session-Export) als kanonische Quelle.
+- Bei einem abgeschlossenen Lauf wird die verstrichene Agenten-Laufzeit vom Start-/Erstellungszeitstempel der Session bis zum letzten abgeschlossenen/Idle-Zeitstempel berechnet.
+- Bei einem unterbrochenen oder gescheiterten Lauf wird die verstrichene Zeit nur bis zum aufgezeichneten Unterbrechungs-/Abbruchpunkt berechnet und ausdrücklich als **Zeit bis Abbruch/Fehler** gekennzeichnet, nicht als Abschlusszeit.
+- Manuelle Fortsetzungs-Prompts bleiben Teil desselben Laufs. Ihre Verzögerungen werden anhand der Session-Timeline interpretiert und nicht geraten.
+- Laufzeitwerte, die nach Notion übernommen werden, sollen daher aus den GitHub-Artefakten reproduzierbar sein. Ist ein rohes Session-Log vorhanden, wird dieser extrahierte Wert manuell berichteten Dauern vorgezogen.
+- Laufzeit bleibt getrennt von Inferenz-Metriken wie TTFT, Prompt-Processing-Geschwindigkeit und Decode-tok/s. Der Benchmark nutzt beides: Inferenz-Metriken beschreiben die Geschwindigkeit von Modell/Runtime, während die verstrichene Session-Zeit die praktische **Time-to-Result** der Coding-Agent-Aufgabe misst.
 
-For future benchmark evaluations, runtime extraction from the logs is a standard evaluation step alongside build/tests, functional verification, tool-use stability and UI/PWA inspection.
+Für künftige Benchmark-Auswertungen ist die Laufzeit-Extraktion aus den Logs ein Standard-Auswertungsschritt neben Build/Tests, funktionaler Verifikation, Tool-Nutzungs-Stabilität und UI/PWA-Inspektion.
 
-## Repository layout
+## Habit-Tracker-Benchmark („Rhythm")
+
+Zweite Benchmark-Aufgabe nach PulseBoard: ein Habit- und Stimmungs-Tracker als PWA mit Fokus auf Designqualität und Skill-Nutzung (`minimalist-ui`, `vite-pwa-patterns`, optional Jev). Prompt, Installations-Skripte und Anleitung stehen in [`tests/habit-tracker/`](./tests/habit-tracker/README.md).
+
+Die Ergebnisse liegen **pro Projekt statt pro Modell** unter `tests/habit-tracker/<modellname>/`, nicht in der `models/`-Struktur von PulseBoard. Die Regel bleibt dieselbe: Das vom Modell erzeugte Ergebnis wird unverändert gesichert.
+
+## Repository-Struktur
 
 ```text
-instructions.md                         # canonical benchmark prompt
-AGENTS.md                               # artifact/documentation policy
+instructions.md                         # kanonischer Benchmark-Prompt
+AGENTS.md                               # Artefakt-/Dokumentations-Richtlinie
 models/
-  <model-family>/                       # e.g. qwen3, gemma-4, ornith-1.5, Edge0
+  <model-family>/                       # z. B. qwen3, gemma-4, ornith-1.5, Edge0
     <model>/
-      <model>-test<N>[-<variant>]/      # numbered benchmark/test slot; optional config suffix
-        ...                             # exact structure produced by the model
+      <model>-test<N>[-<variant>]/      # nummerierter Benchmark-/Test-Slot; optionaler Config-Suffix
+        ...                             # exakte Struktur, wie sie das Modell erzeugt hat
+tests/
+  habit-tracker/
+    <modellname>/                       # ein Lauf pro Modell (Habit-Tracker-Benchmark)
 ```
 
-Model artifacts are grouped by model family first. The numbered test folder remains the canonical run boundary. It lets the same model run multiple independent benchmark apps or benchmark cases without overwriting earlier results. A short optional suffix such as `-mehr-kontext` may be used for a controlled configuration variant, while the test number remains the unique slot identifier.
+Modell-Artefakte sind zuerst nach Modellfamilie gruppiert. Der nummerierte Test-Ordner bleibt die kanonische Run-Grenze. So kann dasselbe Modell mehrere unabhängige Benchmark-Apps oder Benchmark-Fälle durchlaufen, ohne frühere Ergebnisse zu überschreiben. Ein kurzer optionaler Suffix wie `-mehr-kontext` kann für eine kontrollierte Konfigurationsvariante verwendet werden, während die Testnummer der eindeutige Slot-Bezeichner bleibt.
 
-**Important:** the contents inside a test folder are preserved exactly as the model created them. The benchmark does not normalize the generated project layout afterward.
+**Wichtig:** Der Inhalt innerhalb eines Test-Ordners bleibt exakt so erhalten, wie das Modell ihn erzeugt hat. Der Benchmark normalisiert das erzeugte Projektlayout nicht nachträglich.
 
-For example, the current PulseBoard runs differ intentionally:
+Die aktuellen PulseBoard-Läufe unterscheiden sich zum Beispiel bewusst:
 
-- Qwen3-Coder-Next created the app directly inside `qwen3-coder-next-test1/`.
-- Qwen3-Coder-30B-A3B and Gemma 4 26B created an additional `pulseboard/` project folder inside their `test1` folders.
-- Gemma 4 31B IT 8-bit with oMLX created the app directly inside `gemma-4-31b-it-8bit-test1-omlx/`.
-- Ornith 1.5 35B A3B created both runs directly in their test slots. `ornith-1.5-35b-a3b-mlx-test1/` preserves the interrupted 65K-context run; `ornith-1.5-35b-a3b-test2-mehr-kontext/` preserves the 131K-context control run.
-- Edge0 35B A3B Preview created the app in a nested `pulseboard/` folder and stores the OpenCode session plus oMLX runtime log in the sibling `benchmark/` folder.
+- Qwen3-Coder-Next hat die App direkt in `qwen3-coder-next-test1/` erzeugt.
+- Qwen3-Coder-30B-A3B und Gemma 4 26B haben innerhalb ihrer `test1`-Ordner einen zusätzlichen `pulseboard/`-Projektordner angelegt.
+- Gemma 4 31B IT 8-bit mit oMLX hat die App direkt in `gemma-4-31b-it-8bit-test1-omlx/` erzeugt.
+- Ornith 1.5 35B A3B hat beide Läufe direkt in den Test-Slots erzeugt. `ornith-1.5-35b-a3b-mlx-test1/` sichert den unterbrochenen Lauf mit 65K Kontext; `ornith-1.5-35b-a3b-test2-mehr-kontext/` sichert den Kontrolllauf mit 131K Kontext.
+- Edge0 35B A3B Preview hat die App in einem verschachtelten `pulseboard/`-Ordner erzeugt und legt die OpenCode-Session sowie das oMLX-Runtime-Log im danebenliegenden `benchmark/`-Ordner ab.
 
-Both direct and nested layouts are valid benchmark artifacts because this structural choice is itself part of the model output.
+Sowohl direkte als auch verschachtelte Layouts sind gültige Benchmark-Artefakte, weil diese Strukturentscheidung selbst Teil der Modellausgabe ist.
 
-A failed, interrupted, partially working, or visually broken result is still a valid benchmark artifact and is preserved exactly as the run ended. A successful build or green unit tests do not by themselves imply a successful benchmark result; final UI/PWA verification is evaluated separately in Notion.
+Ein gescheitertes, unterbrochenes, teilweise funktionierendes oder visuell kaputtes Ergebnis ist trotzdem ein gültiges Benchmark-Artefakt und wird genau so gesichert, wie der Lauf endete. Ein erfolgreicher Build oder grüne Unit-Tests bedeuten für sich genommen kein erfolgreiches Benchmark-Ergebnis; die finale UI/PWA-Verifikation wird separat in Notion bewertet.
 
-## Current model artifacts
+## Aktuelle Modell-Artefakte
 
 - `models/Laguna/Laguna-XS-2.1-oQ8e/Laguna-XS-2.1-oQ8e-test1/`
-  - oMLX / OpenCode v2 / M1 Max 64 GB / 65,536 configured context / Laguna DFlash oQ8 draft model
-  - canonical session span: `info.time.created=1790551152070` to final `info.time.idle=1790556874110`, exactly **5,722,040 ms (1:35:22.040; 95.367333… min)**; Berlin time **2026-09-28 01:19:12.070–02:54:34.110 CEST**. Includes automatic compaction and the final length-limited response; the export contains one user prompt and no manual continuation
-  - reproducible timing extraction: `python3 scripts/analyze_opencode_session.py models/Laguna/Laguna-XS-2.1-oQ8e/Laguna-XS-2.1-oQ8e-test1/benchmark/session01.json` ([analyzer](./scripts/analyze_opencode_session.py)); source SHA-256 `7378698913ca88df1add7ee27a6f4b5442580701d43559a1340be0acbd34613d`
-  - timing components: assistant interval union **5,577,085 ms**, compaction bracket **142,724 ms** (compaction creation to next assistant creation; no completion timestamp in JSON), other transitions **2,231 ms**. These sum to the canonical span; the compaction bracket is not measured manual idle time. Recorded tools occupy **33,019 ms** within the assistant intervals; no build/test/lint invocation is recorded, so separate production-build time is unavailable
-  - session-reported tokens: **1,413,413 input / 52,682 output**, reasoning and cache read/write 0, cost 0. Exported message sums including compaction: **1,411,911 input / 52,454 output**; discrepancy **1,502 input / 228 output** is unexplained by the export. Maximum reported request input is **34,289 tokens** at compaction
-  - PulseBoard was reported working in the manual run; activity CRUD, optional daily goal, date-specific completion state and versioned localStorage persistence are present in source. Session `outcome=succeeded` does not establish a successful production build or final requirement verification
-  - synthetic oMLX baseline: 4K prompt **462.8 pp tok/s / 40.8 tg tok/s / 8.85 s TTFT / 35.0 GB peak RAM**; 16K prompt **388.1 pp tok/s / 29.7 tg tok/s / 42.2 s TTFT / 35.6 GB peak RAM**
-  - long-agent evidence: at 26,144 prompt tokens TTFT is **75.98 s**; the preserved log reaches **106.09 s** during compaction at 34,289 prompt tokens. The log covers 50 completions from 01:32:33.934 to 02:54:33.903 and is not a complete inference-time record of the entire session
-  - final assistant segment: **1,054,337 ms (17:34.337)**, **32,768 output tokens**, `finish=length`; a malformed, unclosed tool-call envelope attempts PWA-icon creation and degenerates into repeated `AAAAAA`. It is recovered as text, with no executed tool record or changed snapshot files; the oMLX log confirms the unclosed envelope. No such corruption is present in the generated application source
-  - PWA caveat: `vite.config.ts` references `pwa-192x192.png` and `pwa-512x512.png`, but those PNG assets are absent from `public/`; PWA is therefore recorded as PARTIAL in Notion pending/failing complete installability verification
-  - generated `README.md` remained the default Vite README rather than project-specific documentation
+  - oMLX / OpenCode v2 / M1 Max 64 GB / 65.536 konfigurierter Kontext / Laguna DFlash oQ8 Draft-Modell
+  - kanonische Session-Spanne: `info.time.created=1790551152070` bis zum letzten `info.time.idle=1790556874110`, exakt **5.722.040 ms (1:35:22,040; 95,367333… min)**; Berliner Zeit **2026-09-28 01:19:12,070–02:54:34,110 CEST**. Enthält automatische Compaction und die finale, durch das Längenlimit begrenzte Antwort; der Export enthält einen User-Prompt und keine manuelle Fortsetzung
+  - reproduzierbare Zeitextraktion: `python3 scripts/analyze_opencode_session.py models/Laguna/Laguna-XS-2.1-oQ8e/Laguna-XS-2.1-oQ8e-test1/benchmark/session01.json` ([Analyzer](./scripts/analyze_opencode_session.py)); Quell-SHA-256 `7378698913ca88df1add7ee27a6f4b5442580701d43559a1340be0acbd34613d`
+  - Zeitkomponenten: Vereinigung der Assistant-Intervalle **5.577.085 ms**, Compaction-Klammer **142.724 ms** (von der Compaction-Erstellung bis zur nächsten Assistant-Erstellung; im JSON kein Abschlusszeitstempel), übrige Übergänge **2.231 ms**. Diese summieren sich zur kanonischen Spanne; die Compaction-Klammer ist keine gemessene manuelle Leerlaufzeit. Aufgezeichnete Tools belegen **33.019 ms** innerhalb der Assistant-Intervalle; es ist kein Build-/Test-/Lint-Aufruf aufgezeichnet, daher ist die separate Production-Build-Zeit nicht verfügbar
+  - von der Session gemeldete Tokens: **1.413.413 Input / 52.682 Output**, Reasoning und Cache Read/Write 0, Kosten 0. Summen der exportierten Nachrichten inklusive Compaction: **1.411.911 Input / 52.454 Output**; die Abweichung von **1.502 Input / 228 Output** ist durch den Export nicht erklärt. Maximal gemeldeter Request-Input: **34.289 Tokens** bei der Compaction
+  - PulseBoard wurde im manuellen Lauf als funktionierend gemeldet; Activity-CRUD, optionales Tagesziel, datumsspezifischer Erledigt-Status und versionierte localStorage-Persistenz sind im Quellcode vorhanden. Das Session-`outcome=succeeded` belegt weder einen erfolgreichen Production-Build noch die finale Anforderungsverifikation
+  - synthetische oMLX-Baseline: 4K-Prompt **462,8 pp tok/s / 40,8 tg tok/s / 8,85 s TTFT / 35,0 GB Peak-RAM**; 16K-Prompt **388,1 pp tok/s / 29,7 tg tok/s / 42,2 s TTFT / 35,6 GB Peak-RAM**
+  - Belege für lange Agentenläufe: bei 26.144 Prompt-Tokens beträgt die TTFT **75,98 s**; das gesicherte Log erreicht **106,09 s** während der Compaction bei 34.289 Prompt-Tokens. Das Log deckt 50 Completions von 01:32:33,934 bis 02:54:33,903 ab und ist keine vollständige Aufzeichnung der Inferenzzeit der gesamten Session
+  - finales Assistant-Segment: **1.054.337 ms (17:34,337)**, **32.768 Output-Tokens**, `finish=length`; ein fehlerhafter, nicht geschlossener Tool-Call-Envelope versucht, PWA-Icons zu erzeugen, und degeneriert zu wiederholtem `AAAAAA`. Er wird als Text wiederhergestellt, ohne ausgeführten Tool-Eintrag oder geänderte Snapshot-Dateien; das oMLX-Log bestätigt den nicht geschlossenen Envelope. Im erzeugten Anwendungs-Quellcode ist keine solche Korruption vorhanden
+  - PWA-Vorbehalt: `vite.config.ts` referenziert `pwa-192x192.png` und `pwa-512x512.png`, diese PNG-Assets fehlen aber in `public/`; PWA ist daher in Notion als PARTIAL vermerkt, solange die vollständige Installierbarkeit nicht verifiziert ist bzw. fehlschlägt
+  - die erzeugte `README.md` blieb die Standard-Vite-README statt einer projektspezifischen Dokumentation
   - `benchmark/session01.json`
   - `benchmark/session01.md`
   - `benchmark/omlx-log.txt`
 - `models/Edge0/Edge0-35B-A3B-preview/Edge0-35B-A3B-preview-test1/`
-  - oMLX / OpenCode v2 / extended `frontend-design` + Jev benchmark prompt
-  - long, stable tool-using run; OpenCode export records 133,861 input tokens, 70,612 output tokens and 8,085,434 cache-read tokens
+  - oMLX / OpenCode v2 / erweiterter `frontend-design`- + Jev-Benchmark-Prompt
+  - langer, stabiler Lauf mit Tool-Nutzung; der OpenCode-Export verzeichnet 133.861 Input-Tokens, 70.612 Output-Tokens und 8.085.434 Cache-Read-Tokens
   - `benchmark/session01.json`
   - `benchmark/session01.md`
   - `benchmark/omlx-log.txt`
-  - final agent report: 46 tests passed, TypeScript check passed and production build passed
-  - runtime evidence: prefix/boundary caching remained active above 132K prompt tokens; observed tool-call decode throughput in the late-run log is roughly 25–27 tok/s, with context growing beyond 138K prompt tokens
-  - artifact integrity note: browser/code verification found a critical fresh-start integration bug despite green tests — with zero activities, `components/App.tsx` renders only `EmptyState`, so `ActivityList` and its implemented add form are unreachable and the first activity cannot be created
-  - cleanup note: unused Vite starter `src/App.tsx` remains in the project, while `src/main.tsx` correctly imports the real app from `src/components/App.tsx`
-  - visual result is functional but comparatively generic/utilitarian; detailed evaluation and PARTIAL run status are recorded in Notion
+  - finaler Agenten-Report: 46 Tests bestanden, TypeScript-Check bestanden und Production-Build bestanden
+  - Runtime-Belege: Prefix-/Boundary-Caching blieb oberhalb von 132K Prompt-Tokens aktiv; der beobachtete Decode-Durchsatz bei Tool-Calls im späten Log liegt grob bei 25–27 tok/s, bei einem Kontext von über 138K Prompt-Tokens
+  - Hinweis zur Artefakt-Integrität: Browser-/Code-Verifikation fand trotz grüner Tests einen kritischen Integrationsfehler beim ersten Start — ohne Activities rendert `components/App.tsx` nur `EmptyState`, sodass `ActivityList` und ihr implementiertes Hinzufügen-Formular nicht erreichbar sind und die erste Activity nicht angelegt werden kann
+  - Aufräum-Hinweis: die ungenutzte Vite-Starter-`src/App.tsx` bleibt im Projekt, während `src/main.tsx` die echte App korrekt aus `src/components/App.tsx` importiert
+  - das visuelle Ergebnis ist funktional, aber vergleichsweise generisch/nüchtern; die detaillierte Auswertung und der Run-Status PARTIAL stehen in Notion
 - `models/qwen3/qwen3-coder-next/qwen3-coder-next-test1/`
 - `models/qwen3/qwen3-coder-30b-a3b/qwen3-coder-30b-a3b-test1/pulseboard/`
 - `models/gemma-4/gemma-4-26b-a4b-it-qat/gemma-4-26b-a4b-it-qat-test1/pulseboard/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 - `models/gemma-4/gemma-4-31b-it-8bit-omlx/gemma-4-31b-it-8bit-test1-omlx/`
-  - oMLX / M1 Max 64 GB / 131K configured context
-  - extended `frontend-design` + Jev prompt
+  - oMLX / M1 Max 64 GB / 131K konfigurierter Kontext
+  - erweiterter `frontend-design`- + Jev-Prompt
   - `benchmark/session01.json`
   - `benchmark/session01.md`
   - `benchmark/omlx-log.txt`
-  - runtime notes: long-run recovery after interruption; oMLX memory-guard pressure around ~32K live context; intended TurboQuant KV8 was not active (`turboquant_kv_bits=None`); power delivery changed from an insufficient 45 W supply to the Apple 96 W adapter during the run
-  - artifact integrity note: final source/build is preserved even though browser verification showed missing effective styling and the generated PNG PWA icon placeholders are zero-byte files
+  - Runtime-Hinweise: Wiederherstellung des langen Laufs nach einer Unterbrechung; oMLX-Memory-Guard-Druck bei ca. 32K Live-Kontext; das vorgesehene TurboQuant KV8 war nicht aktiv (`turboquant_kv_bits=None`); die Stromversorgung wurde während des Laufs von einem unzureichenden 45-W-Netzteil auf das Apple-96-W-Netzteil gewechselt
+  - Hinweis zur Artefakt-Integrität: der finale Quellcode/Build bleibt erhalten, obwohl die Browser-Verifikation fehlendes wirksames Styling zeigte und die erzeugten PNG-PWA-Icon-Platzhalter Dateien mit null Bytes sind
 - `models/qwen3/qwen3.8-27b/qwen3.8-27b-test1/`
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 - `models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/`
-  - oMLX / OpenCode v2 / optimized Qwen3.8-27B-oQ4e-mtp / high-effort agent run
-  - final OpenCode session outcome: **succeeded**; canonical session span from `time.created` to final `time.idle` is **748.90 min (12:28:54 h)** including the manual continuation gaps; OpenCode's final build segment reported **3 h 4 min**, which is not used as the canonical full-run duration
-  - session totals: **164,023 input**, **141,655 output**, **13,928,491 cache-read tokens**, cost 0
-  - final gates: **47/47 Vitest/RTL tests**, ESLint **0 errors / 0 warnings**, strict `tsc -b` clean, production build successful
-  - PWA verified beyond unit tests with a custom headless-Chrome/CDP harness: Service Worker active, **9/9 unique precache assets**, real dialog interaction, target counter and 50% progress, versioned localStorage persistence across reload; after stopping the preview server, the same profile reloaded the app shell and persisted data successfully offline
-  - implementation is substantially production-oriented: componentized React/TypeScript UI, reducer/context state, URL-hash day selection, defensive versioned localStorage sanitization/recovery, future-day protection in UI and reducer, PWA update flow, keyboard/a11y handling, reduced-motion support, and project-local AGENTS/PLAN/STATUS documentation
-  - notable design idea: the EKG-like **PulseLine** is filled according to daily completion percentage and gives the otherwise restrained UI a product-specific visual motif
-  - Jev was used for **7 architectural/product decisions**; the model did not blindly follow the low-confidence IndexedDB suggestion and instead chose localStorage based on the task's risk/complexity trade-off
-  - agentic weakness: convergence was extremely slow and required manual continuation prompts; substantial time was spent debugging tests and then building a bespoke PWA/offline verification harness. Final quality is strong, but practical time-to-result is poor
-  - requirement interpretation: Dark Mode is implemented through `prefers-color-scheme` and intentionally has **no manual/persistent theme toggle**. This is acceptable for the actual run prompt, which only says “Dark Mode berücksichtigen”; it would be a miss only against older PulseBoard prompt variants that explicitly required a persistent toggle
-  - final project documentation is complete (`AGENTS.md`, `PLAN.md`, `STATUS.md`); `STATUS.md` records all M0–M5 milestones and final browser/offline verification
+  - oMLX / OpenCode v2 / optimiertes Qwen3.8-27B-oQ4e-mtp / Agenten-Lauf mit hohem Aufwand (high effort)
+  - finales OpenCode-Session-Ergebnis: **succeeded**; die kanonische Session-Spanne von `time.created` bis zum letzten `time.idle` beträgt **748,90 min (12:28:54 h)** inklusive der Pausen zwischen manuellen Fortsetzungen; das von OpenCode gemeldete finale Build-Segment von **3 h 4 min** wird nicht als kanonische Gesamtlaufzeit verwendet
+  - Session-Summen: **164.023 Input**, **141.655 Output**, **13.928.491 Cache-Read-Tokens**, Kosten 0
+  - finale Gates: **47/47 Vitest/RTL-Tests**, ESLint **0 Fehler / 0 Warnungen**, striktes `tsc -b` sauber, Production-Build erfolgreich
+  - PWA über Unit-Tests hinaus mit einem eigenen Headless-Chrome/CDP-Harness verifiziert: Service Worker aktiv, **9/9 eindeutige Precache-Assets**, echte Dialog-Interaktion, Ziel-Zähler und 50 % Fortschritt, versionierte localStorage-Persistenz über einen Reload hinweg; nach dem Stoppen des Preview-Servers lud dasselbe Profil die App-Shell und die persistierten Daten offline erfolgreich
+  - die Implementierung ist weitgehend produktionsnah: komponentisierte React/TypeScript-UI, Reducer-/Context-State, Tagesauswahl über URL-Hash, defensive versionierte localStorage-Bereinigung/-Wiederherstellung, Schutz vor Zukunftstagen in UI und Reducer, PWA-Update-Flow, Tastatur-/A11y-Behandlung, Reduced-Motion-Unterstützung und projektlokale AGENTS/PLAN/STATUS-Dokumentation
+  - bemerkenswerte Design-Idee: die EKG-artige **PulseLine** füllt sich entsprechend dem täglichen Erledigungsgrad und gibt der sonst zurückhaltenden UI ein produktspezifisches visuelles Motiv
+  - Jev wurde für **7 Architektur-/Produkt-Entscheidungen** genutzt; das Modell folgte dem Vorschlag mit niedriger Confidence für IndexedDB nicht blind, sondern wählte localStorage aufgrund der Risiko-/Komplexitätsabwägung der Aufgabe
+  - agentische Schwäche: die Konvergenz war extrem langsam und erforderte manuelle Fortsetzungs-Prompts; viel Zeit ging in das Debuggen von Tests und anschließend in den Bau eines eigenen PWA-/Offline-Verifikations-Harness. Die finale Qualität ist stark, aber die praktische Time-to-Result schlecht
+  - Anforderungsinterpretation: Dark Mode ist über `prefers-color-scheme` umgesetzt und hat bewusst **keinen manuellen/persistenten Theme-Toggle**. Das ist für den tatsächlichen Run-Prompt akzeptabel, der nur „Dark Mode berücksichtigen“ sagt; es wäre nur gegenüber älteren PulseBoard-Prompt-Varianten ein Versäumnis, die einen persistenten Toggle ausdrücklich verlangten
+  - die finale Projektdokumentation ist vollständig (`AGENTS.md`, `PLAN.md`, `STATUS.md`); `STATUS.md` verzeichnet alle Meilensteine M0–M5 und die finale Browser-/Offline-Verifikation
   - `benchmark/session01.json`
   - `benchmark/session01.md`
   - `benchmark/omlx-log.txt`
 - `models/qwen3/Qwen3.8-27B-TURBO-Fable-Cold-Heretic/Qwen3.8-27B-TURBO-Fable-Cold-Heretic-test1/`
   - oMLX / M1 Max 64 GB / Lightning MTP
-  - extended `frontend-design` + Jev prompt
-  - interrupted run state preserved as benchmark evidence
+  - erweiterter `frontend-design`- + Jev-Prompt
+  - unterbrochener Lauf-Stand als Benchmark-Beleg gesichert
   - `benchmark/omlx-log.txt`
 - `models/qwen3/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-NEO-CODER/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-NEO-CODER-test1/`
-  - oMLX / M1 Max 64 GB / 134144 configured context / Lightning MTP / TurboQuant KV 4-bit
-  - extended `frontend-design` + Jev prompt; Jev installed as project skill and successfully invoked
-  - interrupted agent run: three manual `Führe die Aufgabe fort.` continuations were required and the model repeatedly stopped after announcing the next implementation step
-  - no PulseBoard implementation was produced in the preserved final state; build, tests, lint and PWA therefore remain unverified
+  - oMLX / M1 Max 64 GB / 134144 konfigurierter Kontext / Lightning MTP / TurboQuant KV 4-bit
+  - erweiterter `frontend-design`- + Jev-Prompt; Jev als Projekt-Skill installiert und erfolgreich aufgerufen
+  - unterbrochener Agenten-Lauf: drei manuelle Fortsetzungen mit `Führe die Aufgabe fort.` waren nötig, und das Modell blieb wiederholt stehen, nachdem es den nächsten Implementierungsschritt angekündigt hatte
+  - im gesicherten Endstand wurde keine PulseBoard-Implementierung erzeugt; Build, Tests, Lint und PWA bleiben daher unverifiziert
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 - `models/ornith-1.5/ornith-1.5-35b-a3b/ornith-1.5-35b-a3b-mlx-test1/`
@@ -155,19 +164,19 @@ A failed, interrupted, partially working, or visually broken result is still a v
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 - `models/qwen3/qwen3.8-35b-a3b-distill-oq8-mtp/qwen3.8-35b-a3b-distill-oq8-mtp-test1/`
-  - oMLX / M1 Max 64 GB / 131K context / Lightning MTP / TurboQuant KV 8-bit
-  - extended `frontend-design` + Jev prompt
+  - oMLX / M1 Max 64 GB / 131K Kontext / Lightning MTP / TurboQuant KV 8-bit
+  - erweiterter `frontend-design`- + Jev-Prompt
   - `benchmark/session01.json`
   - `benchmark/session01.md`
-  - oMLX runtime log in `benchmark/`
+  - oMLX-Runtime-Log in `benchmark/`
 
-Run verdicts and detailed evaluations are intentionally **not duplicated here**. See the Notion **Benchmark Runs** database instead.
+Run-Urteile und detaillierte Auswertungen werden hier bewusst **nicht dupliziert**. Stattdessen siehe die Notion-Datenbank **Benchmark Runs**.
 
-## Benchmark integrity
+## Benchmark-Integrität
 
-- Do not repair a closed run just to make the result pass.
-- Preserve broken or incomplete final states as evidence.
-- Do not move or normalize files created by the model merely to make layouts consistent.
-- Keep raw session exports and reproducible failure evidence in Git.
-- Keep narrative evaluation, comparisons, and lessons learned in Notion.
-- Treat final browser/UI verification as distinct from compile/build success; visually broken styling, empty generated assets, incomplete runtime behavior, or blocked first-run flows remain benchmark findings even when `npm run build` and automated tests exit successfully.
+- Einen abgeschlossenen Lauf nicht reparieren, nur damit das Ergebnis besteht.
+- Kaputte oder unvollständige Endstände als Beleg erhalten.
+- Vom Modell erzeugte Dateien nicht verschieben oder normalisieren, nur um Layouts anzugleichen.
+- Rohe Session-Exporte und reproduzierbare Fehlerbelege in Git behalten.
+- Erzählende Auswertung, Vergleiche und Lessons Learned in Notion behalten.
+- Die finale Browser-/UI-Verifikation getrennt vom Compile-/Build-Erfolg betrachten; visuell kaputtes Styling, leere erzeugte Assets, unvollständiges Laufzeitverhalten oder blockierte Erststart-Abläufe bleiben Benchmark-Befunde, auch wenn `npm run build` und automatisierte Tests erfolgreich beendet werden.

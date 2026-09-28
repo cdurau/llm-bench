@@ -1,45 +1,45 @@
-# Habit Tracker benchmark ("Rhythm")
+# Habit-Tracker-Benchmark („Rhythm")
 
-Second benchmark task of the llm-bench project, after PulseBoard. A local coding LLM builds a small, offline-capable habit and mood tracker as a PWA from a fixed prompt. The focus is on **design quality** and on how well the agent uses skills, in particular the optional [Jev](https://www.skills.sh/okooo5km/jev/jev) decision skill.
+Zweite Benchmark-Aufgabe im llm-bench-Projekt, nach PulseBoard. Ein lokales Coding-LLM baut aus einem festen Prompt einen kleinen, offlinefähigen Habit- und Stimmungs-Tracker als PWA. Im Fokus stehen die **Designqualität** und die Frage, wie gut der Agent Skills nutzt, insbesondere den optionalen Entscheidungs-Skill [Jev](https://www.skills.sh/okooo5km/jev/jev).
 
-Layout: one folder per model directly under this directory (`tests/habit-tracker/<model-name>/`), not the `models/<family>/<model>/<model>-test<N>/` structure used for PulseBoard.
+Struktur: pro Modell ein Ordner direkt unter diesem Verzeichnis (`tests/habit-tracker/<modellname>/`), nicht die Struktur `models/<family>/<model>/<model>-test<N>/` wie bei PulseBoard.
 
-## Task in short
+## Aufgabe in Kürze
 
-- App: **Rhythm**, habits with streaks, daily mood (1 to 5), week chart, dark mode, offline use.
-- Fixed stack: Vite, React, TypeScript, `vite-plugin-pwa`, Tailwind CSS v4, IndexedDB via `idb`, Recharts.
-- Skills: `minimalist-ui` (design), `vite-pwa-patterns` (PWA setup) and, in Jev runs, `jev` (fast typed decisions via CLI).
-- Done when `npm run build` passes and `npm run preview` shows the app.
+- App: **Rhythm** mit Habits und Streaks, täglicher Stimmung (1 bis 5), Wochen-Chart, Dark Mode und Offline-Nutzung.
+- Fester Stack: Vite, React, TypeScript, `vite-plugin-pwa`, Tailwind CSS v4, IndexedDB über `idb`, Recharts.
+- Skills: `minimalist-ui` (Design), `vite-pwa-patterns` (PWA-Setup) und in Jev-Läufen zusätzlich `jev` (schnelle typisierte Entscheidungen per CLI).
+- Fertig, wenn `npm run build` durchläuft und `npm run preview` die App zeigt.
 
-The full task is in [`habit_tracker_prompt.md`](./habit_tracker_prompt.md).
+Die komplette Aufgabe steht in [`habit_tracker_prompt.md`](./habit_tracker_prompt.md).
 
-## Files
+## Dateien
 
-| File | Purpose |
+| Datei | Zweck |
 | --- | --- |
-| `habit_tracker_prompt.md` | Benchmark prompt, followed by the evaluation rubric |
-| `install-skills.sh` | Minimal installer: installs all three skills (including Jev) into the current folder |
-| `auto-install-skills.sh` | Configurable installer with `-d <folder>`, `--with-jev` and `--dry-run` (see `--help`) |
-| `<model-name>/` | One run per model: generated app, `.agents/skills/` and `skills-lock.json` |
+| `habit_tracker_prompt.md` | Benchmark-Prompt, darunter die Bewertungsrubrik |
+| `install-skills.sh` | Einfacher Installer: installiert alle drei Skills (inklusive Jev) in den aktuellen Ordner |
+| `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev` und `--dry-run` (siehe `--help`) |
+| `<modellname>/` | Ein Lauf pro Modell: erzeugte App, `.agents/skills/` und `skills-lock.json` |
 
-`skills-lock.json` in a run folder shows which skills were active in that run, so it also tells you whether a run was with or without Jev.
+Die `skills-lock.json` im Run-Ordner zeigt, welche Skills im Lauf aktiv waren. Daran erkennst du auch, ob ein Lauf mit oder ohne Jev war.
 
-## Running a test
+## Einen Test durchführen
 
-1. Create the model folder: `mkdir <model-name>`
-2. Install the skills into it, from this directory:
-   - without Jev: `./auto-install-skills.sh -d <model-name>`
-   - with Jev: `./auto-install-skills.sh -d <model-name> --with-jev`
-3. Start the agent (opencode) in `<model-name>/` and give it the prompt.
-   - **Only paste the part above the `---` separator.** The rubric below it is for evaluation and must not be shown to the model.
-   - For a run **without Jev**, also remove the section "Arbeitsweise mit Jev" and the Jev part of the closing summary sentence from the pasted prompt.
-4. Jev runs need network access and `TYPESAFE_API_KEY` (or `OPENROUTER_API_KEY`) set in the shell that starts the agent. Check once with `jev yes "Ist 1 kleiner als 2?"` before the run.
-5. Keep the generated result unchanged in Git, also when the run fails (see [`AGENTS.md`](../../AGENTS.md)).
+1. Modellordner anlegen: `mkdir <modellname>`
+2. Skills hineininstallieren, aus diesem Verzeichnis:
+   - ohne Jev: `./auto-install-skills.sh -d <modellname>`
+   - mit Jev: `./auto-install-skills.sh -d <modellname> --with-jev`
+3. Den Agenten (opencode) in `<modellname>/` starten und ihm den Prompt geben.
+   - **Nur den Teil oberhalb des `---` einfügen.** Die Rubrik darunter ist für die Auswertung und darf dem Modell nicht gezeigt werden.
+   - Bei einem Lauf **ohne Jev** zusätzlich den Abschnitt „Arbeitsweise mit Jev" und den Jev-Teil des abschließenden Zusammenfassungs-Satzes aus dem eingefügten Prompt entfernen.
+4. Jev-Läufe brauchen Netzzugriff und `TYPESAFE_API_KEY` (oder `OPENROUTER_API_KEY`) in der Shell, aus der der Agent gestartet wird. Vor dem Lauf einmal testen: `jev yes "Ist 1 kleiner als 2?"`
+5. Das erzeugte Ergebnis unverändert in Git sichern, auch wenn der Lauf scheitert (siehe [`AGENTS.md`](../../AGENTS.md)).
 
-## Comparison
+## Vergleich
 
-Per model, two runs with otherwise identical conditions (without Jev, with Jev) allow a clean comparison. Note that Jev runs are not fully local, because Jev calls the TypeSafe API. Results and findings are documented in Notion, not in this folder.
+Pro Modell erlauben zwei Läufe mit sonst identischen Bedingungen (ohne Jev, mit Jev) einen sauberen Vergleich. Zu beachten: Jev-Läufe sind nicht mehr rein lokal, weil Jev die TypeSafe-API aufruft. Ergebnisse und Erkenntnisse werden in Notion dokumentiert, nicht in diesem Ordner.
 
-- Prompt page: https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d
-- Project page: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f
+- Prompt-Seite: https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d
+- Projektseite: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f
 - Benchmark Runs: https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86
