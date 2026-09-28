@@ -7,7 +7,7 @@ Baue eine kleine, schöne, offlinefähige PWA namens **„Rhythm"**: ein Habit- 
 ## Fester Stack (nicht diskutieren, nicht ersetzen)
 
 - Vite + React + TypeScript (Template `react-ts`)
-- `vite-plugin-pwa` (Manifest + Service Worker, Icons 192/512, installierbar)
+- `vite-plugin-pwa` (Manifest + Service Worker, Icons 192/512, installierbar). Nutze für die PWA-Konfiguration den installierten Skill `vite-pwa-patterns` und halte dich an seine Muster.
 - Tailwind CSS v4
 - IndexedDB über `idb` (kein Backend, alles lokal)
 - Recharts für das Wochen-Chart
