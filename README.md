@@ -11,7 +11,8 @@ Dieses Projekt trennt technische Artefakte bewusst von der lesbaren Auswertung:
 
 Notion-Projekt: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f  
 Benchmark Runs: https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86  
-Methodik: https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e
+Methodik: https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e  
+Prompt-Seiten: [PulseBoard](https://app.notion.com/p/3e58253ebb2481559131f2672aacc765), [Habit-Tracker](https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d)
 
 ## Runtime- und Modellformat-Strategie
 
@@ -49,6 +50,14 @@ Die Benchmark-Laufzeit wird **aus den gesicherten OpenCode-/Session-Logs abgelei
 
 Für künftige Benchmark-Auswertungen ist die Laufzeit-Extraktion aus den Logs ein Standard-Auswertungsschritt neben Build/Tests, funktionaler Verifikation, Tool-Nutzungs-Stabilität und UI/PWA-Inspektion.
 
+## Todo-PWA (Vorversuch)
+
+Vor PulseBoard gab es einen kleinen Vorversuch mit einer Todo-PWA. Der Prompt ist [`todo_prompt.md`](./todo_prompt.md). Der einzige Lauf dazu ist `models/qwen3/qwen3.8-27b-ollama/qwen3.8-27b-ollama-test1/` (Ollama, in Notion als INFRA bewertet).
+
+## Hardware
+
+Die Referenzhardware für alle Läufe steht in [`HARDWARE.md`](./HARDWARE.md). Abweichungen werden beim jeweiligen Run dokumentiert.
+
 ## Habit-Tracker-Benchmark („Rhythm")
 
 Zweite Benchmark-Aufgabe nach PulseBoard: ein Habit- und Stimmungs-Tracker als PWA mit Fokus auf Designqualität und Skill-Nutzung (`minimalist-ui`, `vite-pwa-patterns`, optional Jev). Prompt, Installations-Skripte und Anleitung stehen in [`tests/habit-tracker/`](./tests/habit-tracker/README.md).
@@ -58,8 +67,13 @@ Die Ergebnisse liegen **pro Projekt statt pro Modell** unter `tests/habit-tracke
 ## Repository-Struktur
 
 ```text
-instructions.md                         # kanonischer Benchmark-Prompt
+instructions.md                         # kanonischer PulseBoard-Prompt
+instructions_jev_frontend-skill.md      # erweiterter PulseBoard-Prompt (frontend-design + Jev)
+todo_prompt.md                          # Prompt des Todo-PWA-Vorversuchs
 AGENTS.md                               # Artefakt-/Dokumentations-Richtlinie
+HARDWARE.md                             # Referenzhardware
+runtime-tests/                          # Runtime-Vorprüfungen (keine Benchmark-Runs)
+scripts/                                # Hilfsskripte (z. B. Laufzeit-Analyzer)
 models/
   <model-family>/                       # z. B. qwen3, gemma-4, ornith-1.5, Edge0
     <model>/
@@ -67,6 +81,8 @@ models/
         ...                             # exakte Struktur, wie sie das Modell erzeugt hat
 tests/
   habit-tracker/
+    habit_tracker_prompt.md             # Prompt inkl. Bewertungsrubrik
+    README.md                           # Anleitung für den Habit-Tracker-Benchmark
     <modellname>/                       # ein Lauf pro Modell (Habit-Tracker-Benchmark)
 ```
 
@@ -81,6 +97,8 @@ Die aktuellen PulseBoard-Läufe unterscheiden sich zum Beispiel bewusst:
 - Gemma 4 31B IT 8-bit mit oMLX hat die App direkt in `gemma-4-31b-it-8bit-test1-omlx/` erzeugt.
 - Ornith 1.5 35B A3B hat beide Läufe direkt in den Test-Slots erzeugt. `ornith-1.5-35b-a3b-mlx-test1/` sichert den unterbrochenen Lauf mit 65K Kontext; `ornith-1.5-35b-a3b-test2-mehr-kontext/` sichert den Kontrolllauf mit 131K Kontext.
 - Edge0 35B A3B Preview hat die App in einem verschachtelten `pulseboard/`-Ordner erzeugt und legt die OpenCode-Session sowie das oMLX-Runtime-Log im danebenliegenden `benchmark/`-Ordner ab.
+
+Der Ordner `models/Edge0/Edge0-35B-A3B-preview/Edge0-35B-preview-test1/` enthält nur eine einzelne Datei (`pulseboard/public/icons/icon-192.svg`) und ist keinem dokumentierten Run zugeordnet. Er bleibt aus Gründen der Benchmark-Integrität unverändert; der dokumentierte Run ist `Edge0-35B-A3B-preview-test1/`.
 
 Sowohl direkte als auch verschachtelte Layouts sind gültige Benchmark-Artefakte, weil diese Strukturentscheidung selbst Teil der Modellausgabe ist.
 
@@ -128,6 +146,11 @@ Ein gescheitertes, unterbrochenes, teilweise funktionierendes oder visuell kaput
   - Runtime-Hinweise: Wiederherstellung des langen Laufs nach einer Unterbrechung; oMLX-Memory-Guard-Druck bei ca. 32K Live-Kontext; das vorgesehene TurboQuant KV8 war nicht aktiv (`turboquant_kv_bits=None`); die Stromversorgung wurde während des Laufs von einem unzureichenden 45-W-Netzteil auf das Apple-96-W-Netzteil gewechselt
   - Hinweis zur Artefakt-Integrität: der finale Quellcode/Build bleibt erhalten, obwohl die Browser-Verifikation fehlendes wirksames Styling zeigte und die erzeugten PNG-PWA-Icon-Platzhalter Dateien mit null Bytes sind
 - `models/qwen3/qwen3.8-27b/qwen3.8-27b-test1/`
+  - `benchmark/session01.json`
+  - `benchmark/session01.md`
+- `models/qwen3/qwen3.8-27b-ollama/qwen3.8-27b-ollama-test1/`
+  - Todo-PWA-Vorversuch (`todo_prompt.md`) / Ollama / OpenCode v2 / 262.144 konfigurierter Kontext
+  - abgebrochen nach wiederholten HTTP-200-Decode-Fehlern zwischen OpenCode und Ollama; `app.css` und PWA-Assets fehlen im Endstand, Build und Funktionstests wurden nicht mehr erreicht (in Notion als INFRA bewertet)
   - `benchmark/session01.json`
   - `benchmark/session01.md`
 - `models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/`

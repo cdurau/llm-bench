@@ -18,8 +18,14 @@ Do not duplicate narrative benchmark documentation in Git.
 Repository: https://github.com/cdurau/llm-bench
 
 - `instructions.md` — canonical PulseBoard benchmark prompt.
-- `models/<model>/<model>-test<N>[-<variant>]/` — canonical run boundary for benchmark artifacts; a short optional suffix may identify a controlled configuration variant.
-- `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique.
+- `instructions_jev_frontend-skill.md` — extended PulseBoard prompt (`frontend-design` + Jev + project-memory documentation). Runs using it are not directly comparable with runs using the original prompt.
+- `todo_prompt.md` — prompt of the earlier Todo PWA trial run (`models/qwen3/qwen3.8-27b-ollama/`); it is not a PulseBoard run.
+- `tests/habit-tracker/` — Habit Tracker („Rhythm") benchmark. Contains `habit_tracker_prompt.md` (prompt plus evaluation rubric), `install-skills.sh` / `auto-install-skills.sh` (skill installers), a `README.md`, and **one folder per model** at `tests/habit-tracker/<model-name>/` (structure per project instead of per model). Do not show the rubric at the end of `habit_tracker_prompt.md` to the model under test.
+- `models/<model-family>/<model>/<model>-test<N>[-<variant>]/` — canonical run boundary for PulseBoard (and earlier) benchmark artifacts; a short optional suffix may identify a controlled configuration variant.
+- `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique.
+- `HARDWARE.md` — reference hardware for all runs unless a run documents otherwise.
+- `runtime-tests/` — runtime pre-checks that are not benchmark runs (e.g. loading experiments).
+- `scripts/` — scripts used to inspect benchmarks (e.g. `analyze_opencode_session.py` for timing extraction).
 - Everything **inside** a numbered test folder must preserve the structure actually created by the model.
 - If a model creates the application directly in the test folder, keep it there.
 - If a model creates an additional project folder such as `pulseboard/`, keep that folder as generated.
@@ -43,6 +49,11 @@ Benchmark data source:
 
 Methodology:
 https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e
+
+Prompt pages (readable versions of the prompts):
+
+- PulseBoard: https://app.notion.com/p/3e58253ebb2481559131f2672aacc765
+- Habit Tracker: https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d
 
 ## Documentation policy
 
@@ -78,7 +89,7 @@ When a model run is finished or intentionally aborted:
 
 1. Preserve the model's final generated state exactly as it ended.
 2. Do not silently repair a failed benchmark after the run has been closed.
-3. Store the result under the correct `models/<model>/<model>-test<N>[-<variant>]/` slot.
+3. Store the result under the correct slot: `models/<model-family>/<model>/<model>-test<N>[-<variant>]/` for PulseBoard and earlier benchmarks, or `tests/<project>/<model-name>/` for the Habit Tracker and later per-project benchmarks.
 4. Preserve the model-created structure inside that slot exactly; an extra app folder is neither required nor forbidden.
 5. For a new benchmark app/case or controlled rerun, use a new numbered test slot instead of overwriting an earlier one; an optional suffix may describe the configuration variant.
 6. Save useful raw session/log artifacts with the matching run artifact when available.
@@ -86,6 +97,7 @@ When a model run is finished or intentionally aborted:
 8. Create or update the matching entry in the Notion **Benchmark Runs** database.
 9. Populate at least:
    - Run
+   - Benchmark-Projekt (PulseBoard, Todo-PWA, Habit-Tracker)
    - Modell
    - Datum
    - Status
@@ -120,7 +132,7 @@ Runtime errors and model errors should be separated in the evaluation whenever p
 - Keep model-created folder/layout decisions intact as part of the artifact.
 - Distinguish infrastructure/tool-protocol failures from agent reasoning/coding failures.
 - Repeated bad edits, failure to change strategy, task drift, and inability to verify the final product are relevant agentic benchmark findings.
-- Do not change `instructions.md` between comparison runs unless the benchmark methodology is intentionally versioned and documented in Notion.
+- Do not change `instructions.md` (or `tests/habit-tracker/habit_tracker_prompt.md` for the Habit Tracker) between comparison runs unless the benchmark methodology is intentionally versioned and documented in Notion.
 - Do not repurpose or overwrite a numbered test folder after it has become part of a documented benchmark run.
 
 ## Notion access
@@ -137,7 +149,7 @@ If Notion access is unavailable:
 
 For benchmark-related changes, verify:
 
-- technical artifacts are committed to the correct model/test folder;
+- technical artifacts are committed to the correct model/test folder (`models/...` or `tests/<project>/<model-name>/`);
 - the model-created internal folder structure remains unchanged;
 - no accidental post-run repair changed a closed benchmark result;
 - the matching Notion run points to the exact current Git path;

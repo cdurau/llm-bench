@@ -22,7 +22,7 @@ Die komplette Aufgabe steht in [`habit_tracker_prompt.md`](./habit_tracker_promp
 | `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev` und `--dry-run` (siehe `--help`) |
 | `<modellname>/` | Ein Lauf pro Modell: erzeugte App, `.agents/skills/` und `skills-lock.json` |
 
-Die `skills-lock.json` im Run-Ordner zeigt, welche Skills im Lauf aktiv waren. Daran erkennst du auch, ob ein Lauf mit oder ohne Jev war.
+Beispiel: `gemma-4-26b-a4b-it-oQ8e-mtp/` (aktuell mit installierten Skills inklusive Jev). Die `skills-lock.json` im Run-Ordner zeigt, welche Skills im Lauf aktiv waren. Daran erkennst du auch, ob ein Lauf mit oder ohne Jev war.
 
 ## Einen Test durchführen
 
@@ -38,7 +38,7 @@ Die `skills-lock.json` im Run-Ordner zeigt, welche Skills im Lauf aktiv waren. D
 
 ## Vergleich
 
-Pro Modell erlauben zwei Läufe mit sonst identischen Bedingungen (ohne Jev, mit Jev) einen sauberen Vergleich. Zu beachten: Jev-Läufe sind nicht mehr rein lokal, weil Jev die TypeSafe-API aufruft. Ergebnisse und Erkenntnisse werden in Notion dokumentiert, nicht in diesem Ordner.
+Pro Modell erlauben zwei Läufe mit sonst identischen Bedingungen (ohne Jev, mit Jev) einen sauberen Vergleich. Zu beachten: Jev-Läufe sind nicht mehr rein lokal, weil Jev die TypeSafe-API aufruft. Ergebnisse und Erkenntnisse werden in Notion dokumentiert, nicht in diesem Ordner. In der Datenbank **Benchmark Runs** wird dafür das Benchmark-Projekt „Habit-Tracker" gewählt und der Git-Pfad `tests/habit-tracker/<modellname>` eingetragen.
 
 - Prompt-Seite: https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d
 - Projektseite: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f

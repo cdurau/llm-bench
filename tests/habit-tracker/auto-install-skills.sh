@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# install-skills.sh — installiert die Bench-Skills lokal im Projektordner (opencode).
+# auto-install-skills.sh — installiert die Bench-Skills lokal im Projektordner (opencode).
 #
 # Aufruf:
-#   ./install-skills.sh                          # im aktuellen Ordner, OHNE Jev
-#   ./install-skills.sh --with-jev               # im aktuellen Ordner, MIT Jev
-#   ./install-skills.sh -d run-01                # Projektordner (relativ), wird bei Bedarf angelegt
-#   ./install-skills.sh -d ../tests/qwen --with-jev
-#   ./install-skills.sh -d ~/bench/run-02        # auch absolut oder mit ~
-#   ./install-skills.sh --dry-run -d run-01      # zeigt nur, was passieren würde
+#   ./auto-install-skills.sh                          # im aktuellen Ordner, OHNE Jev
+#   ./auto-install-skills.sh --with-jev               # im aktuellen Ordner, MIT Jev
+#   ./auto-install-skills.sh -d run-01                # Projektordner (relativ), wird bei Bedarf angelegt
+#   ./auto-install-skills.sh -d ../tests/qwen --with-jev
+#   ./auto-install-skills.sh -d ~/bench/run-02        # auch absolut oder mit ~
+#   ./auto-install-skills.sh --dry-run -d run-01      # zeigt nur, was passieren würde
 #
 # Optionen:
 #   -d, --dir <ordner>   Projektverzeichnis, in dem die Skills installiert werden
