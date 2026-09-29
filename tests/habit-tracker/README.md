@@ -35,6 +35,7 @@ Beispiel: `gemma-4-26b-a4b-it-oQ8e-mtp/` (aktuell mit installierten Skills inklu
    - Bei einem Lauf **ohne Jev** zusätzlich den Abschnitt „Arbeitsweise mit Jev" und den Jev-Teil des abschließenden Zusammenfassungs-Satzes aus dem eingefügten Prompt entfernen.
 4. Jev-Läufe brauchen Netzzugriff und `TYPESAFE_API_KEY` (oder `OPENROUTER_API_KEY`) in der Shell, aus der der Agent gestartet wird. Vor dem Lauf einmal testen: `jev yes "Ist 1 kleiner als 2?"`
 5. Das erzeugte Ergebnis unverändert in Git sichern, auch wenn der Lauf scheitert (siehe [`AGENTS.md`](../../AGENTS.md)).
+6. Für den manuellen Browser-Test **jeden Run auf einem eigenen Origin starten**, bevorzugt mit einem eigenen Vite-/Preview-Port. Alternativ vor dem Test IndexedDB, localStorage, Cache Storage und Service Worker für den Origin löschen. So beeinflussen Datenbanknamen oder Schema-Versionen eines vorherigen Modells den nächsten Lauf nicht.
 
 ## Vergleich
 
