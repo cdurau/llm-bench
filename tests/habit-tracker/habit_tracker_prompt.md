@@ -75,5 +75,9 @@ Score je Kriterium 1 bis 5:
 6. **Agent-Verhalten:** Tool-Nutzung, Fehlerkorrektur, Selbstständigkeit
 7. **Jev-Nutzung:** sinnvoll eingesetzt oder Alibi-Aufrufe (nur im Lauf mit Jev)
 8. **Zeit / Tokens:** Dauer und Durchsatz (tok/s) für den Vergleich
+9. **First-Pass Technical Quality:** Anteil der Kernfunktionen, die nach dem eigentlichen Build ohne Nutzerhinweise oder zusätzliche Reparatursessions tatsächlich funktionieren
+10. **Repair Effort:** 5 = kaum oder keine zusätzliche Reparaturarbeit; 1 = viele zusätzliche Agenten-Runden, Bugfix-Sessions oder Nutzer-Bugreports bis zu einem brauchbaren Endzustand
+
+Designqualität, First-Pass Technical Quality und Repair Effort werden getrennt ausgewiesen. Ein visuell stärkerer Endzustand mit hoher Nacharbeit ist ein anderes Ergebnis als eine optisch einfachere, aber technisch nahezu sofort funktionierende App.
 
 Empfehlung: pro Modell zwei Läufe (ohne Jev, mit Jev), sonst identisch.
