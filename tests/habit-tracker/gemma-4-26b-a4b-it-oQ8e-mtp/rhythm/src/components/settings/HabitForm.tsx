@@ -26,7 +26,7 @@ const HabitForm: React.FC<HabitFormProps> = ({ habit, onSave, onCancel }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
       <div className="card w-full max-w-md p-6 space-y-6 animate-in slide-in-from-bottom duration-300">
         <h2 className="text-xl font-bold">{habit ? 'Habit bearbeiten' : 'Neues Habit anlegen'}</h2>
         

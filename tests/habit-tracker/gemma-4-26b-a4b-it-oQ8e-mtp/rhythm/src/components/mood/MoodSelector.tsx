@@ -16,21 +16,28 @@ const MOODS = [
 ];
 
 const MoodSelector: React.FC<MoodSelectorProps> = ({ currentMood, onMoodChange }) => {
+  const [selectedScore, setSelectedScore] = React.useState(currentMood?.score || 3);
   const [note, setNote] = React.useState(currentMood?.note || '');
   const [isSaving, setIsSaving] = React.useState(false);
 
   React.useEffect(() => {
-    setNote(currentMood?.note || '');
-  }, [currentMood?.id, currentMood?.note]);
+    if (currentMood) {
+      setSelectedScore(currentMood.score);
+      setNote(currentMood.note || '');
+    } else {
+      setSelectedScore(3);
+      setNote('');
+    }
+  }, [currentMood]);
 
-  const handleSelect = async (score: number) => {
+  const handleSave = async () => {
     setIsSaving(true);
     const date = new Date().toISOString().split('T')[0];
     
     const newMood: MoodLog = {
       id: `${date}-mood`,
       date,
-      score,
+      score: selectedScore,
       note: note || undefined,
     };
 
@@ -54,14 +61,14 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({ currentMood, onMoodChange }
         {MOODS.map((m) => (
           <button
             key={m.score}
-            onClick={() => handleSelect(m.score)}
+            onClick={() => setSelectedScore(m.score)}
             disabled={isSaving}
             className={`flex flex-col items-center space-y-2 transition-transform active:scale-90 ${
-              currentMood?.score === m.score ? 'scale-110' : ''
+              selectedScore === m.score ? 'scale-110' : ''
             }`}
           >
             <span className="text-3xl">{m.emoji}</span>
-            <span className={`text-xs ${currentMood?.score === m.score ? 'text-[var(--accent)] font-bold' : 'text-[var(--text-muted)]'}`}>
+            <span className={`text-xs ${selectedScore === m.score ? 'text-[var(--accent)] font-bold' : 'text-[var(--text-muted)]'}`}>
               {m.label}
             </span>
           </button>
@@ -79,7 +86,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({ currentMood, onMoodChange }
       </div>
 
       <button
-        onClick={() => handleSelect(currentMood?.score || 3)}
+        onClick={handleSave}
         disabled={isSaving}
         className="w-full btn-primary disabled:opacity-50"
       >
