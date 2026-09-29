@@ -22,7 +22,7 @@ export function BottomNav({
 }) {
   return (
     <nav className="fixed inset-x-0 bottom-0 z-20">
-      <div className="border-t border-[var(--color-line)] bg-white/85 px-6 pb-[max(16px,env(safe-area-inset-bottom))] pt-3 backdrop-blur">
+      <div className="border-t border-[var(--color-line)] bg-[#171614]/90 px-6 pb-[max(16px,env(safe-area-inset-bottom))] pt-3 backdrop-blur">
         <div className="mx-auto flex max-w-[420px] items-center justify-around gap-2">
           {TABS.map((t) => {
             const Icon = t.icon

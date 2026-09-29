@@ -15,6 +15,11 @@ import { EmptyState } from './EmptyState'
 
 const ACCENT = '#4a6a4f'
 const ACCENT_SOFT = '#8fae86'
+const DARK_ACCENT = '#8fae86'
+const DARK_GRID = 'rgba(255, 255, 255, 0.08)'
+const LIGHT_GRID = 'rgba(0, 0, 0, 0.06)'
+const DARK_TICK = '#b3b0aa'
+const LIGHT_TICK = '#6f6d69'
 
 export function Week({
   data,
@@ -24,6 +29,10 @@ export function Week({
   theme: ThemeController
 }) {
   const keys = lastNDays(7)
+
+  const barFill = theme.isDark ? DARK_ACCENT : ACCENT
+  const gridStroke = theme.isDark ? DARK_GRID : LIGHT_GRID
+  const tickFill = theme.isDark ? DARK_TICK : LIGHT_TICK
 
   const chartData = keys.map((key) => {
     const done = data.habits.filter((h) => data.isDone(h.id, key)).length
@@ -68,7 +77,7 @@ export function Week({
             <BarChart data={chartData} barSize={26}>
               <CartesianGrid
                 vertical={false}
-                stroke="rgba(0,0,0,0.06)"
+                stroke={gridStroke}
                 strokeWidth={1}
                 strokeDasharray="4 4"
               />
@@ -76,13 +85,13 @@ export function Week({
                 dataKey="label"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#6f6d69' }}
+                tick={{ fontSize: 12, fill: tickFill }}
                 dy={8}
               />
               <Tooltip
                 contentStyle={{
-                  background: theme.isDark ? '#232220' : '#fff',
-                  border: '1px solid rgba(0,0,0,0.08)',
+                  background: theme.isDark ? 'var(--color-surface)' : '#fff',
+                  border: theme.isDark ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(0,0,0,0.08)',
                   borderRadius: 12,
                   boxShadow: '0 8px 24px rgba(0,0,0,0.10)',
                   fontSize: 13,
@@ -91,7 +100,7 @@ export function Week({
               />
               <Bar
                 dataKey="completions"
-                fill={ACCENT}
+                fill={barFill}
                 radius={[6, 6, 0, 0]}
               />
             </BarChart>
@@ -108,7 +117,7 @@ export function Week({
             <LineChart data={chartData}>
               <CartesianGrid
                 vertical={false}
-                stroke="rgba(0,0,0,0.06)"
+                stroke={gridStroke}
                 strokeWidth={1}
                 strokeDasharray="4 4"
               />
@@ -116,13 +125,13 @@ export function Week({
                 dataKey="label"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#6f6d69' }}
+                tick={{ fontSize: 12, fill: tickFill }}
                 dy={8}
               />
               <Tooltip
                 contentStyle={{
-                  background: theme.isDark ? '#232220' : '#fff',
-                  border: '1px solid rgba(0,0,0,0.08)',
+                  background: theme.isDark ? 'var(--color-surface)' : '#fff',
+                  border: theme.isDark ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(0,0,0,0.08)',
                   borderRadius: 12,
                   boxShadow: '0 8px 24px rgba(0,0,0,0.10)',
                   fontSize: 13,

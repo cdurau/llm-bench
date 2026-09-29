@@ -92,7 +92,7 @@ export function HabitForm({
       <button
         onClick={submit}
         disabled={!name.trim()}
-        className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-ink)] px-4 py-3.5 text-base font-medium text-white transition-colors hover:bg-[#2c2c2b] disabled:opacity-40 disabled:hover:bg-[var(--color-ink)]"
+        className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-ink)] px-4 py-3.5 text-base font-medium text-white transition-colors hover:bg-[#2c2c2b] dark:bg-[var(--color-accent)] dark:text-[#12331f] dark:hover:bg-[#7f9c76] disabled:opacity-40 dark:disabled:hover:bg-[var(--color-accent)]"
       >
         <IconPlus width={19} height={19} />
         Habit anlegen

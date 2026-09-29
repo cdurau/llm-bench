@@ -39,7 +39,7 @@ export function Today({
           action={
             <button
               onClick={() => setAdding(true)}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-ink)] px-4 py-3.5 text-base font-medium text-white"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-ink)] px-4 py-3.5 text-base font-medium text-white dark:bg-[var(--color-accent)] dark:text-[#12331f] dark:hover:bg-[#7f9c76]"
             >
               <IconPlus width={19} height={19} />
               Erstes Habit anlegen
