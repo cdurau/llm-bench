@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Layout from './components/layout/Layout';
 import TodayScreen from './components/today/TodayScreen';
 import WeekScreen from './components/week/WeekScreen';

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckCircle2, Circle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { type Habit } from '../../lib/db';
-import { calculateStreaks } from '../../lib/services';
+import { calculateStreaks, getHabitLogs } from '../../lib/services';
 
 interface HabitItemProps {
   habit: Habit;
@@ -11,11 +11,10 @@ interface HabitItemProps {
 }
 
 const HabitItem: React.FC<HabitItemProps> = ({ habit, isCompleted, onToggle }) => {
-  const [streaks, setStreaks] = React.useState<{ current: number; longest: number }>({ current: 0, longest: 0 });
+  const [streaks, setStreaks] = useState<{ current: number; longest: number }>({ current: 0, longest: 0 });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const loadStreaks = async () => {
-      const { getHabitLogs } = await import('../../lib/services');
       const logs = await getHabitLogs();
       setStreaks(calculateStreaks(habit.id, logs));
     };

@@ -26,7 +26,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } else {
       root.classList.remove('dark');
     }
-    saveSettings({ darkMode });
+    saveSettings({ id: 'user-settings', darkMode });
   }, [darkMode]);
 
   const toggleDarkMode = () => setDarkMode(prev => !prev);

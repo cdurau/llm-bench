@@ -1,37 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: 'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-mono: 'Geist Mono', monospace;
 }
 
 :root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --text-muted: #737373;
-  --border: #e5e5e5;
-  --card-bg: #ffffff;
-  --accent: #000000;
+  --bg: #FBFBFA;
+  --text: #111111;
+  --text-muted: #787774;
+  --border: #EAEAEA;
+  --card-bg: #FFFFFF;
+  --accent: #111111;
+  --accent-bg: #F7F6F3;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0a0a;
-    --text: #f5f5f5;
-    --text-muted: #a3a3a3;
-    --border: #262626;
-    --card-bg: #171717;
-    --accent: #ffffff;
-  }
-}
-
-/* Manual Dark Mode Class */
 .dark {
-  --bg: #0a0a0a;
-  --text: #f5f5f5;
-  --text-muted: #a3a3a3;
+  --bg: #111111;
+  --text: #FBFBFA;
+  --text-muted: #787774;
   --border: #262626;
   --card-bg: #171717;
-  --accent: #ffffff;
+  --accent: #FBFBFA;
+  --accent-bg: #262626;
 }
 
 body {
@@ -39,18 +31,19 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
 }
 
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 1.5rem;
+  border-radius: 12px;
 }
 
 .btn-primary {
   background-color: var(--accent);
   color: var(--bg);
   padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
+  border-radius: 6px;
   font-weight: 500;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { type Habit } from '../../lib/db';
 
 interface HabitFormProps {

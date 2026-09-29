@@ -8,13 +8,11 @@ import {
   Tooltip, 
   ResponsiveContainer,
   BarChart,
-  Bar,
-  Legend
+  Bar
 } from 'recharts';
-import { format, subDays, startOfDay, isSameDay } from 'date-fns';
+import { format, subDays } from 'date-fns';
 import { de } from 'date-fns/locale';
-import { getHabitLogs, getMoodLogs } from '../lib/services';
-import { type HabitLog, type MoodLog } from '../lib/db';
+import { getHabitLogs, getMoodLogs } from '../../lib/services';
 
 interface WeekScreenProps {}
 

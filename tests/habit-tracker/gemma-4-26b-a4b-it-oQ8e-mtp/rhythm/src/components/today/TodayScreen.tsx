@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
-import { getHabits, getHabitLogsByDate, toggleHabitLog, getMoodLogByDate } from '../lib/services';
-import { type Habit } from '../lib/db';
+import { getHabits, getHabitLogsByDate, toggleHabitLog, getMoodLogByDate } from '../../lib/services';
+import { type Habit } from '../../lib/db';
 import { Plus } from 'lucide-react';
-import HabitItem from './habits/HabitItem';
+import HabitItem from '../habits/HabitItem';
 import MoodSelector from '../mood/MoodSelector';
 
 const TodayScreen: React.FC = () => {

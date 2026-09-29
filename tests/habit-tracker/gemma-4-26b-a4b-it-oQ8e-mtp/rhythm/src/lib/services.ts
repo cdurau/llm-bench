@@ -94,7 +94,7 @@ export async function getSettings(): Promise<AppSettings> {
 
 export async function saveSettings(settings: AppSettings): Promise<void> {
   const db = await getDB();
-  await db.settings.put({ id: 'user-settings', ...settings });
+  await db.settings.put(settings);
 }
 
 // --- Utils ---
