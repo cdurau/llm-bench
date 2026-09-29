@@ -42,7 +42,7 @@ export interface RhythmDB extends IDBPDatabase {
 }
 
 export async function initDB(): Promise<RhythmDB> {
-  const db = await openDB('rhythm-db', 1, {
+  const db = await openDB('rhythm-db', 2, {
     upgrade(db) {
       if (!db.objectStoreNames.contains('habits')) {
         db.createObjectStore('habits', { keyPath: 'id' });
