@@ -36,6 +36,15 @@ body {
 
 .dark {
   color-scheme: dark;
+  --color-canvas: #171614;
+  --color-surface: #232220;
+  --color-surface-2: #2a2826;
+  --color-ink: #eceae6;
+  --color-ink-muted: #b3b0aa;
+  --color-ink-faint: #9a9791;
+  --color-line: rgba(255, 255, 255, 0.09);
+  --color-accent: #8fae86;
+  --color-accent-soft: #2c3a2e;
 }
 
 @media (prefers-reduced-motion: reduce) {
