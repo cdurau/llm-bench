@@ -104,7 +104,10 @@ export async function getSettings(): Promise<AppSettings> {
   const db = await getDB();
   const tx = db.transaction('settings', 'readonly');
   const settings = await tx.objectStore('settings').get('user-settings');
-  return settings || { id: 'user-settings', darkMode: false };
+  if (!settings || !('theme' in settings)) {
+    return { id: 'user-settings', theme: 'system' };
+  }
+  return settings as AppSettings;
 }
 
 export async function saveSettings(settings: AppSettings): Promise<void> {

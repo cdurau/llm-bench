@@ -19,6 +19,10 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({ currentMood, onMoodChange }
   const [note, setNote] = React.useState(currentMood?.note || '');
   const [isSaving, setIsSaving] = React.useState(false);
 
+  React.useEffect(() => {
+    setNote(currentMood?.note || '');
+  }, [currentMood?.id, currentMood?.note]);
+
   const handleSelect = async (score: number) => {
     setIsSaving(true);
     const date = new Date().toISOString().split('T')[0];

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { getHabits, saveHabit, deleteHabit } from '../../lib/services';
 import { type Habit } from '../../lib/db';
-import { Plus, Trash2, Moon, Sun } from 'lucide-react';
+import { type ThemeMode } from '../../lib/db';
+import { Plus, Trash2 } from 'lucide-react';
 import HabitForm from './HabitForm';
 
 interface SettingsScreenProps {}
 
 const SettingsScreen: React.FC<SettingsScreenProps> = () => {
-  const { darkMode, toggleDarkMode } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [habits, setHabits] = useState<Habit[]>([]);
   const [isHabitFormOpen, setIsHabitFormOpen] = useState(false);
   const [editingHabit, setEditingHabit] = useState<Habit | null>(null);
@@ -58,21 +59,23 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">Erscheinungsbild</h2>
-        <div className="card p-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            {darkMode ? <Moon size={20} /> : <Sun size={20} />}
-            <span>{darkMode ? 'Dark Mode' : 'Light Mode'}</span>
+        <div className="card p-4 flex flex-col space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="font-medium">Design-Modus</span>
+            <div className="flex bg-[var(--border)] p-1 rounded-xl">
+              {(['light', 'dark', 'system'] as ThemeMode[]).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => setTheme(m)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    theme === m ? 'bg-[var(--card-bg)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-muted)]'
+                  }`}
+                >
+                  {m === 'light' ? 'Hell' : m === 'dark' ? 'Dunkel' : 'System'}
+                </button>
+              ))}
+            </div>
           </div>
-          <button 
-            onClick={toggleDarkMode}
-            className="w-12 h-6 rounded-full relative transition-colors"
-            style={{ backgroundColor: darkMode ? 'var(--accent)' : 'var(--border)' }}
-          >
-            <div 
-              className="absolute top-1 w-4 h-4 rounded-full bg-white transition-all"
-              style={{ left: darkMode ? '26px' : '4px' }}
-            />
-          </button>
         </div>
       </section>
 
@@ -98,7 +101,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
           <div className="space-y-3">
             {habits.map(habit => (
               <div key={habit.id} className="card p-4 flex items-center justify-between">
-                <div className="flex items-center space-x-3" onClick={() => openEditHabit(habit)}>
+                <div className="flex items-center space-x-3 cursor-pointer" onClick={() => openEditHabit(habit)}>
                   <span className="text-xl">{habit.emoji}</span>
                   <span className="font-medium">{habit.name}</span>
                 </div>

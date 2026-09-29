@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
-import { getHabits, getHabitLogsByDate, toggleHabitLog, getMoodLogByDate } from '../../lib/services';
+import { getHabits, getHabitLogsByDate, toggleHabitLog, getMoodLogByDate, saveHabit } from '../../lib/services';
 import { type Habit } from '../../lib/db';
 import { Plus } from 'lucide-react';
 import HabitItem from '../habits/HabitItem';
 import MoodSelector from '../mood/MoodSelector';
+import HabitForm from '../settings/HabitForm';
 
 const TodayScreen: React.FC = () => {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [completedHabitIds, setCompletedHabitIds] = useState<string[]>([]);
   const [today] = useState(new Date());
   const [mood, setMood] = useState<any>(null);
+  const [isHabitFormOpen, setIsHabitFormOpen] = useState(false);
 
   const todayStr = format(today, 'yyyy-MM-dd');
 
+  const loadData = async () => {
+    const h = await getHabits();
+    setHabits(h);
+    const completed = await getHabitLogsByDate(todayStr);
+    setCompletedHabitIds(completed);
+    const m = await getMoodLogByDate(todayStr);
+    setMood(m);
+  };
+
   useEffect(() => {
-    const loadData = async () => {
-      const h = await getHabits();
-      setHabits(h);
-      const completed = await getHabitLogsByDate(todayStr);
-      setCompletedHabitIds(completed);
-      const m = await getMoodLogByDate(todayStr);
-      setMood(m);
-    };
     loadData();
   }, [todayStr]);
 
@@ -32,6 +35,17 @@ const TodayScreen: React.FC = () => {
     // Refresh local state
     const completed = await getHabitLogsByDate(todayStr);
     setCompletedHabitIds(completed);
+  };
+
+  const handleAddHabit = async (habitData: Omit<Habit, 'id' | 'createdAt'>) => {
+    const newHabit: Habit = {
+      id: crypto.randomUUID(),
+      createdAt: Date.now(),
+      ...habitData
+    };
+    await saveHabit(newHabit);
+    await loadData();
+    setIsHabitFormOpen(false);
   };
 
   const progress = habits.length > 0 
@@ -62,10 +76,10 @@ const TodayScreen: React.FC = () => {
         
         {habits.length === 0 ? (
           <div className="py-12 text-center space-y-4 card">
-            <div className="mx-auto w-12 h-12 rounded-full bg-[var(--accent-bg)] flex items-center justify-center text-[var(--accent)]">
+            <div className="mx-auto w-12 h-12 rounded-full bg-[var(--accent-bg)] flex items-center justify-center text-[var(--accent)] cursor-pointer" onClick={() => setIsHabitFormOpen(true)}>
               <Plus size={24} />
             </div>
-            <p className="text-[var(--text-muted)]">Noch keine Habits angelegt.</p>
+            <p className="text-[var(--text-muted)]">Noch keine Habits angelegt. Tippe auf das +, um eines zu erstellen.</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -88,6 +102,13 @@ const TodayScreen: React.FC = () => {
           onMoodChange={(newMood) => setMood(newMood)} 
         />
       </section>
+
+      {isHabitFormOpen && (
+        <HabitForm 
+          onSave={handleAddHabit} 
+          onCancel={() => setIsHabitFormOpen(false)} 
+        />
+      )}
     </div>
   );
 };

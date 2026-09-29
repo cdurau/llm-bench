@@ -21,9 +21,11 @@ export type MoodLog = {
   note?: string;
 };
 
+export type ThemeMode = 'light' | 'dark' | 'system';
+
 export type AppSettings = {
   id: string;
-  darkMode: boolean;
+  theme: ThemeMode;
 };
 
 export interface IDBPStore<T, K> {
