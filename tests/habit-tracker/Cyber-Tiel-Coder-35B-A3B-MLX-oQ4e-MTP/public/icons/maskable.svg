@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Rhythm">
-  <rect width="512" height="512" fill="#f7f6f3" />
-  <g fill="#b4552d" transform="translate(256 256) scale(0.62) translate(-256 -256)">
-    <rect x="140" y="252" width="58" height="132" rx="29" />
-    <rect x="227" y="136" width="58" height="248" rx="29" />
-    <rect x="314" y="200" width="58" height="184" rx="29" />
-  </g>
-</svg>
