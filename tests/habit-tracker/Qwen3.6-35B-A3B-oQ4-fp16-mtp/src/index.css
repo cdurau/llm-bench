@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #faf9f7;
+  --color-bg-dark: #1a1a1a;
+  --color-surface: #ffffff;
+  --color-surface-dark: #252525;
+  --color-text: #1a1a1a;
+  --color-text-dark: #f0efe9;
+  --color-text-secondary: #8a8a8a;
+  --color-text-secondary-dark: #9a9a9a;
+  --color-border: #e8e7e3;
+  --color-border-dark: #333333;
+  --color-accent: #2d5a3d;
+  --color-accent-light: #e8f0ea;
+  --color-accent-dark: #3d7a54;
+  --color-completion: #3b8256;
+  --font-sans: 'SF Pro Display', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lyon Text', 'Newsreader', Georgia, serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light-mode) {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark);
+  }
+}
+
+html.light-mode {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+#root {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  position: relative;
+  background-color: var(--color-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  #root:not(.light-mode) {
+    background-color: var(--color-bg-dark);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+input, textarea, button, select {
+  font-family: inherit;
+}
