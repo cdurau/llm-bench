@@ -13,6 +13,16 @@ Struktur: pro Modell ein Ordner direkt unter diesem Verzeichnis (`tests/habit-tr
 
 Die komplette Aufgabe steht in [`habit_tracker_prompt.md`](./habit_tracker_prompt.md).
 
+## Bewertungsdimensionen
+
+Der finale App-Zustand allein reicht für den Vergleich nicht aus. Zusätzlich zur Feature-Abdeckung werden drei Qualitätsdimensionen bewusst getrennt dokumentiert:
+
+- **Design / UX Quality:** visueller Eindruck, Hierarchie, Konsistenz, Responsive-Verhalten und mobile Nutzbarkeit.
+- **First-Pass Technical Quality:** wie viel nach dem eigentlichen Build ohne Nutzerhinweise oder zusätzliche Reparatursessions tatsächlich funktioniert.
+- **Repair Effort:** wie viele zusätzliche Agenten-Runden, Bugfix-Sessions oder Nutzer-Bugreports nötig sind, bis ein brauchbarer Endzustand erreicht ist.
+
+Damit bleibt sichtbar, ob ein Modell beispielsweise ein stärkeres Design erzeugt, dafür aber viel technische Nacharbeit benötigt, oder ob es visuell einfacher arbeitet, dafür funktional fast sofort zuverlässig ist. Die vollständige Rubrik steht unterhalb des Trenners in `habit_tracker_prompt.md` und wird dem Modell nicht gezeigt.
+
 ## Dateien
 
 | Datei | Zweck |
