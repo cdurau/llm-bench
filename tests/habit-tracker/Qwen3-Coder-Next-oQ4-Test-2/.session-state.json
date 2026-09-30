@@ -1,0 +1,37 @@
+{
+  "status": "active",
+  "lastUpdate": 1727784000000,
+  "notes": [
+    {
+      "timestamp": 1727784000000,
+      "message": "Session restart - checking current status of habit-tracker PWA 'Rhythm' smoke test"
+    }
+  ],
+  "context": {
+    "projectPath": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Qwen3-Coder-Next-oQ4-Test-2",
+    "testStatus": "18 von 24 Prüfungen bestanden",
+    "failingTests": [
+      "Abhaken gilt pro Habit - locator.click: Timeout 4000ms exceeded.",
+      "Daten bleiben nach Reload erhalten - Nach Reload angezeigt: 0 von 2",
+      "Woche-Screen zeigt ein Chart mit sichtbarer Fläche - Im Chart nur 2 SVG-Formen",
+      "Dark Mode: manuell umschaltbar - locator.click: Timeout 4000ms exceeded.",
+      "Offline: Reload ohne Netz - page.reload: net::ERR_INTERNET_DISCONNECTED",
+      "Keine JS-Fehler während der gesamten Nutzung - Request fehlgeschlagen: /settings"
+    ],
+    "knownIssues": [
+      "Button click timeout for habit-toggle and theme-toggle buttons",
+      "IndexedDB data not persisting after reload",
+      "Recharts chart showing only 2 SVG shapes (empty state)",
+      "Network disconnected during offline test",
+      "Settings route returning error"
+    ],
+    "recentChanges": [
+      "Changed habit-add to empty-state-habit-add for empty state button",
+      "Added type=\"button\" to habit-toggle and theme-toggle buttons",
+      "Added z-index: 50 to toggle buttons",
+      "Added z-index: 1 to main-content and z-index: 10 to bottom-nav",
+      "Added width: 100% to app-container",
+      "Changed theme toggle logic to cycle: system -> dark -> light -> system"
+    ]
+  }
+}
