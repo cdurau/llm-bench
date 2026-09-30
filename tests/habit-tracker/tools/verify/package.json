@@ -1,0 +1,10 @@
+{
+  "name": "rhythm-verify",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Smoke-Test für die Habit-Tracker-PWA (LLM-Bench)",
+  "dependencies": {
+    "playwright-core": "^1.56.0"
+  }
+}

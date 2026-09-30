@@ -28,6 +28,8 @@ Damit bleibt sichtbar, ob ein Modell beispielsweise ein stärkeres Design erzeug
 | Datei | Zweck |
 | --- | --- |
 | `habit_tracker_prompt.md` | Benchmark-Prompt, darunter die Bewertungsrubrik |
+| `habit_tracker_prompt_verify.md` | Variante mit Pflicht-`data-testid`s und Smoke-Test-Schritt (nicht direkt mit dem Originalprompt vergleichbar) |
+| `tools/verify/` | Smoke-Test-Skript `verify.mjs` (Playwright) für die Variante, Einrichtung und Vertrag siehe dortiges README |
 | `install-skills.sh` | Einfacher Installer: installiert alle drei Skills (inklusive Jev) in den aktuellen Ordner |
 | `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev` und `--dry-run` (siehe `--help`) |
 | `<modellname>/` | Ein Lauf pro Modell: erzeugte App, `.agents/skills/` und `skills-lock.json` |
