@@ -19,6 +19,8 @@ npm run preview -- --port 4173 --strictPort &
 node ../tools/verify/verify.mjs http://localhost:4173
 ```
 
+Bei Playwright-Timeouts enthält die Fehlermeldung Ziel-Element und Grund (z. B. "element is not visible").
+
 Exit-Code 0 = alle Prüfungen grün, 1 = mindestens eine rot, 2 = Chrome nicht startbar. `--json` hängt das Ergebnis als JSON-Zeile an.
 
 ## Was geprüft wird (24 Prüfungen)

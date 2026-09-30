@@ -32,7 +32,14 @@ async function check(name, fn) {
     results.push({ name, ok: true, note: note ?? '' });
     console.log(`PASS  ${name}${note ? '  (' + note + ')' : ''}`);
   } catch (e) {
-    const msg = String(e.message ?? e).split('\n')[0].slice(0, 400);
+    const full = String(e.message ?? e).replace(/\u001b\[[0-9;]*m/g, '');
+    let msg = full.split('\n')[0].slice(0, 300);
+    // Playwright-Timeouts verstecken den Grund im Call-Log: Ziel-Element und Grund mit ausgeben
+    const target = full.match(/locator resolved to (<[^\n]{0,140})/);
+    const why = [...full.matchAll(/(element is not visible|element is not enabled|element is not stable|element is outside of the viewport|element was detached from the DOM|<[^>\n]{0,80}>[^\n]{0,80}intercepts pointer events)/g)].pop();
+    if (target) msg += ` | Ziel: ${target[1].replace(/\s+/g, ' ')}`;
+    if (why) msg += ` | Grund: ${why[1].replace(/\s+/g, ' ')}`;
+    msg = msg.slice(0, 600);
     results.push({ name, ok: false, note: msg });
     console.log(`FAIL  ${name}\n        ${msg}`);
   }
