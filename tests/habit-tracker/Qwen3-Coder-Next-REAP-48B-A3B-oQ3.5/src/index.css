@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --hue: 215;
+    --sat: 85%;
+    --light: 97%;
+    --dark: 8%;
+    --accent-hsl: var(--hue) var(--sat) var(--light);
+    --accent-hsl-dark: var(--hue) var(--sat) var(--dark);
+    --accent: hsl(var(--accent-hsl));
+    --accent-dark: hsl(var(--accent-hsl-dark));
+    --bg: hsl(var(--light));
+    --bg-dark: hsl(var(--dark));
+    --surface: hsl(210 15% 97%);
+    --surface-dark: hsl(230 10% 12%);
+    --text: hsl(240 10% 16%);
+    --text-dark: hsl(220 10% 85%);
+    --border: hsl(220 10% 90%);
+    --border-dark: hsl(230 10% 25%);
+    --success: hsl(142 71% 45%);
+    --danger: hsl(348 100% 61%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: hsl(var(--dark));
+      --bg-dark: hsl(var(--light));
+      --surface: hsl(230 10% 12%);
+      --surface-dark: hsl(210 15% 97%);
+      --text: hsl(220 10% 85%);
+      --text-dark: hsl(240 10% 16%);
+      --border: hsl(230 10% 25%);
+      --border-dark: hsl(220 10% 90%);
+    }
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystem, "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
