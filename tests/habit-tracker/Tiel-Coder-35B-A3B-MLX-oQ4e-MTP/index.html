@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#171717" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Rhythm</title>
+    <script>
+      // Kein Flash: Theme vor dem ersten Paint aus System-Einstellung oder gespeicherter_override ableiten.
+      (function () {
+        try {
+          var k = 'rhythm-theme';
+          var v = localStorage.getItem(k);
+          var system =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var dark = v === 'light' || v === 'dark' ? v === 'dark' : system;
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
