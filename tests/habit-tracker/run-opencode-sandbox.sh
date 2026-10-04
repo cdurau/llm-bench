@@ -49,7 +49,7 @@ MODEL_DIR="$1"
 shift
 
 # Alle weiteren Argumente werden an OpenCode weitergegeben.
-OPENCODE_ARGS=("$@")
+# OPENCODE_ARGS=("$@")
 
 # Offensichtlich gefährliche Ziele direkt ablehnen.
 if [[ "$MODEL_DIR" == "." || "$MODEL_DIR" == ".." || "$MODEL_DIR" == "/" ]]; then
@@ -163,6 +163,9 @@ DOCKER_ARGS=(
     --rm
     -it
 
+    --entrypoint
+    /bin/bash
+
     # Container selbst read-only.
     --read-only
 
@@ -180,7 +183,7 @@ DOCKER_ARGS=(
 
     # Temporärer beschreibbarer Speicher.
     --tmpfs
-    /tmp:rw,nosuid,nodev,size=2g
+    /tmp:rw,exec,nosuid,nodev,size=2g,mode=1777
 
     --tmpfs
     /home/opencode:rw,nosuid,nodev,size=2g
@@ -220,7 +223,7 @@ DOCKER_ARGS=(
 
 HOST_CONFIG="$HOME/.config/opencode"
 
-if [[ -d "$HOST_CONFIG" ]]; then
+if [[ "${CLEAN_CONFIG:-0}" != "1" && -d "$HOST_CONFIG" ]]; then
     DOCKER_ARGS+=(
         --mount
         "type=bind,src=$HOST_CONFIG,dst=/host/opencode-config,readonly"
@@ -230,7 +233,7 @@ fi
 # Nur auth.json übernehmen, nicht die komplette Session-Datenbank.
 HOST_AUTH="$HOME/.local/share/opencode/auth.json"
 
-if [[ -f "$HOST_AUTH" ]]; then
+if [[ "${CLEAN_CONFIG:-0}" != "1" && -f "$HOST_AUTH" ]]; then
     DOCKER_ARGS+=(
         --mount
         "type=bind,src=$HOST_AUTH,dst=/run/secrets/opencode-auth.json,readonly"
@@ -281,7 +284,7 @@ echo
 
 docker "${DOCKER_ARGS[@]}" \
     "$IMAGE" \
-    bash -lc '
+    -lc '
         set -e
 
         mkdir -p \
@@ -290,13 +293,43 @@ docker "${DOCKER_ARGS[@]}" \
             "$HOME/.cache" \
             "$HOME/.npm"
 
-        # Normale OpenCode-Konfiguration in den temporären HOME kopieren.
-        # Änderungen daran verschwinden beim Beenden des Containers.
         if [ -d /host/opencode-config ]; then
-            cp -a /host/opencode-config/. "$HOME/.config/opencode/" 2>/dev/null || true
-        fi
 
-        # Provider-Authentifizierung übernehmen.
+    # Hauptkonfiguration vorerst NICHT kopieren.
+    # Genau hier vermuten wir aktuell den 500er.
+    #
+    # [ -f /host/opencode-config/opencode.json ] && \
+    #     cp /host/opencode-config/opencode.json \
+    #        "$HOME/.config/opencode/opencode.json"
+    #
+    # [ -f /host/opencode-config/opencode.jsonc ] && \
+    #     cp /host/opencode-config/opencode.jsonc \
+    #        "$HOME/.config/opencode/opencode.jsonc"
+
+    # CLI/TUI-Einstellungen
+    [ -f /host/opencode-config/cli.json ] && \
+        cp /host/opencode-config/cli.json \
+           "$HOME/.config/opencode/cli.json"
+
+    # Skills
+    if [ -d /host/opencode-config/skills ]; then
+        cp -a /host/opencode-config/skills \
+              "$HOME/.config/opencode/"
+    fi
+
+    # Agents
+    if [ -d /host/opencode-config/agents ]; then
+        cp -a /host/opencode-config/agents \
+              "$HOME/.config/opencode/"
+    fi
+
+    # Commands
+    if [ -d /host/opencode-config/commands ]; then
+        cp -a /host/opencode-config/commands \
+              "$HOME/.config/opencode/"
+    fi
+fi
+
         if [ -f /run/secrets/opencode-auth.json ]; then
             cp /run/secrets/opencode-auth.json \
                "$HOME/.local/share/opencode/auth.json"
@@ -308,5 +341,33 @@ docker "${DOCKER_ARGS[@]}" \
         opencode --version
         echo
 
-        exec opencode --standalone --auto "$@"
-    ' bash "${OPENCODE_ARGS[@]}"
+        LOGDIR="$PWD/.sandbox-debug"
+mkdir -p "$LOGDIR"
+
+STAMP="$(date +%Y%m%d-%H%M%S)"
+STDERR_LOG="$LOGDIR/opencode-stderr-$STAMP.log"
+
+set +e
+
+opencode --standalone --auto "$@" \
+    2> >(tee "$STDERR_LOG" >&2)
+
+STATUS=$?
+
+set -e
+
+# OpenCode-interne Logs ebenfalls sichern
+if [ -d "$HOME/.local/share/opencode/log" ]; then
+    mkdir -p "$LOGDIR/opencode-logs-$STAMP"
+    cp -a "$HOME/.local/share/opencode/log/." \
+          "$LOGDIR/opencode-logs-$STAMP/" 2>/dev/null || true
+fi
+
+echo
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Debug-Ausgabe gespeichert unter:"
+echo "  $LOGDIR"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+exit "$STATUS"
+    ' bash "$@"
