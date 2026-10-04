@@ -248,24 +248,24 @@ DOCKER_ARGS=(
 # Normale OpenCode-Konfiguration einbinden
 # ------------------------------------------------------------
 
-HOST_CONFIG="$HOME/.config/opencode"
+# HOST_CONFIG="$HOME/.config/opencode"
 
-if [[ "${CLEAN_CONFIG:-0}" != "1" && -d "$HOST_CONFIG" ]]; then
-    DOCKER_ARGS+=(
-        --mount
-        "type=bind,src=$HOST_CONFIG,dst=/host/opencode-config,readonly"
-    )
-fi
+# if [[ "${CLEAN_CONFIG:-0}" != "1" && -d "$HOST_CONFIG" ]]; then
+#     DOCKER_ARGS+=(
+#         --mount
+#         "type=bind,src=$HOST_CONFIG,dst=/host/opencode-config,readonly"
+#     )
+# fi
 
-# Nur auth.json übernehmen, nicht die komplette Session-Datenbank.
-HOST_AUTH="$HOME/.local/share/opencode/auth.json"
+# # Nur auth.json übernehmen, nicht die komplette Session-Datenbank.
+# HOST_AUTH="$HOME/.local/share/opencode/auth.json"
 
-if [[ "${CLEAN_CONFIG:-0}" != "1" && -f "$HOST_AUTH" ]]; then
-    DOCKER_ARGS+=(
-        --mount
-        "type=bind,src=$HOST_AUTH,dst=/run/secrets/opencode-auth.json,readonly"
-    )
-fi
+# if [[ "${CLEAN_CONFIG:-0}" != "1" && -f "$HOST_AUTH" ]]; then
+#     DOCKER_ARGS+=(
+#         --mount
+#         "type=bind,src=$HOST_AUTH,dst=/run/secrets/opencode-auth.json,readonly"
+#     )
+# fi
 
 # ------------------------------------------------------------
 # Info
@@ -358,38 +358,38 @@ docker "${DOCKER_ARGS[@]}" \
 }
 EOF
 
-        if [ -d /host/opencode-config ]; then
+#         if [ -d /host/opencode-config ]; then
 
-    # CLI/TUI-Einstellungen
-    # [ -f /host/opencode-config/cli.json ] && \
-    #     cp /host/opencode-config/cli.json \
-    #        "$HOME/.config/opencode/cli.json"
+#     # CLI/TUI-Einstellungen
+#     # [ -f /host/opencode-config/cli.json ] && \
+#     #     cp /host/opencode-config/cli.json \
+#     #        "$HOME/.config/opencode/cli.json"
 
-    # Skills
-    if [ -d /host/opencode-config/skills ]; then
-        cp -a /host/opencode-config/skills \
-              "$HOME/.config/opencode/"
-    fi
+#     # Skills
+#     if [ -d /host/opencode-config/skills ]; then
+#         cp -a /host/opencode-config/skills \
+#               "$HOME/.config/opencode/"
+#     fi
 
-    # Agents
-    if [ -d /host/opencode-config/agents ]; then
-        cp -a /host/opencode-config/agents \
-              "$HOME/.config/opencode/"
-    fi
+#     # Agents
+#     if [ -d /host/opencode-config/agents ]; then
+#         cp -a /host/opencode-config/agents \
+#               "$HOME/.config/opencode/"
+#     fi
 
-    # Commands
-    if [ -d /host/opencode-config/commands ]; then
-        cp -a /host/opencode-config/commands \
-              "$HOME/.config/opencode/"
-    fi
-fi
+#     # Commands
+#     if [ -d /host/opencode-config/commands ]; then
+#         cp -a /host/opencode-config/commands \
+#               "$HOME/.config/opencode/"
+#     fi
+# fi
 
-        if [ -f /run/secrets/opencode-auth.json ]; then
-            cp /run/secrets/opencode-auth.json \
-               "$HOME/.local/share/opencode/auth.json"
+        # if [ -f /run/secrets/opencode-auth.json ]; then
+        #     cp /run/secrets/opencode-auth.json \
+        #        "$HOME/.local/share/opencode/auth.json"
 
-            chmod 600 "$HOME/.local/share/opencode/auth.json"
-        fi
+        #     chmod 600 "$HOME/.local/share/opencode/auth.json"
+        # fi
 
         echo "OpenCode-Version:"
         opencode --version
