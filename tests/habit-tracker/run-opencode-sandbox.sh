@@ -353,7 +353,7 @@ set +e
 TTY_LOG="$LOGDIR/opencode-terminal-$STAMP.log"
 
 CMD=(opencode --standalone --auto "$@")
-printf -v CMD_STRING '%q ' "${CMD[@]}"
+printf -v CMD_STRING "%q " "${CMD[@]}"
 
 script \
     -q \
@@ -366,7 +366,7 @@ STATUS=$?
 
 CLEAN_LOG="$LOGDIR/opencode-terminal-clean-$STAMP.log"
 
-python3 - "$TTY_LOG" "$CLEAN_LOG" <<'PY'
+python3 - "$TTY_LOG" "$CLEAN_LOG" <<"PY"
 import re
 import sys
 
