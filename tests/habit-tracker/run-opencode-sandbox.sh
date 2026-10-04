@@ -212,6 +212,15 @@ DOCKER_ARGS=(
     "COLORTERM=${COLORTERM:-truecolor}"
 
     -e
+
+    # TYPESAFE_API_KEY
+    if [[ -n "${TYPESAFE_API_KEY:-}" ]]; then
+    DOCKER_ARGS+=(
+        -e
+        TYPESAFE_API_KEY
+    )
+fi
+
 "OMLX_BASE_URL=$OMLX_BASE_URL"
 
 -e
