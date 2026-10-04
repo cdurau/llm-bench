@@ -307,9 +307,9 @@ docker "${DOCKER_ARGS[@]}" \
     #        "$HOME/.config/opencode/opencode.jsonc"
 
     # CLI/TUI-Einstellungen
-    [ -f /host/opencode-config/cli.json ] && \
-        cp /host/opencode-config/cli.json \
-           "$HOME/.config/opencode/cli.json"
+    # [ -f /host/opencode-config/cli.json ] && \
+    #     cp /host/opencode-config/cli.json \
+    #        "$HOME/.config/opencode/cli.json"
 
     # Skills
     if [ -d /host/opencode-config/skills ]; then
@@ -351,7 +351,7 @@ set +e
 
 TTY_LOG="$LOGDIR/opencode-terminal-$STAMP.log"
 
-CMD=(opencode --standalone "$@")
+CMD=(opencode --standalone --auto "$@")
 printf -v CMD_STRING '%q ' "${CMD[@]}"
 
 script \
