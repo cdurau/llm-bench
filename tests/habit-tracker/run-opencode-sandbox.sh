@@ -126,7 +126,8 @@ RUN apt-get update && \
         python3 \
         ca-certificates \
         procps \
-        findutils && \
+        findutils \
+        util-linux && \
     rm -rf /var/lib/apt/lists/*
 
 # Offizielles OpenCode-V2-NPM-Paket
