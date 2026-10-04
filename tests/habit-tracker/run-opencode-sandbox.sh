@@ -349,10 +349,53 @@ STDERR_LOG="$LOGDIR/opencode-stderr-$STAMP.log"
 
 set +e
 
-opencode --standalone --auto "$@" \
-    2> >(tee "$STDERR_LOG" >&2)
+TTY_LOG="$LOGDIR/opencode-terminal-$STAMP.log"
+
+CMD=(opencode --standalone "$@")
+printf -v CMD_STRING '%q ' "${CMD[@]}"
+
+script \
+    -q \
+    -f \
+    -e \
+    -c "$CMD_STRING" \
+    "$TTY_LOG"
 
 STATUS=$?
+
+CLEAN_LOG="$LOGDIR/opencode-terminal-clean-$STAMP.log"
+
+python3 - "$TTY_LOG" "$CLEAN_LOG" <<'PY'
+import re
+import sys
+
+src, dst = sys.argv[1], sys.argv[2]
+
+with open(src, "rb") as f:
+    data = f.read().decode("utf-8", errors="replace")
+
+ansi = re.compile(
+    r"""
+    \x1B
+    (?:
+        [@-_]
+        |
+        \[
+        [0-?]*
+        [ -/]*
+        [@-~]
+    )
+    """,
+    re.VERBOSE,
+)
+
+data = ansi.sub("", data)
+
+with open(dst, "w", encoding="utf-8") as f:
+    f.write(data)
+PY
+
+set -e
 
 set -e
 
