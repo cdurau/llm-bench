@@ -19,6 +19,7 @@ IMAGE="${OPENCODE_IMAGE:-opencode-v2-bench:latest}"
 
 OMLX_BASE_URL="${OMLX_BASE_URL:-http://192.168.0.189:8000/v1}"
 OMLX_MODEL_ID="${OMLX_MODEL_ID:-}"
+OMLX_KEY_FILE="${OMLX_KEY_FILE:-$HOME/.config/.secrets/omlx-key}"
 CONTEXT_LIMIT="${CONTEXT_LIMIT:-131072}"
 OUTPUT_LIMIT="${OUTPUT_LIMIT:-16384}"
 
@@ -242,6 +243,23 @@ DOCKER_ARGS=(
 )
 
 # ------------------------------------------------------------
+# oMLX-Auth
+# ------------------------------------------------------------
+
+if [[ ! -f "$OMLX_KEY_FILE" ]]; then
+    echo "❌ oMLX-Key nicht gefunden:"
+    echo "   $OMLX_KEY_FILE"
+    echo
+    echo "Alternativ kannst du OMLX_KEY_FILE auf eine andere Key-Datei setzen."
+    exit 1
+fi
+
+DOCKER_ARGS+=(
+    --mount
+    "type=bind,src=$OMLX_KEY_FILE,dst=/run/secrets/omlx-key,readonly"
+)
+
+# ------------------------------------------------------------
 # Jev-Auth
 # ------------------------------------------------------------
 
@@ -285,6 +303,7 @@ echo "  ✅ V2"
 echo "  ✅ Auto Mode"
 echo "  ✅ Standalone"
 echo "  ✅ isolierte oMLX-Config"
+echo "  ✅ oMLX-Key separat read-only gemountet"
 echo "  ✅ Projekt-Skills aus .agents/skills"
 echo
 echo "Jev:"
@@ -332,7 +351,8 @@ docker "${DOCKER_ARGS[@]}" \
       "package": "@opencode/ai/providers/openai-compatible",
 
       "settings": {
-        "baseURL": "${OMLX_BASE_URL}"
+        "baseURL": "${OMLX_BASE_URL}",
+        "apiKey": "{file:/run/secrets/omlx-key}"
       },
 
       "models": {
