@@ -17,6 +17,11 @@ set -Eeuo pipefail
 
 IMAGE="${OPENCODE_IMAGE:-opencode-v2-bench:latest}"
 
+OMLX_BASE_URL="${OMLX_BASE_URL:-http://192.168.0.189:8000/v1}"
+OMLX_MODEL_ID="${OMLX_MODEL_ID:-}"
+CONTEXT_LIMIT="${CONTEXT_LIMIT:-131072}"
+OUTPUT_LIMIT="${OUTPUT_LIMIT:-16384}"
+
 # Der Ordner, in dem dieses Script liegt, ist automatisch unser Benchmark-Root.
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -47,6 +52,12 @@ fi
 
 MODEL_DIR="$1"
 shift
+
+# Wenn keine separate Model-ID angegeben wurde,
+# entspricht sie dem Modellordner.
+if [[ -z "$OMLX_MODEL_ID" ]]; then
+    OMLX_MODEL_ID="$MODEL_DIR"
+fi
 
 # Alle weiteren Argumente werden an OpenCode weitergegeben.
 # OPENCODE_ARGS=("$@")
@@ -200,6 +211,21 @@ DOCKER_ARGS=(
     -e
     "COLORTERM=${COLORTERM:-truecolor}"
 
+    -e
+"OMLX_BASE_URL=$OMLX_BASE_URL"
+
+-e
+"OMLX_MODEL_ID=$OMLX_MODEL_ID"
+
+-e
+"OPENCODE_MODEL_ALIAS=$MODEL_DIR"
+
+-e
+"CONTEXT_LIMIT=$CONTEXT_LIMIT"
+
+-e
+"OUTPUT_LIMIT=$OUTPUT_LIMIT"
+
     # --------------------------------------------------------
     # WICHTIG:
     # gesamter habit-tracker nur lesbar
@@ -294,18 +320,45 @@ docker "${DOCKER_ARGS[@]}" \
             "$HOME/.cache" \
             "$HOME/.npm"
 
-        if [ -d /host/opencode-config ]; then
+        cat > "$HOME/.config/opencode/opencode.json" <<EOF
+{
+  "\$schema": "https://opencode.ai/config.json",
 
-    # Hauptkonfiguration vorerst NICHT kopieren.
-    # Genau hier vermuten wir aktuell den 500er.
-    #
-    # [ -f /host/opencode-config/opencode.json ] && \
-    #     cp /host/opencode-config/opencode.json \
-    #        "$HOME/.config/opencode/opencode.json"
-    #
-    # [ -f /host/opencode-config/opencode.jsonc ] && \
-    #     cp /host/opencode-config/opencode.jsonc \
-    #        "$HOME/.config/opencode/opencode.jsonc"
+  "model": "omlx/${OPENCODE_MODEL_ALIAS}",
+
+  "providers": {
+    "omlx": {
+      "name": "oMLX Sandbox",
+
+      "package": "@opencode/ai/providers/openai-compatible",
+
+      "settings": {
+        "baseURL": "${OMLX_BASE_URL}"
+      },
+
+      "models": {
+        "${OPENCODE_MODEL_ALIAS}": {
+          "name": "${OMLX_MODEL_ID}",
+          "modelID": "${OMLX_MODEL_ID}",
+
+          "capabilities": {
+            "tools": true,
+            "input": ["text"],
+            "output": ["text"]
+          },
+
+          "limit": {
+            "context": ${CONTEXT_LIMIT},
+            "output": ${OUTPUT_LIMIT}
+          }
+        }
+      }
+    }
+  }
+}
+EOF
+
+        if [ -d /host/opencode-config ]; then
 
     # CLI/TUI-Einstellungen
     # [ -f /host/opencode-config/cli.json ] && \

@@ -1,0 +1,63 @@
+timestamp=2026-10-04T23:31:45.129Z level=INFO run=fa78070d message="cli starting" version=2.0.22 channel=latest local=false args="[\"--version\"]" role=cli
+timestamp=2026-10-04T23:31:45.177Z level=INFO run=c5396e81 message="cli starting" version=2.0.22 channel=latest local=false args="[\"--standalone\",\"--auto\"]" role=cli
+timestamp=2026-10-04T23:31:45.212Z level=INFO run=c5396e81 message="spawning process" command=/usr/local/lib/node_modules/@opencode/cli/bin/opencode.exe args="[\"serve\",\"--stdio\",\"--port\",\"0\"]" cwd=/workspace/gpt-oss-20b-mlx-oQ8-fp16 role=cli
+timestamp=2026-10-04T23:31:45.363Z level=INFO run=c5396e81 message="spawning process" command=npm args="[\"list\",\"-g\",\"--depth=0\",\"@opencode/cli\"]" cwd=undefined role=cli
+timestamp=2026-10-04T23:31:45.364Z level=INFO run=c5396e81 message="spawning process" command=pnpm args="[\"list\",\"-g\",\"--depth=0\",\"@opencode/cli\"]" cwd=undefined role=cli
+timestamp=2026-10-04T23:31:45.365Z level=INFO run=c5396e81 message="spawning process" command=bun args="[\"pm\",\"ls\",\"-g\"]" cwd=undefined role=cli
+timestamp=2026-10-04T23:31:45.365Z level=INFO run=c5396e81 message="spawning process" command=yarn args="[\"global\",\"list\"]" cwd=undefined role=cli
+timestamp=2026-10-04T23:31:45.365Z level=INFO run=c5396e81 message="spawning process" command=vp args="[\"list\",\"-g\",\"--json\",\"@opencode/cli\"]" cwd=undefined role=cli
+timestamp=2026-10-04T23:31:45.531Z level=INFO run=c5396e81 message="event stream connecting" component=client attempt=0 role=cli
+timestamp=2026-10-04T23:31:45.546Z level=INFO run=c5396e81 message="plugin reconciliation started" component=plugin id=1 role=cli
+timestamp=2026-10-04T23:31:45.554Z level=INFO run=c5396e81 message="plugin reconciliation completed" component=plugin id=1 durationMs=8 plugins=12 role=cli
+timestamp=2026-10-04T23:31:45.594Z level=INFO run=c5396e81 message="event stream connected" component=client role=cli
+timestamp=2026-10-04T23:31:45.594Z level=INFO run=c5396e81 message="plugin reconciliation started" component=plugin id=2 role=cli
+timestamp=2026-10-04T23:31:45.599Z level=INFO run=c5396e81 message="plugin reconciliation completed" component=plugin id=2 durationMs=5 plugins=12 role=cli
+timestamp=2026-10-04T23:31:45.801Z level=INFO run=c5396e81 message="plugin reconciliation started" component=plugin id=3 role=cli
+timestamp=2026-10-04T23:31:45.802Z level=INFO run=c5396e81 message="plugin reconciliation completed" component=plugin id=3 durationMs=1 plugins=12 role=cli
+timestamp=2026-10-04T23:31:45.802Z level=INFO run=c5396e81 message="plugin reconciliation started" component=plugin id=4 role=cli
+timestamp=2026-10-04T23:31:45.805Z level=INFO run=c5396e81 message="plugin reconciliation completed" component=plugin id=4 durationMs=3 plugins=12 role=cli
+timestamp=2026-10-04T23:31:45.824Z level=INFO run=c5396e81 message="plugin reconciliation started" component=plugin id=5 role=cli
+timestamp=2026-10-04T23:31:45.831Z level=INFO run=c5396e81 message="plugin reconciliation completed" component=plugin id=5 durationMs=7 plugins=12 role=cli
+timestamp=2026-10-04T23:31:46.086Z level=INFO run=c5396e81 message="update check" current=2.0.22 latest=2.0.22 role=cli
+timestamp=2026-10-04T23:31:46.087Z level=INFO run=c5396e81 message="update check done" action=up-to-date role=cli
+timestamp=2026-10-04T23:31:45.252Z level=INFO run=3ea070b5 message="cli starting" version=2.0.22 channel=latest local=false args="[\"serve\",\"--stdio\",\"--port\",\"0\"]" role=cli
+timestamp=2026-10-04T23:31:45.341Z level=INFO run=3ea070b5 message="database schema bootstrap started" migrations=48 role=server
+timestamp=2026-10-04T23:31:45.346Z level=INFO run=3ea070b5 message="database schema bootstrap completed" migrations=48 durationMs=5 role=server
+timestamp=2026-10-04T23:31:45.393Z level=INFO run=3ea070b5 message="watcher subscribe" path=/home/opencode/.config/opencode type=directory ignores=3 http.span=22 role=server
+timestamp=2026-10-04T23:31:45.394Z level=INFO run=3ea070b5 message="watcher subscribe" path=/ type=entries ignores=0 http.span=23 role=server
+timestamp=2026-10-04T23:31:45.395Z level=INFO run=3ea070b5 message="watcher started" path=/ type=entries backend=node ignores=0 http.span=24 role=server
+timestamp=2026-10-04T23:31:45.395Z level=INFO run=3ea070b5 message="watcher subscribe" path=/workspace type=entries ignores=0 http.span=24 role=server
+timestamp=2026-10-04T23:31:45.395Z level=INFO run=3ea070b5 message="watcher started" path=/workspace type=entries backend=node ignores=0 http.span=24 role=server
+timestamp=2026-10-04T23:31:45.395Z level=INFO run=3ea070b5 message="watcher subscribe" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16 type=entries ignores=0 http.span=24 role=server
+timestamp=2026-10-04T23:31:45.395Z level=INFO run=3ea070b5 message="watcher started" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16 type=entries backend=node ignores=0 http.span=24 role=server
+timestamp=2026-10-04T23:31:45.395Z level=INFO run=3ea070b5 message="watcher subscribe" path=/home/opencode type=entries ignores=0 http.span=24 role=server
+timestamp=2026-10-04T23:31:45.395Z level=INFO run=3ea070b5 message="watcher started" path=/home/opencode type=entries backend=node ignores=0 http.span=24 role=server
+timestamp=2026-10-04T23:31:45.405Z level=INFO run=3ea070b5 message="watcher started" path=/home/opencode/.config/opencode type=directory backend=inotify ignores=3 http.span=34 role=server
+timestamp=2026-10-04T23:31:45.407Z level=INFO run=3ea070b5 message="location services booted" directory=/workspace/gpt-oss-20b-mlx-oQ8-fp16 workspaceID=undefined durationMs=35 http.span=36 role=server
+timestamp=2026-10-04T23:31:45.565Z level=INFO run=3ea070b5 message="watcher subscribe" path=/home/opencode/.config/opencode/AGENTS.md type=file ignores=0
+timestamp=2026-10-04T23:31:45.566Z level=INFO run=3ea070b5 message="watcher started" path=/home/opencode/.config/opencode/AGENTS.md type=file backend=node ignores=0 http.span=195 role=server
+timestamp=2026-10-04T23:31:45.566Z level=INFO run=3ea070b5 message="watcher subscribe" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16/AGENTS.md type=file ignores=0
+timestamp=2026-10-04T23:31:45.566Z level=INFO run=3ea070b5 message="watcher started" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16/AGENTS.md type=file backend=node ignores=0 http.span=195 role=server
+timestamp=2026-10-04T23:31:45.576Z level=INFO run=3ea070b5 message="watcher subscribe" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16/.agents/skills type=directory ignores=0
+timestamp=2026-10-04T23:31:45.583Z level=INFO run=3ea070b5 message="watcher started" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16/.agents/skills type=directory backend=inotify ignores=0 http.span=212 role=server
+timestamp=2026-10-04T23:31:45.586Z level=INFO run=3ea070b5 message="watcher subscribe" path=/home/opencode/.config/opencode/skill type=file ignores=0
+timestamp=2026-10-04T23:31:45.586Z level=INFO run=3ea070b5 message="watcher started" path=/home/opencode/.config/opencode/skill type=file backend=node ignores=0 http.span=215 role=server
+timestamp=2026-10-04T23:31:45.587Z level=INFO run=3ea070b5 message="watcher subscribe" path=/home/opencode/.config/opencode/skills type=file ignores=0
+timestamp=2026-10-04T23:31:45.588Z level=INFO run=3ea070b5 message="watcher started" path=/home/opencode/.config/opencode/skills type=file backend=node ignores=0 http.span=217 role=server
+timestamp=2026-10-04T23:31:45.598Z level=INFO run=3ea070b5 message=event event.id=evt_10942593e001TqM5a4gCwWaBtv event.created=1791156705598 event.type=provider.updated event.location.directory=/workspace/gpt-oss-20b-mlx-oQ8-fp16 event.location.workspaceID=undefined event.data={} http.span=227 role=server
+timestamp=2026-10-04T23:31:45.605Z level=INFO run=3ea070b5 message=event event.id=evt_109425945001YAzYJ2lPaHiULi event.created=1791156705605 event.type=model.updated event.location.directory=/workspace/gpt-oss-20b-mlx-oQ8-fp16 event.location.workspaceID=undefined event.data={} http.span=234 role=server
+timestamp=2026-10-04T23:31:45.606Z level=INFO run=3ea070b5 message=event event.id=evt_109425946001hlgM2Uk1qNsDHt event.created=1791156705606 event.type=agent.updated event.location.directory=/workspace/gpt-oss-20b-mlx-oQ8-fp16 event.location.workspaceID=undefined event.data={} http.span=235 role=server
+timestamp=2026-10-04T23:31:45.606Z level=INFO run=3ea070b5 message=event event.id=evt_109425946002b6mJajkM5J74be event.created=1791156705606 event.type=command.updated event.location.directory=/workspace/gpt-oss-20b-mlx-oQ8-fp16 event.location.workspaceID=undefined event.data={} http.span=235 role=server
+timestamp=2026-10-04T23:31:45.786Z level=INFO run=3ea070b5 message=event event.id=evt_1094259fa001tGDcCZ2KcHXRLI event.created=1791156705786 event.type=provider.updated event.location.directory=/workspace/gpt-oss-20b-mlx-oQ8-fp16 event.location.workspaceID=undefined event.data={}
+timestamp=2026-10-04T23:31:45.791Z level=INFO run=3ea070b5 message=event event.id=evt_1094259fe001l878RbY67F8gQh event.created=1791156705790 event.type=model.updated event.location.directory=/workspace/gpt-oss-20b-mlx-oQ8-fp16 event.location.workspaceID=undefined event.data={} http.span=420 role=server
+timestamp=2026-10-04T23:31:46.484Z level=INFO run=3ea070b5 cause="InterruptError: All fibers interrupted without error\n    at ServerProcess.start (/$bunfs/root/chunk-z0f386dm.js:2:6512)\n    at ServerProcess.start (definition) (/$bunfs/root/chunk-fp32z723.js:454:24128) {\n  [cause]: InterruptCause: The fiber was interrupted by:\n      at fiber (#1)\n}" http.span=949 role=server http.method=GET http.url=/api/event http.status=200
+timestamp=2026-10-04T23:31:46.532Z level=INFO run=3ea070b5 message="watcher stopped" path=/home/opencode/.config/opencode/skill type=file http.span=1161 role=server
+timestamp=2026-10-04T23:31:46.532Z level=INFO run=3ea070b5 message="watcher stopped" path=/home/opencode/.config/opencode/skills type=file http.span=1161 role=server
+timestamp=2026-10-04T23:31:46.533Z level=INFO run=3ea070b5 message="watcher stopped" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16/.agents/skills type=directory http.span=1162 role=server
+timestamp=2026-10-04T23:31:46.534Z level=INFO run=3ea070b5 message="watcher stopped" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16/AGENTS.md type=file http.span=1163 role=server
+timestamp=2026-10-04T23:31:46.534Z level=INFO run=3ea070b5 message="watcher stopped" path=/home/opencode/.config/opencode/AGENTS.md type=file http.span=1163 role=server
+timestamp=2026-10-04T23:31:46.540Z level=INFO run=3ea070b5 message="watcher stopped" path=/ type=entries http.span=1169 role=server
+timestamp=2026-10-04T23:31:46.540Z level=INFO run=3ea070b5 message="watcher stopped" path=/workspace type=entries http.span=1169 role=server
+timestamp=2026-10-04T23:31:46.540Z level=INFO run=3ea070b5 message="watcher stopped" path=/workspace/gpt-oss-20b-mlx-oQ8-fp16 type=entries http.span=1169 role=server
+timestamp=2026-10-04T23:31:46.540Z level=INFO run=3ea070b5 message="watcher stopped" path=/home/opencode type=entries http.span=1169 role=server
+timestamp=2026-10-04T23:31:46.540Z level=INFO run=3ea070b5 message="watcher stopped" path=/home/opencode/.config/opencode type=directory http.span=1169 role=server
