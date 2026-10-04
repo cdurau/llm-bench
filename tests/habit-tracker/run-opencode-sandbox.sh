@@ -59,9 +59,6 @@ if [[ -z "$OMLX_MODEL_ID" ]]; then
     OMLX_MODEL_ID="$MODEL_DIR"
 fi
 
-# Alle weiteren Argumente werden an OpenCode weitergegeben.
-# OPENCODE_ARGS=("$@")
-
 # Offensichtlich gefährliche Ziele direkt ablehnen.
 if [[ "$MODEL_DIR" == "." || "$MODEL_DIR" == ".." || "$MODEL_DIR" == "/" ]]; then
     echo "❌ Ungültiger Zielordner: $MODEL_DIR"
@@ -94,11 +91,13 @@ case "$TARGET" in
         ;;
 esac
 
-# tools soll niemals versehentlich als RW-Ziel gestartet werden.
-if [[ "$TARGET" == "$ROOT_REAL/tools" ]]; then
-    echo "❌ Der tools-Ordner darf nicht als Schreibziel verwendet werden."
-    exit 1
-fi
+# tools und alle Unterordner sollen niemals als RW-Ziel gestartet werden.
+case "$TARGET" in
+    "$ROOT_REAL/tools"|"$ROOT_REAL/tools"/*)
+        echo "❌ Der tools-Ordner darf nicht als Schreibziel verwendet werden."
+        exit 1
+        ;;
+esac
 
 # ------------------------------------------------------------
 # Docker prüfen
@@ -144,10 +143,7 @@ RUN apt-get update && \
 # Offizielles OpenCode-V2-NPM-Paket
 RUN npm install -g @opencode/cli
 
-RUN mkdir -p \
-    /home/opencode \
-    /host/opencode-config \
-    /run/secrets
+RUN mkdir -p /home/opencode
 
 ENV HOME=/home/opencode
 
@@ -211,29 +207,21 @@ DOCKER_ARGS=(
     -e
     "COLORTERM=${COLORTERM:-truecolor}"
 
+    # oMLX-Provider-Konfiguration.
     -e
+    "OMLX_BASE_URL=$OMLX_BASE_URL"
 
-    # TYPESAFE_API_KEY
-    if [[ -n "${TYPESAFE_API_KEY:-}" ]]; then
-    DOCKER_ARGS+=(
-        -e
-        TYPESAFE_API_KEY
-    )
-fi
+    -e
+    "OMLX_MODEL_ID=$OMLX_MODEL_ID"
 
-"OMLX_BASE_URL=$OMLX_BASE_URL"
+    -e
+    "OPENCODE_MODEL_ALIAS=$MODEL_DIR"
 
--e
-"OMLX_MODEL_ID=$OMLX_MODEL_ID"
+    -e
+    "CONTEXT_LIMIT=$CONTEXT_LIMIT"
 
--e
-"OPENCODE_MODEL_ALIAS=$MODEL_DIR"
-
--e
-"CONTEXT_LIMIT=$CONTEXT_LIMIT"
-
--e
-"OUTPUT_LIMIT=$OUTPUT_LIMIT"
+    -e
+    "OUTPUT_LIMIT=$OUTPUT_LIMIT"
 
     # --------------------------------------------------------
     # WICHTIG:
@@ -254,27 +242,20 @@ fi
 )
 
 # ------------------------------------------------------------
-# Normale OpenCode-Konfiguration einbinden
+# Jev-Auth
 # ------------------------------------------------------------
 
-# HOST_CONFIG="$HOME/.config/opencode"
+# Nur den bereits in der Host-Shell exportierten TypeSafe-Key weiterreichen.
+# Der Wert wird nicht ins Script oder Repo geschrieben.
+JEV_AUTH_STATUS="⚠️ TYPESAFE_API_KEY nicht gesetzt"
 
-# if [[ "${CLEAN_CONFIG:-0}" != "1" && -d "$HOST_CONFIG" ]]; then
-#     DOCKER_ARGS+=(
-#         --mount
-#         "type=bind,src=$HOST_CONFIG,dst=/host/opencode-config,readonly"
-#     )
-# fi
-
-# # Nur auth.json übernehmen, nicht die komplette Session-Datenbank.
-# HOST_AUTH="$HOME/.local/share/opencode/auth.json"
-
-# if [[ "${CLEAN_CONFIG:-0}" != "1" && -f "$HOST_AUTH" ]]; then
-#     DOCKER_ARGS+=(
-#         --mount
-#         "type=bind,src=$HOST_AUTH,dst=/run/secrets/opencode-auth.json,readonly"
-#     )
-# fi
+if [[ -n "${TYPESAFE_API_KEY:-}" ]]; then
+    DOCKER_ARGS+=(
+        -e
+        TYPESAFE_API_KEY
+    )
+    JEV_AUTH_STATUS="✅ TYPESAFE_API_KEY weitergereicht"
+fi
 
 # ------------------------------------------------------------
 # Info
@@ -303,12 +284,13 @@ echo "OpenCode:"
 echo "  ✅ V2"
 echo "  ✅ Auto Mode"
 echo "  ✅ Standalone"
-echo "  ✅ normale globale Config"
-echo "  ✅ normale CLI Settings"
-echo "  ✅ globale Skills/Agents"
-echo "  ✅ Provider-Auth, falls vorhanden"
+echo "  ✅ isolierte oMLX-Config"
+echo "  ✅ Projekt-Skills aus .agents/skills"
 echo
-echo "Host Home, SSH, Desktop usw.:"
+echo "Jev:"
+echo "  $JEV_AUTH_STATUS"
+echo
+echo "Host Home, OpenCode-Config/Auth, SSH, Desktop usw.:"
 echo "  ⛔ nicht gemountet"
 echo
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -326,8 +308,16 @@ docker "${DOCKER_ARGS[@]}" \
         mkdir -p \
             "$HOME/.config/opencode" \
             "$HOME/.local/share/opencode" \
+            "$HOME/.local/bin" \
             "$HOME/.cache" \
             "$HOME/.npm"
+
+        export PATH="$HOME/.local/bin:$PATH"
+
+        JEV_SCRIPT="$PWD/.agents/skills/jev/scripts/jev"
+        if [ -f "$JEV_SCRIPT" ]; then
+            ln -sf "$JEV_SCRIPT" "$HOME/.local/bin/jev"
+        fi
 
         cat > "$HOME/.config/opencode/opencode.json" <<EOF
 {
@@ -367,39 +357,6 @@ docker "${DOCKER_ARGS[@]}" \
 }
 EOF
 
-#         if [ -d /host/opencode-config ]; then
-
-#     # CLI/TUI-Einstellungen
-#     # [ -f /host/opencode-config/cli.json ] && \
-#     #     cp /host/opencode-config/cli.json \
-#     #        "$HOME/.config/opencode/cli.json"
-
-#     # Skills
-#     if [ -d /host/opencode-config/skills ]; then
-#         cp -a /host/opencode-config/skills \
-#               "$HOME/.config/opencode/"
-#     fi
-
-#     # Agents
-#     if [ -d /host/opencode-config/agents ]; then
-#         cp -a /host/opencode-config/agents \
-#               "$HOME/.config/opencode/"
-#     fi
-
-#     # Commands
-#     if [ -d /host/opencode-config/commands ]; then
-#         cp -a /host/opencode-config/commands \
-#               "$HOME/.config/opencode/"
-#     fi
-# fi
-
-        # if [ -f /run/secrets/opencode-auth.json ]; then
-        #     cp /run/secrets/opencode-auth.json \
-        #        "$HOME/.local/share/opencode/auth.json"
-
-        #     chmod 600 "$HOME/.local/share/opencode/auth.json"
-        # fi
-
         echo "OpenCode-Version:"
         opencode --version
         echo
@@ -408,7 +365,6 @@ EOF
 mkdir -p "$LOGDIR"
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
-STDERR_LOG="$LOGDIR/opencode-stderr-$STAMP.log"
 
 set +e
 
@@ -457,8 +413,6 @@ data = ansi.sub("", data)
 with open(dst, "w", encoding="utf-8") as f:
     f.write(data)
 PY
-
-set -e
 
 set -e
 
