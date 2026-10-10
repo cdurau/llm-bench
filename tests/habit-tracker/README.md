@@ -33,6 +33,7 @@ Damit bleibt sichtbar, ob ein Modell beispielsweise ein stärkeres Design erzeug
 | `install-skills.sh` | Einfacher Installer: installiert alle drei Skills (inklusive Jev) in den aktuellen Ordner |
 | `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev` und `--dry-run` (siehe `--help`) |
 | `run-opencode-sandbox.sh` | Startet OpenCode V2 in Docker mit Schreibzugriff auf genau einen Modellordner |
+| `run-pi-sandbox.sh` | Startet Pi (macOS, `sandbox-exec`) mit Schreibzugriff auf genau einen Modellordner |
 | `<modellname>/` | Ein Lauf pro Modell: erzeugte App, `.agents/skills/` und `skills-lock.json` |
 
 Beispiel: `gemma-4-26b-a4b-it-oQ8e-mtp/` (aktuell mit installierten Skills inklusive Jev). Die `skills-lock.json` im Run-Ordner zeigt, welche Skills im Lauf aktiv waren. Daran erkennst du auch, ob ein Lauf mit oder ohne Jev war.
@@ -71,6 +72,23 @@ OMLX_MODEL_ID=tatsaechliche-modell-id ./run-opencode-sandbox.sh mein-modell-run
 Weitere Einstellungen sind `OMLX_BASE_URL`, `OMLX_KEY_FILE`, `CONTEXT_LIMIT` (Standard: `131072`) und `OUTPUT_LIMIT` (Standard: `16384`). Mit `REBUILD=1 ./run-opencode-sandbox.sh mein-modell-run` wird das Image neu gebaut. Zusätzliche Argumente hinter dem Ordnernamen werden an OpenCode weitergereicht.
 
 Die Sandbox startet OpenCode mit `--standalone --auto` im Modellordner. Der gesamte Habit-Tracker-Bereich ist im Container lesbar; von den Host-Dateien ist nur der ausgewählte Modellordner beschreibbar. Terminal- und OpenCode-Logs werden unter `<modellname>/.sandbox-debug/` gespeichert.
+
+## Pi mit Schreibsperre starten
+
+`run-pi-sandbox.sh` startet Pi im Modellordner, ohne Docker. Es nutzt `sandbox-exec` (nur macOS) und verbietet das Schreiben im gesamten Home außer im Modellordner, `~/.pi`, `~/.npm` und `~/.cache`. Lesen, Netz, `npm` und andere Tools bleiben frei; `~/.ssh` und `~/.config/.secrets` sind zusätzlich zum Lesen gesperrt. Der Agent kann dadurch nicht außerhalb des Run-Ordners schreiben und auch nicht per `git` committen, weil `.git` im Repo-Root liegt.
+
+```bash
+./run-pi-sandbox.sh mein-modell-run
+./run-pi-sandbox.sh mein-modell-run --model xyz   # weitere Argumente gehen an pi
+```
+
+Der Modellordner muss bereits existieren (inklusive installierter Skills) und unter diesem Verzeichnis liegen. Pi findet die Skills unter `<modellname>/.agents/skills/`, solange im Modellordner kein eigenes Git-Repo angelegt wird. Optionen per Umgebungsvariable:
+
+- `PI_SANDBOX_EXTRA_RW="/pfad/a:/pfad/b"` macht weitere Pfade beschreibbar.
+- `PI_SANDBOX_ALLOW_SECRETS=1` hebt die Sperre für `~/.config/.secrets` auf, falls Pi den Modell-Key von dort liest.
+- `PI_SANDBOX_CMD=zsh` startet statt Pi einen anderen Befehl, zum Beispiel zum Testen der Sperre.
+
+`sandbox-exec` ist von Apple als veraltet markiert, funktioniert aber weiterhin. Die Sperre betrifft nur Schreibzugriffe; ein unbeschränktes `find /` wird nicht verhindert.
 
 ## Vergleich
 
