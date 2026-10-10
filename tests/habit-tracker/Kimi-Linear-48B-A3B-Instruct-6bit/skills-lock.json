@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "jev": {
+      "source": "okooo5km/jev",
+      "sourceType": "github",
+      "skillPath": "jev/SKILL.md",
+      "computedHash": "c4e5d28e7c2996d544b1fd6026af52f29a39aca6188d6482a4ac630ba1841ee8"
+    },
+    "minimalist-ui": {
+      "source": "leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/minimalist-skill/SKILL.md",
+      "computedHash": "08873a3131d3be27bef9bf3304b310b16b44ca6e3561aebe532797be3443f6bd"
+    },
+    "vite-pwa-patterns": {
+      "source": "ai-enhanced-engineer/aiee-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vite-pwa-patterns/SKILL.md",
+      "computedHash": "8f9f3a480f65af109120abf3010609a3daff3b068845b7d7c87aa5f20ee9d253"
+    }
+  }
+}
