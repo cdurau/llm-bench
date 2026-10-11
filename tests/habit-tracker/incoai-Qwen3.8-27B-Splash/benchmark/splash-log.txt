@@ -1,0 +1,302 @@
+16:00:04 Done · input 11,772 · cached 32 · output 148 · tools 12·0825d805 · TTFT 82.5s · 25.8 tok/s
+16:10:04 Neural Engine FFN program unloaded while idle
+16:10:04 Weights released after 600 s without a request; the next request restores them
+16:12:51 Neural Engine FFN program reloaded in 0.06 s
+16:12:51 Weights restored in 1.62 s
+16:13:52 Done · input 8,750 · cached 32 · output 204 · tools 8·52ad16f3 · TTFT 55.2s · 29.2 tok/s
+16:14:13 Done · input 10,002 · cached 8,736 · output 293 · tools 8·52ad16f3 · TTFT 9.1s · 24.6 tok/s
+16:14:25 Done · input 10,836 · cached 9,984 · output 189 · tools 8·52ad16f3 · TTFT 6.9s · 39.5 tok/s
+16:15:08 Done · input 16,385 · cached 10,816 · output 95 · tools 8·52ad16f3 · TTFT 40.6s · 30.8 tok/s
+16:25:47 Done · input 25,277 · cached 16,352 · output 9,439 · tools 8·52ad16f3 · TTFT 71.7s · 16.6 tok/s
+16:27:24 Done · input 34,851 · cached 25,248 · output 190 · tools 8·52ad16f3 · TTFT 86.7s · 21.1 tok/s
+16:27:36 Done · input 35,111 · cached 34,816 · output 174 · tools 8·52ad16f3 · TTFT 4.4s · 24.7 tok/s
+16:27:47 Done · input 35,425 · cached 35,104 · output 106 · tools 8·52ad16f3 · TTFT 4.8s · 16.6 tok/s
+16:28:01 Done · input 35,611 · cached 35,392 · output 261 · tools 8·52ad16f3 · TTFT 3.4s · 24.8 tok/s
+16:28:17 Done · input 36,351 · cached 35,584 · output 164 · tools 8·52ad16f3 · TTFT 8.3s · 26.3 tok/s
+16:28:42 Done · input 37,184 · cached 36,320 · output 311 · tools 8·52ad16f3 · TTFT 9.3s · 19.4 tok/s
+16:28:58 Done · input 38,017 · cached 37,152 · output 208 · tools 8·52ad16f3 · TTFT 9.7s · 32.3 tok/s
+16:29:35 Done · input 38,362 · cached 37,984 · output 247 · tools 8·52ad16f3 · TTFT 5.0s · 25.9 tok/s
+16:38:30 Done · input 38,999 · cached 38,336 · output 9,680 · tools 8·52ad16f3 · TTFT 7.6s · 18.3 tok/s
+16:41:01 Done · input 48,703 · cached 38,976 · output 840 · tools 8·52ad16f3 · TTFT 114.7s · 23.0 tok/s
+16:42:02 Done · input 49,573 · cached 48,672 · output 791 · tools 8·52ad16f3 · TTFT 11.8s · 16.1 tok/s
+16:42:37 Done · input 50,646 · cached 49,568 · output 415 · tools 8·52ad16f3 · TTFT 14.5s · 20.5 tok/s
+16:44:26 Done · input 51,091 · cached 50,624 · output 2,251 · tools 8·52ad16f3 · TTFT 7.1s · 22.2 tok/s
+16:46:19 Done · input 53,580 · cached 51,072 · output 1,443 · tools 8·52ad16f3 · TTFT 36.0s · 18.7 tok/s
+16:48:30 Done · input 55,052 · cached 53,568 · output 2,081 · tools 8·52ad16f3 · TTFT 21.4s · 19.0 tok/s
+16:50:24 Done · input 57,183 · cached 55,040 · output 1,746 · tools 8·52ad16f3 · TTFT 32.3s · 21.4 tok/s
+16:52:55 Done · input 58,963 · cached 57,152 · output 2,280 · tools 8·52ad16f3 · TTFT 28.2s · 18.5 tok/s
+16:54:38 Done · input 61,265 · cached 58,944 · output 599 · tools 8·52ad16f3 · TTFT 37.9s · 9.2 tok/s
+16:55:07 Done · input 61,944 · cached 61,248 · output 219 · tools 8·52ad16f3 · TTFT 12.3s · 13.8 tok/s
+16:55:34 Done · input 62,987 · cached 61,920 · output 128 · tools 8·52ad16f3 · TTFT 18.5s · 14.4 tok/s
+16:56:10 Done · input 63,507 · cached 62,976 · output 353 · tools 8·52ad16f3 · TTFT 9.7s · 13.4 tok/s
+16:56:38 Done · input 63,884 · cached 63,488 · output 356 · tools 8·52ad16f3 · TTFT 7.6s · 18.0 tok/s
+16:57:00 Done · input 64,372 · cached 63,872 · output 274 · tools 8·52ad16f3 · TTFT 9.5s · 21.1 tok/s
+16:57:17 Done · input 64,747 · cached 64,352 · output 137 · tools 8·52ad16f3 · TTFT 7.7s · 14.7 tok/s
+16:57:43 Done · input 65,191 · cached 64,736 · output 332 · tools 8·52ad16f3 · TTFT 8.7s · 19.2 tok/s
+16:58:09 Done · input 65,655 · cached 65,184 · output 287 · tools 8·52ad16f3 · TTFT 9.1s · 17.0 tok/s
+16:58:37 Done · input 66,019 · cached 65,632 · output 323 · tools 8·52ad16f3 · TTFT 8.1s · 16.1 tok/s
+16:59:29 Done · input 66,407 · cached 65,984 · output 484 · tools 8·52ad16f3 · TTFT 8.8s · 11.4 tok/s
+17:00:17 Done · input 66,949 · cached 66,400 · output 381 · tools 8·52ad16f3 · TTFT 10.6s · 10.3 tok/s
+17:01:06 Done · input 67,354 · cached 66,944 · output 481 · tools 8·52ad16f3 · TTFT 8.2s · 11.8 tok/s
+17:01:24 Done · input 67,853 · cached 67,328 · output 123 · tools 8·52ad16f3 · TTFT 10.2s · 15.9 tok/s
+17:01:54 Done · input 68,346 · cached 67,840 · output 265 · tools 8·52ad16f3 · TTFT 10.0s · 13.1 tok/s
+17:02:19 Done · input 69,029 · cached 68,320 · output 164 · tools 8·52ad16f3 · TTFT 13.7s · 15.0 tok/s
+17:03:52 Done · input 72,440 · cached 69,024 · output 279 · tools 8·52ad16f3 · TTFT 63.5s · 9.6 tok/s
+17:10:55 Done · input 72,853 · cached 72,416 · output 4,988 · tools 8·52ad16f3 · TTFT 9.3s · 12.0 tok/s
+17:14:53 Done · input 77,881 · cached 72,832 · output 2,963 · tools 8·52ad16f3 · TTFT 85.0s · 19.4 tok/s
+17:16:19 Done · input 80,884 · cached 77,856 · output 514 · tools 8·52ad16f3 · TTFT 52.4s · 15.2 tok/s
+17:16:41 Done · input 81,446 · cached 80,864 · output 210 · tools 8·52ad16f3 · TTFT 11.1s · 18.0 tok/s
+17:17:01 Done · input 81,705 · cached 81,440 · output 154 · tools 8·52ad16f3 · TTFT 5.6s · 10.8 tok/s
+17:17:18 Done · input 81,954 · cached 81,696 · output 199 · tools 8·52ad16f3 · TTFT 6.2s · 18.1 tok/s
+17:19:56 Done · input 82,184 · cached 81,920 · output 2,602 · tools 8·52ad16f3 · TTFT 5.5s · 17.1 tok/s
+17:23:25 Done · input 84,826 · cached 82,176 · output 2,941 · tools 8·52ad16f3 · TTFT 48.2s · 18.3 tok/s
+17:26:12 Done · input 87,813 · cached 84,800 · output 2,209 · tools 8·52ad16f3 · TTFT 52.2s · 19.2 tok/s
+17:27:10 Done · input 90,066 · cached 87,808 · output 202 · tools 8·52ad16f3 · TTFT 39.3s · 11.4 tok/s
+17:29:16 Done · input 90,433 · cached 90,048 · output 2,779 · tools 8·52ad16f3 · TTFT 7.9s · 23.4 tok/s
+17:31:30 Done · input 93,237 · cached 90,400 · output 1,738 · tools 8·52ad16f3 · TTFT 48.0s · 20.4 tok/s
+17:32:32 Done · input 95,301 · cached 93,216 · output 378 · tools 8·52ad16f3 · TTFT 36.0s · 13.9 tok/s
+17:34:01 Done · input 96,318 · cached 95,296 · output 1,411 · tools 8·52ad16f3 · TTFT 18.3s · 21.0 tok/s
+17:34:41 Done · input 97,796 · cached 96,288 · output 175 · tools 8·52ad16f3 · TTFT 27.2s · 13.1 tok/s
+17:35:42 Done · input 98,249 · cached 97,760 · output 627 · tools 8·52ad16f3 · TTFT 9.8s · 13.8 tok/s
+17:36:33 Done · input 99,483 · cached 98,240 · output 384 · tools 8·52ad16f3 · TTFT 22.9s · 15.6 tok/s
+17:36:57 Done · input 99,909 · cached 99,456 · output 250 · tools 8·52ad16f3 · TTFT 9.3s · 17.1 tok/s
+17:37:18 Done · input 100,214 · cached 99,904 · output 258 · tools 8·52ad16f3 · TTFT 6.8s · 17.6 tok/s
+17:39:20 Done · input 100,507 · cached 100,192 · output 1,844 · tools 8·52ad16f3 · TTFT 6.9s · 16.1 tok/s
+17:40:09 Done · input 102,374 · cached 100,480 · output 192 · tools 8·52ad16f3 · TTFT 35.2s · 14.5 tok/s
+17:40:38 Done · input 102,839 · cached 102,368 · output 315 · tools 8·52ad16f3 · TTFT 9.7s · 16.6 tok/s
+17:41:13 Done · input 103,213 · cached 102,816 · output 489 · tools 8·52ad16f3 · TTFT 8.2s · 17.8 tok/s
+17:41:28 Done · input 103,731 · cached 103,200 · output 83 · tools 8·52ad16f3 · TTFT 10.5s · 19.7 tok/s
+17:41:39 Done · input 103,833 · cached 103,712 · output 153 · tools 8·52ad16f3 · TTFT 3.4s · 20.8 tok/s
+17:42:16 Done · input 104,191 · cached 103,808 · output 319 · tools 8·52ad16f3 · TTFT 8.2s · 14.7 tok/s
+17:42:42 Done · input 104,539 · cached 104,160 · output 293 · tools 8·52ad16f3 · TTFT 8.2s · 16.4 tok/s
+17:43:24 Done · input 104,890 · cached 104,512 · output 382 · tools 8·52ad16f3 · TTFT 8.2s · 12.5 tok/s
+17:59:21 Done · input 105,810 · cached 104,864 · output 12,907 · tools 8·52ad16f3 · TTFT 18.7s · 13.8 tok/s
+18:04:44 Done · input 118,740 · cached 105,792 · output 364 · tools 8·52ad16f3 · TTFT 287.1s · 9.9 tok/s
+18:06:22 Done · input 120,360 · cached 118,720 · output 735 · tools 8·52ad16f3 · TTFT 39.7s · 12.7 tok/s
+18:07:03 Done · input 121,154 · cached 120,352 · output 194 · tools 8·52ad16f3 · TTFT 20.9s · 9.2 tok/s
+18:07:26 Done · input 121,432 · cached 121,120 · output 235 · tools 8·52ad16f3 · TTFT 8.9s · 17.5 tok/s
+18:07:46 Done · input 121,694 · cached 121,408 · output 149 · tools 8·52ad16f3 · TTFT 7.9s · 12.5 tok/s
+18:08:31 Done · input 122,735 · cached 121,664 · output 222 · tools 8·52ad16f3 · TTFT 26.7s · 12.1 tok/s
+18:08:50 Done · input 122,988 · cached 122,720 · output 145 · tools 8·52ad16f3 · TTFT 7.5s · 11.8 tok/s
+18:09:41 Done · input 123,179 · cached 122,976 · output 379 · tools 8·52ad16f3 · TTFT 6.1s · 10.5 tok/s
+18:10:45 Done · input 123,588 · cached 123,168 · output 564 · tools 8·52ad16f3 · TTFT 10.6s · 10.6 tok/s
+18:11:23 Done · input 124,182 · cached 123,552 · output 302 · tools 8·52ad16f3 · TTFT 14.8s · 13.5 tok/s
+18:11:50 Done · input 124,737 · cached 124,160 · output 193 · tools 8·52ad16f3 · TTFT 14.3s · 14.4 tok/s
+18:12:04 Done · input 125,005 · cached 124,704 · output 89 · tools 8·52ad16f3 · TTFT 8.1s · 15.1 tok/s
+18:12:37 Done · input 125,574 · cached 124,992 · output 290 · tools 8·52ad16f3 · TTFT 14.3s · 15.6 tok/s
+18:15:36 Done · input 125,964 · cached 125,568 · output 1,871 · tools 8·52ad16f3 · TTFT 9.9s · 11.1 tok/s
+18:16:39 Done · input 128,101 · cached 125,952 · output 147 · tools 8·52ad16f3 · TTFT 52.1s · 13.6 tok/s
+18:17:53 Done · input 128,347 · cached 128,096 · output 1,326 · tools 8·52ad16f3 · TTFT 7.8s · 20.2 tok/s
+18:18:39 Done · input 129,704 · cached 128,320 · output 199 · tools 8·52ad16f3 · TTFT 34.1s · 15.9 tok/s
+18:20:56 Done · input 130,048 · cached 129,696 · output 1,537 · tools 8·52ad16f3 · TTFT 8.9s · 12.1 tok/s
+18:22:45 Done · input 131,738 · cached 130,016 · output 454 · tools 8·52ad16f3 · TTFT 39.7s · 14.7 tok/s
+18:23:20 Done · input 132,511 · cached 131,712 · output 81 · tools 8·52ad16f3 · TTFT 17.7s · 20.1 tok/s
+18:24:55 Done · input 134,943 · cached 132,480 · output 471 · tools 8·52ad16f3 · TTFT 55.9s · 12.3 tok/s
+18:27:47 Done · input 138,929 · cached 134,912 · output 1,053 · tools 8·52ad16f3 · TTFT 91.2s · 13.0 tok/s
+18:29:17 Done · input 140,013 · cached 138,912 · output 718 · tools 8·52ad16f3 · TTFT 25.2s · 11.1 tok/s
+18:30:43 Done · input 140,771 · cached 140,000 · output 723 · tools 8·52ad16f3 · TTFT 18.4s · 11.5 tok/s
+18:31:39 Done · input 141,665 · cached 140,736 · output 413 · tools 8·52ad16f3 · TTFT 21.5s · 12.1 tok/s
+18:33:26 Done · input 142,312 · cached 141,632 · output 888 · tools 8·52ad16f3 · TTFT 16.3s · 11.1 tok/s
+18:35:39 Done · input 144,081 · cached 142,304 · output 926 · tools 8·52ad16f3 · TTFT 40.7s · 10.0 tok/s
+cedi@MacBook-Pro-von-Cedric Splash-M1 % 
+cedi@MacBook-Pro-von-Cedric Splash-M1 % tail -n 200 ~/.splash-m1/logs/serve.log
+12:48:53 Neural Engine FFN split at share 0.59 for chunks of 256 rows or more, 1.2% from the GPU alone on the Neural Engine's part (set up as calibrated before in 2.7 s).
+12:49:12 Ready · incoai/Qwen3.8-27B-Splash · context 256K · http://0.0.0.0:8002
+12:49:16 Stopping · releasing engine resources
+Splash model incoai/Qwen3.8-27B-Splash is already installed in /Users/cedi/Library/Application Support/Splash/models/incoai/Qwen3.8-27B-Splash
+12:49:36 Loading · incoai/Qwen3.8-27B-Splash
+12:49:37 Chat template · renders later system messages in place, generation prompt 5-7 tokens
+12:49:37 Stopping · releasing engine resources
+Splash model incoai/Qwen3.8-27B-Splash is already installed in /Users/cedi/Library/Application Support/Splash/models/incoai/Qwen3.8-27B-Splash
+12:49:40 Loading · incoai/Qwen3.8-27B-Splash
+12:49:41 Chat template · renders later system messages in place, generation prompt 5-7 tokens
+12:49:43 Weights loaded in 1.69 s.
+12:49:43 Kernel policy for GPU family 7 with 24 cores.
+12:49:43 Setting up the Neural Engine FFN split (splash serve --disable-ane keeps the FFN on the GPU).
+12:49:46 Neural Engine FFN split at share 0.59 for chunks of 256 rows or more, 1.2% from the GPU alone on the Neural Engine's part (set up as calibrated before in 2.7 s).
+12:50:05 Ready · incoai/Qwen3.8-27B-Splash · context 256K · http://0.0.0.0:8001
+12:50:06 Done · input 21 · cached 0 · output 2 · TTFT 0.6s
+12:50:15 Stopping · releasing engine resources
+Splash model incoai/Qwen3.8-27B-Splash is already installed in /Users/cedi/Library/Application Support/Splash/models/incoai/Qwen3.8-27B-Splash
+12:50:18 Loading · incoai/Qwen3.8-27B-Splash
+12:50:19 Chat template · renders later system messages in place, generation prompt 5-7 tokens
+12:50:20 Weights loaded in 1.64 s.
+12:50:20 Kernel policy for GPU family 7 with 24 cores.
+12:50:20 Setting up the Neural Engine FFN split (splash serve --disable-ane keeps the FFN on the GPU).
+12:50:23 Neural Engine FFN split at share 0.59 for chunks of 256 rows or more, 1.2% from the GPU alone on the Neural Engine's part (set up as calibrated before in 2.7 s).
+12:50:28 Stopping · releasing engine resources
+Splash model incoai/Qwen3.8-27B-Splash is already installed in /Users/cedi/Library/Application Support/Splash/models/incoai/Qwen3.8-27B-Splash
+12:50:33 Loading · incoai/Qwen3.8-27B-Splash
+12:50:34 Chat template · renders later system messages in place, generation prompt 5-7 tokens
+12:50:36 Weights loaded in 1.69 s.
+12:50:36 Kernel policy for GPU family 7 with 24 cores.
+12:50:36 Setting up the Neural Engine FFN split (splash serve --disable-ane keeps the FFN on the GPU).
+12:50:38 Neural Engine FFN split at share 0.59 for chunks of 256 rows or more, 1.2% from the GPU alone on the Neural Engine's part (set up as calibrated before in 2.7 s).
+12:50:58 Ready · incoai/Qwen3.8-27B-Splash · context 256K · http://0.0.0.0:8001
+12:50:59 Done · input 21 · cached 0 · output 2 · TTFT 0.6s
+12:56:57 Error · not_found · POST /v1/__llmprobe_no_such_endpoint__
+12:56:57 Error · invalid_request_error · POST /v1/chat/completions
+12:56:57 Error · invalid_request_error · POST /v1/responses
+12:56:57 Error · invalid_request_error · POST /v1/messages
+12:56:57 Error · invalid_request_error · POST /v1/messages/count_tokens
+12:56:58 Error · not_found · POST /v1/embeddings
+12:56:58 Error · not_found · POST /embeddings
+12:56:58 Error · invalid_request_error · POST /v1/completions
+12:56:58 Error · not_found · POST /v1/images/generations
+12:56:58 Error · not_found · POST /images/generations
+12:56:58 Error · not_found · POST /v1/images/edits
+12:56:58 Error · not_found · POST /images/edits
+12:56:58 Error · not_found · POST /v1/audio/speech
+12:56:58 Error · not_found · POST /audio/speech
+12:56:58 Error · not_found · POST /v1/audio/transcriptions
+12:56:58 Error · not_found · POST /audio/transcriptions
+12:56:58 Error · not_found · POST /api/chat
+12:56:58 Error · not_found · GET /api/tags
+12:57:00 Done · input 66 · cached 0 · output 38 · TTFT 1.2s · 50.8 tok/s
+12:57:02 Done · input 24 · cached 0 · output 37 · TTFT 0.5s · 37.3 tok/s
+12:57:08 Done · input 65 · cached 0 · output 192 · TTFT 1.2s · 40.1 tok/s
+12:57:14 Done · input 65 · cached 0 · output 192 · TTFT 1.2s · 40.1 tok/s
+12:57:20 Done · input 65 · cached 0 · output 192 · TTFT 1.2s · 38.1 tok/s
+12:57:26 Done · input 65 · cached 0 · output 192 · TTFT 1.2s · 39.2 tok/s
+12:58:32 Done · input 10,405 · cached 0 · output 8 · TTFT 66.0s
+12:59:39 Done · input 10,405 · cached 0 · output 8 · TTFT 67.3s
+13:00:46 Done · input 10,405 · cached 0 · output 8 · TTFT 66.7s
+13:00:52 Done · input 282 · cached 0 · output 192 · TTFT 2.4s · 49.3 tok/s
+13:00:59 Done · input 282 · cached 0 · output 192 · TTFT 2.4s · 49.3 tok/s
+13:01:05 Done · input 282 · cached 0 · output 192 · TTFT 2.4s · 49.0 tok/s
+13:01:13 Done · input 36 · cached 0 · output 192 · TTFT 0.8s · 26.2 tok/s
+13:01:21 Done · input 36 · cached 0 · output 192 · TTFT 0.8s · 25.0 tok/s
+13:01:29 Done · input 36 · cached 0 · output 192 · TTFT 0.8s · 25.9 tok/s
+13:01:39 Done · input 1,539 · cached 0 · output 8 · TTFT 9.7s
+13:01:40 Done · input 1,539 · cached 1,504 · output 8 · TTFT 0.8s
+13:01:44 Done · input 48 · cached 0 · output 96 · TTFT 1.0s · 27.4 tok/s
+13:01:56 Done · input 48 · cached 0 · output 96 · TTFT 1.3s · 8.9 tok/s
+13:01:58 Done · input 48 · cached 0 · output 96 · TTFT 2.5s · 8.1 tok/s
+13:01:58 Done · input 48 · cached 0 · output 96 · TTFT 3.4s · 8.9 tok/s
+13:01:58 Done · input 48 · cached 0 · output 96 · TTFT 4.3s · 9.2 tok/s
+13:02:03 Done · input 692 · cached 0 · output 1 · TTFT 4.8s
+13:02:36 Done · input 4,248 · cached 0 · output 192 · TTFT 26.3s · 30.9 tok/s
+13:03:06 Done · input 4,215 · cached 0 · output 192 · TTFT 26.7s · 50.7 tok/s
+13:03:39 Done · input 4,248 · cached 0 · output 192 · TTFT 26.9s · 29.2 tok/s
+13:04:10 Done · input 4,215 · cached 0 · output 192 · TTFT 26.7s · 49.1 tok/s
+13:05:12 Done · input 8,237 · cached 0 · output 192 · TTFT 54.8s · 26.6 tok/s
+13:05:53 Done · input 8,204 · cached 4,096 · output 192 · TTFT 30.1s · 16.1 tok/s
+13:07:33 Done · input 8,237 · cached 0 · output 192 · TTFT 92.9s · 26.2 tok/s
+13:08:08 Done · input 8,204 · cached 4,096 · output 192 · TTFT 30.2s · 45.0 tok/s
+13:10:24 Done · input 16,300 · cached 0 · output 192 · TTFT 126.8s · 19.9 tok/s
+13:11:26 Done · input 16,267 · cached 12,288 · output 192 · TTFT 47.8s · 13.6 tok/s
+13:13:55 Done · input 16,300 · cached 0 · output 192 · TTFT 140.6s · 20.6 tok/s
+13:14:38 Done · input 16,267 · cached 12,288 · output 192 · TTFT 38.0s · 38.1 tok/s
+13:14:49 Done · input 64 · cached 0 · output 192 · TTFT 1.0s · 40.3 tok/s
+13:14:57 Done · input 64 · cached 0 · output 192 · TTFT 1.0s · 28.1 tok/s
+13:18:16 Stopping · releasing engine resources
+Splash model incoai/Qwen3.8-27B-Splash is already installed in /Users/cedi/Library/Application Support/Splash/models/incoai/Qwen3.8-27B-Splash
+15:57:32 Loading · incoai/Qwen3.8-27B-Splash
+15:57:33 Chat template · renders later system messages in place, generation prompt 5-7 tokens
+15:57:34 Weights loaded in 1.66 s.
+15:57:34 Kernel policy for GPU family 7 with 24 cores.
+15:57:34 Setting up the Neural Engine FFN split (splash serve --disable-ane keeps the FFN on the GPU).
+15:57:37 Neural Engine FFN split at share 0.59 for chunks of 256 rows or more, 1.2% from the GPU alone on the Neural Engine's part (set up as calibrated before in 2.7 s).
+15:57:56 Ready · incoai/Qwen3.8-27B-Splash · context 256K · http://0.0.0.0:8001
+15:58:40 Done · input 283 · cached 0 · output 26 · tools 1·a8c04808 · TTFT 3.5s · 17.2 tok/s
+15:58:46 Done · input 571 · cached 0 · output 24 · TTFT 7.9s · 10.5 tok/s
+16:00:04 Done · input 11,772 · cached 32 · output 148 · tools 12·0825d805 · TTFT 82.5s · 25.8 tok/s
+16:10:04 Neural Engine FFN program unloaded while idle
+16:10:04 Weights released after 600 s without a request; the next request restores them
+16:12:51 Neural Engine FFN program reloaded in 0.06 s
+16:12:51 Weights restored in 1.62 s
+16:13:52 Done · input 8,750 · cached 32 · output 204 · tools 8·52ad16f3 · TTFT 55.2s · 29.2 tok/s
+16:14:13 Done · input 10,002 · cached 8,736 · output 293 · tools 8·52ad16f3 · TTFT 9.1s · 24.6 tok/s
+16:14:25 Done · input 10,836 · cached 9,984 · output 189 · tools 8·52ad16f3 · TTFT 6.9s · 39.5 tok/s
+16:15:08 Done · input 16,385 · cached 10,816 · output 95 · tools 8·52ad16f3 · TTFT 40.6s · 30.8 tok/s
+16:25:47 Done · input 25,277 · cached 16,352 · output 9,439 · tools 8·52ad16f3 · TTFT 71.7s · 16.6 tok/s
+16:27:24 Done · input 34,851 · cached 25,248 · output 190 · tools 8·52ad16f3 · TTFT 86.7s · 21.1 tok/s
+16:27:36 Done · input 35,111 · cached 34,816 · output 174 · tools 8·52ad16f3 · TTFT 4.4s · 24.7 tok/s
+16:27:47 Done · input 35,425 · cached 35,104 · output 106 · tools 8·52ad16f3 · TTFT 4.8s · 16.6 tok/s
+16:28:01 Done · input 35,611 · cached 35,392 · output 261 · tools 8·52ad16f3 · TTFT 3.4s · 24.8 tok/s
+16:28:17 Done · input 36,351 · cached 35,584 · output 164 · tools 8·52ad16f3 · TTFT 8.3s · 26.3 tok/s
+16:28:42 Done · input 37,184 · cached 36,320 · output 311 · tools 8·52ad16f3 · TTFT 9.3s · 19.4 tok/s
+16:28:58 Done · input 38,017 · cached 37,152 · output 208 · tools 8·52ad16f3 · TTFT 9.7s · 32.3 tok/s
+16:29:35 Done · input 38,362 · cached 37,984 · output 247 · tools 8·52ad16f3 · TTFT 5.0s · 25.9 tok/s
+16:38:30 Done · input 38,999 · cached 38,336 · output 9,680 · tools 8·52ad16f3 · TTFT 7.6s · 18.3 tok/s
+16:41:01 Done · input 48,703 · cached 38,976 · output 840 · tools 8·52ad16f3 · TTFT 114.7s · 23.0 tok/s
+16:42:02 Done · input 49,573 · cached 48,672 · output 791 · tools 8·52ad16f3 · TTFT 11.8s · 16.1 tok/s
+16:42:37 Done · input 50,646 · cached 49,568 · output 415 · tools 8·52ad16f3 · TTFT 14.5s · 20.5 tok/s
+16:44:26 Done · input 51,091 · cached 50,624 · output 2,251 · tools 8·52ad16f3 · TTFT 7.1s · 22.2 tok/s
+16:46:19 Done · input 53,580 · cached 51,072 · output 1,443 · tools 8·52ad16f3 · TTFT 36.0s · 18.7 tok/s
+16:48:30 Done · input 55,052 · cached 53,568 · output 2,081 · tools 8·52ad16f3 · TTFT 21.4s · 19.0 tok/s
+16:50:24 Done · input 57,183 · cached 55,040 · output 1,746 · tools 8·52ad16f3 · TTFT 32.3s · 21.4 tok/s
+16:52:55 Done · input 58,963 · cached 57,152 · output 2,280 · tools 8·52ad16f3 · TTFT 28.2s · 18.5 tok/s
+16:54:38 Done · input 61,265 · cached 58,944 · output 599 · tools 8·52ad16f3 · TTFT 37.9s · 9.2 tok/s
+16:55:07 Done · input 61,944 · cached 61,248 · output 219 · tools 8·52ad16f3 · TTFT 12.3s · 13.8 tok/s
+16:55:34 Done · input 62,987 · cached 61,920 · output 128 · tools 8·52ad16f3 · TTFT 18.5s · 14.4 tok/s
+16:56:10 Done · input 63,507 · cached 62,976 · output 353 · tools 8·52ad16f3 · TTFT 9.7s · 13.4 tok/s
+16:56:38 Done · input 63,884 · cached 63,488 · output 356 · tools 8·52ad16f3 · TTFT 7.6s · 18.0 tok/s
+16:57:00 Done · input 64,372 · cached 63,872 · output 274 · tools 8·52ad16f3 · TTFT 9.5s · 21.1 tok/s
+16:57:17 Done · input 64,747 · cached 64,352 · output 137 · tools 8·52ad16f3 · TTFT 7.7s · 14.7 tok/s
+16:57:43 Done · input 65,191 · cached 64,736 · output 332 · tools 8·52ad16f3 · TTFT 8.7s · 19.2 tok/s
+16:58:09 Done · input 65,655 · cached 65,184 · output 287 · tools 8·52ad16f3 · TTFT 9.1s · 17.0 tok/s
+16:58:37 Done · input 66,019 · cached 65,632 · output 323 · tools 8·52ad16f3 · TTFT 8.1s · 16.1 tok/s
+16:59:29 Done · input 66,407 · cached 65,984 · output 484 · tools 8·52ad16f3 · TTFT 8.8s · 11.4 tok/s
+17:00:17 Done · input 66,949 · cached 66,400 · output 381 · tools 8·52ad16f3 · TTFT 10.6s · 10.3 tok/s
+17:01:06 Done · input 67,354 · cached 66,944 · output 481 · tools 8·52ad16f3 · TTFT 8.2s · 11.8 tok/s
+17:01:24 Done · input 67,853 · cached 67,328 · output 123 · tools 8·52ad16f3 · TTFT 10.2s · 15.9 tok/s
+17:01:54 Done · input 68,346 · cached 67,840 · output 265 · tools 8·52ad16f3 · TTFT 10.0s · 13.1 tok/s
+17:02:19 Done · input 69,029 · cached 68,320 · output 164 · tools 8·52ad16f3 · TTFT 13.7s · 15.0 tok/s
+17:03:52 Done · input 72,440 · cached 69,024 · output 279 · tools 8·52ad16f3 · TTFT 63.5s · 9.6 tok/s
+17:10:55 Done · input 72,853 · cached 72,416 · output 4,988 · tools 8·52ad16f3 · TTFT 9.3s · 12.0 tok/s
+17:14:53 Done · input 77,881 · cached 72,832 · output 2,963 · tools 8·52ad16f3 · TTFT 85.0s · 19.4 tok/s
+17:16:19 Done · input 80,884 · cached 77,856 · output 514 · tools 8·52ad16f3 · TTFT 52.4s · 15.2 tok/s
+17:16:41 Done · input 81,446 · cached 80,864 · output 210 · tools 8·52ad16f3 · TTFT 11.1s · 18.0 tok/s
+17:17:01 Done · input 81,705 · cached 81,440 · output 154 · tools 8·52ad16f3 · TTFT 5.6s · 10.8 tok/s
+17:17:18 Done · input 81,954 · cached 81,696 · output 199 · tools 8·52ad16f3 · TTFT 6.2s · 18.1 tok/s
+17:19:56 Done · input 82,184 · cached 81,920 · output 2,602 · tools 8·52ad16f3 · TTFT 5.5s · 17.1 tok/s
+17:23:25 Done · input 84,826 · cached 82,176 · output 2,941 · tools 8·52ad16f3 · TTFT 48.2s · 18.3 tok/s
+17:26:12 Done · input 87,813 · cached 84,800 · output 2,209 · tools 8·52ad16f3 · TTFT 52.2s · 19.2 tok/s
+17:27:10 Done · input 90,066 · cached 87,808 · output 202 · tools 8·52ad16f3 · TTFT 39.3s · 11.4 tok/s
+17:29:16 Done · input 90,433 · cached 90,048 · output 2,779 · tools 8·52ad16f3 · TTFT 7.9s · 23.4 tok/s
+17:31:30 Done · input 93,237 · cached 90,400 · output 1,738 · tools 8·52ad16f3 · TTFT 48.0s · 20.4 tok/s
+17:32:32 Done · input 95,301 · cached 93,216 · output 378 · tools 8·52ad16f3 · TTFT 36.0s · 13.9 tok/s
+17:34:01 Done · input 96,318 · cached 95,296 · output 1,411 · tools 8·52ad16f3 · TTFT 18.3s · 21.0 tok/s
+17:34:41 Done · input 97,796 · cached 96,288 · output 175 · tools 8·52ad16f3 · TTFT 27.2s · 13.1 tok/s
+17:35:42 Done · input 98,249 · cached 97,760 · output 627 · tools 8·52ad16f3 · TTFT 9.8s · 13.8 tok/s
+17:36:33 Done · input 99,483 · cached 98,240 · output 384 · tools 8·52ad16f3 · TTFT 22.9s · 15.6 tok/s
+17:36:57 Done · input 99,909 · cached 99,456 · output 250 · tools 8·52ad16f3 · TTFT 9.3s · 17.1 tok/s
+17:37:18 Done · input 100,214 · cached 99,904 · output 258 · tools 8·52ad16f3 · TTFT 6.8s · 17.6 tok/s
+17:39:20 Done · input 100,507 · cached 100,192 · output 1,844 · tools 8·52ad16f3 · TTFT 6.9s · 16.1 tok/s
+17:40:09 Done · input 102,374 · cached 100,480 · output 192 · tools 8·52ad16f3 · TTFT 35.2s · 14.5 tok/s
+17:40:38 Done · input 102,839 · cached 102,368 · output 315 · tools 8·52ad16f3 · TTFT 9.7s · 16.6 tok/s
+17:41:13 Done · input 103,213 · cached 102,816 · output 489 · tools 8·52ad16f3 · TTFT 8.2s · 17.8 tok/s
+17:41:28 Done · input 103,731 · cached 103,200 · output 83 · tools 8·52ad16f3 · TTFT 10.5s · 19.7 tok/s
+17:41:39 Done · input 103,833 · cached 103,712 · output 153 · tools 8·52ad16f3 · TTFT 3.4s · 20.8 tok/s
+17:42:16 Done · input 104,191 · cached 103,808 · output 319 · tools 8·52ad16f3 · TTFT 8.2s · 14.7 tok/s
+17:42:42 Done · input 104,539 · cached 104,160 · output 293 · tools 8·52ad16f3 · TTFT 8.2s · 16.4 tok/s
+17:43:24 Done · input 104,890 · cached 104,512 · output 382 · tools 8·52ad16f3 · TTFT 8.2s · 12.5 tok/s
+17:59:21 Done · input 105,810 · cached 104,864 · output 12,907 · tools 8·52ad16f3 · TTFT 18.7s · 13.8 tok/s
+18:04:44 Done · input 118,740 · cached 105,792 · output 364 · tools 8·52ad16f3 · TTFT 287.1s · 9.9 tok/s
+18:06:22 Done · input 120,360 · cached 118,720 · output 735 · tools 8·52ad16f3 · TTFT 39.7s · 12.7 tok/s
+18:07:03 Done · input 121,154 · cached 120,352 · output 194 · tools 8·52ad16f3 · TTFT 20.9s · 9.2 tok/s
+18:07:26 Done · input 121,432 · cached 121,120 · output 235 · tools 8·52ad16f3 · TTFT 8.9s · 17.5 tok/s
+18:07:46 Done · input 121,694 · cached 121,408 · output 149 · tools 8·52ad16f3 · TTFT 7.9s · 12.5 tok/s
+18:08:31 Done · input 122,735 · cached 121,664 · output 222 · tools 8·52ad16f3 · TTFT 26.7s · 12.1 tok/s
+18:08:50 Done · input 122,988 · cached 122,720 · output 145 · tools 8·52ad16f3 · TTFT 7.5s · 11.8 tok/s
+18:09:41 Done · input 123,179 · cached 122,976 · output 379 · tools 8·52ad16f3 · TTFT 6.1s · 10.5 tok/s
+18:10:45 Done · input 123,588 · cached 123,168 · output 564 · tools 8·52ad16f3 · TTFT 10.6s · 10.6 tok/s
+18:11:23 Done · input 124,182 · cached 123,552 · output 302 · tools 8·52ad16f3 · TTFT 14.8s · 13.5 tok/s
+18:11:50 Done · input 124,737 · cached 124,160 · output 193 · tools 8·52ad16f3 · TTFT 14.3s · 14.4 tok/s
+18:12:04 Done · input 125,005 · cached 124,704 · output 89 · tools 8·52ad16f3 · TTFT 8.1s · 15.1 tok/s
+18:12:37 Done · input 125,574 · cached 124,992 · output 290 · tools 8·52ad16f3 · TTFT 14.3s · 15.6 tok/s
+18:15:36 Done · input 125,964 · cached 125,568 · output 1,871 · tools 8·52ad16f3 · TTFT 9.9s · 11.1 tok/s
+18:16:39 Done · input 128,101 · cached 125,952 · output 147 · tools 8·52ad16f3 · TTFT 52.1s · 13.6 tok/s
+18:17:53 Done · input 128,347 · cached 128,096 · output 1,326 · tools 8·52ad16f3 · TTFT 7.8s · 20.2 tok/s
+18:18:39 Done · input 129,704 · cached 128,320 · output 199 · tools 8·52ad16f3 · TTFT 34.1s · 15.9 tok/s
+18:20:56 Done · input 130,048 · cached 129,696 · output 1,537 · tools 8·52ad16f3 · TTFT 8.9s · 12.1 tok/s
+18:22:45 Done · input 131,738 · cached 130,016 · output 454 · tools 8·52ad16f3 · TTFT 39.7s · 14.7 tok/s
+18:23:20 Done · input 132,511 · cached 131,712 · output 81 · tools 8·52ad16f3 · TTFT 17.7s · 20.1 tok/s
+18:24:55 Done · input 134,943 · cached 132,480 · output 471 · tools 8·52ad16f3 · TTFT 55.9s · 12.3 tok/s
+18:27:47 Done · input 138,929 · cached 134,912 · output 1,053 · tools 8·52ad16f3 · TTFT 91.2s · 13.0 tok/s
+18:29:17 Done · input 140,013 · cached 138,912 · output 718 · tools 8·52ad16f3 · TTFT 25.2s · 11.1 tok/s
+18:30:43 Done · input 140,771 · cached 140,000 · output 723 · tools 8·52ad16f3 · TTFT 18.4s · 11.5 tok/s
+18:31:39 Done · input 141,665 · cached 140,736 · output 413 · tools 8·52ad16f3 · TTFT 21.5s · 12.1 tok/s
+18:33:26 Done · input 142,312 · cached 141,632 · output 888 · tools 8·52ad16f3 · TTFT 16.3s · 11.1 tok/s
+18:35:39 Done · input 144,081 · cached 142,304 · output 926 · tools 8·52ad16f3 · TTFT 40.7s · 10.0 tok/s

@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/* Dark Mode: Klassengesteuert (Dark Mode folgt dem System, ist aber manuell umschaltbar). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Typografie: systemeigene Schriften mit Charakter, kein Webfont (Offline-App). */
+  --font-sans: 'SF Pro Display', 'Geist Sans', 'Helvetica Neue', 'Segoe UI', system-ui,
+    -apple-system, sans-serif;
+  --font-serif: 'Iowan Old Style', 'New York', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Geist Mono', 'SF Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
+
+  /* Warmes Monochrom +Spot-Pastelle (Light) */
+  --color-canvas: #fbfaf8;
+  --color-surface: #ffffff;
+  --color-ink: #111111;
+  --color-body: #2f3437;
+  --color-muted: #6f6e69;
+  --color-faint: #73726d;
+  --color-line: #eaeaea;
+  --color-line-strong: #dcdcd7;
+
+  /* Ein zurückhaltender Akzent (Terrakotta) für Stimmung & Hervorhebungen. */
+  --color-clay: #a2491f;
+  --color-clay-soft: #f7eae1;
+  --color-danger: #9f2f2d;
+  --color-danger-soft: #fdebec;
+
+  --radius-card: 12px;
+}
+
+/* Dunkle Gegenwerte: dieselben Token, umgedreht – alle Utilities folgen automatisch. */
+.dark {
+  --color-canvas: #151412;
+  --color-surface: #1d1c1a;
+  --color-ink: #f2f1ec;
+  --color-body: #d6d5d0;
+  --color-muted: #8d8c86;
+  --color-faint: #85847f;
+  --color-line: #2a2926;
+  --color-line-strong: #3b3a36;
+  --color-clay: #dd8a5e;
+  --color-clay-soft: #33251d;
+  --color-danger: #e0908c;
+  --color-danger-soft: #3a2320;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Schatten praktisch nicht vorhanden – Tiefe kommt aus Rand und Weißraum. */
+}
+
+/* Sichtbare Fokuszustände für Tastaturnavigation. */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Dezente, weit verstreute Schatten – der einzige Schatten im App. */
+.shadow-soft {
+  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.03), 0 2px 8px rgba(17, 17, 17, 0.04);
+}
+.dark .shadow-soft {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Ruhige Mikro-Animationen – nur transform/opacity, wie vom Design-Skill gefordert. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.86);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--index, 0) * 80ms);
+}
+
+.pop {
+  animation: pop 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in {
+  animation: fade-in 200ms ease-out both;
+}
+
+.sheet-up {
+  animation: sheet-up 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

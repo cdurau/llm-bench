@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rhythm – Offline</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fbfaf8;
+        color: #2f3437;
+        font-family: 'SF Pro Display', 'Helvetica Neue', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #151412;
+          color: #d6d5d0;
+        }
+      }
+      .card {
+        max-width: 360px;
+        margin: 0 20px;
+        padding: 40px 32px;
+        border: 1px solid rgba(128, 128, 128, 0.2);
+        border-radius: 12px;
+        text-align: center;
+      }
+      .mark {
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 24px;
+        border-radius: 12px;
+        background: #f7f6f3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 22px;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        color: #111111;
+      }
+      @media (prefers-color-scheme: dark) {
+        h1 {
+          color: #f2f1ec;
+        }
+      }
+      p {
+        margin: 0 0 24px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #787774;
+      }
+      button {
+        appearance: none;
+        min-height: 44px;
+        padding: 0 28px;
+        border: none;
+        border-radius: 6px;
+        background: #111111;
+        color: #ffffff;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 550;
+        cursor: pointer;
+      }
+      @media (prefers-color-scheme: dark) {
+        button {
+          background: #f2f1ec;
+          color: #141412;
+        }
+      }
+      button:active {
+        transform: scale(0.98);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="mark" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 64 64">
+          <path
+            d="M11 36.5h11.5l5.5-13 7.5 19 5.5-6.5H53"
+            fill="none"
+            stroke="#111111"
+            stroke-width="5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <h1>Keine Verbindung</h1>
+      <p>
+        Diese Seite ist gerade offline. Rhythm selbst funktioniert ganz ohne Internet – lade sie
+        einfach erneut, sobald die Verbindung zurück ist.
+      </p>
+      <button type="button" onclick="location.reload()">Erneut versuchen</button>
+    </div>
+  </body>
+</html>
