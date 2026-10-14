@@ -1,0 +1,453 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# ============================================================
+# OpenCode V2 Benchmark Sandbox
+#
+# Verwendung:
+#   ./run-opencode-sandbox.sh <modell-ordner> [OpenCode-Argumente...]
+#
+# Beispiele:
+#   ./run-opencode-sandbox.sh gpt-oss-20b-mlx-oQ8-fp16
+#   ./run-opencode-sandbox.sh Cyber-Tiel-Coder-35B-A3B-MLX-oQ4e-MTP
+#
+# Image neu bauen:
+#   REBUILD=1 ./run-opencode-sandbox.sh gpt-oss-20b-mlx-oQ8-fp16
+# ============================================================
+
+IMAGE="${OPENCODE_IMAGE:-opencode-v2-bench:latest}"
+
+OMLX_BASE_URL="${OMLX_BASE_URL:-http://192.168.0.189:8000/v1}"
+OMLX_MODEL_ID="${OMLX_MODEL_ID:-}"
+OMLX_KEY_FILE="${OMLX_KEY_FILE:-$HOME/.config/.secrets/omlx-key}"
+CONTEXT_LIMIT="${CONTEXT_LIMIT:-131072}"
+OUTPUT_LIMIT="${OUTPUT_LIMIT:-16384}"
+
+# Der Ordner, in dem dieses Script liegt, ist automatisch unser Benchmark-Root.
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+
+usage() {
+    cat <<EOF
+Verwendung:
+  $(basename "$0") <modell-ordner> [OpenCode-Argumente...]
+
+Beispiel:
+  $(basename "$0") gpt-oss-20b-mlx-oQ8-fp16
+
+Optional:
+  REBUILD=1 $(basename "$0") gpt-oss-20b-mlx-oQ8-fp16
+
+Benchmark-Root:
+  $ROOT
+EOF
+}
+
+# ------------------------------------------------------------
+# Argument prüfen
+# ------------------------------------------------------------
+
+if [[ $# -lt 1 ]]; then
+    usage
+    exit 1
+fi
+
+MODEL_DIR="$1"
+shift
+
+# Wenn keine separate Model-ID angegeben wurde,
+# entspricht sie dem Modellordner.
+if [[ -z "$OMLX_MODEL_ID" ]]; then
+    OMLX_MODEL_ID="$MODEL_DIR"
+fi
+
+# Offensichtlich gefährliche Ziele direkt ablehnen.
+if [[ "$MODEL_DIR" == "." || "$MODEL_DIR" == ".." || "$MODEL_DIR" == "/" ]]; then
+    echo "❌ Ungültiger Zielordner: $MODEL_DIR"
+    exit 1
+fi
+
+TARGET_CANDIDATE="$ROOT/$MODEL_DIR"
+
+if [[ ! -d "$TARGET_CANDIDATE" ]]; then
+    echo "❌ Modellordner existiert nicht:"
+    echo "   $TARGET_CANDIDATE"
+    echo
+    echo "Verfügbare Ordner:"
+    find "$ROOT" -mindepth 1 -maxdepth 1 -type d -print | sed "s|$ROOT/|  - |"
+    exit 1
+fi
+
+# Physikalischen Pfad auflösen, damit Symlinks nicht aus der Sandbox führen.
+TARGET="$(cd "$TARGET_CANDIDATE" && pwd -P)"
+ROOT_REAL="$(cd "$ROOT" && pwd -P)"
+
+case "$TARGET" in
+    "$ROOT_REAL"/*)
+        ;;
+    *)
+        echo "❌ Sicherheitscheck fehlgeschlagen."
+        echo "   Ziel liegt außerhalb von:"
+        echo "   $ROOT_REAL"
+        exit 1
+        ;;
+esac
+
+# tools und alle Unterordner sollen niemals als RW-Ziel gestartet werden.
+case "$TARGET" in
+    "$ROOT_REAL/tools"|"$ROOT_REAL/tools"/*)
+        echo "❌ Der tools-Ordner darf nicht als Schreibziel verwendet werden."
+        exit 1
+        ;;
+esac
+
+# ------------------------------------------------------------
+# Docker prüfen
+# ------------------------------------------------------------
+
+if ! command -v docker >/dev/null 2>&1; then
+    echo "❌ Docker wurde nicht gefunden."
+    exit 1
+fi
+
+if ! docker info >/dev/null 2>&1; then
+    echo "❌ Docker läuft nicht."
+    exit 1
+fi
+
+# ------------------------------------------------------------
+# OpenCode-V2-Image bauen
+# ------------------------------------------------------------
+
+build_image() {
+    echo "🔨 Baue OpenCode-V2-Sandbox-Image..."
+
+    docker build \
+        -t "$IMAGE" \
+        -f - \
+        "$ROOT" <<'DOCKERFILE'
+FROM node:22-bookworm-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        bash \
+        git \
+        curl \
+        ripgrep \
+        jq \
+        python3 \
+        ca-certificates \
+        procps \
+        findutils \
+        util-linux && \
+    rm -rf /var/lib/apt/lists/*
+
+# Offizielles OpenCode-V2-NPM-Paket
+RUN npm install -g @opencode/cli
+
+RUN mkdir -p /home/opencode
+
+ENV HOME=/home/opencode
+
+WORKDIR /workspace
+
+CMD ["/bin/bash"]
+DOCKERFILE
+
+    echo "✅ Image gebaut: $IMAGE"
+}
+
+if [[ "${REBUILD:-0}" == "1" ]]; then
+    build_image
+elif ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
+    echo "ℹ️ OpenCode-V2-Image wurde noch nicht gefunden."
+    build_image
+fi
+
+# ------------------------------------------------------------
+# Container-Argumente
+# ------------------------------------------------------------
+
+DOCKER_ARGS=(
+    run
+    --rm
+    -it
+
+    --entrypoint
+    /bin/bash
+
+    # Container selbst read-only.
+    --read-only
+
+    # Keine zusätzlichen Linux-Capabilities.
+    --cap-drop
+    ALL
+
+    # Keine Privilege Escalation.
+    --security-opt
+    no-new-privileges
+
+    # Prozess-Limit als zusätzliche Absicherung.
+    --pids-limit
+    512
+
+    # Temporärer beschreibbarer Speicher.
+    --tmpfs
+    /tmp:rw,exec,nosuid,nodev,size=2g,mode=1777
+
+    --tmpfs
+    /home/opencode:rw,nosuid,nodev,size=2g
+
+    # HOME für OpenCode.
+    -e
+    HOME=/home/opencode
+
+    # Terminal/TUI.
+    -e
+    "TERM=${TERM:-xterm-256color}"
+
+    -e
+    "COLORTERM=${COLORTERM:-truecolor}"
+
+    # oMLX-Provider-Konfiguration.
+    -e
+    "OMLX_BASE_URL=$OMLX_BASE_URL"
+
+    -e
+    "OMLX_MODEL_ID=$OMLX_MODEL_ID"
+
+    -e
+    "OPENCODE_MODEL_ALIAS=$MODEL_DIR"
+
+    -e
+    "CONTEXT_LIMIT=$CONTEXT_LIMIT"
+
+    -e
+    "OUTPUT_LIMIT=$OUTPUT_LIMIT"
+
+    # --------------------------------------------------------
+    # WICHTIG:
+    # gesamter habit-tracker nur lesbar
+    # --------------------------------------------------------
+    --mount
+    "type=bind,src=$ROOT_REAL,dst=/workspace,readonly"
+
+    # --------------------------------------------------------
+    # nur der ausgewählte Modellordner beschreibbar
+    # --------------------------------------------------------
+    --mount
+    "type=bind,src=$TARGET,dst=/workspace/$MODEL_DIR"
+
+    # OpenCode startet direkt im Modellordner.
+    --workdir
+    "/workspace/$MODEL_DIR"
+)
+
+# ------------------------------------------------------------
+# oMLX-Auth
+# ------------------------------------------------------------
+
+if [[ ! -f "$OMLX_KEY_FILE" ]]; then
+    echo "❌ oMLX-Key nicht gefunden:"
+    echo "   $OMLX_KEY_FILE"
+    echo
+    echo "Alternativ kannst du OMLX_KEY_FILE auf eine andere Key-Datei setzen."
+    exit 1
+fi
+
+DOCKER_ARGS+=(
+    --mount
+    "type=bind,src=$OMLX_KEY_FILE,dst=/run/secrets/omlx-key,readonly"
+)
+
+# ------------------------------------------------------------
+# Jev-Auth
+# ------------------------------------------------------------
+
+# Nur den bereits in der Host-Shell exportierten TypeSafe-Key weiterreichen.
+# Der Wert wird nicht ins Script oder Repo geschrieben.
+JEV_AUTH_STATUS="⚠️ TYPESAFE_API_KEY nicht gesetzt"
+
+if [[ -n "${TYPESAFE_API_KEY:-}" ]]; then
+    DOCKER_ARGS+=(
+        -e
+        TYPESAFE_API_KEY
+    )
+    JEV_AUTH_STATUS="✅ TYPESAFE_API_KEY weitergereicht"
+fi
+
+# ------------------------------------------------------------
+# Info
+# ------------------------------------------------------------
+
+echo
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo " OpenCode V2 Sandbox"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo
+echo "Benchmark Root:"
+echo "  🔵 RO  $ROOT_REAL"
+echo
+echo "Schreibbarer Modellordner:"
+echo "  🟢 RW  $TARGET"
+echo
+echo "Tools:"
+echo "  🔵 RO  $ROOT_REAL/tools"
+echo
+echo "Im Container:"
+echo "  Root:   /workspace"
+echo "  Target: /workspace/$MODEL_DIR"
+echo "  Tools:  /workspace/tools"
+echo
+echo "OpenCode:"
+echo "  ✅ V2"
+echo "  ✅ Auto Mode"
+echo "  ✅ Standalone"
+echo "  ✅ isolierte oMLX-Config"
+echo "  ✅ oMLX-Key separat read-only gemountet"
+echo "  ✅ Projekt-Skills aus .agents/skills"
+echo
+echo "Jev:"
+echo "  $JEV_AUTH_STATUS"
+echo
+echo "Host Home, OpenCode-Config/Auth, SSH, Desktop usw.:"
+echo "  ⛔ nicht gemountet"
+echo
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo
+
+# ------------------------------------------------------------
+# Container starten
+# ------------------------------------------------------------
+
+docker "${DOCKER_ARGS[@]}" \
+    "$IMAGE" \
+    -lc '
+        set -e
+
+        mkdir -p \
+            "$HOME/.config/opencode" \
+            "$HOME/.local/share/opencode" \
+            "$HOME/.local/bin" \
+            "$HOME/.cache" \
+            "$HOME/.npm"
+
+        export PATH="$HOME/.local/bin:$PATH"
+
+        JEV_SCRIPT="$PWD/.agents/skills/jev/scripts/jev"
+        if [ -f "$JEV_SCRIPT" ]; then
+            ln -sf "$JEV_SCRIPT" "$HOME/.local/bin/jev"
+        fi
+
+        cat > "$HOME/.config/opencode/opencode.json" <<EOF
+{
+  "\$schema": "https://opencode.ai/config.json",
+
+  "model": "omlx/${OPENCODE_MODEL_ALIAS}",
+
+  "providers": {
+    "omlx": {
+      "name": "oMLX Sandbox",
+
+      "package": "@opencode/ai/providers/openai-compatible",
+
+      "settings": {
+        "baseURL": "${OMLX_BASE_URL}",
+        "apiKey": "{file:/run/secrets/omlx-key}"
+      },
+
+      "models": {
+        "${OPENCODE_MODEL_ALIAS}": {
+          "name": "${OMLX_MODEL_ID}",
+          "modelID": "${OMLX_MODEL_ID}",
+
+          "capabilities": {
+            "tools": true,
+            "input": ["text"],
+            "output": ["text"]
+          },
+
+          "limit": {
+            "context": ${CONTEXT_LIMIT},
+            "output": ${OUTPUT_LIMIT}
+          }
+        }
+      }
+    }
+  }
+}
+EOF
+
+        echo "OpenCode-Version:"
+        opencode --version
+        echo
+
+        LOGDIR="$PWD/.sandbox-debug"
+mkdir -p "$LOGDIR"
+
+STAMP="$(date +%Y%m%d-%H%M%S)"
+
+set +e
+
+TTY_LOG="$LOGDIR/opencode-terminal-$STAMP.log"
+
+CMD=(opencode --standalone --auto "$@")
+printf -v CMD_STRING "%q " "${CMD[@]}"
+
+script \
+    -q \
+    -f \
+    -e \
+    -c "$CMD_STRING" \
+    "$TTY_LOG"
+
+STATUS=$?
+
+CLEAN_LOG="$LOGDIR/opencode-terminal-clean-$STAMP.log"
+
+python3 - "$TTY_LOG" "$CLEAN_LOG" <<"PY"
+import re
+import sys
+
+src, dst = sys.argv[1], sys.argv[2]
+
+with open(src, "rb") as f:
+    data = f.read().decode("utf-8", errors="replace")
+
+ansi = re.compile(
+    r"""
+    \x1B
+    (?:
+        [@-_]
+        |
+        \[
+        [0-?]*
+        [ -/]*
+        [@-~]
+    )
+    """,
+    re.VERBOSE,
+)
+
+data = ansi.sub("", data)
+
+with open(dst, "w", encoding="utf-8") as f:
+    f.write(data)
+PY
+
+set -e
+
+# OpenCode-interne Logs ebenfalls sichern
+if [ -d "$HOME/.local/share/opencode/log" ]; then
+    mkdir -p "$LOGDIR/opencode-logs-$STAMP"
+    cp -a "$HOME/.local/share/opencode/log/." \
+          "$LOGDIR/opencode-logs-$STAMP/" 2>/dev/null || true
+fi
+
+echo
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Debug-Ausgabe gespeichert unter:"
+echo "  $LOGDIR"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+exit "$STATUS"
+    ' bash "$@"

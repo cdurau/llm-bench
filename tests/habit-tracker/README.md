@@ -32,7 +32,8 @@ Damit bleibt sichtbar, ob ein Modell beispielsweise ein stärkeres Design erzeug
 | `tools/verify/` | Smoke-Test-Skript `verify.mjs` (Playwright) für die Variante, Einrichtung und Vertrag siehe dortiges README |
 | `install-skills.sh` | Einfacher Installer: installiert alle drei Skills (inklusive Jev) in den aktuellen Ordner |
 | `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev` und `--dry-run` (siehe `--help`) |
-| `run-opencode-sandbox.sh` | Startet OpenCode V2 in Docker mit Schreibzugriff auf genau einen Modellordner |
+| `run-opencode-sandbox.sh` | Startet OpenCode V2 (macOS, `sandbox-exec`) mit Schreibzugriff auf genau einen Modellordner |
+| `run-opencode-sandbox_alt.sh` | Startet OpenCode V2 in Docker mit Schreibzugriff auf genau einen Modellordner |
 | `run-pi-sandbox.sh` | Startet Pi (macOS, `sandbox-exec`) mit Schreibzugriff auf genau einen Modellordner |
 | `<modellname>/` | Ein Lauf pro Modell: erzeugte App, `.agents/skills/` und `skills-lock.json` |
 
@@ -44,21 +45,40 @@ Beispiel: `gemma-4-26b-a4b-it-oQ8e-mtp/` (aktuell mit installierten Skills inklu
 2. Skills hineininstallieren, aus diesem Verzeichnis:
    - ohne Jev: `./auto-install-skills.sh -d <modellname>`
    - mit Jev: `./auto-install-skills.sh -d <modellname> --with-jev`
-3. Den Agenten (OpenCode) in `<modellname>/` starten, zum Beispiel mit der [Docker-Sandbox](#opencode-in-der-docker-sandbox-starten), und ihm den Prompt geben.
+3. Den Agenten (OpenCode) in `<modellname>/` starten, zum Beispiel mit der [macOS-Sandbox](#opencode-mit-schreibsperre-starten) oder der [Docker-Sandbox](#opencode-in-der-docker-sandbox-starten), und ihm den Prompt geben.
    - **Nur den Teil oberhalb des `---` einfügen.** Die Rubrik darunter ist für die Auswertung und darf dem Modell nicht gezeigt werden.
    - Bei einem Lauf **ohne Jev** zusätzlich den Abschnitt „Arbeitsweise mit Jev" und den Jev-Teil des abschließenden Zusammenfassungs-Satzes aus dem eingefügten Prompt entfernen.
-4. Jev-Läufe brauchen Netzzugriff und `TYPESAFE_API_KEY` (oder außerhalb der Sandbox `OPENROUTER_API_KEY`) in der Shell, aus der der Agent gestartet wird. Die Sandbox reicht derzeit nur `TYPESAFE_API_KEY` weiter. Vor dem Lauf einmal testen: `jev yes "Ist 1 kleiner als 2?"`
+4. Jev-Läufe brauchen Netzzugriff und `TYPESAFE_API_KEY` (oder außerhalb der Sandbox `OPENROUTER_API_KEY`) in der Shell, aus der der Agent gestartet wird. Die Docker-Sandbox reicht derzeit nur `TYPESAFE_API_KEY` weiter. Vor dem Lauf einmal testen: `jev yes "Ist 1 kleiner als 2?"`
 5. Das erzeugte Ergebnis unverändert in Git sichern, auch wenn der Lauf scheitert (siehe [`AGENTS.md`](../../AGENTS.md)).
 6. Für den manuellen Browser-Test **jeden Run auf einem eigenen Origin starten**, bevorzugt mit einem eigenen Vite-/Preview-Port. Alternativ vor dem Test IndexedDB, localStorage, Cache Storage und Service Worker für den Origin löschen. So beeinflussen Datenbanknamen oder Schema-Versionen eines vorherigen Modells den nächsten Lauf nicht.
 
+## OpenCode mit Schreibsperre starten
+
+`run-opencode-sandbox.sh` ist das Gegenstück zu `run-pi-sandbox.sh` für OpenCode V2, ohne Docker. Es nutzt die normale Host-Installation und globale Config von OpenCode (Provider, Modelle, Plugins, MCP) und verbietet per `sandbox-exec` das Schreiben im gesamten Home außer im Modellordner, `~/.local/share/opencode`, `~/.local/state/opencode`, `~/.opencode`, `~/.npm`, `~/.bun` und `~/.cache`. `~/.config/opencode` bleibt nur lesbar. Zum Lesen gesperrt sind `~/.ssh`, `~/.config/.secrets` (außer den Key-Dateien, die `opencode.json` per `{file:...}` einbindet) und die `service.json` des OpenCode-Hintergrunddienstes.
+
+```bash
+./run-opencode-sandbox.sh mein-modell-run                          # TUI
+./run-opencode-sandbox.sh mein-modell-run --auto                   # TUI, Freigaben automatisch
+./run-opencode-sandbox.sh mein-modell-run run --auto "Prompt..."   # nicht interaktiv
+```
+
+OpenCode V2 führt Tools sonst im Hintergrunddienst (`opencode serve --service`) aus, der außerhalb der Sandbox läuft. Das Skript setzt deshalb immer `--standalone` (beim TUI und bei `run`/`mini`), sodass der private Server als Kindprozess ebenfalls gesperrt ist; `--server` wird abgelehnt. Umgebungsvariablen wie `TYPESAFE_API_KEY` werden unverändert vererbt. Optionen:
+
+- `OC_SANDBOX_EXTRA_RW="/pfad/a:/pfad/b"` macht weitere Pfade beschreibbar.
+- `OC_SANDBOX_CONFIG_RW=1` macht `~/.config/opencode` beschreibbar.
+- `OC_SANDBOX_ALLOW_SECRETS=1` hebt die Lesesperre für `~/.config/.secrets` ganz auf.
+- `OC_SANDBOX_CMD=zsh` startet statt OpenCode einen anderen Befehl, zum Beispiel zum Testen der Sperre.
+
+Der Modellordner muss bereits existieren und unter diesem Verzeichnis liegen (`tools/` ist ausgeschlossen). Anders als die Docker-Variante schreibt dieses Skript keine eigenen Logs nach `.sandbox-debug/`; Sessions landen in der normalen OpenCode-Datenbank unter `~/.local/share/opencode`.
+
 ## OpenCode in der Docker-Sandbox starten
 
-`run-opencode-sandbox.sh` wird aus diesem Verzeichnis mit einem **bereits vorhandenen Modellordner** aufgerufen. Für einen neuen Lauf zum Beispiel:
+`run-opencode-sandbox_alt.sh` wird aus diesem Verzeichnis mit einem **bereits vorhandenen Modellordner** aufgerufen. Für einen neuen Lauf zum Beispiel:
 
 ```bash
 mkdir mein-modell-run
 ./auto-install-skills.sh -d mein-modell-run
-./run-opencode-sandbox.sh mein-modell-run
+./run-opencode-sandbox_alt.sh mein-modell-run
 ```
 
 Für einen Jev-Lauf die Skills stattdessen mit `--with-jev` installieren und `TYPESAFE_API_KEY` vor dem Sandbox-Start in der Host-Shell exportieren. Dem Agenten anschließend nur den Promptteil oberhalb der Bewertungsrubrik geben. Geschlossene Modellläufe nicht erneut als Schreibziel verwenden.
@@ -66,10 +86,10 @@ Für einen Jev-Lauf die Skills stattdessen mit `--with-jev` installieren und `TY
 Voraussetzungen sind ein laufender Docker-Daemon, ein aus dem Container erreichbarer oMLX-Server (Standard: `http://192.168.0.189:8000/v1`) und eine oMLX-Key-Datei (Standard: `~/.config/.secrets/omlx-key`). Das Docker-Image wird beim ersten Start automatisch gebaut. Die oMLX-Model-ID entspricht standardmäßig dem Ordnernamen; bei einem anderen Server-Modellnamen kann sie separat gesetzt werden:
 
 ```bash
-OMLX_MODEL_ID=tatsaechliche-modell-id ./run-opencode-sandbox.sh mein-modell-run
+OMLX_MODEL_ID=tatsaechliche-modell-id ./run-opencode-sandbox_alt.sh mein-modell-run
 ```
 
-Weitere Einstellungen sind `OMLX_BASE_URL`, `OMLX_KEY_FILE`, `CONTEXT_LIMIT` (Standard: `131072`) und `OUTPUT_LIMIT` (Standard: `16384`). Mit `REBUILD=1 ./run-opencode-sandbox.sh mein-modell-run` wird das Image neu gebaut. Zusätzliche Argumente hinter dem Ordnernamen werden an OpenCode weitergereicht.
+Weitere Einstellungen sind `OMLX_BASE_URL`, `OMLX_KEY_FILE`, `CONTEXT_LIMIT` (Standard: `131072`) und `OUTPUT_LIMIT` (Standard: `16384`). Mit `REBUILD=1 ./run-opencode-sandbox_alt.sh mein-modell-run` wird das Image neu gebaut. Zusätzliche Argumente hinter dem Ordnernamen werden an OpenCode weitergereicht.
 
 Die Sandbox startet OpenCode mit `--standalone --auto` im Modellordner. Der gesamte Habit-Tracker-Bereich ist im Container lesbar; von den Host-Dateien ist nur der ausgewählte Modellordner beschreibbar. Terminal- und OpenCode-Logs werden unter `<modellname>/.sandbox-debug/` gespeichert.
 
