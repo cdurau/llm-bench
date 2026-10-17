@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+/* Dark Mode über .dark-Klasse (manuell oder System), Tailwind v4 Syntax */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Warmes Monochrom (Light)
+ * Farben als CSS-Variablen, damit Dark Mode zur Laufzeit umschalten kann.
+ * Werte: warmes Bone statt reinem Weiß, Tinte statt absolutem Schwarz.
+ */
+:root {
+  --paper: #f7f5f1;
+  --surface: #ffffff;
+  --sunken: #efede7;
+  --ink: #17150f;
+  --ink-soft: #5b564b;
+  --ink-faint: #777065;
+  --line: #e6e2d9;
+  --accent: #5b7157;
+  --accent-soft: #e9eee6;
+  --habit-sage: #55684c;
+  --habit-clay: #8a5a44;
+  --habit-blue: #4f688a;
+  --habit-lavender: #665a7e;
+  --habit-sand: #756438;
+  --habit-rose: #8a5560;
+  --chart-mood: #a4705a;
+  --habit-check: #ffffff;
+  --danger: #9f2f2d;
+  --danger-soft: #fdebec;
+}
+
+.dark {
+  --paper: #141210;
+  --surface: #1c1a17;
+  --sunken: #23201b;
+  --ink: #f1eee7;
+  --ink-soft: #a8a294;
+  --ink-faint: #8b8579;
+  --line: #2b2822;
+  --accent: #9dae8e;
+  --accent-soft: #292e24;
+  --habit-sage: #a3b595;
+  --habit-clay: #c89a83;
+  --habit-blue: #96acc9;
+  --habit-lavender: #ac9cc8;
+  --habit-sand: #c4ac7b;
+  --habit-rose: #c595a0;
+  --chart-mood: #c89a83;
+  --habit-check: #17150f;
+  --danger: #d8a19c;
+  --danger-soft: #3a2320;
+}
+
+/* Variablen in Tailwind-Namespace spiegeln ("inline" => Utilities referenzieren die Variablen direkt) */
+@theme inline {
+  --font-sans: "SF Pro Display", "Geist Sans", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "New York", ui-serif, "Iowan Old Style", Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-sage: var(--habit-sage);
+  --color-clay: var(--habit-clay);
+  --color-blue: var(--habit-blue);
+  --color-lavender: var(--habit-lavender);
+  --color-sand: var(--habit-sand);
+  --color-rose: var(--habit-rose);
+  --color-moodline: var(--chart-mood);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --radius-card: 16px;
+
+  /* Sehr dezente Schatten (< 0.05), wie vom Design-Skill gefordert */
+  --shadow-lift: 0 1px 2px rgba(23, 21, 15, 0.04), 0 2px 8px rgba(23, 21, 15, 0.03);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Sichtbarer Fokuszustand für Tastaturnavigation */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/*
+ * Bewegung: nur, wenn der Nutzer sie nicht deaktiviert hat.
+ * Ausschließlich transform/opacity, keine Layout-Eigenschaften.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  .fade-swap {
+    animation: rise 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .check-pop {
+    animation: pop 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  .bar-fill {
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sheet-panel {
+    animation: sheet-up 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .sheet-backdrop {
+    animation: fade-in 240ms ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .fade-swap,
+  .check-pop,
+  .sheet-panel,
+  .sheet-backdrop {
+    animation: none !important;
+  }
+
+  .bar-fill {
+    transition: none !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
