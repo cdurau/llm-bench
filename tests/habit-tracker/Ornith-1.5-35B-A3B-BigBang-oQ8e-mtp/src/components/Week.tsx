@@ -12,7 +12,7 @@ import {
 } from "recharts"
 import { useData } from "../hooks/useData"
 import { useDarkMode } from "../hooks/useDarkMode"
-import { weekdayShort } from "../lib/date"
+import { addDaysKey, todayKey, weekdayShort } from "../lib/date"
 import EmptyState from "./EmptyState"
 import { IconChart } from "./icons"
 
@@ -31,14 +31,8 @@ export default function Week() {
 
   const keys = useMemo(() => {
     const out: string[] = []
-    const now = new Date()
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i)
-      const y = d.getFullYear()
-      const m = String(d.getMonth() + 1).padStart(2, "0")
-      const day = String(d.getDate()).padStart(2, "0")
-      out.push(`${y}-${m}-${day}`)
-    }
+    const today = todayKey()
+    for (let i = 6; i >= 0; i--) out.push(addDaysKey(today, -i))
     return out
   }, [])
 

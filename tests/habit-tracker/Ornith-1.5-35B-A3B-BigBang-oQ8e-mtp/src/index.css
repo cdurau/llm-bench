@@ -6,7 +6,7 @@
   --surface: #ffffff;
   --surface-alt: #f5f4f2;
   --text: #111111;
-  --text-muted: #787774;
+  --text-muted: #6e6d6a;
   --border: rgba(0, 0, 0, 0.06);
   --border-strong: #e0dfdc;
   --accent: #111111;
@@ -140,11 +140,6 @@ textarea {
   0% { transform: scale(1); }
   45% { transform: scale(1.18); }
   100% { transform: scale(1); }
-}
-
-@keyframes barGrow {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
 }
 
 .animate-fade { animation: fadeIn 0.35s ease both; }

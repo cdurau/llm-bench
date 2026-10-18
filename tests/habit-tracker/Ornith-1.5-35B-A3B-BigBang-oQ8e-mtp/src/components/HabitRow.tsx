@@ -1,10 +1,12 @@
 import type { Habit } from "../types"
+import { withAlpha } from "../lib/colors"
 import { IconCheck, IconCheckOutline, IconEdit, IconFlame } from "./icons"
 
 interface HabitRowProps {
   habit: Habit
   completed: boolean
   streak: number
+  longest: number
   onToggle: () => void
   onEdit: () => void
   index?: number
@@ -14,11 +16,12 @@ export default function HabitRow({
   habit,
   completed,
   streak,
+  longest,
   onToggle,
   onEdit,
   index = 0,
 }: HabitRowProps) {
-  const tint = `rgb(${parseInt(habit.color.slice(1, 3), 16)}, ${parseInt(habit.color.slice(3, 5), 16)}, ${parseInt(habit.color.slice(5, 7), 16)})`
+  const tint = withAlpha(habit.color, 1)
 
   return (
     <div
@@ -32,7 +35,7 @@ export default function HabitRow({
     >
       <button
         onClick={onToggle}
-        aria-label={`${completed ? "Entscheiden" : "Erledigen"}: ${habit.name}`}
+        aria-label={`${completed ? "Zurücksetzen" : "Erledigen"}: ${habit.name}`}
         aria-pressed={completed}
         className="flex shrink-0 items-center justify-center rounded-full transition-transform duration-200 active:scale-90"
         style={{
@@ -74,6 +77,11 @@ export default function HabitRow({
             </span>
           )}
         </div>
+        {longest > 0 && (
+          <div className="mt-0.5 text-xs text-[var(--text-muted)]">
+            Längste Serie: {longest}
+          </div>
+        )}
       </div>
 
       <button

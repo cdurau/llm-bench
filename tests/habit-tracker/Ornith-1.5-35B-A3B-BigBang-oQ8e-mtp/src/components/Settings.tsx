@@ -80,7 +80,7 @@ export default function Settings() {
               {typeof window !== "undefined" &&
               matchMedia("(display-mode: standalone)").matches
                 ? "Die App ist bereits installiert."
-                : "Oeffne die App in Safari und waehle 'Auf Heim Bildschirm'."}
+                : "Öffne die App in Safari und wähle 'Auf Heim Bildschirm'."}
             </div>
           )}
         </div>

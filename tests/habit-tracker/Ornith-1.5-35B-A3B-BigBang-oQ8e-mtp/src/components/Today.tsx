@@ -165,6 +165,7 @@ export default function Today() {
                 habit={habit}
                 completed={completedToday.includes(habit.id)}
                 streak={streaks.get(habit.id)?.current ?? 0}
+                longest={streaks.get(habit.id)?.longest ?? 0}
                 onToggle={() => toggleHabit(habit.id)}
                 onEdit={() => setForm({ habit })}
                 index={i}

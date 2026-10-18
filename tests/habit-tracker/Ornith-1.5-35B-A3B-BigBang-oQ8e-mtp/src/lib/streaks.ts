@@ -1,4 +1,4 @@
-import { addDaysKey, toDate, todayKey } from "./date"
+import { addDays, addDaysKey, keyOf, toDate, todayKey } from "./date"
 
 export interface Streaks {
   current: number
@@ -9,16 +9,13 @@ export function computeStreaks(dates: string[]): Streaks {
   const sorted = Array.from(new Set(dates)).sort()
   const set = new Set(sorted)
 
-  // Longest streak: longest run of consecutive days.
-  let longest = 0
-  let run = 0
-  for (let i = 0; i < sorted.length; i++) {
-    if (i === 0) {
-      run = 1
-    } else {
-      const diff = (toDate(sorted[i]).getTime() - toDate(sorted[i - 1]).getTime()) / 86400000
-      run = diff === 1 ? run + 1 : 1
-    }
+  // Longest streak: longest run of consecutive calendar days. Uses calendar
+  // arithmetic (not raw timestamps) so DST transitions never split a run.
+  let longest = sorted.length === 0 ? 0 : 1
+  let run = sorted.length === 0 ? 0 : 1
+  for (let i = 1; i < sorted.length; i++) {
+    const expected = keyOf(addDays(toDate(sorted[i - 1]), 1))
+    run = sorted[i] === expected ? run + 1 : 1
     longest = Math.max(longest, run)
   }
 
