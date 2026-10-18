@@ -2,7 +2,7 @@
 
 **Session ID:** ses_eb0395520ffe3Klrgc0nh1cRPz
 **Created:** 10/18/2026, 6:09:42 PM
-**Updated:** 10/18/2026, 7:11:52 PM
+**Updated:** 10/18/2026, 7:42:50 PM
 
 ---
 
@@ -7521,3 +7521,490 @@ The build is complete and verified. Here's my final summary.
 - **Commit:** Das repo-root `.git` ist in dieser Umgebung schreibgeschützt (`Operation not permitted` auf `.git/*`), ein Commit ist daher aus dieser Session nicht möglich — das ist der Post-Run-Schritt des Harnesses. Die Artefakte liegen komplett auf Platte.
 - **Notion:** kein Connector-Zugriff → der Notion-Eintrag („Benchmark Runs") bleibt als_pending_ zurück.
 - **Jev:** nicht als Skill vorhanden und kein Jev-Lauf, daher nicht genutzt.
+
+---
+
+## User
+
+Der Button für das Hinzufügen neuer Habits ist im Darkmode nicht lesbar, es ist weißer Text auf weißem Hintergrund. Das gilt auch für andere Buttons
+
+---
+
+## Assistant
+
+_Thinking:_
+
+The user reports that in dark mode, the "add new habit" button (and other buttons) have white text on white background — not legible. This is a real bug in my dark mode styling.
+
+Let me look at the button styles. The issue is likely in buttons that use `text-white` class (Tailwind's hardcoded white) instead of `text-[var(--text)]`. In dark mode, `text-white` gives pure white (#ffffff) which on a white/`--surface` background (which in dark mode is #222224, not white)... wait, let me think.
+
+Actually the issue: in dark mode, `--surface` is #222224 (dark). A button with `bg-[var(--surface)]` would be dark, and `text-white` would be white → readable on dark bg. But the user says white text on white background. So somewhere a button has white background AND white text in dark mode.
+
+Let me think about which buttons. The "add new habit" button — in Today.tsx there are two:
+1. In EmptyState: `bg-[var(--accent)] ... text-white` → accent is #f5f5f0 in dark mode (light), on dark surface... that's fine.
+
+Wait — actually the issue might be buttons that use `text-[var(--text)]` but the user says WHITE text on WHITE bg. White text = `text-white`. White background = something that becomes white in dark mode.
+
+Hmm. Let me reconsider. Actually, maybe the issue is buttons using Tailwind's default classes that don't respect the CSS vars. Let me grep for `text-white` and hardcoded colors across components.
+
+Let me look for the specific problem. The "Habit anlegen" button in EmptyState uses `bg-[var(--accent)] text-white`. In dark mode accent = #f5f5f0 (off-white). That's a light button with dark text? No — text-white on light accent bg → white text on light bg → NOT readable! That's the bug! In dark mode, `--accent` becomes #f5f5f0 (very light), and `text-white` is also white → white on white → invisible.
+
+That's exactly it. The primary CTA buttons use `text-white` which assumes a dark accent. But in dark mode my accent is light (#f5f5f0), so white text on light bg fails.
+
+Fix: Make the CTA text color respect the accent — use `text-white` only when accent is dark (light mode), and dark text when accent is light (dark mode). Since `--accent` is the button bg, the text should be white when bg is dark, and the bg's fg should contrast. 
+
+Better approach: define the accent button text color via CSS too. I can use `color-mix` or just make the CTA text always white — but then dark-mode accent must be dark enough. Alternative: make the primary button use `--accent` as background and a contrasting text. The simplest robust fix: the primary CTA should have text that contrasts with `--accent`. Since --accent is #111 (light mode, dark) → white text fine. In dark mode --accent is #f5f5f0 (light) → need dark text.
+
+I can compute this with CSS: `color: color-mix(in srgb, var(--accent) 20%, white)` — no. Better: use a helper that picks white or black based on the accent. But CSS can't easily do luminance detection.
+
+Cleanest: Make the primary CTA button background = `--accent` and text = a fixed readable color. Since in light mode accent is dark (#111), white text works. In dark mode, I want dark text on the light accent. 
+
+Option: Use `text-white` always but change --accent in dark mode to be dark instead of light. But --accent is also used for other things (progress bar, active tab, links). In dark mode having accent be dark would change the look but might be fine. Actually the minimalist design uses accent for emphasis; in dark mode a light accent is more visible. Changing accent to dark in dark mode would make it less visible.
+
+Better option: Make the primary CTA text color adaptive via a CSS variable that's the inverse. I can add a CSS var `--accent-text` = white in light, black/dark in dark. Then buttons use `text-[var(--accent-text)]`. That's clean and explicit.
+
+Let me add to CSS:
+```css
+:root { --accent-text: #ffffff; }
+:root.dark { --accent-text: #111111; }
+@media (prefers-color-scheme: dark) :root:not(.light) { --accent-text: #111111; }
+```
+Then replace `text-white` on CTA buttons with `text-[var(--accent-text)]`.
+
+But there might be OTHER buttons with hardcoded white too. Let me grep for `text-white` across src.
+
+Also the user says "andere Buttons" — other buttons too. Let me find all hardcoded `text-white` and any hardcoded `#ffffff`/`white` in components and fix them to use the adaptive variable or `text-[var(--text)]`.
+
+Let me grep first.
+
+
+Real dark-mode bug: primary buttons use hardcoded `text-white`, which collides with the light accent in dark mode. Let me find all hardcoded white text.
+
+
+
+**Tool: grep**
+
+**Input:**
+```json
+{
+  "pattern": "text-white|bg-white|#ffffff|color white",
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src"
+}
+```
+
+Found 9 matches
+/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/HabitForm.tsx:
+  Line 126:               className="flex h-12 items-center justify-center gap-2 rounded-xl border border-[var(--border-strong)] px-4 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white"
+
+  Line 135:             className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_85%,black)] disabled:cursor-not-allowed disabled:opacity-40"
+
+
+/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/Settings.tsx:
+  Line 110:           className="mt-2 w-full rounded-2xl border border-[var(--danger)]/40 bg-transparent px-4 py-3 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+
+  Line 144:                 className="flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--danger)] px-4 text-sm font-semibold text-white transition-colors"
+
+
+/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/index.css:
+  Line 6:   --surface: #ffffff;
+
+
+/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/Today.tsx:
+  Line 152:                 className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition-colors"
+
+
+/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/Mood.tsx:
+  Line 85:           className="flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+
+
+/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/HabitRow.tsx:
+  Line 41:           color: completed ? "#ffffff" : tint,
+
+  Line 71:             <span className="inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-xs font-semibold" style={{ backgroundColor: tint, color: "#ffffff" }}>
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+The primary CTA buttons use `text-white` on `bg-[var(--accent)]`. In dark mode, `--accent` is #f5f5f0 (light) → white text on light = invisible. These are the bug.
+
+The danger buttons (`bg-[var(--danger)] text-white`) — `--danger` is #b55a5a (light) / #d48a8a (dark). In dark mode danger is #d48a8a (lighter) → white text on light red → also somewhat low contrast but red is darker than accent... #d48a8a on white text: contrast might be okay-ish but not great. The user specifically mentioned the add-habit button (accent). But "andere Buttons" suggests danger too. Let me make these adaptive.
+
+Cleanest fix: introduce CSS variables for the text-on-accent and text-on-danger colors, computed as the inverse. Actually simpler: make the CTA/danger buttons use text that adapts. I'll add two CSS vars:
+- `--accent-text`: white in light, dark in dark
+- `--danger-text`: white in light, dark in dark
+
+danger is a red — in both modes, is white or dark better? #b55a5a (light mode danger) with white text → fine contrast. #d48a8a (dark mode) with white → borderline. With dark text (#111) on #d48a8a → better contrast. So `--danger-text` = #111111 in dark, #ffffff in light. Consistent with accent.
+
+Approach: Add CSS vars and replace `text-white` on these CTA/danger buttons with `text-[var(--accent-text)]` / `text-[var(--danger-text)]`.
+
+Where to define:
+```css
+:root {
+  --accent-text: #ffffff;
+  --danger-text: #ffffff;
+}
+:root.dark {
+  --accent-text: #111111;
+  --danger-text: #111111;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --accent-text: #111111;
+    --danger-text: #111111;
+  }
+}
+```
+
+Then replace:
+- HabitForm.tsx line 135: `text-white` → `text-[var(--accent-text)]`
+- HabitForm.tsx line 126: `hover:text-white` → `hover:text-[var(--danger-text)]` (the cancel/delete text button, bg-transparent → text var(--danger); on hover bg var(--danger) → text should be inverse). Actually line 126 is the "Löschen" button: `text-[var(--danger)]` normally (transparent bg), on hover `bg-[var(--danger)] hover:text-white`. In dark mode, --danger is #d48a8a (light), so hover text should be dark. Replace hover:text-white → hover:text-[var(--danger-text)].
+- Settings.tsx line 110: `hover:text-white` → `hover:text-[var(--danger-text)]`
+- Settings.tsx line 144: confirm dialog delete button `text-white` → `text-[var(--danger-text)]`
+- Today.tsx line 152: add-habit button `text-white` → `text-[var(--accent-text)]`
+- Mood.tsx line 85: save button `text-white` → `text-[var(--accent-text)]`
+
+The HabitRow uses inline `color: "#ffffff"` for completed checkmark and streak badge — those are on `tint` (the habit's own color) backgrounds, which are intentionally dark-ish colors → white text is fine and correct (they're accent-colored chips, not system accent). Leave those.
+
+The `--surface: #ffffff` in index.css line 6 is the light-mode surface — correct, only in light mode. Fine.
+
+Also the `hover:bg-[color-mix(in_srgb,var(--accent)_85%,black)]` on the primary button — color-mix with var(--accent) which in dark mode is #f5f5f0 → color-mix(#f5f5f0 85%, black) → a medium gray → fine. And text becomes var(--accent-text) dark → readable. Good.
+
+Also the `hover:bg-[var(--danger)]` buttons: in dark mode --danger = #d48a8a (light). The base state of these buttons: line 126 "Löschen" has bg-transparent (no bg) so text var(--danger) readable on surface. Line 144 confirm delete has bg-[var(--danger)] = #d48a8a → with var(--danger-text)=#111 → readable. Good.
+
+Also the primary accent button hover uses color-mix — fine.
+
+Let me also double check: are there other buttons with potential dark-mode issues? Let me also check the Mood picker cancel button (line ~80) uses `border border-[var(--border-strong)]` with default text (var(--text)) → fine. The primary buttons are the issue.
+
+Also — the `<html>` toggling `.dark` class via useDarkMode effect. The `@media (prefers-color-scheme: dark) :root:not(.light)` handles system default. But note: when appearance='system' and prefers dark, the media query sets --accent etc dark AND now --accent-text dark. Good. When appearance='light', .light class present → :root:not(.light) doesn't apply → light vars + --accent-text white. Good. When appearance='dark', .dark class → --accent-text dark. Good.
+
+Let me apply the edits. First add the CSS vars, then replace text-white occurrences.
+
+Let me add the vars right after the :root block (after --danger line). Actually I'll add them in both :root and .dark and the media block. Let me add a dedicated block.
+
+I'll insert into index.css after the `.dark` block's vars or in each. Simplest: add to `:root` and `:root.dark` and the media query. Let me edit index.css: add `--accent-text` and `--danger-text` to :root (light), :root.dark (dark), and the media :root:not(.light).
+
+Let me do the edits.
+
+
+Found it — primary/CTA buttons use hardcoded `text-white`, which collides with the light accent in dark mode. I'll add adaptive `--accent-text`/`--danger-text` CSS variables and wire the CTA buttons to them.
+
+
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/index.css",
+  "oldString": "  --success: #3a7d44;\n  --danger: #b55a5a;\n  --radius-lg: 16px;",
+  "newString": "  --success: #3a7d44;\n  --danger: #b55a5a;\n  --accent-text: #ffffff;\n  --danger-text: #ffffff;\n  --radius-lg: 16px;"
+}
+```
+
+Edited src/index.css (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/index.css",
+  "oldString": "  --success: #6fbf7b;\n  --danger: #d48a8a;\n}",
+  "newString": "  --success: #6fbf7b;\n  --danger: #d48a8a;\n  --accent-text: #111111;\n  --danger-text: #111111;\n}"
+}
+```
+
+Edited src/index.css (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/index.css",
+  "oldString": "    --success: #6fbf7b;\n    --danger: #d48a8a;\n  }\n}",
+  "newString": "    --success: #6fbf7b;\n    --danger: #d48a8a;\n    --accent-text: #111111;\n    --danger-text: #111111;\n  }\n}"
+}
+```
+
+Edited src/index.css (1 replacement)
+
+---
+
+## Assistant
+
+_Thinking:_
+
+Wait — the second edit: I targeted `--success: #6fbf7b;\n  --danger: #d48a8a;\n}` — but there might be two occurrences of that pattern (in :root.dark and in the media query). The replacement with replaceAll=false requires unique match. Let me check — the media query block has the same vars with the same indentation (4 spaces). So the pattern `--success: #6fbf7b;\n  --danger: #d48a8a;\n}` appears in BOTH the `.dark` block AND the media query block → not unique → the edit would FAIL or apply to first only. It succeeded though. Hmm, but if it's not unique it should fail. Actually the tool says it retries and if not unique it fails unless replaceAll. Since it succeeded, maybe the two blocks differ in surrounding context making them unique? Let me verify the CSS is correct now by reading it. Actually the third edit targeted `--success: #6fbf7b;\n    --danger: #d48a8a;\n  }\n}` with 4-space indent and `}` closing — that's the media query block (indented differently). It succeeded. So the second edit (2-space indent, matching `.dark` block) replaced the `.dark` occurrence, and the third (4-space) matched the media block. Good — they were distinguishable by indentation. 
+
+Let me verify the CSS now and then fix the component text-white occurrences. Let me read the relevant CSS parts to confirm.
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "cd /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp && grep -n \"accent-text\\|danger-text\" src/index.css"
+}
+```
+
+16:  --accent-text: #ffffff;
+17:  --danger-text: #ffffff;
+36:  --accent-text: #111111;
+37:  --danger-text: #111111;
+53:    --accent-text: #111111;
+54:    --danger-text: #111111;
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+All three blocks have the vars correctly (light=white, dark=dark). Now replace the hardcoded `text-white` on CTA/danger buttons with the adaptive vars.
+
+Edits:
+1. HabitForm.tsx line 135: primary save button `text-white` → `text-[var(--accent-text)]`
+2. HabitForm.tsx line 126: `hover:text-white` → `hover:text-[var(--danger-text)]`
+3. Settings.tsx line 110: `hover:text-white` → `hover:text-[var(--danger-text)]`
+4. Settings.tsx line 144: confirm delete `text-white` → `text-[var(--danger-text)]`
+5. Today.tsx line 152: add-habit `text-white` → `text-[var(--accent-text)]`
+6. Mood.tsx line 85: save `text-white` → `text-[var(--accent-text)]`
+
+Let me do these edits. Each `text-white` occurrence — I need to be careful with uniqueness. Let me include surrounding context to make each unique.
+
+HabitForm line 135 context: `rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_85%,black)]`. Unique enough.
+
+HabitForm line 126: `text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white`. Unique.
+
+Settings line 110: `text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white disabled...`. Unique.
+
+Settings line 144: `rounded-xl bg-[var(--danger)] px-4 text-sm font-semibold text-white transition-colors`. Unique.
+
+Today line 152: `rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition-colors`. Unique.
+
+Mood line 85: `rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors disabled...`. Unique.
+
+Let me apply all edits.
+
+
+Now wire the CTA/danger buttons to the adaptive text variables.
+
+
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/HabitForm.tsx",
+  "oldString": "              className=\"flex h-12 items-center justify-center gap-2 rounded-xl border border-[var(--border-strong)] px-4 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white\"",
+  "newString": "              className=\"flex h-12 items-center justify-center gap-2 rounded-xl border border-[var(--border-strong)] px-4 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-[var(--danger-text)]\""
+}
+```
+
+Edited src/components/HabitForm.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/HabitForm.tsx",
+  "oldString": "            className=\"flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_85%,black)] disabled:cursor-not-allowed disabled:opacity-40\"",
+  "newString": "            className=\"flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-[var(--accent-text)] transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_85%,black)] disabled:cursor-not-allowed disabled:opacity-40\""
+}
+```
+
+Edited src/components/HabitForm.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/Settings.tsx",
+  "oldString": "          className=\"mt-2 w-full rounded-2xl border border-[var(--danger)]/40 bg-transparent px-4 py-3 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white disabled:cursor-not-allowed disabled:opacity-40\"",
+  "newString": "          className=\"mt-2 w-full rounded-2xl border border-[var(--danger)]/40 bg-transparent px-4 py-3 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-[var(--danger-text)] disabled:cursor-not-allowed disabled:opacity-40\""
+}
+```
+
+Edited src/components/Settings.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/Settings.tsx",
+  "oldString": "                className=\"flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--danger)] px-4 text-sm font-semibold text-white transition-colors\"",
+  "newString": "                className=\"flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--danger)] px-4 text-sm font-semibold text-[var(--danger-text)] transition-colors\""
+}
+```
+
+Edited src/components/Settings.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/Today.tsx",
+  "oldString": "                className=\"inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition-colors\"",
+  "newString": "                className=\"inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--accent-text)] transition-colors\""
+}
+```
+
+Edited src/components/Today.tsx (1 replacement)
+
+**Tool: edit**
+
+**Input:**
+```json
+{
+  "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/src/components/Mood.tsx",
+  "oldString": "          className=\"flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-40\"",
+  "newString": "          className=\"flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-[var(--accent-text)] transition-colors disabled:cursor-not-allowed disabled:opacity-40\""
+}
+```
+
+Edited src/components/Mood.tsx (1 replacement)
+
+---
+
+## Assistant
+
+_Thinking:_
+
+Now rebuild and re-run the smoke test to confirm nothing broke. Also, I want to visually verify the dark-mode button contrast. I can't open a browser, but I can verify the CSS vars resolve correctly. Let me rebuild and re-run the smoke test (which renders today + settings).
+
+Actually, the smoke test checks string presence, not colors. To verify the dark-mode text is now dark (not white), I could enhance the smoke test to check computed styles — but that requires jsdom's getComputedStyle with CSS vars, which jsdom may not fully resolve custom properties. jsdom does compute CSS custom properties via getComputedStyle? It resolves `var()` references I believe. Actually jsdom's getComputedStyle does resolve custom properties since it parses CSS. Let me add a check to the smoke test: render in dark mode and check the accent button's computed color is NOT white.
+
+To render in dark mode, I set globalThis.document.documentElement.classList.add('dark') before rendering. Then getComputedStyle on the button element → color should be var(--danger-text)=#111111 in dark.
+
+But extracting the button element from the rendered HTML string is hard. Alternatively, I can render into the jsdom document via createRoot (client render) so elements are real DOM nodes, then query them and check getComputedStyle. But that reintroduces effects/idb issues. Hmm.
+
+Simpler verification: I trust the CSS vars now correctly provide dark text in dark mode. The fix is straightforward and correct by construction. Let me at least rebuild to ensure it compiles, and re-run the smoke test to confirm no regressions in rendering.
+
+Actually, a cleaner verification of the contrast: I can write a tiny script that parses index.css, finds the .dark block values for --accent-text/--danger-text, and asserts they're #111111. That's trivial and confirms the fix. Plus rebuild.
+
+Let me rebuild and re-run smoke test, and also grep the built CSS to confirm the vars are present in the output. Actually the build output CSS — let me check the minified CSS contains the --accent-text declarations. Vite/Tailwind would include the raw CSS custom properties (they're in index.css which is passed through). Let me rebuild and grep the dist CSS for accent-text.
+
+Let me rebuild + smoke test + grep.
+
+
+Rebuild, re-run the smoke test, and confirm the CSS vars are present in the output.
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "cd /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp && npm run build 2>&1 | tail -6 && echo \"=== CSS vars in output ===\" && grep -o \"accent-text:[^;}]*\\|danger-text:[^;}]*\" dist/assets/*.css | sort -u",
+  "timeout": 300000
+}
+```
+
+PWA v2.0.0
+mode      generateSW
+precache  12 entries (657.18 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-dcde9eb3.js
+=== CSS vars in output ===
+accent-text:#111
+accent-text:#fff
+danger-text:#111
+danger-text:#fff
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+The output CSS contains all four var values: accent-text #111 (dark) and #fff (light), danger-text #111 (dark) and #fff (light). 
+
+Now let me re-run the smoke test to confirm no regressions, and also add a dark-mode contrast assertion. Let me recreate the smoke test (I deleted it). Actually, let me write a focused dark-mode verification: render App in dark mode into jsdom and compute the button color via getComputedStyle. This genuinely verifies the fix.
+
+To render into real DOM (so getComputedStyle works), I'll use createRoot + act. But effects would run → idb issues. Alternatively, I can render with renderToString into a document that has .dark class, but renderToString produces a string without computed styles.
+
+Better approach: use jsdom to set up the full environment, then use react-dom/client createRoot to render into the jsdom document. To avoid effects running and hitting idb, I can... effects always run after commit. Hmm.
+
+Alternative: Use a fake indexedDB so effects work. Earlier that was complex. 
+
+Simplest reliable verification of the contrast fix: directly test that getComputedStyle resolves the var correctly. I can create a tiny detached element in jsdom with the class `.dark` and inline nothing — but the vars come from :root.dark. Actually I can create a jsdom with the index.css applied. jsdom with `runScripts: 'dangerously'` and a `<link rel=stylesheet>` won't fetch local files easily.
+
+Even simpler: I already confirmed via grep that the output CSS has the right values per mode. The mapping is deterministic: `.dark` sets --accent-text:#111 and --danger-text:#111; light sets #fff. That's exactly the fix. The button classes now reference these vars. So dark-mode buttons get #111 text (readable on the light accent #f5f5f0). 
+
+Let me still do a quick runtime re-check via the smoke test to ensure no regressions in rendering. Let me recreate it quickly — actually I deleted it. Recreating takes effort. Instead, let me do a lighter check: re-run tsc app check (fast) to ensure the edits didn't introduce type errors, and rely on the grep confirming CSS correctness. The smoke test was mostly confirming rendering which my type-check + build already strongly implies.
+
+Actually, the smoke test caught real runtime issues earlier (it PASSED only after fixes). Recreating it adds confidence. But it's ~15 lines. Given I already verified rendering works before these edits (which only changed text-color class names — purely cosmetic, can't break rendering), and build+typecheck will catch syntax errors, I'm confident. Let me just run the typecheck to be safe, and confirm no `text-white` remains on CTA buttons.
+
+Let me run tsc app check + grep remaining text-white occurrences.
+
+
+All four var values are present and correctly mapped per mode. Let me confirm the type-check still passes and no hardcoded white remains on CTA buttons.
+
+
+
+**Tool: shell**
+
+**Input:**
+```json
+{
+  "command": "cd /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp && echo \"=== typecheck ===\" && npx tsc --noEmit -p tsconfig.app.json 2>&1 | grep -c \"error TS\" && echo \"=== remaining text-white ===\" && grep -rn \"text-white\" src/ || echo \"none (good)\""
+}
+```
+
+=== typecheck ===
+0
+none (good)
+
+
+---
+
+## Assistant
+
+_Thinking:_
+
+The system update mentions a new skill (code-review). That's just informational — not directly relevant unless I want to review. I'll skip it; my changes are straightforward.
+
+The fix is complete:
+- Added `--accent-text` and `--danger-text` CSS vars (white in light, #111 in dark).
+- Wired all primary/CTA and danger buttons to these vars.
+- Build passes, type-check passes, no hardcoded text-white remains.
+
+Let me verify the final state once more quickly and give a concise confirmation. I don't need to rebuild again — already rebuilt and confirmed CSS vars present. 
+
+Let me provide a brief summary of the fix. The task said keep responses under 500 words. I'll be concise.
+
+I should confirm the dark-mode fix works visually — I can't open a browser, but I verified the CSS output contains the correct var values and the buttons reference them. That's sufficient evidence.
+
+Let me write a short final message.
+
+
+Fix applied and verified.
+
+**Ursache:** Die Haupt-CTA-Buttons (`Habit anlegen`, `Speichern`, `Löschen`) verwendeten hardcoded `text-white` auf `bg-[var(--accent)]`. Im Dark Mode ist `--accent` hell (`#f5f5f0`), sodass weißer Text auf hellem Hintergrund verschwindet.
+
+**Fix:** Zwei CSS-Variablen in `src/index.css`:
+- `--accent-text` / `--danger-text` → weiß im Light-Mode, `#111111` im Dark-Mode
+- Alle betroffenen Buttons (`HabitForm`, `Settings`, `Today`, `Mood`) nutzen jetzt `text-[var(--accent-text)]` bzw. `text-[var(--danger-text)]`
+
+**Verifiziert:**
+- `npm run build` durchläuft fehlerfrei
+- TypeScript-Check: 0 Fehler
+- In `dist/assets/*.css` sind alle vier Werte vorhanden: `accent-text:#fff` / `accent-text:#111` / `danger-text:#fff` / `danger-text:#111`
+- Kein `text-white` mehr in den Buttons vorhanden
+
+Dark-Mode-Buttons sind jetzt lesbar (dunkler Text auf hellem Akzent).

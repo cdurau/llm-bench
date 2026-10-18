@@ -149,7 +149,7 @@ export default function Today() {
             action={
               <button
                 onClick={() => setForm({ habit: null })}
-                className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition-colors"
+                className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--accent-text)] transition-colors"
                 style={{ minHeight: 44 }}
               >
                 <IconPlus className="h-4 w-4" />

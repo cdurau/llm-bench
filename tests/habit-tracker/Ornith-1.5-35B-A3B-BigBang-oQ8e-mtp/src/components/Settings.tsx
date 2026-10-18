@@ -107,7 +107,7 @@ export default function Settings() {
         <button
           onClick={() => setConfirming(true)}
           disabled={habits.length === 0 && moods.length === 0}
-          className="mt-2 w-full rounded-2xl border border-[var(--danger)]/40 bg-transparent px-4 py-3 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-2 w-full rounded-2xl border border-[var(--danger)]/40 bg-transparent px-4 py-3 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-[var(--danger-text)] disabled:cursor-not-allowed disabled:opacity-40"
           style={{ minHeight: 52 }}
         >
           Alle Daten löschen
@@ -141,7 +141,7 @@ export default function Settings() {
               </button>
               <button
                 onClick={handleClear}
-                className="flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--danger)] px-4 text-sm font-semibold text-white transition-colors"
+                className="flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--danger)] px-4 text-sm font-semibold text-[var(--danger-text)] transition-colors"
                 style={{ minHeight: 44 }}
               >
                 Löschen

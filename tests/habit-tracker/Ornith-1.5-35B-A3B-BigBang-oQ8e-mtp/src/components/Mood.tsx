@@ -82,7 +82,7 @@ export default function MoodPicker({ value, note, onSave, onClose }: MoodPickerP
         <button
           onClick={save}
           disabled={!picked}
-          className="flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+          className="flex h-12 flex-1 items-center justify-center rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-[var(--accent-text)] transition-colors disabled:cursor-not-allowed disabled:opacity-40"
           style={{ minHeight: 44 }}
         >
           Speichern

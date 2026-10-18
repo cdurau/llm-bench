@@ -123,7 +123,7 @@ export default function HabitForm({ habit, onSave, onDelete, onClose }: HabitFor
           {habit && onDelete && (
             <button
               onClick={() => onDelete(habit.id)}
-              className="flex h-12 items-center justify-center gap-2 rounded-xl border border-[var(--border-strong)] px-4 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-white"
+              className="flex h-12 items-center justify-center gap-2 rounded-xl border border-[var(--border-strong)] px-4 text-sm font-medium text-[var(--danger)] transition-colors hover:bg-[var(--danger)] hover:text-[var(--danger-text)]"
               style={{ minWidth: 44 }}
             >
               Löschen
@@ -132,7 +132,7 @@ export default function HabitForm({ habit, onSave, onDelete, onClose }: HabitFor
           <button
             onClick={submit}
             disabled={!name.trim()}
-            className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_85%,black)] disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-4 text-sm font-semibold text-[var(--accent-text)] transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_85%,black)] disabled:cursor-not-allowed disabled:opacity-40"
             style={{ minHeight: 44 }}
           >
             <IconPlus className="h-4 w-4" />
