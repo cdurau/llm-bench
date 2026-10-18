@@ -31,7 +31,7 @@ Damit bleibt sichtbar, ob ein Modell beispielsweise ein stärkeres Design erzeug
 | `habit_tracker_prompt_verify.md` | Variante mit Pflicht-`data-testid`s und Smoke-Test-Schritt (nicht direkt mit dem Originalprompt vergleichbar) |
 | `tools/verify/` | Smoke-Test-Skript `verify.mjs` (Playwright) für die Variante, Einrichtung und Vertrag siehe dortiges README |
 | `install-skills.sh` | Einfacher Installer: installiert alle drei Skills (inklusive Jev) in den aktuellen Ordner |
-| `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev` und `--dry-run` (siehe `--help`) |
+| `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev`, `--dry-run`, `--check` und `--update` (siehe `--help`) |
 | `run-opencode-sandbox.sh` | Startet OpenCode V2 (macOS, `sandbox-exec`) mit Schreibzugriff auf genau einen Modellordner |
 | `run-opencode-sandbox_alt.sh` | Startet OpenCode V2 in Docker mit Schreibzugriff auf genau einen Modellordner |
 | `run-pi-sandbox.sh` | Startet Pi (macOS, `sandbox-exec`) mit Schreibzugriff auf genau einen Modellordner |
@@ -39,12 +39,35 @@ Damit bleibt sichtbar, ob ein Modell beispielsweise ein stärkeres Design erzeug
 
 Beispiel: `gemma-4-26b-a4b-it-oQ8e-mtp/` (aktuell mit installierten Skills inklusive Jev). Die `skills-lock.json` im Run-Ordner zeigt, welche Skills im Lauf aktiv waren. Daran erkennst du auch, ob ein Lauf mit oder ohne Jev war.
 
+## Skill-Versionen
+
+Die Skills liegen als echte Kopien in `<modellname>/.agents/skills/` und gehören damit zum Lauf-Artefakt. Sie werden in geschlossenen Läufen **nicht** nachträglich aktualisiert, sonst ist der Lauf nicht mehr reproduzierbar.
+
+Stand prüfen (nur lesend, vergleicht die lokale `SKILL.md` mit dem Upstream auf GitHub):
+
+```bash
+./auto-install-skills.sh --check -d <modellname>            # Jev wird nur geprüft, wenn installiert
+./auto-install-skills.sh --check -d <modellname> --with-jev # Exit 1, wenn etwas veraltet/fehlt
+```
+
+Für einen **neuen** Lauf auf den aktuellen Upstream-Stand ziehen:
+
+```bash
+./auto-install-skills.sh -d <neuermodellname>
+./auto-install-skills.sh --check -d <neuermodellname>
+```
+
+`--update` führt `npx skills update -p -y` im Zielordner aus und aktualisiert nur bereits installierte Skills. Nur für offene bzw. neue Läufe verwenden.
+
+Bekannter Stand der vorhandenen Läufe: `vite-pwa-patterns` und `jev` entsprechen überall dem Upstream. `minimalist-ui` existiert in zwei Fassungen — ältere Läufe (u. a. `gemma-…`, `Deepseek-V4.1-Flash`, `Qwen3-Coder-Next-oQ4`, `Qwen3.8-27B-Turbo-Fable`) nutzen die frühere Version, spätere Läufe (u. a. `Qwen3.8-27B-oQ4e-mtp`, `Qwen3.8-27B-4bit-Splash`, `K2-Horizon-MoVA-…`, `Mellum2.1-…`) die aktuelle. Beim Vergleich von Design-Ergebnissen ist das mitzudenken.
+
 ## Einen Test durchführen
 
 1. Modellordner anlegen: `mkdir <modellname>`
 2. Skills hineininstallieren, aus diesem Verzeichnis:
    - ohne Jev: `./auto-install-skills.sh -d <modellname>`
    - mit Jev: `./auto-install-skills.sh -d <modellname> --with-jev`
+   - danach optional `./auto-install-skills.sh --check -d <modellname>` (siehe [Skill-Versionen](#skill-versionen))
 3. Den Agenten (OpenCode) in `<modellname>/` starten, zum Beispiel mit der [macOS-Sandbox](#opencode-mit-schreibsperre-starten) oder der [Docker-Sandbox](#opencode-in-der-docker-sandbox-starten), und ihm den Prompt geben.
    - **Nur den Teil oberhalb des `---` einfügen.** Die Rubrik darunter ist für die Auswertung und darf dem Modell nicht gezeigt werden.
    - Bei einem Lauf **ohne Jev** zusätzlich den Abschnitt „Arbeitsweise mit Jev" und den Jev-Teil des abschließenden Zusammenfassungs-Satzes aus dem eingefügten Prompt entfernen.

@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #faf9f7;
+  --color-surface: #ffffff;
+  --color-surface-pressed: #f0efed;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #777774;
+  --color-text-tertiary: #a09f9c;
+  --color-border: rgba(0, 0, 0, 0.06);
+  --color-accent: #1a1a1a;
+  --color-accent-text: #ffffff;
+  --color-habit-1: #c4956a;
+  --color-habit-2: #6a9c8a;
+  --color-habit-3: #8a7ab0;
+  --color-habit-4: #b07a7a;
+  --color-habit-5: #7a9cc4;
+  --radius-card: 16px;
+  --radius-sm: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #141414;
+    --color-surface: #1e1e1e;
+    --color-surface-pressed: #2a2a2a;
+    --color-text: #ececec;
+    --color-text-secondary: #999997;
+    --color-text-tertiary: #666664;
+    --color-border: rgba(255, 255, 255, 0.08);
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family:
+    'Inter',
+    -apple-system,
+    'Helvetica Neue',
+    'Segoe UI',
+    system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-check {
+  animation: checkPop 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Focus rings for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-check {
+    animation: none;
+  }
+}
+
+/* Tab bar safe area */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
