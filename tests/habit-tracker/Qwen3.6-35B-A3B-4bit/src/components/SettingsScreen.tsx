@@ -86,8 +86,8 @@ export default function SettingsScreen({ onThemeOverride }: { onThemeOverride?: 
   }
 
   const handleSaveNote = async () => {
-    const value = isEditingMood ? 3 : (todayMood?.value || 3)
-    await saveMood(value, moodNote.trim() || undefined)
+    if (!todayMood) return
+    await saveMood(todayMood.value, moodNote.trim() || undefined)
     const updated = await getTodayMood()
     setTodayMood(updated)
     setIsEditingMood(false)
