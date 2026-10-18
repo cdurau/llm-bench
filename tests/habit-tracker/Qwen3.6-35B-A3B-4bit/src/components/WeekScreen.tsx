@@ -47,7 +47,7 @@ export default function WeekScreen() {
     <div className="flex flex-col flex-1 overflow-y-auto">
       <div className="px-5 pt-14 pb-5">
         <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-secondary)]">
-          {formatDateGerman(data[6].date)} — {formatDateGerman(data[0].date)}
+          {formatDateGerman(data[0].date)} — {formatDateGerman(data[6].date)}
         </p>
         <h2 className="text-3xl font-bold tracking-tight mt-1 text-[var(--color-text)]">Woche</h2>
       </div>
