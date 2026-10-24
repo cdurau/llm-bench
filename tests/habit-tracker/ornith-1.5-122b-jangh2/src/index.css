@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "SF Pro Display", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Newsreader", "Lyon Text", Georgia, serif;
+  --font-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Warm monochrome palette (minimalist-ui). Semantic colors switch with the theme. */
+:root {
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --surface-2: #f9f9f8;
+  --border: #eaeaea;
+  --text: #2f3437;
+  --muted: #787774;
+  --accent: #3f7a74;
+  --accent-strong: #2e6b5f;
+  --danger: #9f2f2d;
+  --focus: #3f7a74;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] {
+  --bg: #131416;
+  --surface: #1c1e21;
+  --surface-2: #232529;
+  --border: #2e3135;
+  --text: #e8e7e4;
+  --muted: #9a9a96;
+  --accent: #5fb3a8;
+  --accent-strong: #6fc3b8;
+  --danger: #e08785;
+  --focus: #5fb3a8;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Only color surfaces transitions — never layout. */
+.theme-transition {
+  transition: background-color 320ms ease, color 320ms ease, border-color 320ms ease;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* --- Motion (gated behind prefers-reduced-motion) --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal 620ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Gentle check animation on tap */
+.check-pop {
+  transform: scale(0.86);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .check-pop {
+    animation: pop 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes pop {
+    0% {
+      transform: scale(0.6);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+}
+
+/* Staggered list reveal */
+.stagger {
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
