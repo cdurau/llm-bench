@@ -31,7 +31,7 @@ AGENT="opencode"
 
 # Basis-Skills: "repo|skill-name|pfad-der-SKILL.md" (in jedem Lauf installiert)
 BASE_SKILLS=(
-  "leonxlnx/taste-skill|minimalist-ui|skills/minimalist-skill/SKILL.md"
+  "leonxlnx/taste-skill-classics|minimalist-ui|skills/minimalist-skill/SKILL.md"
   "ai-enhanced-engineer/aiee-skills|vite-pwa-patterns|skills/vite-pwa-patterns/SKILL.md"
 )
 
