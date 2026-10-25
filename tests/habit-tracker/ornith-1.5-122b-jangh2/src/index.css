@@ -57,6 +57,14 @@ body {
   transition: background-color 320ms ease, color 320ms ease, border-color 320ms ease;
 }
 
+/* Soft card: large radius, very subtle shadow (minimalist-ui). Surfaces switch with the theme. */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
 :focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;

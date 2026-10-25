@@ -14,7 +14,6 @@ export default defineConfig({
         navigateFallback: '/offline.html',
         navigateFallbackDenylist: [/^\/api\//],
         cleanupOutdatedCaches: true,
-        maxFileSize: 5 * 1024 * 1024,
       },
       manifest: {
         name: 'Rhythm — Habit & Stimmung',
