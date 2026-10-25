@@ -1,0 +1,479 @@
+{
+  "info": {
+    "id": "ses_e8d3c0dd4ffeAAhm1taHhtT9ir",
+    "projectID": "5dda1b27d7138d1b64d243fa5d5aa00f60358bbf",
+    "agent": "build",
+    "model": {
+      "id": "Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP",
+      "providerID": "omlx",
+      "variant": "high"
+    },
+    "cost": 0,
+    "tokens": {
+      "input": 22150,
+      "output": 453,
+      "reasoning": 1223,
+      "cache": {
+        "read": 30705,
+        "write": 0
+      }
+    },
+    "outcome": "failed",
+    "time": {
+      "created": 1792926806636,
+      "updated": 1792927610341,
+      "idle": 1792927610343,
+      "viewed": 1792927610343
+    },
+    "title": "Rhythm PWA: Habit- & Stimmungs-Tracker bauen",
+    "subpath": "tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP",
+    "location": {
+      "directory": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP"
+    }
+  },
+  "messages": [
+    {
+      "id": "msg_172c3f230001XEFGauhYi0M1Ov",
+      "time": {
+        "created": 1792926806661
+      },
+      "text": "# LLM-Bench Aufgabe: Habit- & Stimmungs-Tracker (PWA)\n\n## Aufgabe\n\nBaue eine kleine, schöne, offlinefähige PWA namens **„Rhythm\"**: ein Habit- und Stimmungs-Tracker. Arbeite selbstständig im Projektordner, bis alles läuft. Am Ende muss `npm run build` ohne Fehler durchlaufen und `npm run preview` die App zeigen.\n\n## Fester Stack (nicht diskutieren, nicht ersetzen)\n\n- Vite + React + TypeScript (Template `react-ts`)\n- `vite-plugin-pwa` (Manifest + Service Worker, Icons 192/512, installierbar). Nutze für die PWA-Konfiguration den installierten Skill `vite-pwa-patterns` und halte dich an seine Muster.\n- Tailwind CSS v4\n- IndexedDB über `idb` (kein Backend, alles lokal)\n- Recharts für das Wochen-Chart\n\n## Features\n\n1. **Heute-Screen:** Liste der Habits, per Tap abhaken, mit sanfter Animation. Oben Datum und Fortschritt („3 von 5\").\n2. **Habits verwalten:** anlegen, umbenennen, löschen, Emoji und Farbe wählen.\n3. **Streaks:** aktuelle und längste Serie pro Habit, sichtbar am Habit.\n4. **Stimmung:** einmal pro Tag Stimmung von 1 bis 5 auswählen (mit Emojis), optional Kurznotiz.\n5. **Woche-Screen:** Chart der letzten 7 Tage (erledigte Habits pro Tag und Stimmungsverlauf).\n6. **Dark Mode:** folgt dem System, manuell umschaltbar, Auswahl wird gespeichert.\n7. **Offline:** nach dem ersten Laden komplett offline nutzbar, Daten bleiben erhalten.\n8. **Leerzustände:** sinnvoll gestaltet (keine Habits, keine Daten).\n\n## Design-Vorgaben\n\n- Nutze den installierten Design-Skill (`minimalist-ui`) und halte dich an ihn.\n- Gefühl: ruhig, modern, hochwertig. Referenzen im Kopf: Things, Streaks, Apple Health. Kein Bootstrap-Look, keine Standard-Blau-Buttons, keine grellen Verläufe.\n- Mobile first (Ziel: 375 px Breite), auf Desktop zentrierte schmale Spalte.\n- Große, klare Typografie mit deutlicher Hierarchie, viel Weißraum.\n- Weiche Karten (große Radien, sehr dezente Schatten), Bottom-Navigation mit 3 Tabs (Heute, Woche, Einstellungen).\n- Eine zurückhaltende Akzentfarbe plus pro Habit eine eigene Farbe. Kontrast nach WCAG AA.\n- Touch-Ziele mindestens 44 px, sichtbare Fokuszustände, `prefers-reduced-motion` respektieren.\n- Alle Texte auf Deutsch.\n\n## Ablauf\n\n1. Projekt aufsetzen, Stack installieren, PWA konfigurieren.\n2. Datenschicht (idb) und Streak-Logik.\n3. Heute-Screen und Habit-Verwaltung.\n4. Stimmung und Woche-Screen mit Chart.\n5. Dark Mode, Leerzustände, Feinschliff.\n6. `npm run build` und `npm run preview`, Feature-Checkliste durchgehen, Reste beheben.\n\nBeende mit einer kurzen Zusammenfassung: was funktioniert und was fehlt. ",
+      "files": [],
+      "agents": [],
+      "type": "user"
+    },
+    {
+      "id": "msg_172c3f298001EGw5ZyauiFl6zS",
+      "time": {
+        "created": 1792926806687,
+        "streamed": 1792927043861,
+        "completed": 1792927043900
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nLet me start by understanding the task. The user wants me to build a PWA called \"Rhythm\" - a habit and mood tracker. This is a benchmark task. Let me first look at the current state of the working directory and understand what exists.\n\nThe working directory is `/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP`\n\nWait, but I'm \"Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP\" - that's actually MY model name. So this is a benchmark where I'm being tested as the model under test. Interesting.\n\nLet me read the task. The task is in German. Let me understand it:\n\nThe task is to build a small, beautiful, offline-capable PWA called \"Rhythm\": a habit and mood tracker. Work independently in the project folder until everything runs. At the end `npm run build` must run without errors and `npm run preview` must show the app.\n\nFixed stack (don't discuss, don't replace):\n- Vite + React + TypeScript (template react-ts)\n- vite-plugin-pwa (Manifest + Service Worker, Icons 192/512, installable). Use the installed skill vite-pwa-patterns for PWA config and stick to its patterns.\n- Tailwind CSS v4\n- IndexedDB via idb (no backend, all local)\n- Recharts for the weekly chart\n\nFeatures:\n1. Today screen: habit list, tap to check off, gentle animation. Date and progress at top (\"3 of 5\")\n2. Manage habits: create, rename, delete, choose emoji and color\n3. Streaks: current and longest series per habit\n4. Mood: once per day choose mood 1-5 (with emojis), optional short note\n5. Week screen: chart of last 7 days (completed habits per day and mood progression)\n6. Dark mode: follows system, manually switchable, selection saved\n7. Offline: fully usable offline after first load, data persists\n8. Empty states: thoughtfully designed\n\nDesign requirements:\n- Use the installed design skill (minimalist-ui) and follow it\n- Feeling: calm, modern, high-quality. References: Things, Streaks, Apple Health. No Bootstrap look, no standard blue buttons, no garish gradients\n- Mobile first (target 375px width), centered narrow column on desktop\n- Large, clear typography with clear hierarchy, lots of whitespace\n- Soft cards (large radii, very subtle shadows), bottom navigation with 3 tabs (Today, Week, Settings)\n- One restrained accent color plus one color per habit. Contrast per WCAG AA\n- Touch targets at least 44px, visible focus states, respect prefers-reduced-motion\n- All text in German\n\nLet me first look at the current state of the directory and check the AGENTS.md files and skills mentioned.\n\nLet me start by exploring the environment. I should:\n1. Check what's in the current directory\n2. Read the habit_tracker_prompt.md to understand the canonical prompt\n3. Check the skills mentioned (vite-pwa-patterns, minimalist-ui)\n\nLet me be efficient and parallelize my initial exploration.\n\nActually, wait. This is a benchmark task. I'm being tested. Let me behave as a capable coding agent would. I should:\n1. Set up the project\n2. Install the stack\n3. Build the app\n4. Make sure build and preview work\n\nLet me first explore the current directory state.\n",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1792926983710,
+            "completed": 1792927043854
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nI'll start by exploring the current state of the project directory and understanding the task context.\n\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_85a6d0f4",
+          "name": "read",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Read directory /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker, entries 1-43\nCyber-Tiel-Coder-35B-A3B-MLX-oQ4e-MTP/\nDeepseek-V4.1-Flash/\ngemma-4-26b-a4b-it-oQ8e-mtp/\ngpt-oss-20b-mlx-oQ8-fp16/\nincoai-Qwen3.8-27B-Splash/\nK2-Horizon-MoVA-36B-A4B-oQ4e-fixed/\nKAT-Coder-V2.5-Dev-OptiQ-4bit/\nKAT-Coder-V2.5-Dev-VL-oQ4e-mtp/\nKimi-Linear-48B-A3B-Instruct-6bit-OpenCode/\nKimi-Linear-48B-A3B-Instruct-6bit/\nMellum2.1-12B-A2.5B-Thinking-oQ8e/\nNVIDIA-Nemotron-3.5-Lightning-30B-A3B-oQ4e-mtp/\nornith-1.5-122b-jangh2/\nOrnith-1.5-122B-MLX-Imatrix-Mixed-MTP/\nOrnith-1.5-35B-A3B-BigBang-oQ8e-mtp/\nQwen3-Coder-Next-oQ4-Test-2/\nQwen3-Coder-Next-oQ4/\nQwen3-Coder-Next-REAP-48B-A3B-oQ3.5/\nQwen3.6-35B-A3B-4bit/\nQwen3.6-35B-A3B-Claude-4.7-Opus-Reasoning-Distilled-MLX-oQ4-MTP/\nQwen3.6-35B-A3B-oQ4-fp16-mtp/\nQwen3.8-27B-4bit-Splash/\nQwen3.8-27B-oQ4e-mtp/\nQwen3.8-27B-Turbo-Fable/\nQwen3.8-Flash-Next-119B-A5B-Niwaki/\nQwen3.8-Flash-Next-REAP-288-MLX-4bit-qwen3-next-parser/\nQwen3.8-Flash-Next-REAP-288-MLX-4bit-qwen3-next/\nsupergemma4-26b-uncensored-mlx-4bit-v2/\nTiel-Coder-35B-A3B-MLX-oQ4e-MTP/\ntools/\n.DS_Store\nauto-install-skills.sh\nhabit_tracker_prompt_ohne_jev.md\nhabit_tracker_prompt_v2_ohne_jev.md\nhabit_tracker_prompt_v2.md\nhabit_tracker_prompt_verify_ohne_jev.md\nhabit_tracker_prompt_verify.md\nhabit_tracker_prompt.md\ninstall-skills.sh\nREADME.md\nrun-opencode-sandbox_alt.sh\nrun-opencode-sandbox.sh\nrun-pi-sandbox.sh"
+              }
+            ],
+            "metadata": {
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1792927039498,
+            "ran": 1792927043857,
+            "completed": 1792927043872
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_6df387e7",
+          "name": "read",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Read directory /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP, entries 1-2\n.agents/\nskills-lock.json"
+              }
+            ],
+            "metadata": {
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1792927043841,
+            "ran": 1792927043859,
+            "completed": 1792927043870
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "end": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 14485,
+        "output": 132,
+        "reasoning": 788,
+        "cache": {
+          "read": 0,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_172c79145001OYE65Vx4PN2sxu",
+      "time": {
+        "created": 1792927043916,
+        "completed": 1792927048234
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [],
+      "snapshot": {
+        "start": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "end": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "files": []
+      },
+      "finish": "error",
+      "error": {
+        "type": "provider.invalid-request",
+        "message": "oMLX prefill memory guard rejected this prompt: Prefill would require ~57.71 GB peak (current 44.89 GB + KV+SDPA 12.82 GB) but the prefill limit is 53.48 GB (metal_cap ceiling 55.14 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.",
+        "status": 400,
+        "response": {
+          "body": "{\"error\":{\"message\":\"oMLX prefill memory guard rejected this prompt: Prefill would require ~57.71 GB peak (current 44.89 GB + KV+SDPA 12.82 GB) but the prefill limit is 53.48 GB (metal_cap ceiling 55.14 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"prefill_memory_exceeded\",\"omlx_code\":\"prefill_memory_exceeded\",\"estimated_bytes\":61968727094,\"limit_bytes\":57428575792},\"type\":\"error\"}"
+        }
+      }
+    },
+    {
+      "id": "msg_172c7a22c001S8mjZCstIfjRSI",
+      "time": {
+        "created": 1792927048236
+      },
+      "type": "idle",
+      "outcome": "failed",
+      "error": {
+        "type": "provider.invalid-request",
+        "message": "oMLX prefill memory guard rejected this prompt: Prefill would require ~57.71 GB peak (current 44.89 GB + KV+SDPA 12.82 GB) but the prefill limit is 53.48 GB (metal_cap ceiling 55.14 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.",
+        "status": 400,
+        "response": {
+          "body": "{\"error\":{\"message\":\"oMLX prefill memory guard rejected this prompt: Prefill would require ~57.71 GB peak (current 44.89 GB + KV+SDPA 12.82 GB) but the prefill limit is 53.48 GB (metal_cap ceiling 55.14 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"prefill_memory_exceeded\",\"omlx_code\":\"prefill_memory_exceeded\",\"estimated_bytes\":61968727094,\"limit_bytes\":57428575792},\"type\":\"error\"}"
+        }
+      }
+    },
+    {
+      "id": "msg_172ce3b93001v97Bsq68IyIKCh",
+      "time": {
+        "created": 1792927480750
+      },
+      "text": "Fährst du mit der Aufgabe fort?",
+      "files": [],
+      "agents": [],
+      "type": "user"
+    },
+    {
+      "id": "msg_172ce3bb30016qyKW4ElhTzfoV",
+      "time": {
+        "created": 1792927480761,
+        "streamed": 1792927536311,
+        "completed": 1792927536348
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nThe user is asking \"Are you continuing with the task?\" in German. Let me continue with the task. I should read the canonical prompt and the skills first. Let me be efficient.\n\nLet me read the key files:\n1. habit_tracker_prompt.md (canonical prompt)\n2. The skills mentioned (vite-pwa-patterns, minimalist-ui)\n3. Check the .agents folder and skills-lock.json\n\nLet me proceed.\n",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1792927518224,
+            "completed": 1792927536295
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nJa, ich fahre mit der Aufgabe fort. Lass mich zunächst die zentralen Dateien und die verwendeten Skills lesen.\n\n\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_f5afc37a",
+          "name": "read",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/skills-lock.json"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Read file /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/skills-lock.json, lines 1-17\n1: {\n2:   \"version\": 1,\n3:   \"skills\": {\n4:     \"minimalist-ui\": {\n5:       \"source\": \"leonxlnx/taste-skill-classics\",\n6:       \"sourceType\": \"github\",\n7:       \"skillPath\": \"skills/minimalist-skill/SKILL.md\",\n8:       \"computedHash\": \"1e37c8db6ad1589730a035a0298d125d3bafb4b9207c024d37b7638008aa1874\"\n9:     },\n10:     \"vite-pwa-patterns\": {\n11:       \"source\": \"ai-enhanced-engineer/aiee-skills\",\n12:       \"sourceType\": \"github\",\n13:       \"skillPath\": \"skills/vite-pwa-patterns/SKILL.md\",\n14:       \"computedHash\": \"8f9f3a480f65af109120abf3010609a3daff3b068845b7d7c87aa5f20ee9d253\"\n15:     }\n16:   }\n17: }"
+              }
+            ],
+            "metadata": {
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1792927530335,
+            "ran": 1792927536299,
+            "completed": 1792927536317
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_3cf44348",
+          "name": "read",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Read directory /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents, entries 1-1\nskills/"
+              }
+            ],
+            "metadata": {
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1792927533947,
+            "ran": 1792927536302,
+            "completed": 1792927536315
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_5fb757d0",
+          "name": "read",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/README.md"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Read file /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/README.md, lines 1-142\n1: # Habit-Tracker-Benchmark („Rhythm\")\n2: \n3: Zweite Benchmark-Aufgabe im llm-bench-Projekt, nach PulseBoard. Ein lokales Coding-LLM baut aus einem festen Prompt einen kleinen, offlinefähigen Habit- und Stimmungs-Tracker als PWA. Im Fokus stehen die **Designqualität** und die Frage, wie gut der Agent Skills nutzt, insbesondere den optionalen Entscheidungs-Skill [Jev](https://www.skills.sh/okooo5km/jev/jev).\n4: \n5: Struktur: pro Modell ein Ordner direkt unter diesem Verzeichnis (`tests/habit-tracker/<modellname>/`), nicht die Struktur `models/<family>/<model>/<model>-test<N>/` wie bei PulseBoard.\n6: \n7: ## Aufgabe in Kürze\n8: \n9: - App: **Rhythm** mit Habits und Streaks, täglicher Stimmung (1 bis 5), Wochen-Chart, Dark Mode und Offline-Nutzung.\n10: - Fester Stack: Vite, React, TypeScript, `vite-plugin-pwa`, Tailwind CSS v4, IndexedDB über `idb`, Recharts.\n11: - Skills: `minimalist-ui` (Design), `vite-pwa-patterns` (PWA-Setup) und in Jev-Läufen zusätzlich `jev` (schnelle typisierte Entscheidungen per CLI).\n12: - Fertig, wenn `npm run build` durchläuft und `npm run preview` die App zeigt.\n13: \n14: Die komplette Aufgabe steht in [`habit_tracker_prompt.md`](./habit_tracker_prompt.md).\n15: \n16: ## Bewertungsdimensionen\n17: \n18: Der finale App-Zustand allein reicht für den Vergleich nicht aus. Zusätzlich zur Feature-Abdeckung werden drei Qualitätsdimensionen bewusst getrennt dokumentiert:\n19: \n20: - **Design / UX Quality:** visueller Eindruck, Hierarchie, Konsistenz, Responsive-Verhalten und mobile Nutzbarkeit.\n21: - **First-Pass Technical Quality:** wie viel nach dem eigentlichen Build ohne Nutzerhinweise oder zusätzliche Reparatursessions tatsächlich funktioniert.\n22: - **Repair Effort:** wie viele zusätzliche Agenten-Runden, Bugfix-Sessions oder Nutzer-Bugreports nötig sind, bis ein brauchbarer Endzustand erreicht ist.\n23: \n24: Damit bleibt sichtbar, ob ein Modell beispielsweise ein stärkeres Design erzeugt, dafür aber viel technische Nacharbeit benötigt, oder ob es visuell einfacher arbeitet, dafür funktional fast sofort zuverlässig ist. Die vollständige Rubrik steht unterhalb des Trenners in `habit_tracker_prompt.md` und wird dem Modell nicht gezeigt.\n25: \n26: ## Dateien\n27: \n28: | Datei | Zweck |\n29: | --- | --- |\n30: | `habit_tracker_prompt.md` | Benchmark-Prompt, darunter die Bewertungsrubrik |\n31: | `habit_tracker_prompt_verify.md` | Variante mit Pflicht-`data-testid`s und Smoke-Test-Schritt (nicht direkt mit dem Originalprompt vergleichbar) |\n32: | `tools/verify/` | Smoke-Test-Skript `verify.mjs` (Playwright) für die Variante, Einrichtung und Vertrag siehe dortiges README |\n33: | `install-skills.sh` | Einfacher Installer: installiert alle drei Skills (inklusive Jev) in den aktuellen Ordner |\n34: | `auto-install-skills.sh` | Konfigurierbarer Installer mit `-d <ordner>`, `--with-jev`, `--dry-run`, `--check` und `--update` (siehe `--help`) |\n35: | `run-opencode-sandbox.sh` | Startet OpenCode V2 (macOS, `sandbox-exec`) mit Schreibzugriff auf genau einen Modellordner |\n36: | `run-opencode-sandbox_alt.sh` | Startet OpenCode V2 in Docker mit Schreibzugriff auf genau einen Modellordner |\n37: | `run-pi-sandbox.sh` | Startet Pi (macOS, `sandbox-exec`) mit Schreibzugriff auf genau einen Modellordner |\n38: | `<modellname>/` | Ein Lauf pro Modell: erzeugte App, `.agents/skills/` und `skills-lock.json` |\n39: \n40: Beispiel: `gemma-4-26b-a4b-it-oQ8e-mtp/` (aktuell mit installierten Skills inklusive Jev). Die `skills-lock.json` im Run-Ordner zeigt, welche Skills im Lauf aktiv waren. Daran erkennst du auch, ob ein Lauf mit oder ohne Jev war.\n41: \n42: ## Skill-Versionen\n43: \n44: Die Skills liegen als echte Kopien in `<modellname>/.agents/skills/` und gehören damit zum Lauf-Artefakt. Sie werden in geschlossenen Läufen **nicht** nachträglich aktualisiert, sonst ist der Lauf nicht mehr reproduzierbar.\n45: \n46: Stand prüfen (nur lesend, vergleicht die lokale `SKILL.md` mit dem Upstream auf GitHub):\n47: \n48: ```bash\n49: ./auto-install-skills.sh --check -d <modellname>            # Jev wird nur geprüft, wenn installiert\n50: ./auto-install-skills.sh --check -d <modellname> --with-jev # Exit 1, wenn etwas veraltet/fehlt\n51: ```\n52: \n53: Für einen **neuen** Lauf auf den aktuellen Upstream-Stand ziehen:\n54: \n55: ```bash\n56: ./auto-install-skills.sh -d <neuermodellname>\n57: ./auto-install-skills.sh --check -d <neuermodellname>\n58: ```\n59: \n60: `--update` führt `npx skills update -p -y` im Zielordner aus und aktualisiert nur bereits installierte Skills. Nur für offene bzw. neue Läufe verwenden.\n61: \n62: Bekannter Stand der vorhandenen Läufe: `vite-pwa-patterns` und `jev` entsprechen überall dem Upstream. `minimalist-ui` existiert in zwei Fassungen — ältere Läufe (u. a. `gemma-…`, `Deepseek-V4.1-Flash`, `Qwen3-Coder-Next-oQ4`, `Qwen3.8-27B-Turbo-Fable`) nutzen die frühere Version, spätere Läufe (u. a. `Qwen3.8-27B-oQ4e-mtp`, `Qwen3.8-27B-4bit-Splash`, `K2-Horizon-MoVA-…`, `Mellum2.1-…`) die aktuelle. Beim Vergleich von Design-Ergebnissen ist das mitzudenken.\n63: \n64: ## Einen Test durchführen\n65: \n66: 1. Modellordner anlegen: `mkdir <modellname>`\n67: 2. Skills hineininstallieren, aus diesem Verzeichnis:\n68:    - ohne Jev: `./auto-install-skills.sh -d <modellname>`\n69:    - mit Jev: `./auto-install-skills.sh -d <modellname> --with-jev`\n70:    - danach optional `./auto-install-skills.sh --check -d <modellname>` (siehe [Skill-Versionen](#skill-versionen))\n71: 3. Den Agenten (OpenCode) in `<modellname>/` starten, zum Beispiel mit der [macOS-Sandbox](#opencode-mit-schreibsperre-starten) oder der [Docker-Sandbox](#opencode-in-der-docker-sandbox-starten), und ihm den Prompt geben.\n72:    - **Nur den Teil oberhalb des `---` einfügen.** Die Rubrik darunter ist für die Auswertung und darf dem Modell nicht gezeigt werden.\n73:    - Bei einem Lauf **ohne Jev** zusätzlich den Abschnitt „Arbeitsweise mit Jev\" und den Jev-Teil des abschließenden Zusammenfassungs-Satzes aus dem eingefügten Prompt entfernen.\n74: 4. Jev-Läufe brauchen Netzzugriff und `TYPESAFE_API_KEY` (oder außerhalb der Sandbox `OPENROUTER_API_KEY`) in der Shell, aus der der Agent gestartet wird. Die Docker-Sandbox reicht derzeit nur `TYPESAFE_API_KEY` weiter. Vor dem Lauf einmal testen: `jev yes \"Ist 1 kleiner als 2?\"`\n75: 5. Das erzeugte Ergebnis unverändert in Git sichern, auch wenn der Lauf scheitert (siehe [`AGENTS.md`](../../AGENTS.md)).\n76: 6. Für den manuellen Browser-Test **jeden Run auf einem eigenen Origin starten**, bevorzugt mit einem eigenen Vite-/Preview-Port. Alternativ vor dem Test IndexedDB, localStorage, Cache Storage und Service Worker für den Origin löschen. So beeinflussen Datenbanknamen oder Schema-Versionen eines vorherigen Modells den nächsten Lauf nicht.\n77: \n78: ## OpenCode mit Schreibsperre starten\n79: \n80: `run-opencode-sandbox.sh` ist das Gegenstück zu `run-pi-sandbox.sh` für OpenCode V2, ohne Docker. Es nutzt die normale Host-Installation und globale Config von OpenCode (Provider, Modelle, Plugins, MCP) und verbietet per `sandbox-exec` das Schreiben im gesamten Home außer im Modellordner, `~/.local/share/opencode`, `~/.local/state/opencode`, `~/.opencode`, `~/.npm`, `~/.bun` und `~/.cache`. `~/.config/opencode` bleibt nur lesbar. Zum Lesen gesperrt sind `~/.ssh`, `~/.config/.secrets` (außer den Key-Dateien, die `opencode.json` per `{file:...}` einbindet) und die `service.json` des OpenCode-Hintergrunddienstes.\n81: \n82: ```bash\n83: ./run-opencode-sandbox.sh mein-modell-run                          # TUI\n84: ./run-opencode-sandbox.sh mein-modell-run --auto                   # TUI, Freigaben automatisch\n85: ./run-opencode-sandbox.sh mein-modell-run run --auto \"Prompt...\"   # nicht interaktiv\n86: ```\n87: \n88: OpenCode V2 führt Tools sonst im Hintergrunddienst (`opencode serve --service`) aus, der außerhalb der Sandbox läuft. Das Skript setzt deshalb immer `--standalone` (beim TUI und bei `run`/`mini`), sodass der private Server als Kindprozess ebenfalls gesperrt ist; `--server` wird abgelehnt. Umgebungsvariablen wie `TYPESAFE_API_KEY` werden unverändert vererbt. Optionen:\n89: \n90: - `OC_SANDBOX_EXTRA_RW=\"/pfad/a:/pfad/b\"` macht weitere Pfade beschreibbar.\n91: - `OC_SANDBOX_CONFIG_RW=1` macht `~/.config/opencode` beschreibbar.\n92: - `OC_SANDBOX_ALLOW_SECRETS=1` hebt die Lesesperre für `~/.config/.secrets` ganz auf.\n93: - `OC_SANDBOX_CMD=zsh` startet statt OpenCode einen anderen Befehl, zum Beispiel zum Testen der Sperre.\n94: \n95: Der Modellordner muss bereits existieren und unter diesem Verzeichnis liegen (`tools/` ist ausgeschlossen). Anders als die Docker-Variante schreibt dieses Skript keine eigenen Logs nach `.sandbox-debug/`; Sessions landen in der normalen OpenCode-Datenbank unter `~/.local/share/opencode`.\n96: \n97: ## OpenCode in der Docker-Sandbox starten\n98: \n99: `run-opencode-sandbox_alt.sh` wird aus diesem Verzeichnis mit einem **bereits vorhandenen Modellordner** aufgerufen. Für einen neuen Lauf zum Beispiel:\n100: \n101: ```bash\n102: mkdir mein-modell-run\n103: ./auto-install-skills.sh -d mein-modell-run\n104: ./run-opencode-sandbox_alt.sh mein-modell-run\n105: ```\n106: \n107: Für einen Jev-Lauf die Skills stattdessen mit `--with-jev` installieren und `TYPESAFE_API_KEY` vor dem Sandbox-Start in der Host-Shell exportieren. Dem Agenten anschließend nur den Promptteil oberhalb der Bewertungsrubrik geben. Geschlossene Modellläufe nicht erneut als Schreibziel verwenden.\n108: \n109: Voraussetzungen sind ein laufender Docker-Daemon, ein aus dem Container erreichbarer oMLX-Server (Standard: `http://192.168.0.189:8000/v1`) und eine oMLX-Key-Datei (Standard: `~/.config/.secrets/omlx-key`). Das Docker-Image wird beim ersten Start automatisch gebaut. Die oMLX-Model-ID entspricht standardmäßig dem Ordnernamen; bei einem anderen Server-Modellnamen kann sie separat gesetzt werden:\n110: \n111: ```bash\n112: OMLX_MODEL_ID=tatsaechliche-modell-id ./run-opencode-sandbox_alt.sh mein-modell-run\n113: ```\n114: \n115: Weitere Einstellungen sind `OMLX_BASE_URL`, `OMLX_KEY_FILE`, `CONTEXT_LIMIT` (Standard: `131072`) und `OUTPUT_LIMIT` (Standard: `16384`). Mit `REBUILD=1 ./run-opencode-sandbox_alt.sh mein-modell-run` wird das Image neu gebaut. Zusätzliche Argumente hinter dem Ordnernamen werden an OpenCode weitergereicht.\n116: \n117: Die Sandbox startet OpenCode mit `--standalone --auto` im Modellordner. Der gesamte Habit-Tracker-Bereich ist im Container lesbar; von den Host-Dateien ist nur der ausgewählte Modellordner beschreibbar. Terminal- und OpenCode-Logs werden unter `<modellname>/.sandbox-debug/` gespeichert.\n118: \n119: ## Pi mit Schreibsperre starten\n120: \n121: `run-pi-sandbox.sh` startet Pi im Modellordner, ohne Docker. Es nutzt `sandbox-exec` (nur macOS) und verbietet das Schreiben im gesamten Home außer im Modellordner, `~/.pi`, `~/.npm` und `~/.cache`. Lesen, Netz, `npm` und andere Tools bleiben frei; `~/.ssh` und `~/.config/.secrets` sind zusätzlich zum Lesen gesperrt. Der Agent kann dadurch nicht außerhalb des Run-Ordners schreiben und auch nicht per `git` committen, weil `.git` im Repo-Root liegt.\n122: \n123: ```bash\n124: ./run-pi-sandbox.sh mein-modell-run\n125: ./run-pi-sandbox.sh mein-modell-run --model xyz   # weitere Argumente gehen an pi\n126: ```\n127: \n128: Der Modellordner muss bereits existieren (inklusive installierter Skills) und unter diesem Verzeichnis liegen. Pi findet die Skills unter `<modellname>/.agents/skills/`, solange im Modellordner kein eigenes Git-Repo angelegt wird. Optionen per Umgebungsvariable:\n129: \n130: - `PI_SANDBOX_EXTRA_RW=\"/pfad/a:/pfad/b\"` macht weitere Pfade beschreibbar.\n131: - `PI_SANDBOX_ALLOW_SECRETS=1` hebt die Sperre für `~/.config/.secrets` auf, falls Pi den Modell-Key von dort liest.\n132: - `PI_SANDBOX_CMD=zsh` startet statt Pi einen anderen Befehl, zum Beispiel zum Testen der Sperre.\n133: \n134: `sandbox-exec` ist von Apple als veraltet markiert, funktioniert aber weiterhin. Die Sperre betrifft nur Schreibzugriffe; ein unbeschränktes `find /` wird nicht verhindert.\n135: \n136: ## Vergleich\n137: \n138: Pro Modell erlauben zwei Läufe mit sonst identischen Bedingungen (ohne Jev, mit Jev) einen sauberen Vergleich. Zu beachten: Jev-Läufe sind nicht mehr rein lokal, weil Jev die TypeSafe-API aufruft. Ergebnisse und Erkenntnisse werden in Notion dokumentiert, nicht in diesem Ordner. In der Datenbank **Benchmark Runs** wird dafür das Benchmark-Projekt „Habit-Tracker\" gewählt und der Git-Pfad `tests/habit-tracker/<modellname>` eingetragen.\n139: \n140: - Prompt-Seite: https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d\n141: - Projektseite: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f\n142: - Benchmark Runs: https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86"
+              }
+            ],
+            "metadata": {
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1792927536277,
+            "ran": 1792927536304,
+            "completed": 1792927536319
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "end": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 1750,
+        "output": 215,
+        "reasoning": 93,
+        "cache": {
+          "read": 14480,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_172cf14e4001DfqaD75uCjXrxH",
+      "time": {
+        "created": 1792927536361,
+        "streamed": 1792927606034,
+        "completed": 1792927606074
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "\nNow let me read the skills that are installed. I need to load the vite-pwa-patterns skill and the minimalist-ui skill. Let me also read the canonical prompt to understand the full task (I already have the task from the user, but let me check the prompt to see if there are additional details).\n\nActually, the user gave me the full task in the message. Let me focus on:\n1. Loading the skills (vite-pwa-patterns and minimalist-ui)\n2. Setting up the project\n\nLet me load the skills first. According to the task, I should use the `vite-pwa-patterns` skill for PWA config and the `minimalist-ui` design skill.\n\nLet me load both skills.\n",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1792927588345,
+            "completed": 1792927606025
+          }
+        },
+        {
+          "type": "text",
+          "text": "\n\nIch habe den Kontext verstanden. Jetzt lade ich die beiden relevanten Skills (PWA-Muster und Design), bevor ich das Projekt aufsetze.\n\n\n"
+        },
+        {
+          "type": "tool",
+          "id": "call_998be4cd",
+          "name": "skill",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "id": "vite-pwa-patterns"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "<skill_content name=\"vite-pwa-patterns\">\n# Skill: vite-pwa-patterns\n\n# Vite PWA Configuration\n\nProgressive Web App capabilities for Vite 5 + React 18 applications using vite-plugin-pwa and Workbox.\n\n## When to Use\n\n- Building installable web apps\n- Offline functionality required\n- Caching static assets for performance\n- Auto-update mechanisms needed\n- Mobile-first applications\n- Native-like app experience\n\n## Quick Reference\n\n### Basic Configuration\n\nConfigure PWA with vite-plugin-pwa:\n- `registerType: 'autoUpdate'` - Automatic service worker updates\n- `manifest` - App manifest with icons and theme\n- `workbox.runtimeCaching` - Cache strategies for assets and API\n- `includeAssets` - Static files to precache\n\nSee **examples.md** for complete vite.config.js setup.\n\n## Key Patterns\n\n| Pattern | Use Case | Configuration |\n|---------|----------|---------------|\n| **CacheFirst** | Static assets (images, fonts) | Fast load, serves from cache first |\n| **NetworkFirst** | API calls, dynamic content | Fresh data with offline fallback |\n| **StaleWhileRevalidate** | Avatars, non-critical UI | Instant response + background update |\n| **autoUpdate** | Seamless updates | New SW installs automatically |\n| **prompt** | User-controlled updates | Show update notification |\n\n### Caching Strategies\n\n**CacheFirst** - For static assets (images, fonts, styles):\n- Serve from cache immediately\n- Fallback to network if not cached\n- Best for content that rarely changes\n\n**NetworkFirst** - For API calls and dynamic content:\n- Try network first with timeout\n- Fallback to cache on network failure\n- Ensures fresh data when online\n\n**StaleWhileRevalidate** - For semi-static assets:\n- Serve stale cache immediately\n- Update cache in background\n- Balance between speed and freshness\n\nSee **reference.md** for complete Workbox configuration and cache expiration policies.\n\n## Anti-Patterns\n\n| Anti-Pattern | Pattern |\n|--------------|---------|\n| **Caching index.html indefinitely** | Exclude index.html from cache or use short TTL |\n| **Not cleaning up old caches** | Use cache versioning with expiration policies |\n| **Precaching protected routes** | Exclude authentication-required content from precache |\n| **Missing offline fallback** | Configure navigateFallback for offline page |\n| **networkTimeoutSeconds too low** | Set 5-10s timeout to avoid false offline state |\n| **Not versioning caches** | Use unique cache names per deployment |\n| **No HTTPS in production** | Service workers require HTTPS to register |\n\n---\n\n**See reference.md** for complete Workbox configuration, service worker lifecycle, debugging techniques, and testing strategies.\n\n**See examples.md** for production PWA setup including update prompts, offline fallback, and runtime caching from example-frontend.\n\nBase directory for this skill: /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents/skills/vite-pwa-patterns\nRelative paths in this skill (e.g., scripts/, reference/) are relative to this base directory.\nNote: file list is sampled.\n\n<skill_files>\n<file>/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents/skills/vite-pwa-patterns/examples.md</file>\n<file>/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents/skills/vite-pwa-patterns/reference.md</file>\n</skill_files>\n</skill_content>"
+              }
+            ],
+            "metadata": {
+              "name": "vite-pwa-patterns",
+              "directory": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents/skills/vite-pwa-patterns",
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1792927603736,
+            "ran": 1792927606029,
+            "completed": 1792927606042
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_f41850f6",
+          "name": "skill",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "id": "minimalist-ui"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "<skill_content name=\"minimalist-ui\">\n# Skill: minimalist-ui\n\n# Protocol: Premium Utilitarian Minimalism UI Architect\n\n## 1. Protocol Overview\nName: Premium Utilitarian Minimalism & Editorial UI\nDescription: An advanced frontend engineering directive for generating highly refined, ultra-minimalist, \"document-style\" web interfaces analogous to top-tier workspace platforms. This protocol strictly enforces a high-contrast warm monochrome palette, bespoke typographic hierarchies, meticulous structural macro-whitespace, bento-grid layouts, and an ultra-flat component architecture with deliberate muted pastel accents. It actively rejects standard generic SaaS design trends.\n\n## 2. Absolute Negative Constraints (Banned Elements)\nThe AI must strictly avoid the following generic web development defaults:\n- DO NOT use the \"Inter\", \"Roboto\", or \"Open Sans\" typefaces.\n- DO NOT use generic, thin-line icon libraries like \"Lucide\", \"Feather\", or standard \"Heroicons\".\n- DO NOT use Tailwind's default heavy drop shadows (e.g., `shadow-md`, `shadow-lg`, `shadow-xl`). Shadows must be practically non-existent or heavily customized to be ultra-diffuse and low opacity (< 0.05).\n- DO NOT use primary colored backgrounds for large elements or sections (e.g., no bright blue, green, or red hero sections).\n- DO NOT use gradients, neon colors, or 3D glassmorphism (beyond subtle navbar blurs).\n- DO NOT use `rounded-full` (pill shapes) for large containers, cards, or primary buttons.\n- DO NOT use emojis anywhere in code, markup, text content, headings, or alt text. Replace with proper icons or clean SVG primitives.\n- DO NOT use generic placeholder names like \"John Doe\", \"Acme Corp\", or \"Lorem Ipsum\". Use realistic, contextual content.\n- DO NOT use AI copywriting clichés: \"Elevate\", \"Seamless\", \"Unleash\", \"Next-Gen\", \"Game-changer\", \"Delve\". Write plain, specific language.\n\n## 3. Typographic Architecture\nThe interface must rely on extreme typographic contrast and premium font selection to establish an editorial feel.\n- Primary Sans-Serif (Body, UI, Buttons): Use clean, geometric, or system-native fonts with character. Target: `font-family: 'SF Pro Display', 'Geist Sans', 'Helvetica Neue', 'Switzer', sans-serif`.\n- Editorial Serif (Hero Headings & Quotes): Target: `font-family: 'Lyon Text', 'Newsreader', 'Playfair Display', 'Instrument Serif', serif`. Apply tight tracking (`letter-spacing: -0.02em` to `-0.04em`) and tight line-height (`1.1`).\n- Monospace (Code, Keystrokes, Meta-data): Target: `font-family: 'Geist Mono', 'SF Mono', 'JetBrains Mono', monospace`.\n- Text Colors: Body text must never be absolute black (`#000000`). Use off-black/charcoal (`#111111` or `#2F3437`) with a generous `line-height` of `1.6` for legibility. Secondary text should be muted gray (`#787774`).\n\n## 4. Color Palette (Warm Monochrome + Spot Pastels)\nColor is a scarce resource, utilized only for semantic meaning or subtle accents.\n- Canvas / Background: Pure White `#FFFFFF` or Warm Bone/Off-White `#F7F6F3` / `#FBFBFA`.\n- Primary Surface (Cards): `#FFFFFF` or `#F9F9F8`.\n- Structural Borders / Dividers: Ultra-light gray `#EAEAEA` or `rgba(0,0,0,0.06)`.\n- Accent Colors: Exclusively use highly desaturated, washed-out pastels for tags, inline code backgrounds, or subtle icon backgrounds.\n  - Pale Red: `#FDEBEC` (Text: `#9F2F2D`)\n  - Pale Blue: `#E1F3FE` (Text: `#1F6C9F`)\n  - Pale Green: `#EDF3EC` (Text: `#346538`)\n  - Pale Yellow: `#FBF3DB` (Text: `#956400`)\n\n## 5. Component Specifications\n- Bento Box Feature Grids:\n  - Utilize asymmetrical CSS Grid layouts.\n  - Cards must have exactly `border: 1px solid #EAEAEA`.\n  - Border-radius must be crisp: `8px` or `12px` maximum.\n  - Internal padding must be generous (e.g., `24px` to `40px`).\n- Primary Call-To-Action (Buttons):\n  - Solid background `#111111`, text `#FFFFFF`. \n  - Slight border-radius (`4px` to `6px`). No box-shadow. \n  - Hover state should be a subtle color shift to `#333333` or a micro-scale `transform: scale(0.98)`.\n- Tags & Status Badges:\n  - Pill-shaped (`border-radius: 9999px`), very small typography (`text-xs`), uppercase with wide tracking (`letter-spacing: 0.05em`).\n  - Background must use the defined Muted Pastels.\n- Accordions (FAQ):\n  - Strip all container boxes. Separate items only with a `border-bottom: 1px solid #EAEAEA`.\n  - Use a clean, sharp `+` and `-` icon for the toggle state.\n- Keystroke Micro-UIs:\n  - Render shortcuts as physical keys using `<kbd>` tags: `border: 1px solid #EAEAEA`, `border-radius: 4px`, `background: #F7F6F3`, using the Monospace font.\n- Faux-OS Window Chrome:\n  - When mocking up software, wrap it in a minimalist container with a white top bar containing three small, light gray circles (replicating macOS window controls).\n\n## 6. Iconography & Imagery Directives\n- System Icons: Use \"Phosphor Icons (Bold or Fill weights)\" or \"Radix UI Icons\" for a technical, slightly thicker-stroke aesthetic. Standardize stroke width across all icons.\n- Illustrations: Monochromatic, rough continuous-line ink sketches on a white background, featuring a single offset geometric shape filled with a muted pastel color.\n- Photography: Use high-quality, desaturated images with a warm tone. Apply subtle overlays (`opacity: 0.04` warm grain) to blend photos into the monochrome palette. Never use oversaturated stock photos. Use reliable placeholders like `https://picsum.photos/seed/{context}/1200/800` when real assets are unavailable.\n- Hero & Section Backgrounds: Sections should not feel empty and flat. Use subtle full-width background imagery at very low opacity, soft radial light spots (`radial-gradient` with warm tones at `opacity: 0.03`), or minimal geometric line patterns to add depth without breaking the clean aesthetic.\n\n## 7. Subtle Motion & Micro-Animations\nMotion should feel invisible — present but never distracting. The goal is quiet sophistication, not spectacle.\n- Scroll Entry: Elements fade in gently as they enter the viewport. Use `translateY(12px)` + `opacity: 0` resolving over `600ms` with `cubic-bezier(0.16, 1, 0.3, 1)`. Use `IntersectionObserver`, never `window.addEventListener('scroll')`.\n- Hover States: Cards lift with an ultra-subtle shadow shift (`box-shadow` transitioning from `0 0 0` to `0 2px 8px rgba(0,0,0,0.04)` over `200ms`). Buttons respond with `scale(0.98)` on `:active`.\n- Staggered Reveals: Lists and grid items enter with a cascade delay (`animation-delay: calc(var(--index) * 80ms)`). Never mount everything at once.\n- Background Ambient Motion: Optional. A single, very slow-moving radial gradient blob (`animation-duration: 20s+`, `opacity: 0.02-0.04`) drifting behind hero sections. Must be applied to a `position: fixed; pointer-events: none` layer. Never on scrolling containers.\n- Performance: Animate exclusively via `transform` and `opacity`. No layout-triggering properties (`top`, `left`, `width`, `height`). Use `will-change: transform` sparingly and only on actively animating elements.\n- Reduced Motion (mandatory): Gate scroll-entry, staggered reveals, and ambient background motion behind `@media (prefers-reduced-motion: no-preference)`, and add a `@media (prefers-reduced-motion: reduce)` block that disables them so content appears instantly at rest. Hover and `:active` feedback may remain.\n\n## 8. Execution Protocol\nWhen tasked with writing frontend code (HTML, React, Tailwind, Vue) or designing a layout:\n1. Establish the macro-whitespace first. Use massive vertical padding between sections (e.g., `py-24` or `py-32` in Tailwind).\n2. Constrain the main typography content width to `max-w-4xl` or `max-w-5xl`.\n3. Apply the custom typographic hierarchy and monochromatic color variables immediately.\n4. Ensure every card, divider, and border adheres strictly to the `1px solid #EAEAEA` rule.\n5. Add scroll-entry animations to all major content blocks.\n6. Ensure sections have visual depth through imagery, ambient gradients, or subtle textures — no empty flat backgrounds.\n7. Provide code that reflects this high-end, uncluttered, editorial aesthetic natively without requiring manual adjustments.\n\nBase directory for this skill: /Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents/skills/minimalist-ui\nRelative paths in this skill (e.g., scripts/, reference/) are relative to this base directory.\nNote: file list is sampled.\n\n<skill_files>\n<file>/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents/skills/minimalist-ui/agents/openai.yaml</file>\n</skill_files>\n</skill_content>"
+              }
+            ],
+            "metadata": {
+              "name": "minimalist-ui",
+              "directory": "/Users/cedi/Clouds/Projekte/KI/LLM-Bench/tests/habit-tracker/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP/.agents/skills/minimalist-ui",
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1792927605949,
+            "ran": 1792927606031,
+            "completed": 1792927606045
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "end": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0,
+      "tokens": {
+        "input": 4658,
+        "output": 91,
+        "reasoning": 155,
+        "cache": {
+          "read": 16225,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_172d02542001kvylyISrxnFNPK",
+      "time": {
+        "created": 1792927606087,
+        "completed": 1792927610341
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP",
+        "providerID": "omlx",
+        "variant": "high"
+      },
+      "content": [],
+      "snapshot": {
+        "start": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "end": "46c743cadd5ff4dc8ebefe567e3783f6fd484f2a",
+        "files": []
+      },
+      "finish": "error",
+      "error": {
+        "type": "provider.invalid-request",
+        "message": "oMLX prefill memory guard rejected this prompt: Prefill would require ~54.35 GB peak (current 44.88 GB + KV+SDPA 9.47 GB) but the prefill limit is 53.50 GB (metal_cap ceiling 55.15 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.",
+        "status": 400,
+        "response": {
+          "body": "{\"error\":{\"message\":\"oMLX prefill memory guard rejected this prompt: Prefill would require ~54.35 GB peak (current 44.88 GB + KV+SDPA 9.47 GB) but the prefill limit is 53.50 GB (metal_cap ceiling 55.15 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"prefill_memory_exceeded\",\"omlx_code\":\"prefill_memory_exceeded\",\"estimated_bytes\":58359991390,\"limit_bytes\":57443324014},\"type\":\"error\"}"
+        }
+      }
+    },
+    {
+      "id": "msg_172d035e7001zmwH1iijYNareH",
+      "time": {
+        "created": 1792927610343
+      },
+      "type": "idle",
+      "outcome": "failed",
+      "error": {
+        "type": "provider.invalid-request",
+        "message": "oMLX prefill memory guard rejected this prompt: Prefill would require ~54.35 GB peak (current 44.88 GB + KV+SDPA 9.47 GB) but the prefill limit is 53.50 GB (metal_cap ceiling 55.15 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.",
+        "status": 400,
+        "response": {
+          "body": "{\"error\":{\"message\":\"oMLX prefill memory guard rejected this prompt: Prefill would require ~54.35 GB peak (current 44.88 GB + KV+SDPA 9.47 GB) but the prefill limit is 53.50 GB (metal_cap ceiling 55.15 GB - safety margin 1.65 GB). Raise kernel iogpu.wired_limit_mb in Terminal (currently caps Metal at 54.69 GB), or reduce context length. To continue, set Memory Guard to aggressive, raise the custom memory guard ceiling, free system memory, or compact/reduce context.\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"prefill_memory_exceeded\",\"omlx_code\":\"prefill_memory_exceeded\",\"estimated_bytes\":58359991390,\"limit_bytes\":57443324014},\"type\":\"error\"}"
+        }
+      }
+    }
+  ]
+}

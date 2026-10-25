@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "minimalist-ui": {
+      "source": "leonxlnx/taste-skill-classics",
+      "sourceType": "github",
+      "skillPath": "skills/minimalist-skill/SKILL.md",
+      "computedHash": "1e37c8db6ad1589730a035a0298d125d3bafb4b9207c024d37b7638008aa1874"
+    },
+    "vite-pwa-patterns": {
+      "source": "ai-enhanced-engineer/aiee-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vite-pwa-patterns/SKILL.md",
+      "computedHash": "8f9f3a480f65af109120abf3010609a3daff3b068845b7d7c87aa5f20ee9d253"
+    }
+  }
+}
