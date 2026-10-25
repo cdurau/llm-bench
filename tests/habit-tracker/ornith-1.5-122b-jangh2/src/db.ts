@@ -5,6 +5,10 @@ import type { Habit, Completion, Mood, Settings } from './types'
 const DB_NAME = 'rhythm-db'
 const DB_VERSION = 1
 
+interface MetaEntry extends Settings {
+  key: string
+}
+
 interface RhythmSchema extends DBSchema {
   habits: {
     key: string
@@ -21,7 +25,7 @@ interface RhythmSchema extends DBSchema {
   }
   meta: {
     key: string
-    value: Settings
+    value: MetaEntry
   }
 }
 
@@ -103,5 +107,5 @@ export async function loadSettings(): Promise<Settings | undefined> {
 
 export async function saveSettings(s: Settings): Promise<void> {
   const db = await getDB()
-  await db.put('meta', s)
+  await db.put('meta', { key: 'settings', theme: s.theme })
 }

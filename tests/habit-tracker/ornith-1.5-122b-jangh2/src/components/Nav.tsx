@@ -29,10 +29,10 @@ function SettingsIcon() {
 export type Screen = 'today' | 'week' | 'settings'
 
 export default function Nav({ screen, onSet }: { screen: Screen; onSet: (s: Screen) => void }) {
-  const items: { id: string; label: string; icon: JSX.Element }[] = [
-    { id: 'nav-today', label: 'Heute', icon: <CheckIcon /> },
-    { id: 'nav-week', label: 'Woche', icon: <WeekIcon /> },
-    { id: 'nav-settings', label: 'Einstellungen', icon: <SettingsIcon /> },
+  const items: { testId: string; id: Screen; label: string; icon: JSX.Element }[] = [
+    { testId: 'nav-today', id: 'today', label: 'Heute', icon: <CheckIcon /> },
+    { testId: 'nav-week', id: 'week', label: 'Woche', icon: <WeekIcon /> },
+    { testId: 'nav-settings', id: 'settings', label: 'Einstellungen', icon: <SettingsIcon /> },
   ]
 
   return (
@@ -40,10 +40,10 @@ export default function Nav({ screen, onSet }: { screen: Screen; onSet: (s: Scre
       <div className="mx-auto flex max-w-3xl">
         {items.map((it) => (
           <button
-            key={it.id}
-            data-testid={it.id}
+            key={it.testId}
+            data-testid={it.testId}
             type="button"
-            onClick={() => onSet(it.id as Screen)}
+            onClick={() => onSet(it.id)}
             aria-current={screen === it.id ? 'page' : undefined}
             aria-label={it.label}
             className="theme-transition flex min-h-[44px] flex-1 items-center justify-center gap-2 px-3 py-3 text-sm font-medium"

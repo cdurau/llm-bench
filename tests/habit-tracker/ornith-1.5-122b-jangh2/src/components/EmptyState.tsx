@@ -18,6 +18,7 @@ export default function EmptyState({ title, text, action }: EmptyStateProps) {
       </div>
       {action && (
         <button
+          data-testid="habit-add"
           type="button"
           onClick={action.onClick}
           className="mt-2 rounded-md bg-[var(--text)] px-5 py-3 text-sm font-medium text-[var(--bg)] transition-transform active:scale-95"
