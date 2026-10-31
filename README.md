@@ -2,7 +2,41 @@
 
 Reproduzierbares Artefakt-Repository für Benchmarks lokaler Coding-LLMs.
 
-**Inhalt:** [Source of Truth](#-source-of-truth) · [Runtime-Strategie](#-runtime--und-modellformat-strategie) · [PulseBoard](#-pulseboard-benchmark) · [Todo-PWA](#-todo-pwa-vorversuch) · [Hardware](#-hardware) · [Habit-Tracker](#-habit-tracker-benchmark-rhythm) · [Struktur](#-repository-struktur) · [Artefakte](#-aktuelle-modell-artefakte) · [Integrität](#-benchmark-integrität)
+Lokale Modelle bauen hier als Coding-Agenten dieselben vollständigen Apps auf einem MacBook Pro (Apple M1 Max, 64 GB). Bewertet wird nicht nur der Code, sondern der ganze Agentenlauf: Tool-Nutzung, Recovery, Kontextverhalten, Laufzeit und die tatsächliche Verifikation im Browser.
+
+**Inhalt:** [Ergebnisse](#-ergebnisse) · [Source of Truth](#-source-of-truth) · [Runtime-Strategie](#-runtime--und-modellformat-strategie) · [PulseBoard](#-pulseboard-benchmark) · [Todo-PWA](#-todo-pwa-vorversuch) · [Hardware](#-hardware) · [Habit-Tracker](#-habit-tracker-benchmark-rhythm) · [Struktur](#-repository-struktur) · [Artefakte](#-aktuelle-modell-artefakte) · [Integrität](#-benchmark-integrität) · [Lizenz](#️-lizenz)
+
+## 🏆 Ergebnisse
+
+44 dokumentierte Läufe, Stand 2026-10-31:
+
+| Benchmark | PASS | PARTIAL | FAIL | INFRA |
+| --- | ---: | ---: | ---: | ---: |
+| Habit-Tracker „Rhythm“ | 7 | 11 | 11 | 1 |
+| PulseBoard | 1 | 5 | 7 | 0 |
+| Todo-PWA (Vorversuch) | 0 | 0 | 0 | 1 |
+
+Alle Läufe mit PASS:
+
+| Lauf | Benchmark | Runtime / Agent | Laufzeit | Einordnung |
+| --- | --- | --- | ---: | --- |
+| [Tiel-Coder 35B A3B oQ4e MTP](./tests/habit-tracker/Tiel-Coder-35B-A3B-MLX-oQ4e-MTP/) | Habit-Tracker | oMLX / Pi | 155,8 min | Smoke-Test 24/24; bisher stärkster lokaler Habit-Tracker-Lauf |
+| [Qwen3.8 27B Splash](./tests/habit-tracker/incoai-Qwen3.8-27B-Splash/) | Habit-Tracker | Splash / Pi | 142,8 min | Smoke-Test 16/16 und echter Offline-Reload |
+| [Qwen3.8 27B 4bit Splash](./tests/habit-tracker/Qwen3.8-27B-4bit-Splash/) | Habit-Tracker | oMLX-Backend Splash / OpenCode | 171,0 min | Funktionen vollständig; Browser- und Offline-Test nicht automatisiert |
+| [Ornith 1.5 35B BigBang](./tests/habit-tracker/Ornith-1.5-35B-A3B-BigBang-oQ8e-mtp/) | Habit-Tracker | oMLX / OpenCode | 62,2 min | Schnell und optisch stark; offene UI- und A11y-Fehler |
+| [Qwen3.8 27B oQ4e MTP Optimized](./models/qwen3/qwen3.8-27b-oq4e-mtp-optimized/qwen3.8-27b-oq4e-mtp-optimized-test1/) | PulseBoard | oMLX / OpenCode | 748,9 min | 47/47 Tests und Offline-PWA verifiziert; drei manuelle Eingriffe nötig |
+| [Flint 40B JANG 6M v2](./tests/habit-tracker/Flint-40B-A2.5B-JANG_6M-v2/) | Habit-Tracker | Osaurus / OpenCode | – | Funktional; kein autonomer First-Pass-Lauf, Nutzerhinweise nötig |
+| [Flint 40B JANG 6M](./tests/habit-tracker/Flint-40B-A2.5B-JANG_6M/) | Habit-Tracker | Osaurus / OpenCode | 85,9 min | **Kein gültiger Blind-Benchmark:** Das Modell hatte Referenzcode gelesen |
+| [DeepSeek V4.1 Flash](./tests/habit-tracker/Deepseek-V4.1-Flash/) | Habit-Tracker | Cloud / Pi | – | Cloud-Referenz, kein lokaler Lauf |
+
+Die wichtigsten Erkenntnisse:
+
+- **Grüne Checks beweisen keine funktionierende App.** Ein Lauf hatte 46 grüne Tests und einen erfolgreichen Build, aber beim ersten Start war das Formular zum Anlegen nicht erreichbar.
+- **Abschlussberichte von Modellen sind keine Belege.** Mehrere Modelle meldeten Funktionen als fertig, die im Browser nicht funktionierten. Deshalb wird jeder Endstand unabhängig geprüft.
+- **Geschwindigkeit und Qualität sind getrennte Größen.** Die Laufzeiten erfolgreicher Läufe reichen von rund einer Stunde bis über zwölf Stunden.
+- **Runtime und Modell lassen sich nicht immer trennen.** Tool-Parser, Reasoning-Parser und Speicherdruck können wie Modellfehler aussehen, deshalb werden Infrastrukturfehler getrennt erfasst.
+
+Laufzeiten stammen aus den Session-Logs oder der Auswertung und enthalten teils Pausen. Die Läufe nutzen unterschiedliche Prompt-Varianten und Konfigurationen und sind daher nicht als striktes Ranking zu lesen.
 
 ## 📚 Source of Truth
 
@@ -15,7 +49,6 @@ Dieses Projekt trennt technische Artefakte bewusst von der lesbaren Auswertung:
 
 Notion-Links:
 
-- [Projekt](https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f)
 - [Benchmark Runs](https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86)
 - [Methodik](https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e)
 - Prompt-Seiten: [PulseBoard](https://app.notion.com/p/3e58253ebb2481559131f2672aacc765), [Habit-Tracker](https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d)
@@ -214,5 +247,11 @@ Run-Urteile und detaillierte Auswertungen werden hier bewusst **nicht dupliziert
 - Kaputte oder unvollständige Endstände als Beleg erhalten.
 - Vom Modell erzeugte Dateien nicht verschieben oder normalisieren, nur um Layouts anzugleichen.
 - Rohe Session-Exporte und reproduzierbare Fehlerbelege in Git behalten.
-- Erzählende Auswertung, Vergleiche und Lessons Learned in Notion behalten.
+- Erzählende Auswertung, Vergleiche und Lessons Learned in Notion behalten. Die README enthält nur eine kompakte Ergebnisübersicht.
 - Die finale Browser-/UI-Verifikation getrennt vom Compile-/Build-Erfolg betrachten; visuell kaputtes Styling, leere erzeugte Assets, unvollständiges Laufzeitverhalten oder blockierte Erststart-Abläufe bleiben Benchmark-Befunde, auch wenn `npm run build` und automatisierte Tests erfolgreich beendet werden.
+
+**Schwärzungen vor der Veröffentlichung:** In den Session-Logs von `tests/habit-tracker/Qwen3.8-Flash-Next-REAP-288-MLX-4bit-qwen3-next-parser/` und `tests/habit-tracker/Qwen3.6-35B-A3B-4bit/` hatten Modelle private Verzeichnisse außerhalb des Benchmarks aufgelistet. Nur diese Ausgaben sind durch `[REDACTED: private directory listing removed before publication]` ersetzt. Code, Bewertungen und der übrige Log bleiben unverändert.
+
+## ⚖️ Lizenz
+
+Die eigenen Skripte, Prompts und die Dokumentation stehen unter der [MIT-Lizenz](./LICENSE). Modellausgaben und mitgesicherte Skills von Dritten sind davon ausgenommen. Für Skills gelten die Lizenzen ihrer Ursprungsprojekte.

@@ -11,6 +11,8 @@ The project has two sources of truth:
 
 Do not duplicate narrative benchmark documentation in Git.
 
+Exception: `README.md` may hold a compact results overview (status counts, PASS runs, key findings) so public readers can see outcomes. Detailed evaluations stay in Notion. This repository is public: before committing session logs, check them for private data and redact only output unrelated to the benchmark, with the redaction noted in the README and the Notion run page.
+
 ## Canonical locations
 
 ### GitHub

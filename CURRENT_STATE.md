@@ -12,11 +12,15 @@
 
 ## Not Working / Risks
 
+- New session logs can contain private data when a model lists folders outside its run. Scan them before committing.
+- `OMLX-Benchmarks/` and `oMLX-Benchmarks/` are both tracked and collide on case-insensitive file systems.
 - The legacy skills.sh page for `leonxlnx/taste-skill/minimalist-ui` still shows the removed repository source.
 - Existing runs contain their historical skill versions and may fail `--check` against current upstream. Do not update closed runs.
 
 ## Recent Changes
 
+- 2026-10-31: Published the repository as a new public `cdurau/llm-bench` with redacted history; the previous private repository is `cdurau/llm-bench-private-archive`.
+- 2026-10-31: Added `LICENSE` (MIT, own material only) and a README results overview.
 - 2026-10-24: Updated the `minimalist-ui` source after its upstream classic skills moved.
 - 2026-10-24: Initialized compact repository project memory.
 
