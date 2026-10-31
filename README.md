@@ -1,35 +1,48 @@
-# llm-bench
+# 🧪 llm-bench
 
 Reproduzierbares Artefakt-Repository für Benchmarks lokaler Coding-LLMs.
 
-## Source of Truth
+**Inhalt:** [Source of Truth](#-source-of-truth) · [Runtime-Strategie](#-runtime--und-modellformat-strategie) · [PulseBoard](#-pulseboard-benchmark) · [Todo-PWA](#-todo-pwa-vorversuch) · [Hardware](#-hardware) · [Habit-Tracker](#-habit-tracker-benchmark-rhythm) · [Struktur](#-repository-struktur) · [Artefakte](#-aktuelle-modell-artefakte) · [Integrität](#-benchmark-integrität)
+
+## 📚 Source of Truth
 
 Dieses Projekt trennt technische Artefakte bewusst von der lesbaren Auswertung:
 
-- **GitHub** enthält Benchmark-Prompts, erzeugten Code, Configs, rohe Session-Exporte/Logs und weitere reproduzierbare Artefakte.
-- **Notion** enthält Run-Auswertungen, Vergleiche, Erkenntnisse, Entscheidungen und die Benchmark-Methodik.
+| Ort | Inhalt |
+| --- | --- |
+| **GitHub** | Benchmark-Prompts, erzeugter Code, Configs, rohe Session-Exporte/Logs und weitere reproduzierbare Artefakte |
+| **Notion** | Run-Auswertungen, Vergleiche, Erkenntnisse, Entscheidungen und die Benchmark-Methodik |
 
-Notion-Projekt: https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f  
-Benchmark Runs: https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86  
-Methodik: https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e  
-Prompt-Seiten: [PulseBoard](https://app.notion.com/p/3e58253ebb2481559131f2672aacc765), [Habit-Tracker](https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d)
+Notion-Links:
 
-## Runtime- und Modellformat-Strategie
+- [Projekt](https://app.notion.com/p/3e58253ebb2481509990d9277c093f8f)
+- [Benchmark Runs](https://app.notion.com/p/18ff8888f9df4a4ebddb4927e07a8c86)
+- [Methodik](https://app.notion.com/p/3e58253ebb2481c5b3a5e88723c25c3e)
+- Prompt-Seiten: [PulseBoard](https://app.notion.com/p/3e58253ebb2481559131f2672aacc765), [Habit-Tracker](https://app.notion.com/p/3e98253ebb248154bfc2ed1a92e13f2d)
+
+## ⚙️ Runtime- und Modellformat-Strategie
 
 Stand 2026-09-27 ist der Benchmark bewusst auf das praktische Ziel ausgerichtet: zuverlässige lokale Coding-Agenten auf Apple Silicon, die mittelgroße bis komplexe Anwendungen mit minimalem manuellem Eingreifen bauen können.
+
+### Runtimes
 
 - **Primärer Pfad: oMLX + MLX.** Das ist der Standard für ernsthafte neue Coding-Benchmark-Läufe und die aktuelle Referenzplattform.
 - **Vergleichspfad: Ollama + MLX.** Ausgewählte starke Modelle können unter kontrollierten Bedingungen gegen oMLX getestet werden, insbesondere bei Tool-Calling, TTFT, Decode-Geschwindigkeit, Speicherbedarf und Agenten-Stabilität.
 - **Modell-Labor / Fallback: LM Studio + MLX/GGUF.** LM Studio bleibt nützlich, um neue Modelle schnell zu laden und zu untersuchen und für Kompatibilitätschecks, ist aber nicht mehr die primäre Benchmark-Runtime.
 - **GGUF ist ein gezielter Nebenpfad.** Nutze es, wenn ein interessantes Modell/Finetune nicht sinnvoll als MLX verfügbar ist oder GGUF einen konkreten Vorteil bietet. Das Projekt strebt keine 50:50-Aufteilung zwischen MLX und GGUF an.
+
+### Modellauswahl
+
 - Als grobe Richtlinie sollten **80–90 % der relevanten Modell-Exploration MLX nutzen**. Nicht jede Quantisierung in jeder Runtime testen, solange der Vergleich keine konkrete Frage beantwortet.
 - Vielversprechende **27–40B Dense/MoE**-Modelle und größere **50–70B MoE- oder stark quantisierte Modelle** priorisieren, wenn sie genug Speicher-Headroom für Runtime, KV-Cache und Coding-Agent lassen.
 - **100–120B-Experimente sind selektiv**, kein Standard-Suchpfad. Die Lade-/Inferenz-Experimente mit Nemotron 120B sind ein Beispiel dafür, dass Runtime-Komplexität und Speicherdruck den praktischen Nutzen überwiegen können.
 - Bei einem besonders starken Kandidaten kann ein kontrollierter **oMLX-vs-Ollama-MLX**-Folgetest dasselbe Modell anhand von TTFT, Decode-Geschwindigkeit, RAM, Tool-Call-Erfolg, Agenten-Stabilität und dem finalen PulseBoard-Ergebnis vergleichen.
 
-Die aktuelle praktische Referenz ist **Qwen3.8-35B-A3B-Distill-oQ8-fp16-mtp + oMLX**. Neue Kandidaten werden vor allem am kombinierten Ergebnis aus Qualität, Geschwindigkeit, Speicherbedarf und agentischer Zuverlässigkeit gemessen, nicht allein an rohen Tokens/s. Die ausführliche Runtime-Begründung und laufende Erkenntnisse stehen weiter in der Notion-Seite **Inference Provider & Runtime Vergleich**.
+> 🎯 **Aktuelle Referenz:** **Qwen3.8-35B-A3B-Distill-oQ8-fp16-mtp + oMLX**. Neue Kandidaten werden vor allem am kombinierten Ergebnis aus Qualität, Geschwindigkeit, Speicherbedarf und agentischer Zuverlässigkeit gemessen, nicht allein an rohen Tokens/s.
+>
+> Die ausführliche Runtime-Begründung und laufende Erkenntnisse stehen weiter in der Notion-Seite **Inference Provider & Runtime Vergleich**.
 
-## PulseBoard-Benchmark
+## 📊 PulseBoard-Benchmark
 
 Der ursprüngliche kanonische, reproduzierbare Prompt ist [`instructions.md`](./instructions.md).
 
@@ -37,7 +50,7 @@ Läufe mit dem erweiterten Agenten-Workflow mit `frontend-design`, Jev und Proje
 
 Regeln für Agenten und Dokumentation stehen in [`AGENTS.md`](./AGENTS.md).
 
-### Laufzeitmessung
+### ⏱️ Laufzeitmessung
 
 Die Benchmark-Laufzeit wird **aus den gesicherten OpenCode-/Session-Logs abgeleitet**, nicht manuell aus Chat-Nachrichten oder der Erinnerung an die Uhrzeit geschätzt.
 
@@ -50,21 +63,21 @@ Die Benchmark-Laufzeit wird **aus den gesicherten OpenCode-/Session-Logs abgelei
 
 Für künftige Benchmark-Auswertungen ist die Laufzeit-Extraktion aus den Logs ein Standard-Auswertungsschritt neben Build/Tests, funktionaler Verifikation, Tool-Nutzungs-Stabilität und UI/PWA-Inspektion.
 
-## Todo-PWA (Vorversuch)
+## ✅ Todo-PWA (Vorversuch)
 
 Vor PulseBoard gab es einen kleinen Vorversuch mit einer Todo-PWA. Der Prompt ist [`todo_prompt.md`](./todo_prompt.md). Der einzige Lauf dazu ist `models/qwen3/qwen3.8-27b-ollama/qwen3.8-27b-ollama-test1/` (Ollama, in Notion als INFRA bewertet).
 
-## Hardware
+## 💻 Hardware
 
 Die Referenzhardware für alle Läufe steht in [`HARDWARE.md`](./HARDWARE.md). Abweichungen werden beim jeweiligen Run dokumentiert.
 
-## Habit-Tracker-Benchmark („Rhythm")
+## 🎯 Habit-Tracker-Benchmark („Rhythm")
 
 Zweite Benchmark-Aufgabe nach PulseBoard: ein Habit- und Stimmungs-Tracker als PWA mit Fokus auf Designqualität und Skill-Nutzung (`minimalist-ui`, `vite-pwa-patterns`, optional Jev). Prompt, Installations-Skripte und Anleitung stehen in [`tests/habit-tracker/`](./tests/habit-tracker/README.md).
 
 Die Ergebnisse liegen **pro Projekt statt pro Modell** unter `tests/habit-tracker/<modellname>/`, nicht in der `models/`-Struktur von PulseBoard. Die Regel bleibt dieselbe: Das vom Modell erzeugte Ergebnis wird unverändert gesichert.
 
-## Repository-Struktur
+## 🗂️ Repository-Struktur
 
 ```text
 instructions.md                         # kanonischer PulseBoard-Prompt
@@ -88,7 +101,7 @@ tests/
 
 Modell-Artefakte sind zuerst nach Modellfamilie gruppiert. Der nummerierte Test-Ordner bleibt die kanonische Run-Grenze. So kann dasselbe Modell mehrere unabhängige Benchmark-Apps oder Benchmark-Fälle durchlaufen, ohne frühere Ergebnisse zu überschreiben. Ein kurzer optionaler Suffix wie `-mehr-kontext` kann für eine kontrollierte Konfigurationsvariante verwendet werden, während die Testnummer der eindeutige Slot-Bezeichner bleibt.
 
-**Wichtig:** Der Inhalt innerhalb eines Test-Ordners bleibt exakt so erhalten, wie das Modell ihn erzeugt hat. Der Benchmark normalisiert das erzeugte Projektlayout nicht nachträglich.
+> ⚠️ **Wichtig:** Der Inhalt innerhalb eines Test-Ordners bleibt exakt so erhalten, wie das Modell ihn erzeugt hat. Der Benchmark normalisiert das erzeugte Projektlayout nicht nachträglich.
 
 Die aktuellen PulseBoard-Läufe unterscheiden sich zum Beispiel bewusst:
 
@@ -104,7 +117,7 @@ Sowohl direkte als auch verschachtelte Layouts sind gültige Benchmark-Artefakte
 
 Ein gescheitertes, unterbrochenes, teilweise funktionierendes oder visuell kaputtes Ergebnis ist trotzdem ein gültiges Benchmark-Artefakt und wird genau so gesichert, wie der Lauf endete. Ein erfolgreicher Build oder grüne Unit-Tests bedeuten für sich genommen kein erfolgreiches Benchmark-Ergebnis; die finale UI/PWA-Verifikation wird separat in Notion bewertet.
 
-## Aktuelle Modell-Artefakte
+## 📦 Aktuelle Modell-Artefakte
 
 - `models/Laguna/Laguna-XS-2.1-oQ8e/Laguna-XS-2.1-oQ8e-test1/`
   - oMLX / OpenCode v2 / M1 Max 64 GB / 65.536 konfigurierter Kontext / Laguna DFlash oQ8 Draft-Modell
@@ -195,7 +208,7 @@ Ein gescheitertes, unterbrochenes, teilweise funktionierendes oder visuell kaput
 
 Run-Urteile und detaillierte Auswertungen werden hier bewusst **nicht dupliziert**. Stattdessen siehe die Notion-Datenbank **Benchmark Runs**.
 
-## Benchmark-Integrität
+## 🔒 Benchmark-Integrität
 
 - Einen abgeschlossenen Lauf nicht reparieren, nur damit das Ergebnis besteht.
 - Kaputte oder unvollständige Endstände als Beleg erhalten.
