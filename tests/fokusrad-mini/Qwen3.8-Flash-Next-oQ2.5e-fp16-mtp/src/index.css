@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+/* Dark Mode per Klassenschalter (Light/Dark/System-Toggle der App) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* „Morgenfluss"-Palette: sanfte Teal-/Salbei- + warme Sand-/Schiefer-Töne.
+   Kontrastwerte sind in Light und Dark nach WCAG AA gewählt. */
+:root {
+  --canvas: #f2eee4;
+  --surface: #faf8f2;
+  --surface-2: #ebe6d8;
+  --ink: #24302b;
+  --ink-soft: #55655c;
+  --line: #d9d3c3;
+  --accent: #2f635c;
+  --accent-strong: #27544e;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(47 99 92 / 0.09);
+  --wheel-center: #faf8f2;
+  --seg-empty: #e3dcc9;
+  --seg-filled: #4c7f75;
+  --glow: rgb(76 127 117 / 0.35);
+  --shadow-tint: rgb(70 72 56 / 0.16);
+  /* Stimmungs-Punkte (decorativ, warm → teal) */
+  --mood-1: #7e5f4e;
+  --mood-2: #a3806a;
+  --mood-3: #8e9c88;
+  --mood-4: #5f8b7e;
+  --mood-5: #3e7c74;
+}
+
+.dark {
+  --canvas: #161d19;
+  --surface: #1f2823;
+  --surface-2: #2a352e;
+  --ink: #e7ebe0;
+  --ink-soft: #a3ae9f;
+  --line: #37423b;
+  --accent: #2f635c;
+  --accent-strong: #3b7a70;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(110 158 145 / 0.14);
+  --wheel-center: #1f2823;
+  --seg-empty: #2b352e;
+  --seg-filled: #6e9e91;
+  --glow: rgb(110 158 145 / 0.3);
+  --shadow-tint: rgb(6 10 8 / 0.5);
+  --mood-1: #c2957e;
+  --mood-2: #cfa886;
+  --mood-3: #b4c2b1;
+  --mood-4: #7fb3a2;
+  --mood-5: #5fa392;
+}
+
+/* Runtime-Semantik-Tokens für Tailwind-Utilities (bg-canvas, text-ink, …) */
+@theme inline {
+  --font-sans: ui-rounded, "SF Pro Rounded", system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --shadow-card: 0 10px 30px -14px var(--shadow-tint);
+  --animate-rise: rise 0.45s ease-out both;
+  --animate-glow: glow 2.8s ease-in-out infinite;
+  --animate-soft-pulse: soft-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(76 127 117 / 0);
+  }
+  50% {
+    box-shadow: 0 0 26px 6px var(--glow);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* mobile-native-Baseline: kein Tap-Flash, kein Overscroll-Banding,
+   16px in Inputs (gegen iOS-Auto-Zoom), sofortiges Tap-Feedback. */
+html {
+  background-color: var(--canvas);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  margin: 0;
+  background-color: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px; /*(iOS-Zoom-Ursache, nie user-scalable=no) */
+}
+
+button,
+a,
+[role='button'] {
+  touch-action: manipulation;
+}
+
+/* Nur Steuerungselecte nicht selektierbar – Content bleibt kopierbar. */
+button,
+[role='button'] {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Safe-Area-Insets (Notch/Home-Indikator; ohne viewport-fit=cover = 0) */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-bottom {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Rad-Segmente: sanftes Einfärben via CSS-Transition auf fill */
+.wheel-seg {
+  fill: var(--seg-empty);
+  transition:
+    fill 700ms ease,
+    opacity 700ms ease;
+}
+
+.wheel-seg-filled {
+  fill: var(--seg-filled);
+}
+
+.wheel-seg-active {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  animation: soft-pulse 2.2s ease-in-out infinite;
+}
+
+/* Gemeinsame Buttons/Cards/Felder – 8-Point-Grid, 44px-Touch-Ziele */
+.btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl px-4 py-3 text-[16px] font-semibold transition-[transform,background-color,border-color] duration-150 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:opacity-45 disabled:pointer-events-none;
+}
+
+.btn-primary {
+  @apply bg-accent text-accent-ink hover:bg-accent-strong;
+}
+
+.btn-ghost {
+  @apply border border-line bg-surface text-ink hover:bg-surface-2;
+}
+
+.card {
+  @apply rounded-2xl border border-line bg-surface p-4 shadow-card;
+}
+
+.input {
+  @apply w-full resize-y rounded-2xl border border-line bg-surface px-4 py-3 text-[16px] leading-relaxed text-ink outline-none transition-colors duration-150 placeholder:text-ink-soft/60 focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40;
+}
+
+.chip {
+  @apply inline-flex min-h-8 items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1 text-xs text-ink-soft;
+}
