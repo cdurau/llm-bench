@@ -2,7 +2,7 @@
 
 ## High Priority
 
-- None.
+- Add the Notion **Benchmark Runs** entry for `tests/fokusrad-mini/Qwen3.8-Flash-Next-oQ2.5e-fp16-mtp/` (PASS) once the Notion connector is enabled.
 
 ## Medium Priority
 
@@ -15,6 +15,7 @@
 
 ## Done
 
+- Evaluate `tests/fokusrad-mini/Qwen3.8-Flash-Next-oQ2.5e-fp16-mtp/` (19/19 Playwright E2E checks, WCAG contrast audit, timing/oMLX log extraction) and update `README.md` results overview.
 - Publish the repository with redacted history, `LICENSE`, and a README results overview.
 - Point `minimalist-ui` installation to `leonxlnx/taste-skill-classics`.
 - Verify Bash syntax, dry-run, and an isolated end-to-end installation without changing an existing run.

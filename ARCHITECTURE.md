@@ -8,6 +8,7 @@ The repository has no single application stack. Each benchmark run contains the 
 
 - `models/`: PulseBoard and earlier model run artifacts.
 - `tests/habit-tracker/`: Habit Tracker prompt, launchers, verifier, and one folder per model run.
+- `tests/fokusrad-mini/`: Fokusrad Mini prompts (`fokusrad_prompt.md`, `fokusrad_prompt_ohne_jev.md`), launchers, skill installers, and one folder per model run.
 - `runtime-tests/`: runtime checks outside benchmark runs.
 - `scripts/`: inspection and analysis utilities.
 

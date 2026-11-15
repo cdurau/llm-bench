@@ -14,6 +14,7 @@ This repository is the reproducible artifact store for local coding-LLM benchmar
 
 - PulseBoard benchmark artifacts under `models/`.
 - Habit Tracker („Rhythm") benchmark under `tests/habit-tracker/`.
+- Fokusrad Mini („Fokusrad") benchmark under `tests/fokusrad-mini/`.
 - Shell launchers for sandboxed OpenCode and Pi runs.
 - Playwright smoke-test tooling for the Habit Tracker verification variant.
 
@@ -28,6 +29,7 @@ This repository is the reproducible artifact store for local coding-LLM benchmar
 
 - PulseBoard: `models/<model-family>/<model>/<model>-test<N>[-variant]/`.
 - Habit Tracker: `tests/habit-tracker/<model-name>/`.
+- Fokusrad Mini: `tests/fokusrad-mini/<model-name>/`.
 - Raw sessions, logs, configs, and reproducible failures stay with their run artifact.
 
 ## Key Files

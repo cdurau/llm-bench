@@ -4,22 +4,24 @@ Reproduzierbares Artefakt-Repository für Benchmarks lokaler Coding-LLMs.
 
 Lokale Modelle bauen hier als Coding-Agenten dieselben vollständigen Apps auf einem MacBook Pro (Apple M1 Max, 64 GB). Bewertet wird nicht nur der Code, sondern der ganze Agentenlauf: Tool-Nutzung, Recovery, Kontextverhalten, Laufzeit und die tatsächliche Verifikation im Browser.
 
-**Inhalt:** [Ergebnisse](#-ergebnisse) · [Source of Truth](#-source-of-truth) · [Runtime-Strategie](#-runtime--und-modellformat-strategie) · [PulseBoard](#-pulseboard-benchmark) · [Todo-PWA](#-todo-pwa-vorversuch) · [Hardware](#-hardware) · [Habit-Tracker](#-habit-tracker-benchmark-rhythm) · [Struktur](#-repository-struktur) · [Artefakte](#-aktuelle-modell-artefakte) · [Integrität](#-benchmark-integrität) · [Lizenz](#️-lizenz)
+**Inhalt:** [Ergebnisse](#-ergebnisse) · [Source of Truth](#-source-of-truth) · [Runtime-Strategie](#-runtime--und-modellformat-strategie) · [PulseBoard](#-pulseboard-benchmark) · [Todo-PWA](#-todo-pwa-vorversuch) · [Hardware](#-hardware) · [Habit-Tracker](#-habit-tracker-benchmark-rhythm) · [Fokusrad Mini](#-fokusrad-mini-benchmark-fokusrad) · [Struktur](#-repository-struktur) · [Artefakte](#-aktuelle-modell-artefakte) · [Integrität](#-benchmark-integrität) · [Lizenz](#️-lizenz)
 
 ## 🏆 Ergebnisse
 
-44 dokumentierte Läufe, Stand 2026-10-31:
+45 dokumentierte Läufe, Stand 2026-11-15:
 
 | Benchmark | PASS | PARTIAL | FAIL | INFRA |
 | --- | ---: | ---: | ---: | ---: |
 | Habit-Tracker „Rhythm“ | 7 | 11 | 11 | 1 |
 | PulseBoard | 1 | 5 | 7 | 0 |
+| Fokusrad Mini „Fokusrad“ | 1 | 0 | 0 | 0 |
 | Todo-PWA (Vorversuch) | 0 | 0 | 0 | 1 |
 
 Alle Läufe mit PASS:
 
 | Lauf | Benchmark | Runtime / Agent | Laufzeit | Einordnung |
 | --- | --- | --- | ---: | --- |
+| [Qwen3.8 Flash Next oQ2.5e fp16 MTP](./tests/fokusrad-mini/Qwen3.8-Flash-Next-oQ2.5e-fp16-mtp/) | Fokusrad Mini | oMLX / OpenCode | 192,9 min | 19/19 E2E-Checks und echter Offline-Reload verifiziert; 111,0 min aktiv (inkl. 64,4 min oMLX-Memory-Guard-Pause) |
 | [Tiel-Coder 35B A3B oQ4e MTP](./tests/habit-tracker/Tiel-Coder-35B-A3B-MLX-oQ4e-MTP/) | Habit-Tracker | oMLX / Pi | 155,8 min | Smoke-Test 24/24; bisher stärkster lokaler Habit-Tracker-Lauf |
 | [Qwen3.8 27B Splash](./tests/habit-tracker/incoai-Qwen3.8-27B-Splash/) | Habit-Tracker | Splash / Pi | 142,8 min | Smoke-Test 16/16 und echter Offline-Reload |
 | [Qwen3.8 27B 4bit Splash](./tests/habit-tracker/Qwen3.8-27B-4bit-Splash/) | Habit-Tracker | oMLX-Backend Splash / OpenCode | 171,0 min | Funktionen vollständig; Browser- und Offline-Test nicht automatisiert |
@@ -110,6 +112,10 @@ Zweite Benchmark-Aufgabe nach PulseBoard: ein Habit- und Stimmungs-Tracker als P
 
 Die Ergebnisse liegen **pro Projekt statt pro Modell** unter `tests/habit-tracker/<modellname>/`, nicht in der `models/`-Struktur von PulseBoard. Die Regel bleibt dieselbe: Das vom Modell erzeugte Ergebnis wird unverändert gesichert.
 
+## 🎡 Fokusrad-Mini-Benchmark („Fokusrad")
+
+Dritte, kompakte Benchmark-Aufgabe: eine ruhige, offlinefähige **5-Minuten-Gedanken-Shift-PWA** nach dem Focus-Wheel-Prinzip (8 SVG-Kreissegmente rund um den Zielgedanken, Start-/End-Stimmung 1–5, versionierte `localStorage`-Persistenz inkl. Entwurfs-Reload-Schutz, Archiv und Light/Dark/System-Mode) mit den Skills `mobile-native`, `mobile-app-ui-design` und `vite-pwa-patterns` (optional Jev). Prompt, Installations-Skripte und Anleitung stehen in [`tests/fokusrad-mini/`](./tests/fokusrad-mini/README.md).
+
 ## 🗂️ Repository-Struktur
 
 ```text
@@ -130,6 +136,11 @@ tests/
     habit_tracker_prompt.md             # Prompt inkl. Bewertungsrubrik
     README.md                           # Anleitung für den Habit-Tracker-Benchmark
     <modellname>/                       # ein Lauf pro Modell (Habit-Tracker-Benchmark)
+  fokusrad-mini/
+    fokusrad_prompt.md                  # Prompt mit Jev inkl. Bewertungsrubrik
+    fokusrad_prompt_ohne_jev.md         # Prompt ohne Jev inkl. Bewertungsrubrik
+    README.md                           # Anleitung für den Fokusrad-Mini-Benchmark
+    <modellname>/                       # ein Lauf pro Modell (Fokusrad-Mini-Benchmark)
 ```
 
 Modell-Artefakte sind zuerst nach Modellfamilie gruppiert. Der nummerierte Test-Ordner bleibt die kanonische Run-Grenze. So kann dasselbe Modell mehrere unabhängige Benchmark-Apps oder Benchmark-Fälle durchlaufen, ohne frühere Ergebnisse zu überschreiben. Ein kurzer optionaler Suffix wie `-mehr-kontext` kann für eine kontrollierte Konfigurationsvariante verwendet werden, während die Testnummer der eindeutige Slot-Bezeichner bleibt.

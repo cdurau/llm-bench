@@ -23,6 +23,7 @@ Repository: https://github.com/cdurau/llm-bench
 - `instructions_jev_frontend-skill.md` — extended PulseBoard prompt (`frontend-design` + Jev + project-memory documentation). Runs using it are not directly comparable with runs using the original prompt.
 - `todo_prompt.md` — prompt of the earlier Todo PWA trial run (`models/qwen3/qwen3.8-27b-ollama/`); it is not a PulseBoard run.
 - `tests/habit-tracker/` — Habit Tracker („Rhythm") benchmark. Contains `habit_tracker_prompt.md` (prompt plus evaluation rubric), `install-skills.sh` / `auto-install-skills.sh` (skill installers), a `README.md`, and **one folder per model** at `tests/habit-tracker/<model-name>/` (structure per project instead of per model). Do not show the rubric at the end of `habit_tracker_prompt.md` to the model under test. `habit_tracker_prompt_verify.md` is a variant (mandatory `data-testid`s plus a smoke-test step, Jev part unchanged); runs using it are not directly comparable with runs using the original prompt. `tests/habit-tracker/tools/verify/` holds the smoke-test script (`verify.mjs`, Playwright) that variant relies on; it is not a model folder and must not be modified by a model under test.
+- `tests/fokusrad-mini/` — Fokusrad Mini („Fokusrad") benchmark. Contains `fokusrad_prompt.md` (with Jev, plus evaluation rubric), `fokusrad_prompt_ohne_jev.md` (without Jev, plus evaluation rubric), `install-skills.sh` / `auto-install-skills.sh`, sandbox launchers, a `README.md`, and **one folder per model** at `tests/fokusrad-mini/<model-name>/`. Do not show the rubric below `---` to the model under test.
 - `models/<model-family>/<model>/<model>-test<N>[-<variant>]/` — canonical run boundary for PulseBoard (and earlier) benchmark artifacts; a short optional suffix may identify a controlled configuration variant.
 - `<model>-test1`, `<model>-test2`, ... are independent numbered benchmark/test slots for that model. Optional suffixes such as `-mehr-kontext` do not create a second slot with the same number; the numeric test ID remains unique.
 - `HARDWARE.md` — reference hardware for all runs unless a run documents otherwise.
@@ -99,7 +100,7 @@ When a model run is finished or intentionally aborted:
 8. Create or update the matching entry in the Notion **Benchmark Runs** database.
 9. Populate at least:
    - Run
-   - Benchmark-Projekt (PulseBoard, Todo-PWA, Habit-Tracker)
+   - Benchmark-Projekt (PulseBoard, Todo-PWA, Habit-Tracker, Fokusrad-Mini)
    - Modell
    - Datum
    - Status
@@ -134,7 +135,7 @@ Runtime errors and model errors should be separated in the evaluation whenever p
 - Keep model-created folder/layout decisions intact as part of the artifact.
 - Distinguish infrastructure/tool-protocol failures from agent reasoning/coding failures.
 - Repeated bad edits, failure to change strategy, task drift, and inability to verify the final product are relevant agentic benchmark findings.
-- Do not change `instructions.md` (or `tests/habit-tracker/habit_tracker_prompt.md` for the Habit Tracker) between comparison runs unless the benchmark methodology is intentionally versioned and documented in Notion.
+- Do not change `instructions.md` (or `tests/habit-tracker/habit_tracker_prompt.md` for the Habit Tracker, or `tests/fokusrad-mini/fokusrad_prompt*.md` for Fokusrad Mini) between comparison runs unless the benchmark methodology is intentionally versioned and documented in Notion.
 - Do not repurpose or overwrite a numbered test folder after it has become part of a documented benchmark run.
 
 ## Notion access
