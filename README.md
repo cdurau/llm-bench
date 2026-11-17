@@ -8,13 +8,13 @@ Lokale Modelle bauen hier als Coding-Agenten dieselben vollständigen Apps auf e
 
 ## 🏆 Ergebnisse
 
-45 dokumentierte Läufe, Stand 2026-11-15:
+46 dokumentierte Läufe, Stand 2026-11-17:
 
 | Benchmark | PASS | PARTIAL | FAIL | INFRA |
 | --- | ---: | ---: | ---: | ---: |
 | Habit-Tracker „Rhythm“ | 7 | 11 | 11 | 1 |
 | PulseBoard | 1 | 5 | 7 | 0 |
-| Fokusrad Mini „Fokusrad“ | 1 | 0 | 0 | 0 |
+| Fokusrad Mini „Fokusrad“ | 1 | 1 | 0 | 0 |
 | Todo-PWA (Vorversuch) | 0 | 0 | 0 | 1 |
 
 Alle Läufe mit PASS:
