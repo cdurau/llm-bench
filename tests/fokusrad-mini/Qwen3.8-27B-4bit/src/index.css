@@ -1,0 +1,352 @@
+@import "tailwindcss";
+
+/* Klassen-basierter Dark Mode (.dark auf <html>) für Tailwind-v4-Varianten. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  „Morgenfluss"-Palette
+  Light: warme Sandtöne + Salbei/Teal
+  Dark:  tiefer Slate-Teal + warmes Creme
+  Alle Text-/Hintergrund-Kombos sind nach WCAG AA abgeglichen.
+*/
+:root {
+  --bg: #f6f1e8;
+  --bg-soft: #efe7d9;
+  --surface: #fcfaf5;
+  --surface-2: #f0eadd;
+  --ink: #2b3a36;
+  --ink-2: #56685f;
+  --ink-3: #64756c;
+  --accent: #2e7d6d;
+  --accent-strong: #246053;
+  --accent-ink: #f7fbf6;
+  --sage: #8fae94;
+  --sand: #e3d7c0;
+  --line: #e0d7c3;
+  --danger: #a85440;
+  --shadow: 32 43 39; /* RGB für getönte Schatten */
+
+  --mood-1: #b26049;
+  --mood-2: #bb8452;
+  --mood-3: #9a9a5f;
+  --mood-4: #6f9f6e;
+  --mood-5: #2e7d6d;
+  --mood-num-1: #fdf8f3;
+  --mood-num-2: #33261a;
+  --mood-num-3: #2e2e1c;
+  --mood-num-4: #1d2b1c;
+  --mood-num-5: #f7fbf6;
+
+  --wheel-empty: #eae2d2;
+  --wheel-1: #2c7a6b;
+  --wheel-2: #378670;
+  --wheel-3: #479176;
+  --wheel-4: #5a9b7a;
+  --wheel-5: #6ca37e;
+  --wheel-6: #7eab84;
+  --wheel-7: #8fb28b;
+  --wheel-8: #a0ba92;
+
+  --seg-num: #f4efe4;
+  --center-ink: #2b3a36;
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #131c1a;
+  --bg-soft: #182420;
+  --surface: #1d2b27;
+  --surface-2: #24332e;
+  --ink: #ece7da;
+  --ink-2: #a8b5a9;
+  --ink-3: #8a9a8e;
+  --accent: #67bda6;
+  --accent-strong: #7ecbbc;
+  --accent-ink: #10201b;
+  --sage: #7d9c85;
+  --sand: #3b3a2e;
+  --line: #2e3d37;
+  --danger: #d98a72;
+  --shadow: 0 0 0;
+
+  --mood-1: #d98a72;
+  --mood-2: #d9a06b;
+  --mood-3: #c9c178;
+  --mood-4: #96c28f;
+  --mood-5: #6fc7a8;
+  --mood-num-1: #2b150e;
+  --mood-num-2: #332008;
+  --mood-num-3: #2e2a10;
+  --mood-num-4: #16260f;
+  --mood-num-5: #0c261d;
+
+  --wheel-empty: #263530;
+  --wheel-1: #4f9c88;
+  --wheel-2: #5ca38d;
+  --wheel-3: #69aa90;
+  --wheel-4: #77b093;
+  --wheel-5: #85b694;
+  --wheel-6: #93bc92;
+  --wheel-7: #a1c193;
+  --wheel-8: #afc894;
+
+  --seg-num: #15201d;
+  --center-ink: #ece7da;
+
+  color-scheme: dark;
+}
+
+/* CSS-Variablen als Tailwind-Farben abbilden (bg-bg, text-ink, border-line, …).
+   `inline` sorgt dafür, dass die Utilities die Laufzeit-Variablen referenzieren
+   und so auf den .dark-Wechsel reagieren. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-ink: var(--accent-ink);
+  --color-sage: var(--sage);
+  --color-sand: var(--sand);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* mobile-native-Baseline                                              */
+/* ------------------------------------------------------------------ */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  margin: 0;
+  overscroll-behavior: none;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* iOS zoomt bei Fokus, wenn das Eingabefeld < 16 px groß ist. */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+/* Kein Double-Tap-Zoom-Verzug auf steuerelementen. */
+button,
+a,
+[role="button"],
+.tappable {
+  touch-action: manipulation;
+}
+
+/* Keine Textauswahl / Long-Press-Callout auf Bedienelementen. */
+button,
+[role="button"],
+.chip,
+.tab {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* App-Shell: folgt dem sichtbaren Viewport (dvh), Fallback für alte Browser. */
+.app-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Safe-Area-Auslassungen (viewport-fit=cover ist in index.html gesetzt). */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Drück-Feedback statt Browser-Flash (100–160 ms, ease-out). */
+.press {
+  transition:
+    transform 120ms ease-out,
+    background-color 120ms ease-out,
+    border-color 120ms ease-out,
+    opacity 120ms ease-out;
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+/*
+  Fixierte Aktionsleiste in der Thumb-Zone.
+  `--nav`: über der Tab-Navigation (56 px + Safe Area), sonst am
+  unteren Bildschirmrand (Safe-Area-Unterrand via env()).
+*/
+.action-dock {
+  position: sticky;
+  z-index: 10;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+}
+.action-dock--nav {
+  bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Hover-Styles nur für echte Pointer-Geräte (Tailwinds `hover:` kompiliert
+   bereits zu `@media (hover: hover)` – hier für handgeschriebene Klassen). */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background-color: var(--accent-strong);
+  }
+  .btn-ghost:hover {
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+  .press:hover {
+    opacity: 0.88;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Gemeinsame Bausteine                                               */
+/* ------------------------------------------------------------------ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0 1.5rem;
+  border: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 10px 24px -12px rgb(var(--shadow) / 0.55);
+  cursor: pointer;
+}
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  border-radius: 9999px;
+  background-color: transparent;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0 1.25rem;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  box-shadow: 0 14px 34px -22px rgb(var(--shadow) / 0.5);
+}
+
+.field {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 1rem;
+  background-color: var(--surface-2);
+  border: 1px solid transparent;
+  color: var(--ink);
+  padding: 0.875rem 1rem;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+.field::placeholder {
+  color: var(--ink-3);
+  opacity: 1;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: var(--surface);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Sanfte Segment-Füllung im SVG-Rad. */
+.wheel-segment {
+  transition:
+    fill 500ms ease,
+    opacity 500ms ease;
+}
+.wheel-center {
+  transition: fill 500ms ease, stroke 500ms ease;
+}
+
+/* Ruhiger Einblend-Übergang zwischen Ansichten. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise-in {
+  animation: rise-in 320ms ease-out both;
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  70% {
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.pop-in {
+  animation: pop-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in,
+  .pop-in,
+  .wheel-segment,
+  .wheel-center,
+  .press {
+    animation: none;
+    transition: none;
+  }
+}
