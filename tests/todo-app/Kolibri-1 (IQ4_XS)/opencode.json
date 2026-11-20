@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "llama-local": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "M1 Max llama-server",
+      "options": {
+        "baseURL": "http://MacBook-Pro-von-Cedric.local:8080/v1",
+        "apiKey": "local"
+      },
+      "models": {
+        "kolibri-1": {
+          "name": "Kolibri-1 (IQ4_XS)",
+          "limit": {
+            "context": 65536,
+            "output": 8192
+          }
+        }
+      }
+    }
+  }
+}

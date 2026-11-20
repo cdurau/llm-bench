@@ -1,0 +1,14 @@
+[      28ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3dfd23b1:15805
+[      40ms] [WARNING] Error while trying to use the following icon from the Manifest: http://localhost:5173/pwa-192x192.png (Download error or resource isn't a valid image) @ http://localhost:5173/:1
+[  625994ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:1031
+[  627084ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=512d6618:15805
+[  668766ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:1031
+[  923317ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=825ad951:15805
+[ 1083835ms] ReferenceError: isDark is not defined
+    at eval (eval at predicate (eval at evaluate (:370:30)), <anonymous>:1:63)
+    at predicate (eval at evaluate (:370:30), <anonymous>:7:27)
+    at next (eval at evaluate (:370:30), <anonymous>:29:33)
+    at eval (eval at evaluate (:370:30), <anonymous>:42:13)
+    at UtilityScript.evaluate (<anonymous>:372:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[ 1266001ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:1031

@@ -1,0 +1,20 @@
+- generic [ref=f4e4]:
+  - banner [ref=f4e5]:
+    - heading "Todo App" [level=1] [ref=f4e6]
+    - button "☀️ Light Mode" [ref=f4e7] [cursor=pointer]
+  - generic [ref=f4e8]:
+    - textbox "Add a new todo..." [ref=f4e9]
+    - button "Add" [active] [ref=f4e10] [cursor=pointer]
+  - generic [ref=f4e11]:
+    - generic [ref=f4e12]:
+      - button "All" [ref=f4e13] [cursor=pointer]
+      - button "Open" [ref=f4e14] [cursor=pointer]
+      - button "Done" [ref=f4e15] [cursor=pointer]
+    - paragraph [ref=f4e16]: 1 open todo
+  - generic [ref=f4e19]:
+    - generic [ref=f4e20] [cursor=pointer]:
+      - checkbox "Persistence Test 2" [ref=f4e21]
+      - generic [ref=f4e22]: Persistence Test 2
+    - generic [ref=f4e23]:
+      - button "Edit" [ref=f4e24] [cursor=pointer]
+      - button "Delete" [ref=f4e25] [cursor=pointer]

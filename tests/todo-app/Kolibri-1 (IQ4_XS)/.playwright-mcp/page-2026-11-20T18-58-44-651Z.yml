@@ -1,0 +1,20 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - heading "Todo App" [level=1] [ref=e6]
+    - button "🌙 Dark Mode" [ref=e7] [cursor=pointer]
+  - generic [ref=e8]:
+    - textbox "Add a new todo..." [ref=e9]
+    - button "Add" [active] [ref=e10] [cursor=pointer]
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - button "All" [ref=e13] [cursor=pointer]
+      - button "Open" [ref=e14] [cursor=pointer]
+      - button "Done" [ref=e15] [cursor=pointer]
+    - paragraph [ref=e16]: 1 open todo
+  - generic [ref=e19]:
+    - generic [ref=e20] [cursor=pointer]:
+      - checkbox "Test todo" [ref=e21]
+      - generic [ref=e22]: Test todo
+    - generic [ref=e23]:
+      - button "Edit" [ref=e24] [cursor=pointer]
+      - button "Delete" [ref=e25] [cursor=pointer]

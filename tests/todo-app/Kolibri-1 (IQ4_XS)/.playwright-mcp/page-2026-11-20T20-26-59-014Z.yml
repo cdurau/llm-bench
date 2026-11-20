@@ -1,0 +1,14 @@
+- generic [ref=f12e4]:
+  - banner [ref=f12e5]:
+    - heading "Todo App" [level=1] [ref=f12e6]
+    - button "🌙 Dark Mode" [ref=f12e7] [cursor=pointer]
+  - generic [ref=f12e8]:
+    - textbox "Add a new todo..." [ref=f12e9]
+    - button "Add" [ref=f12e10] [cursor=pointer]
+  - generic [ref=f12e11]:
+    - generic [ref=f12e12]:
+      - button "All" [ref=f12e13] [cursor=pointer]
+      - button "Open" [ref=f12e14] [cursor=pointer]
+      - button "Done" [ref=f12e15] [cursor=pointer]
+    - paragraph [ref=f12e16]: 0 open todos
+  - paragraph [ref=f12e18]: No todos found.

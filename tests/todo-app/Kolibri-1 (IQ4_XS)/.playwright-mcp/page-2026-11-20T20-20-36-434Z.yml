@@ -1,0 +1,20 @@
+- generic [ref=f10e4]:
+  - banner [ref=f10e5]:
+    - heading "Todo App" [level=1] [ref=f10e6]
+    - button "☀️ Light Mode" [ref=f10e7] [cursor=pointer]
+  - generic [ref=f10e8]:
+    - textbox "Add a new todo..." [ref=f10e9]
+    - button "Add" [ref=f10e10] [cursor=pointer]
+  - generic [ref=f10e11]:
+    - generic [ref=f10e12]:
+      - button "All" [ref=f10e13] [cursor=pointer]
+      - button "Open" [ref=f10e14] [cursor=pointer]
+      - button "Done" [ref=f10e15] [cursor=pointer]
+    - paragraph [ref=f10e16]: 1 open todo
+  - generic [ref=f10e18]:
+    - generic [ref=f10e19] [cursor=pointer]:
+      - checkbox "Updated Text" [ref=f10e20]
+      - generic [ref=f10e21]: Updated Text
+    - generic [ref=f10e22]:
+      - button "Edit" [ref=f10e23] [cursor=pointer]
+      - button "Delete" [ref=f10e24] [cursor=pointer]
