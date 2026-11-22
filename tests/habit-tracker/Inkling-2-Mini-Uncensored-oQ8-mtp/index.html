@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Rhythm — Habit- und Stimmungs-Tracker. Offline, privat, auf dem Gerät." />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F6F3" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171614" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Rhythm" />
+    <script>
+      try {
+        var m = localStorage.getItem('rhythm-theme') || 'system'
+        var dark = m === 'dark' || (m === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        if (dark) document.documentElement.classList.add('dark')
+      } catch (e) {}
+    </script>
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/icons/icon.svg" color="#171614" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>Rhythm — Habit- &amp; Stimmungs-Tracker</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
