@@ -94,7 +94,7 @@ export default function TodayScreen({ onNavigateToWeek }: TodayScreenProps) {
       {/* Header */}
       <header className="pt-6 pb-4">
         <h1 className="text-3xl font-bold mb-2">Heute</h1>
-        <p className="text-muted-foreground">{formatDisplayDate(new Date())}</p>
+        <p className="text-muted-foreground">{formatDisplayDate(todayDateString)}</p>
         
         {/* Progress */}
         {totalCount > 0 && (

@@ -11,7 +11,8 @@ interface HabitItemProps {
 export default function HabitItem({ habit, onToggle, onDelete }: HabitItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   
-  const currentStreak = getDaysSince(habit.createdAt.toString());
+  // getDaysSince expects a number (timestamp), so we pass the createdAt directly
+  const currentStreak = getDaysSince(habit.createdAt);
   
   return (
     <div className="bg-surface rounded-xl p-4 shadow-sm border border-border/50 transition-all hover:shadow-md">

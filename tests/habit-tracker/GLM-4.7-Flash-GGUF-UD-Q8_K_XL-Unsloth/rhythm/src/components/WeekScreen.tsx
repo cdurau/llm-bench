@@ -22,7 +22,6 @@ export default function WeekScreen({ onNavigateToToday }: WeekScreenProps) {
   const [moodData, setMoodData] = useState<any[]>([]);
   const [selectedHabitId, setSelectedHabitId] = useState<string | null>(null);
   const [completionData, setCompletionData] = useState<any[]>([]);
-  const weekStartString = formatDate(getStartOfWeek(new Date()));
   
   useEffect(() => {
     loadHabits();
@@ -35,12 +34,12 @@ export default function WeekScreen({ onNavigateToToday }: WeekScreenProps) {
   };
 
   const loadMoodData = async () => {
-    const endOfWeek = new Date(getEndOfWeek(new Date()));
-    const startOfWeek = new Date(weekStartString);
+    const endOfWeekDate = new Date(getEndOfWeek(new Date()));
+    const startOfWeekDate = new Date(getStartOfWeek(new Date()));
     
     const entries = await getMoodEntriesForDateRange(
-      weekStartString,
-      formatDate(endOfWeek)
+      formatDate(startOfWeekDate),
+      formatDate(endOfWeekDate)
     );
     
     // Sort by date
@@ -93,7 +92,7 @@ export default function WeekScreen({ onNavigateToToday }: WeekScreenProps) {
       {/* Header */}
       <header className="pt-6 pb-4">
         <h1 className="text-3xl font-bold mb-2">Woche</h1>
-        <p className="text-muted-foreground">{formatDisplayDate(getStartOfWeek(new Date()))} - {formatDisplayDate(getEndOfWeek(new Date()))}</p>
+        <p className="text-muted-foreground">{formatDisplayDate(formatDate(getStartOfWeek(new Date())))} - {formatDisplayDate(formatDate(getEndOfWeek(new Date())))}</p>
       </header>
 
       {/* Mood Chart */}

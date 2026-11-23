@@ -1,5 +1,3 @@
-import { MoodValue } from './db';
-
 export const MOOD_OPTIONS = [
   { value: 1, emoji: '😢', label: 'Sehr schlecht' },
   { value: 2, emoji: '😕', label: 'Schlecht' },
@@ -55,7 +53,7 @@ export function isToday(date: string): boolean {
   return isSameDay(formatDate(new Date()), date);
 }
 
-export function getDaysSince(date: string): number {
+export function getDaysSince(date: number): number {
   const now = new Date();
   const d = new Date(date);
   const diffTime = Math.abs(now.getTime() - d.getTime());
