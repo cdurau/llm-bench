@@ -27,7 +27,7 @@
 set -euo pipefail
 
 # ---- Konfiguration ---------------------------------------------------------
-AGENT="opencode"
+AGENT="universal"
 
 # Basis-Skills: "repo|skill-name|pfad-der-SKILL.md" (in jedem Lauf installiert)
 BASE_SKILLS=(
