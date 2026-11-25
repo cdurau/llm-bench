@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 .npm/
+.npm-cache/
 .yarn/
 .pnp.*
 package-lock.json.bak
