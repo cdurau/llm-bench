@@ -106,6 +106,10 @@ fi
 
 # Globale Agent-Skills/AGENTS (z. B. ~/.agents) bleiben lesbar, aber nicht schreibbar.
 ALLOW_READ="$ALLOW_READ (subpath \"$(esc "$HOME_REAL/.agents")\")"
+# Node-Toolchain (nvm) und Playwright-Browser nur lesbar: ohne das startet der
+# Playwright-MCP (npx @playwright/mcp) in der Sandbox nicht (npx liegt in ~/.nvm).
+ALLOW_READ="$ALLOW_READ (subpath \"$(esc "$HOME_REAL/.nvm")\")"
+ALLOW_READ="$ALLOW_READ (subpath \"$(esc "$HOME_REAL/Library/Caches/ms-playwright")\")"
 
 # {file:...}-Refs aus globaler Config bleiben lesbar.
 for cfg in "$CONFIG_DIR/opencode.json" "$CONFIG_DIR/opencode.jsonc"; do
@@ -142,7 +146,8 @@ PROFILE="(version 1)
 (deny file-write* $DENY_WRITE)
 (allow file-write*$RW)
 (deny file-read* $DENY_READ (with errno 2))
-(allow file-read*$ALLOW_READ)"
+(allow file-read*$ALLOW_READ)
+(allow file-read-metadata (literal \"$(esc "$HOME_REAL")\") (literal \"$(esc "$HOME_REAL/Library")\") (literal \"$(esc "$HOME_REAL/Library/Caches")\"))"
 
 echo "Sandbox (strikt): lesbar/schreibbar NUR in $TARGET (+ OpenCode-Daten/State, ~/.opencode, ~/.npm, ~/.bun, ~/.cache, ~/.config/opencode lesbar). Rest von \$HOME nicht sichtbar." >&2
 cd "$TARGET"
