@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+- Date: 2026-11-26
+- Decision: Return ENOENT for denied reads in the strict OpenCode sandbox.
+- Reason: OpenCode probes parent `.git` paths and aborts on EPERM; hidden paths should appear absent.
+- Alternatives Considered: Allow parent `.git` metadata (exposes repository presence and may lead to further blocked reads).
+- Consequences: Blocked home reads still fail, but report missing files rather than permission errors.
+
 - Date: 2026-10-24
 - Decision: Install `minimalist-ui` from `leonxlnx/taste-skill-classics` in `tests/habit-tracker/auto-install-skills.sh`.
 - Reason: The upstream repository removed its classic skills on 2026-10-19 and moved them to the classics repository under the same install names. The old source now exposes only `design-taste-frontend`, so installation of `minimalist-ui` fails.

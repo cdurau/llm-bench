@@ -21,11 +21,12 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 TARGET="$1"
+TARGET_INPUT="$1"
 shift
 
 [ -d "$TARGET" ] || TARGET="$SCRIPT_DIR/$TARGET"
 if [ ! -d "$TARGET" ]; then
-  echo "Modellordner nicht gefunden: $1" >&2
+  echo "Modellordner nicht gefunden: $TARGET_INPUT" >&2
   exit 1
 fi
 TARGET="$(cd "$TARGET" && pwd -P)"
@@ -134,11 +135,13 @@ if [ -n "${OC_SANDBOX_EXTRA_RW:-}" ]; then
   for p in "${EXTRA[@]}"; do RW="$RW (subpath \"$(esc "$p")\")"; done
 fi
 
+# Verborgene Pfade melden ENOENT: OpenCodes Git-Erkennung durchsucht sonst
+# Elternverzeichnisse und bricht bei EPERM statt eines fehlenden .git ab.
 PROFILE="(version 1)
 (allow default)
 (deny file-write* $DENY_WRITE)
 (allow file-write*$RW)
-(deny file-read* $DENY_READ)
+(deny file-read* $DENY_READ (with errno 2))
 (allow file-read*$ALLOW_READ)"
 
 echo "Sandbox (strikt): lesbar/schreibbar NUR in $TARGET (+ OpenCode-Daten/State, ~/.opencode, ~/.npm, ~/.bun, ~/.cache, ~/.config/opencode lesbar). Rest von \$HOME nicht sichtbar." >&2

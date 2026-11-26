@@ -22,6 +22,7 @@
 
 ## Recent Changes
 
+- 2026-11-26: Strict OpenCode sandbox returns ENOENT for blocked reads so parent Git discovery does not abort with EPERM; blocked reads and writes remain denied.
 - 2026-11-17: Evaluated `tests/fokusrad-mini/Qwen3.8-27B-4bit/` (PARTIAL, 240.27 min, 118,751 generated tokens, ~8.24 tok/s effective / 11.32 tok/s active decode) and updated `README.md`, `CURRENT_STATE.md`, `TASKS.md`, plus Notion evaluation page body (`41b8253ebb24817eb41aeaa92a3c5810`).
 - 2026-11-15: Evaluated and documented `tests/fokusrad-mini/Qwen3.8-Flash-Next-oQ2.5e-fp16-mtp/` (PASS, 192.9 min total wall-clock / 111.0 min active Assistant+Compaction time, 91,595 generated tokens at 14.44 tok/s effective / ~16.0 tok/s in oMLX log) in `README.md`, `AGENTS.md`, `ARCHITECTURE.md`, and `MEMORY.md`.
 - 2026-10-31: Merged the duplicate `OMLX-Benchmarks/` and `oMLX-Benchmarks/` trees into the single `oMLX-Benchmarks/` folder.
