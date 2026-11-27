@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --canvas: #f7f6f3;
+  --card: #ffffff;
+  --subtle: #efece5;
+  --line: #e6e2d8;
+  --ink: #26231d;
+  --muted: #6f6960;
+  --faint: #9d9689;
+  --accent: #1c1b17;
+  --accent-fg: #f8f6f1;
+  --clay: #b4512d;
+  --clay-soft: #f4e4d8;
+  --clay-soft-text: #7c3a21;
+  --ring: rgba(28, 27, 23, 0.12);
+  --bar: #e8e1d2;
+  --shadow-card: 0 1px 2px rgba(28, 27, 23, 0.04), 0 10px 28px rgba(28, 27, 23, 0.05);
+}
+
+.dark {
+  --canvas: #14120e;
+  --card: #1e1c17;
+  --subtle: #2a2720;
+  --line: #2f2c25;
+  --ink: #ece8dd;
+  --muted: #a99f8f;
+  --faint: #7c7364;
+  --accent: #ece8dd;
+  --accent-fg: #1c1b17;
+  --clay: #e08a63;
+  --clay-soft: #38241c;
+  --clay-soft-text: #f0b595;
+  --ring: rgba(236, 232, 221, 0.14);
+  --bar: #33302a;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+@theme {
+  --font-sans: "SF Pro Text", "SF Pro Display", "Geist", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+  --font-serif: "Newsreader", "Instrument Serif", "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: "Geist Mono", "SF Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-canvas: var(--canvas);
+  --color-card: var(--card);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-clay: var(--clay);
+  --color-clay-soft: var(--clay-soft);
+  --color-clay-soft-text: var(--clay-soft-text);
+  --color-ring: var(--ring);
+  --color-bar: var(--bar);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+/* Per-habit chip colors (light default, dark override) */
+.habit-chip {
+  background: var(--chip-bg, var(--subtle));
+  color: var(--chip-text, var(--ink));
+}
+.dark .habit-chip {
+  background: var(--chip-bg-dark, var(--subtle));
+  color: var(--chip-text-dark, var(--ink));
+}
+.habit-chip.habit-chip-done,
+.dark .habit-chip.habit-chip-done {
+  background: var(--chip-solid, var(--ink));
+  color: #1c1b17;
+}
+.dark .habit-chip.habit-chip-done {
+  background: var(--chip-solid-dark, var(--ink));
+  color: #14120e;
+}
+
+::selection {
+  background: var(--clay-soft);
+  color: var(--clay-soft-text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(0.6);
+    }
+    60% {
+      transform: scale(1.18);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .screen-enter {
+    animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .screen-enter > * {
+    animation: rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  .check-pop {
+    animation: pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .progress-fill {
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fade-in {
+    animation: fadeIn 0.35s ease both;
+  }
+
+  .surface-lift {
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+
+  .surface-lift:hover {
+    box-shadow: var(--shadow-card);
+  }
+
+  button:active {
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Respect reduced motion for smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Details ---------- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
